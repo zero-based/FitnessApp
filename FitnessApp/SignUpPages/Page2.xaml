@@ -1,0 +1,58 @@
+﻿<Page x:Class="FitnessApp.SignUpPages.Page2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FitnessApp.SignUpPages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+      Title="SignUpPage2" Width="Auto" Height="Auto" Margin="0,60,0,0">
+
+    <StackPanel HorizontalAlignment="Center" Width="auto" Height="auto">
+        <ComboBox
+                materialDesign:HintAssist.Hint="Gender"
+                IsEditable="True"
+                materialDesign:HintAssist.HintOpacity=".26"
+                Width="455">
+        <ComboBoxItem>
+                Male
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Female
+            </ComboBoxItem>
+        </ComboBox>
+
+        <DatePicker
+            Width="455"
+            Margin="0,20,0,20"
+            materialDesign:HintAssist.Hint="Pick Date"
+            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+
+
+        <CheckBox
+            Style="{StaticResource MaterialDesignCheckBox}"
+            Margin="0,20,0,0">
+            Private account
+        </CheckBox>
+
+        <CheckBox
+            Style="{StaticResource MaterialDesignCheckBox}"
+            ToolTip="what's Privacy??!"
+            Margin="0,10,0,0">
+            I'm not a robot!
+        </CheckBox>
+        <Button
+            x:Name="signUpButton"
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            Width="100" 
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="0,45,0,0"
+            FontSize="12"
+            Click="signUpButton_Click">
+            Sign Up
+        </Button>
+    </StackPanel>
+    
+</Page>
