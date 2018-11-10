@@ -4,11 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-      mc:Ignorable="d" 
-      Width="500"
-      Title="SignUpPage1">
+      mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Center" Width="450">
+        <!--450px Width gives 25px whitespace margin on both sides
+             because the total width of the frame is 500px-->
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
@@ -21,7 +22,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
             
-        <!--first name and last name-->
+        
+        <!--First and Last name Feilds-->
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -29,57 +31,69 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             
-            <TextBox materialDesign:HintAssist.Hint="First Name" 
+            <TextBox x:Name="FirstNameTextBox"
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
+                     materialDesign:HintAssist.Hint="First Name" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-            <TextBox materialDesign:HintAssist.Hint="Last Name" 
+            <TextBox x:Name="LastNameTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
+                     materialDesign:HintAssist.Hint="Last Name" 
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         </Grid>
-        
-        <TextBox materialDesign:HintAssist.Hint="Username" 
+
+
+        <!--Username and Email Feilds-->
+        <TextBox x:Name="UserNameTextBox"
                  Grid.Row="2"
                  FontFamily="{StaticResource Roboto}"
+                 materialDesign:HintAssist.Hint="Username"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-        
-        <TextBox materialDesign:HintAssist.Hint="Email" 
+
+        <TextBox x:Name="EmailTextBox"
                  Grid.Row="4"
                  FontFamily="{StaticResource Roboto}"
+                 materialDesign:HintAssist.Hint="Email" 
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         
-        <!--passsword and cofirm-->
+        
+        <!--Passsword and Confirm Password Feilds-->
         <Grid Grid.Row="6">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <PasswordBox x:Name="password" 
+            <PasswordBox x:Name="PasswordTextBox" 
                          Grid.Column="0"
-                         materialDesign:HintAssist.Hint="Password" 
                          FontFamily="{StaticResource Roboto}"
+                         materialDesign:HintAssist.Hint="Password" 
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
 
-            <PasswordBox x:Name="passwordConfirmation" 
+            <PasswordBox x:Name="ConfirmPasswordTextBox" 
                          Grid.Column="2"
-                         materialDesign:HintAssist.Hint="Confirm Password"
                          FontFamily="{StaticResource Roboto}"
+                         materialDesign:HintAssist.Hint="Confirm Password"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+            
         </Grid>
+
         
-        <Button x:Name="signInButton"
+        <!--Next Button-->
+        <Button x:Name="NextButton"
+                Click="NextButton_Click"
                 Grid.Row="8"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
                 FontFamily="{StaticResource ProductSans}" 
-                HorizontalAlignment="Right"
-                VerticalAlignment="Center"
                 FontSize="14"
-                Click="NextButton_Click">
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                HorizontalAlignment="Right">
                 Next
         </Button>
+        
     </Grid>
+    
 </Page>

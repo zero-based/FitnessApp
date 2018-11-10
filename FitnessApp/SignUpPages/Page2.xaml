@@ -4,11 +4,12 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
-      mc:Ignorable="d" 
-      Width="500"
-      Title="SignUpPage2">
+      mc:Ignorable="d">
 
     <Grid HorizontalAlignment="Center" Width="450">
+        <!--450px Width gives 25px whitespace margin on both sides
+             because the total width of the frame is 500px-->
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
@@ -21,11 +22,12 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ComboBox materialDesign:HintAssist.Hint="Gender"
-                  FontFamily="{StaticResource Roboto}"
+        
+        <!--Gender and Birthdate Feilds-->
+        <ComboBox x:Name="GenderComboBox"
                   Grid.Row="0"
-                  IsEditable="True"
-                  materialDesign:HintAssist.HintOpacity="0.5">
+                  FontFamily="{StaticResource Roboto}"
+                  materialDesign:HintAssist.Hint="Gender">
             <ComboBoxItem>
                 Male
             </ComboBoxItem>
@@ -34,44 +36,52 @@
             </ComboBoxItem>
         </ComboBox>
 
-        <DatePicker Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+        <DatePicker x:Name="BirthDatePicker"
                     Grid.Row="2"
                     FontFamily="{StaticResource Roboto}"
-                    materialDesign:HintAssist.Hint="Pick Date"/>
+                    materialDesign:HintAssist.Hint="Birth Date"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
 
-        <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
+        
+        <!--Privacy and Not-A-Robot CheckBoxes-->
+        <CheckBox x:Name="AccountPrivacyCheckBox"
                   Grid.Row="4"
                   FontFamily="{StaticResource Roboto}"
-                  ToolTip="What's Privacy??!">
+                  Style="{StaticResource MaterialDesignCheckBox}">
                   Private account
         </CheckBox>
 
-        <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
+        <CheckBox x:Name="NotRobotCheckBox"
                   Grid.Row="6"
-                  FontFamily="{StaticResource Roboto}">
-                  I'm not a robot!
+                  FontFamily="{StaticResource Roboto}"
+                  Style="{StaticResource MaterialDesignCheckBox}">
+                  I'm not a Robot!
         </CheckBox>
 
+        
+        <!--Back and Sign Up Buttons-->
         <Grid Grid.Row="8">
-            <Button x:Name="backButton" 
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                    FontFamily="{StaticResource ProductSans}"
-                    HorizontalAlignment="Left" 
-                    VerticalAlignment="Center" 
+            
+            <Button x:Name="BackButton" 
+                    Click="BackButton_Click"
+                    FontFamily="{StaticResource ProductSans}" 
                     FontSize="14" 
-                    Click="backButton_Click">
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                    HorizontalAlignment="Left">
                     Back
             </Button>
-            <Button x:Name="signUpButton" 
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+            
+            <Button x:Name="SignUpButton" 
+                    Click="SignUpButton_Click"
                     FontFamily="{StaticResource ProductSans}" 
-                    HorizontalAlignment="Right" 
-                    VerticalAlignment="Center" 
                     FontSize="14" 
-                    Click="signUpButton_Click">
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                    HorizontalAlignment="Right">
                     Sign Up
             </Button>
+            
         </Grid>
         
     </Grid>
+    
 </Page>

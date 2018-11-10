@@ -33,7 +33,7 @@ namespace FitnessApp
 
         private void createAnAccount_Click(object sender, RoutedEventArgs e)
         {
-            signUpPages.NavigationService.Navigate(new SignUpPages.Page1());
+            signUpPagesFrame.NavigationService.Navigate(new SignUpPages.Page1());
 
         }
     }

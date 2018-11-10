@@ -25,12 +25,12 @@ namespace FitnessApp.SignUpPages
             InitializeComponent();
         }
 
-        private void signUpButton_Click(object sender, RoutedEventArgs e)
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void backButton_Click(object sender, RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new SignUpPages.Page1());
         }
