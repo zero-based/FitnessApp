@@ -1,3 +1,5 @@
-# Handle line endings automatically for files detected as text
-# and leave all files detected as binary untouched.
+# Auto detect text files and perform LF normalization
 * text=auto
+
+# Custom for Visual Studio
+*.cs     diff=csharp
