@@ -5,57 +5,75 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
-      d:DesignHeight="500" d:DesignWidth="500"
-      Title="SignUpPage1" Width="Auto" Height="Auto" Margin="0,60,0,0">
+      Width="500"
+      Title="SignUpPage1">
 
-    <StackPanel HorizontalAlignment="Center" Width="auto" Height="auto">
+    <Grid HorizontalAlignment="Center" Width="450">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+            
         <!--first name and last name-->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <TextBox   materialDesign:HintAssist.Hint="First Name" 
-                       Margin="0,0,15,0"
-                       VerticalAlignment="Center" 
-                       Width="220"
-                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBox materialDesign:HintAssist.Hint="First Name" 
+                     Grid.Column="0"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
-            <TextBox   materialDesign:HintAssist.Hint="Last Name" 
-                       VerticalAlignment="Center" 
-                       Width="220"
-                       Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
+            <TextBox materialDesign:HintAssist.Hint="Last Name" 
+                     Grid.Column="2"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        </Grid>
         
-        </StackPanel>
-        <TextBox   materialDesign:HintAssist.Hint="Username" 
-                   Margin="0,20,0,0"
-                   VerticalAlignment="Center" 
-                   Width="455"
-                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
-        <TextBox   materialDesign:HintAssist.Hint="Email" 
-                   Margin="0,20,0,0"
-                   VerticalAlignment="Center" 
-                   Width="455"
-                   Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
+        <TextBox materialDesign:HintAssist.Hint="Username" 
+                 Grid.Row="2"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        
+        <TextBox materialDesign:HintAssist.Hint="Email" 
+                 Grid.Row="4"
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+        
         <!--passsword and cofirm-->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
             <PasswordBox x:Name="password" 
-                         Width="220"
+                         Grid.Column="0"
                          materialDesign:HintAssist.Hint="Password" 
-                         Margin="0,0,15,0"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
 
             <PasswordBox x:Name="passwordConfirmation" 
+                         Grid.Column="2"
                          materialDesign:HintAssist.Hint="confirm Password" 
-                         Width="220"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
-        </StackPanel>
-        <Button
-            x:Name="signInButton"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-            Width="100" 
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Margin="0,60,0,0"
-            FontSize="12"
-            Click="NextButton_Click">
-            Next
+        </Grid>
+        
+        <Button x:Name="signInButton"
+                Grid.Row="8"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                Width="100" 
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                FontSize="12"
+                Click="NextButton_Click">
+                Next
         </Button>
-    </StackPanel>
+    </Grid>
 </Page>

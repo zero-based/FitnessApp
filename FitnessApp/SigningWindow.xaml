@@ -4,147 +4,143 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        FontFamily="{DynamicResource MaterialDesignFont}"
+        mc:Ignorable="d"  
         Title="Fitness App" 
+        Width="700"         
         Height="700"
-        Width="700" 
         HorizontalAlignment="Center" 
         VerticalAlignment="Center" 
-        WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" >
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen">
+    
     <Grid>
+        
         <Grid.Background>
-        <ImageBrush ImageSource="Images/BG.jpg" Stretch="UniformToFill" Opacity="0.20"/>
-    </Grid.Background>
+            <!--Background Pattern Image-->
+            <ImageBrush ImageSource="Images/BG.jpg"
+                        Stretch="UniformToFill"
+                        Opacity="0.20"/>
+        </Grid.Background>
 
-    <Grid>
-        <materialDesign:Flipper   Style="{StaticResource MaterialDesignCardFlipper}"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Center">
+        <materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
                 
             <materialDesign:Flipper.FrontContent>
-                    <Grid Height="500" Width="500">
-                        <StackPanel>
-
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="180" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="auto" />
-                        </Grid.RowDefinitions>
-                        <Image Source="Images/LoginHeader.jpg"
+                <Grid Height="500" Width="500">
+                        
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="180" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                        
+                    <Image Source="Images/LoginHeader.jpg"
                            Height="180"
                            Width="auto"
                            Stretch="UniformToFill"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0.4,0"  />
-                        <StackPanel Grid.Row="1">
-                            <TextBlock FontWeight="Bold" 
-                                       TextAlignment="Center"
-                                       Margin="0,30,0,0"
-                                       FontSize="18">
-                            Sign in
-                            </TextBlock>
-                                    <TextBlock FontWeight="Regular" 
+                           HorizontalAlignment="Center" />
+
+                    <StackPanel Grid.Row="1" Margin="0,35,0,0">
+                        <TextBlock FontWeight="Bold" 
                                    TextAlignment="Center"
-                                   Margin="0,10,0,25"
-                                        FontSize="14">
-                            Use your "Fitness" account
-                            </TextBlock>
-                            <Grid Margin="15,0,15,0">
-                                <materialDesign:PackIcon Kind="Account" 
-                                                     VerticalAlignment="Center" 
-                                                     HorizontalAlignment="Left" 
-                                                     Margin="1,12,0,0.4" />
-                                <TextBox x:Name="email_input" materialDesign:HintAssist.Hint="Email" 
-                                     Margin="25,1,8.4,0.4" 
-                                     VerticalAlignment="Center" 
+                                   FontSize="18">
+                                   Sign in
+                        </TextBlock>
+                        <TextBlock FontWeight="Regular" 
+                                   TextAlignment="Center"
+                                   Margin="0,5,0,0"
+                                   FontSize="12">
+                                   Use your "Fitness" account
+                        </TextBlock>
+                    </StackPanel>
+                        
+                    <StackPanel Grid.Row="2" Margin="25,0">
+
+                        <Grid>
+                            <materialDesign:PackIcon Kind="Account" 
+                                                     Margin="0,20,0,0" />
+                            <TextBox x:Name="email_input"
+                                     materialDesign:HintAssist.Hint="Email" 
+                                     Margin="25,0,0,0" 
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
-                            </Grid>
-                            <Grid Margin="15,3,15,0">
-                                <materialDesign:PackIcon Kind="AccountKey" 
-                                                     VerticalAlignment="Center" 
-                                                     HorizontalAlignment="Left" 
-                                                     Margin="1,12,0,0.4" />
-
-                                <PasswordBox x:Name="FloatingPasswordBox" 
+                        </Grid>
+                            
+                        <Grid>
+                            <materialDesign:PackIcon Kind="AccountKey" 
+                                                     Margin="0,20,0,0" />
+                            <PasswordBox x:Name="FloatingPasswordBox" 
                                          materialDesign:HintAssist.Hint="Password" 
-                                         Margin="25,1,8.4,0.4" 
+                                         Margin="25,0,0,0" 
                                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
-                            </Grid>
-                            <Grid>
-                                <Button
-                                x:Name="signInButton"
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                                Width="100" 
-                                ToolTip="Resource name: MaterialDesignRaisedLightDarkButton" 
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Center"
-                                Margin="0,36,15,10.4"
-                                FontSize="12"
-                                Click="signInButton_Click">
-                                    Sign in
-                                </Button>
+                        </Grid>
+                    </StackPanel>
 
-                                <Button
-                                x:Name="createAnAccount"
+                    <Grid Grid.Row="3" Margin="25,0">
+                        <Button x:Name="createAnAccount"
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="createAnAccount_Click"
                                 VerticalAlignment="Center"
                                 FontSize="12"
-                                Margin="15,45,0,18.2"
                                 HorizontalAlignment="Left"
                                 Padding="-5"
-                                Width="110"
-                                Foreground="{ DynamicResource PrimaryHueDarkBrush}" 
+                                Width="120"
+                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"
                                 FontWeight="Bold">
-                                    Create an account
-                                </Button>
-                            </Grid>
-                        </StackPanel>
+                                Create an account
+                        </Button>
+
+                        <Button x:Name="signInButton"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                                Width="100" 
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                FontSize="12"
+                                Click="signInButton_Click">
+                                Sign in
+                        </Button>
                     </Grid>
-                </StackPanel>
-                    </Grid>
-                </materialDesign:Flipper.FrontContent>
+                        
+                </Grid>
+                    
+            </materialDesign:Flipper.FrontContent>
+                
+                
             <materialDesign:Flipper.BackContent>
+                    
                 <Grid Height="500" Width="500">
+                        
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <StackPanel>
-                        <materialDesign:ColorZone Mode="PrimaryDark" Padding="10">
-                            <StackPanel Orientation="Horizontal">
-                                <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
-                                    Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                    HorizontalAlignment="Left">
-                                    <materialDesign:PackIcon
-                                    Kind="ArrowLeft"
-                                    HorizontalAlignment="Right" />
-
-                                </Button>
-                                <TextBlock
-                                Margin="8 0 0 0"
+                        
+                    <materialDesign:ColorZone Mode="PrimaryDark" Padding="10">
+                        <StackPanel Orientation="Horizontal">
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                    Command="{x:Static materialDesign:Flipper.FlipCommand}">
+                                <materialDesign:PackIcon Kind="ArrowLeft" />
+                            </Button>
+                            <TextBlock
+                                Margin="10,0,0,2.5"
                                 VerticalAlignment="Center"
                                 FontSize="15"
                                 FontWeight="Regular">
                                 Create an account
-                                </TextBlock>
-                            </StackPanel>
-                        </materialDesign:ColorZone>
-                        <Frame x:Name="signUpPages" 
+                            </TextBlock>
+                        </StackPanel>
+                    </materialDesign:ColorZone>
+                            
+                    <Frame x:Name="signUpPages" 
+                           Grid.Row="1"
                            HorizontalAlignment="Center" 
-                           VerticalAlignment="Center" 
-                           NavigationUIVisibility="Hidden" 
-                           Width="500" 
-                           Height="500"/>
-                    </StackPanel>
+                           Margin="0,30,0,0"
+                           NavigationUIVisibility="Hidden" />
 
                 </Grid>
             </materialDesign:Flipper.BackContent>
         </materialDesign:Flipper>
-    </Grid>
     </Grid>
 </Window>

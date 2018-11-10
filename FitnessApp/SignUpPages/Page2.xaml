@@ -3,24 +3,28 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FitnessApp.SignUpPages" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       mc:Ignorable="d" 
-      d:DesignHeight="500" 
-      d:DesignWidth="500"
-      Width="Auto" Height="Auto" Margin="0,60,0,0"
+      Width="500"
       Title="SignUpPage2">
-    
-    <StackPanel 
-        HorizontalAlignment="Center"
-        Width="auto"
-        Height="auto">
 
-        <ComboBox 
-            materialDesign:HintAssist.Hint="Gender"
-            IsEditable="True"
-            materialDesign:HintAssist.HintOpacity=".26"
-            Width="455">
+    <Grid HorizontalAlignment="Center" Width="450">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ComboBox materialDesign:HintAssist.Hint="Gender"
+                  Grid.Row="0"
+                  IsEditable="True"
+                  materialDesign:HintAssist.HintOpacity="0.25">
             <ComboBoxItem>
                 Male
             </ComboBoxItem>
@@ -29,35 +33,41 @@
             </ComboBoxItem>
         </ComboBox>
 
-        <DatePicker
-            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-            Width="455"
-            Margin="0,20,0,20"
-            materialDesign:HintAssist.Hint="Pick Date"/>
+        <DatePicker Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    Grid.Row="2"
+                    materialDesign:HintAssist.Hint="Pick Date"/>
 
-        <CheckBox 
-            Style="{StaticResource MaterialDesignCheckBox}"
-            Margin="0,20,0,0">
-            Private account
+        <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
+                  Grid.Row="4"
+                  ToolTip="What's Privacy??!">
+                  Private account
         </CheckBox>
 
-        <CheckBox 
-            Style="{StaticResource MaterialDesignCheckBox}"
-            Margin="0,10,0,0"
-            ToolTip="what's Privacy??!" >
-            I'm not a robot!
+        <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
+                  Grid.Row="6">
+                  I'm not a robot!
         </CheckBox>
 
-        <Button 
-            x:Name="signUpButton" 
-            Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-            Width="100" 
-            Margin="0,45,0,0" 
-            HorizontalAlignment="Right" 
-            VerticalAlignment="Center" 
-            FontSize="12" 
-            Click="signUpButton_Click">
-            Sign Up
-        </Button>
-    </StackPanel>
+        <Grid Grid.Row="8">
+            <Button x:Name="backButton" 
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                    Width="100" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center" 
+                    FontSize="12" 
+                    Click="backButton_Click">
+                    Back
+            </Button>
+            <Button x:Name="signUpButton" 
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                    Width="100" 
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center" 
+                    FontSize="12" 
+                    Click="signUpButton_Click">
+                    Sign Up
+            </Button>
+        </Grid>
+        
+    </Grid>
 </Page>
