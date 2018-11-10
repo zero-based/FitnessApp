@@ -152,7 +152,7 @@
 
                     
                     <!--SignUpPages Frame-->
-                    <Frame x:Name="signUpPagesFrame" 
+                    <Frame x:Name="SignUpPagesFrame" 
                            Grid.Row="1"
                            Margin="0,30,0,0"
                            NavigationUIVisibility="Hidden">
