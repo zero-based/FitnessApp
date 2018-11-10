@@ -22,9 +22,9 @@
         </Grid.Background>
 
         <!--Flip Card-->
-        <materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center">
+        <materialDesign:Flipper HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Style="{StaticResource MaterialDesignCardFlipper}">
                 
             <!--Sign In Card-->
             <materialDesign:Flipper.FrontContent>
@@ -40,26 +40,26 @@
                     
                     <!--Header Image-->
                     <Image Source="Images/LoginHeader.jpg"
-                           Width="auto"
-                           Height="180"
+                           HorizontalAlignment="Center"
                            Stretch="UniformToFill"
-                           HorizontalAlignment="Center" />
+                           Width="auto"
+                           Height="180"/>
 
                     
                     <!--Header Text-->
                     <StackPanel Grid.Row="1" Margin="0,35,0,10">
 
                         <TextBlock FontFamily="{StaticResource ProductSans}"
-                                   FontSize="18"
                                    FontWeight="Bold" 
+                                   FontSize="18"
                                    TextAlignment="Center">
                                    Sign in
                         </TextBlock>
 
-                        <TextBlock FontFamily="{StaticResource Roboto}"
+                        <TextBlock Margin="0,5,0,0"
+                                   FontFamily="{StaticResource Roboto}"
                                    FontSize="14"
-                                   TextAlignment="Center"
-                                   Margin="0,5,0,0">
+                                   TextAlignment="Center">
                                    Use your "Fitness" account
                         </TextBlock>
 
@@ -70,21 +70,21 @@
                     <StackPanel Grid.Row="2" Margin="25,0">
                         
                         <Grid>
-                            <materialDesign:PackIcon Kind="Account" Margin="0,20,0,0" />
-                            <TextBox x:Name="email_input"
+                            <materialDesign:PackIcon Kind="Account" Margin="0,20,0,0"/>
+                            <TextBox x:Name="EmailSignInTextBox"
+                                     Margin="25,0,0,0"
                                      FontFamily="{StaticResource Roboto}"
-                                     materialDesign:HintAssist.Hint="Email"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     Margin="25,0,0,0"/>
+                                     materialDesign:HintAssist.Hint="Email"/>
                         </Grid>
                         
                         <Grid Margin="0,15">
-                            <materialDesign:PackIcon Kind="Key" Margin="0,20,0,0" />
-                            <PasswordBox x:Name="FloatingPasswordBox" 
+                            <materialDesign:PackIcon Kind="Key" Margin="0,20,0,0"/>
+                            <PasswordBox x:Name="PasswordSignInTextBox" 
+                                         Margin="25,0,0,0"
                                          FontFamily="{StaticResource Roboto}"
-                                         materialDesign:HintAssist.Hint="Password"
                                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                         Margin="25,0,0,0"/>
+                                         materialDesign:HintAssist.Hint="Password"/>
                         </Grid>
                         
                     </StackPanel>
@@ -93,23 +93,23 @@
                     <!--Create an account & Sign In Buttons-->
                     <Grid Grid.Row="3" Margin="25,0">
                         
-                        <Button x:Name="createAnAccount"
-                                Click="createAnAccount_Click"
-                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                        <Button x:Name="CreateAnAccount"
+                                HorizontalAlignment="Left"
                                 FontFamily="{StaticResource ProductSans}"
                                 FontSize="12"
-                                Style="{StaticResource MaterialDesignFlatButton}"
                                 Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                                HorizontalAlignment="Left">
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                Click="CreateAnAccount_Click">
                                 Create an account
                         </Button>
 
-                        <Button x:Name="signInButton"
-                                Click="signInButton_Click"
+                        <Button x:Name="SignInButton"
+                                HorizontalAlignment="Right"
                                 FontFamily="{StaticResource ProductSans}"
                                 FontSize="14"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                                HorizontalAlignment="Right">
+                                Click="SignInButton_Click">
                                 Sign in
                         </Button>
                         
@@ -133,17 +133,17 @@
                     <!--Create an account Header-->
                     <materialDesign:ColorZone Mode="PrimaryDark" Padding="10">
                         <StackPanel Orientation="Horizontal">
-                            
-                            <Button Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                    Style="{StaticResource MaterialDesignToolForegroundButton}">
+
+                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                                    Command="{x:Static materialDesign:Flipper.FlipCommand}">
                                 <materialDesign:PackIcon Kind="ArrowLeft"/>
                             </Button>
-                            
-                            <TextBlock FontFamily="{StaticResource ProductSans}"
-                                       FontSize="16"
-                                       FontWeight="Bold"
-                                       VerticalAlignment="Center"
-                                       Margin="10,0,0,0">
+
+                            <TextBlock VerticalAlignment="Center"
+                                       Margin="10,0,0,0"
+                                       FontFamily="{StaticResource ProductSans}"
+                                       FontWeight="SemiBold"
+                                       FontSize="16">
                                        Create an account
                             </TextBlock>
                             
@@ -154,8 +154,8 @@
                     <!--SignUpPages Frame-->
                     <Frame x:Name="signUpPagesFrame" 
                            Grid.Row="1"
-                           NavigationUIVisibility="Hidden"
-                           Margin="0,30,0,0">
+                           Margin="0,30,0,0"
+                           NavigationUIVisibility="Hidden">
                     </Frame>
 
                 </Grid>

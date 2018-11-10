@@ -39,8 +39,8 @@
         <DatePicker x:Name="BirthDatePicker"
                     Grid.Row="2"
                     FontFamily="{StaticResource Roboto}"
-                    materialDesign:HintAssist.Hint="Birth Date"
-                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"/>
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    materialDesign:HintAssist.Hint="Birth Date"/>
 
         
         <!--Privacy and Not-A-Robot CheckBoxes-->
@@ -63,20 +63,20 @@
         <Grid Grid.Row="8">
             
             <Button x:Name="BackButton" 
-                    Click="BackButton_Click"
+                    HorizontalAlignment="Left"
                     FontFamily="{StaticResource ProductSans}" 
                     FontSize="14" 
                     Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                    HorizontalAlignment="Left">
+                    Click="BackButton_Click">
                     Back
             </Button>
             
             <Button x:Name="SignUpButton" 
-                    Click="SignUpButton_Click"
+                    HorizontalAlignment="Right"
                     FontFamily="{StaticResource ProductSans}" 
                     FontSize="14" 
                     Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                    HorizontalAlignment="Right">
+                    Click="SignUpButton_Click">
                     Sign Up
             </Button>
             

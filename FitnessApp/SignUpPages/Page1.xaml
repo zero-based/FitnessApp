@@ -34,14 +34,14 @@
             <TextBox x:Name="FirstNameTextBox"
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
-                     materialDesign:HintAssist.Hint="First Name" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="First Name"/>
 
             <TextBox x:Name="LastNameTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
-                     materialDesign:HintAssist.Hint="Last Name" 
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Last Name"/>
         </Grid>
 
 
@@ -49,14 +49,14 @@
         <TextBox x:Name="UserNameTextBox"
                  Grid.Row="2"
                  FontFamily="{StaticResource Roboto}"
-                 materialDesign:HintAssist.Hint="Username"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:HintAssist.Hint="Username"/>
 
         <TextBox x:Name="EmailTextBox"
                  Grid.Row="4"
                  FontFamily="{StaticResource Roboto}"
-                 materialDesign:HintAssist.Hint="Email" 
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                 materialDesign:HintAssist.Hint="Email"/>
         
         
         <!--Passsword and Confirm Password Feilds-->
@@ -71,26 +71,26 @@
             <PasswordBox x:Name="PasswordTextBox" 
                          Grid.Column="0"
                          FontFamily="{StaticResource Roboto}"
-                         materialDesign:HintAssist.Hint="Password" 
-                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                         materialDesign:HintAssist.Hint="Password"/>
 
             <PasswordBox x:Name="ConfirmPasswordTextBox" 
                          Grid.Column="2"
                          FontFamily="{StaticResource Roboto}"
-                         materialDesign:HintAssist.Hint="Confirm Password"
-                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                         materialDesign:HintAssist.Hint="Confirm Password"/>
             
         </Grid>
 
         
         <!--Next Button-->
         <Button x:Name="NextButton"
-                Click="NextButton_Click"
                 Grid.Row="8"
+                HorizontalAlignment="Right"
                 FontFamily="{StaticResource ProductSans}" 
                 FontSize="14"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                HorizontalAlignment="Right">
+                Click="NextButton_Click">
                 Next
         </Button>
         
