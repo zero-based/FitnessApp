@@ -19,7 +19,7 @@
             <!--Background Pattern Image-->
             <ImageBrush ImageSource="Images/BG.jpg"
                         Stretch="UniformToFill"
-                        Opacity="0.20"/>
+                        Opacity="0.15"/>
         </Grid.Background>
 
         <materialDesign:Flipper Style="{StaticResource MaterialDesignCardFlipper}"
@@ -42,36 +42,39 @@
                            Stretch="UniformToFill"
                            HorizontalAlignment="Center" />
 
-                    <StackPanel Grid.Row="1" Margin="0,35,0,0">
+                    <StackPanel Grid.Row="1" Margin="0,35,0,10">
                         <TextBlock FontWeight="Bold" 
                                    TextAlignment="Center"
-                                   FontSize="18">
+                                   FontSize="18"
+                                   FontFamily="{StaticResource ProductSans}">
                                    Sign in
                         </TextBlock>
-                        <TextBlock FontWeight="Regular" 
-                                   TextAlignment="Center"
+                        <TextBlock TextAlignment="Center"
                                    Margin="0,5,0,0"
-                                   FontSize="12">
+                                   FontSize="14"
+                                   FontFamily="{StaticResource Roboto}">
                                    Use your "Fitness" account
                         </TextBlock>
                     </StackPanel>
                         
                     <StackPanel Grid.Row="2" Margin="25,0">
 
-                        <Grid>
+                        <Grid Margin="0,5">
                             <materialDesign:PackIcon Kind="Account" 
                                                      Margin="0,20,0,0" />
                             <TextBox x:Name="email_input"
-                                     materialDesign:HintAssist.Hint="Email" 
+                                     materialDesign:HintAssist.Hint="Email"
+                                     FontFamily="{StaticResource Roboto}"
                                      Margin="25,0,0,0" 
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"  />
                         </Grid>
-                            
-                        <Grid>
+
+                        <Grid Margin="0,5">
                             <materialDesign:PackIcon Kind="AccountKey" 
                                                      Margin="0,20,0,0" />
                             <PasswordBox x:Name="FloatingPasswordBox" 
-                                         materialDesign:HintAssist.Hint="Password" 
+                                         materialDesign:HintAssist.Hint="Password"
+                                         FontFamily="{StaticResource Roboto}"
                                          Margin="25,0,0,0" 
                                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
                         </Grid>
@@ -83,21 +86,19 @@
                                 Click="createAnAccount_Click"
                                 VerticalAlignment="Center"
                                 FontSize="12"
+                                FontFamily="{StaticResource ProductSans}"
                                 HorizontalAlignment="Left"
-                                Padding="-5"
-                                Width="120"
                                 Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                FontWeight="Bold">
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}">
                                 Create an account
                         </Button>
 
                         <Button x:Name="signInButton"
+                                FontFamily="{StaticResource ProductSans}"
                                 Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                                Width="100" 
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
-                                FontSize="12"
+                                FontSize="14"
                                 Click="signInButton_Click">
                                 Sign in
                         </Button>
@@ -124,10 +125,10 @@
                                 <materialDesign:PackIcon Kind="ArrowLeft" />
                             </Button>
                             <TextBlock
-                                Margin="10,0,0,2.5"
+                                Margin="10,0,0,0"
                                 VerticalAlignment="Center"
-                                FontSize="15"
-                                FontWeight="Regular">
+                                FontSize="16"
+                                FontFamily="{StaticResource ProductSans}">
                                 Create an account
                             </TextBlock>
                         </StackPanel>

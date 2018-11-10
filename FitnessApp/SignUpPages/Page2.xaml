@@ -22,9 +22,10 @@
         </Grid.RowDefinitions>
 
         <ComboBox materialDesign:HintAssist.Hint="Gender"
+                  FontFamily="{StaticResource Roboto}"
                   Grid.Row="0"
                   IsEditable="True"
-                  materialDesign:HintAssist.HintOpacity="0.25">
+                  materialDesign:HintAssist.HintOpacity="0.5">
             <ComboBoxItem>
                 Male
             </ComboBoxItem>
@@ -35,35 +36,38 @@
 
         <DatePicker Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
                     Grid.Row="2"
+                    FontFamily="{StaticResource Roboto}"
                     materialDesign:HintAssist.Hint="Pick Date"/>
 
         <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
                   Grid.Row="4"
+                  FontFamily="{StaticResource Roboto}"
                   ToolTip="What's Privacy??!">
                   Private account
         </CheckBox>
 
         <CheckBox Style="{StaticResource MaterialDesignCheckBox}"
-                  Grid.Row="6">
+                  Grid.Row="6"
+                  FontFamily="{StaticResource Roboto}">
                   I'm not a robot!
         </CheckBox>
 
         <Grid Grid.Row="8">
             <Button x:Name="backButton" 
                     Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                    Width="100" 
+                    FontFamily="{StaticResource ProductSans}"
                     HorizontalAlignment="Left" 
                     VerticalAlignment="Center" 
-                    FontSize="12" 
+                    FontSize="14" 
                     Click="backButton_Click">
                     Back
             </Button>
             <Button x:Name="signUpButton" 
                     Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                    Width="100" 
+                    FontFamily="{StaticResource ProductSans}" 
                     HorizontalAlignment="Right" 
                     VerticalAlignment="Center" 
-                    FontSize="12" 
+                    FontSize="14" 
                     Click="signUpButton_Click">
                     Sign Up
             </Button>

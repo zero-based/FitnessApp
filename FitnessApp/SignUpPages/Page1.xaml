@@ -31,19 +31,23 @@
             
             <TextBox materialDesign:HintAssist.Hint="First Name" 
                      Grid.Column="0"
+                     FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
 
             <TextBox materialDesign:HintAssist.Hint="Last Name" 
                      Grid.Column="2"
+                     FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         </Grid>
         
         <TextBox materialDesign:HintAssist.Hint="Username" 
                  Grid.Row="2"
+                 FontFamily="{StaticResource Roboto}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         
         <TextBox materialDesign:HintAssist.Hint="Email" 
                  Grid.Row="4"
+                 FontFamily="{StaticResource Roboto}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
         
         <!--passsword and cofirm-->
@@ -57,21 +61,23 @@
             <PasswordBox x:Name="password" 
                          Grid.Column="0"
                          materialDesign:HintAssist.Hint="Password" 
+                         FontFamily="{StaticResource Roboto}"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
 
             <PasswordBox x:Name="passwordConfirmation" 
                          Grid.Column="2"
-                         materialDesign:HintAssist.Hint="confirm Password" 
+                         materialDesign:HintAssist.Hint="Confirm Password"
+                         FontFamily="{StaticResource Roboto}"
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
         </Grid>
         
         <Button x:Name="signInButton"
                 Grid.Row="8"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                Width="100" 
+                FontFamily="{StaticResource ProductSans}" 
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
-                FontSize="12"
+                FontSize="14"
                 Click="NextButton_Click">
                 Next
         </Button>
