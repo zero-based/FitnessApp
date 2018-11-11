@@ -16,23 +16,29 @@ using System.Windows.Shapes;
 namespace FitnessApp.SignUpPages
 {
     /// <summary>
-    /// Interaction logic for Page2.xaml
+    /// Interaction logic for Page3.xaml
     /// </summary>
-    public partial class Page2 : Page
+    public partial class Page3 : Page
     {
-        public Page2()
+        public Page3()
         {
             InitializeComponent();
         }
 
-        private void SignUpButton_Click(object sender, RoutedEventArgs e)
+        private void userDP_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new SignUpPages.Page3());
+
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e)
+        private void setUpProfile_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new SignUpPages.Page1());
+    
+            UserMainWindow dashboard = new UserMainWindow();
+            dashboard.ShowDialog();
+
+            Window sin = Window.GetWindow(this);
+            sin.Close();
+            
         }
     }
 }

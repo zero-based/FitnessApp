@@ -78,6 +78,9 @@
     <Compile Include="SignUpPages\Page2.xaml.cs">
       <DependentUpon>Page2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SignUpPages\Page3.xaml.cs">
+      <DependentUpon>Page3.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserMainWindow.xaml.cs">
       <DependentUpon>UserMainWindow.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SignUpPages\Page2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SignUpPages\Page3.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
