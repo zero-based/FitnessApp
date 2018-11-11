@@ -24,7 +24,7 @@ namespace FitnessApp
         public UserMainWindow()
         {
             InitializeComponent();
-
+            
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries

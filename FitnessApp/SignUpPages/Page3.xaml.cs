@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Microsoft.Win32;
 namespace FitnessApp.SignUpPages
 {
     /// <summary>
@@ -25,20 +25,25 @@ namespace FitnessApp.SignUpPages
             InitializeComponent();
         }
 
-        private void userDP_Click(object sender, RoutedEventArgs e)
+        private void SetUpProfile_Click(object sender, RoutedEventArgs e)
         {
-
+            UserMainWindow AppWindow = new UserMainWindow();
+            SigningWindow.GetWindow(this).Close();
+            AppWindow.ShowDialog();
         }
 
-        private void setUpProfile_Click(object sender, RoutedEventArgs e)
+        private void ChooseImageButton_Click(object sender, RoutedEventArgs e)
         {
-    
-            UserMainWindow dashboard = new UserMainWindow();
-            dashboard.ShowDialog();
+            OpenFileDialog BrowseImageDialogBox = new OpenFileDialog();
+            BrowseImageDialogBox.Title = "Select a picture";
+            BrowseImageDialogBox.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (BrowseImageDialogBox.ShowDialog() == true)
+            {
+                UserDPSource.ImageSource = new BitmapImage(new Uri(BrowseImageDialogBox.FileName));
+            }
 
-            Window sin = Window.GetWindow(this);
-            sin.Close();
-            
         }
     }
 }

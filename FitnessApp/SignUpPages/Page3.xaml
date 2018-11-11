@@ -10,122 +10,117 @@
         <!--450px Width gives 25px whitespace margin on both sides
              because the total width of the frame is 500px-->
         <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
-            <RowDefinition Height="150"/>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="30"/>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-
-        <!--Header Text-->
-            <TextBlock 
-                Grid.Row="0"
-                Grid.Column="1"
-                FontFamily="{StaticResource ProductSans}"
-                FontWeight="Bold" 
-                FontSize="18"
-                TextAlignment="Center">
-                Setup your Profile
-            </TextBlock>
-            
-            <!--User display picture-->
-            <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Button
-                x:Name="userDP"
-                Grid.Column="1"
-                Width="150"
-                Height="150"
-                HorizontalAlignment="Center"
-                VerticalAlignment="Center"
-                Style="{StaticResource MaterialDesignFloatingActionAccentButton}"
-                Click="userDP_Click">
-                <Image 
-                    x:Name="userDPSource"
-                    Width="auto"
-                    Height="150"
-                    Stretch="UniformToFill"
-                    Source="C:/Users/Michael/Desktop/fitness-and-weight-loss-app/FitnessApp/Images/loginHeader.jpg"/>
-            </Button>
-        </Grid>
         
-        <!--weight Feilds-->
-        <Grid Grid.Row="4">
+        <!--User display picture-->
+        <Grid Grid.Row="0" HorizontalAlignment="Center">
+            
+            <Ellipse Width="150"
+                     Height="150"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Center">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="UserDPSource"
+                                ImageSource="../Images/AccountCircleDefaultIcon.png"
+                                Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Button x:Name="ChooseImageButton"
+                    Click="ChooseImageButton_Click" 
+                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                    Width="125" 
+                    Height="125" 
+                    Opacity="0">
+            </Button>
+
+        </Grid> 
+        
+        <!--Weight and Height Feilds-->
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="weight"
+            <TextBox x:Name="Weight"
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Weight"/>
 
-            <TextBox x:Name="targetWeight"
+            <TextBox x:Name="Height"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Target Weight"/>
-
-            <TextBox x:Name="LastNameTextBox"
-                     Grid.Column="4"
-                     FontFamily="{StaticResource Roboto}"
-                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Kilos to lose/week"/>
+                     materialDesign:HintAssist.Hint="Height"/>
+            
         </Grid>
-
-        <!--Height and workouts Feilds-->
-        <Grid Grid.Row="6">
+        
+        <!--Target Weights Feilds-->
+        <Grid Grid.Row="4">
+            
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="height"
+            <TextBox x:Name="TargetWeight"
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Height"/>
+                     materialDesign:HintAssist.Hint="Target Weight"/>
 
-            <TextBox x:Name="workoutsPerWeek"
+            <TextBox x:Name="KilosToLosePerWeek"
                      Grid.Column="2"
+                     FontFamily="{StaticResource Roboto}"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     materialDesign:HintAssist.Hint="Kilos to lose/week"/>
+
+        </Grid>
+        
+        <!--workouts Feilds-->
+        <Grid Grid.Row="6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="WorkoutsPerWeek"
+                     Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Workouts/week"/>
 
-            <TextBox x:Name="workoutHoursPerDay"
-                     Grid.Column="4"
+            <TextBox x:Name="WorkoutHoursPerDay"
+                     Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Workout Hours/Day"/>
         </Grid>
 
         <!--Setup Profile Button-->
-        <Button x:Name="setUpProfile"
-                Grid.Row="9"
+        <Button x:Name="SetUpProfile"
+                Grid.Row="8"
                 HorizontalAlignment="Right"
                 FontFamily="{StaticResource ProductSans}" 
                 FontSize="14"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                Click="setUpProfile_Click">
-            Setup Profile
+                Click="SetUpProfile_Click">
+                Set up Profile
         </Button>
-
-
+        
     </Grid>
+    
 </Page>

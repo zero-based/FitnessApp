@@ -139,14 +139,14 @@
                                 <materialDesign:PackIcon Kind="ArrowLeft"/>
                             </Button>
 
-                            <TextBlock VerticalAlignment="Center"
+                            <TextBlock x:Name="BackCardHeaderTextBlock"
+                                       VerticalAlignment="Center"
                                        Margin="10,0,0,0"
                                        FontFamily="{StaticResource ProductSans}"
                                        FontWeight="SemiBold"
-                                       FontSize="16">
-                                       Create an account
-                            </TextBlock>
-                            
+                                       FontSize="16"
+                                       Text="Create an account"/>
+
                         </StackPanel>
                     </materialDesign:ColorZone>
 

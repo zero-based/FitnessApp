@@ -28,6 +28,14 @@ namespace FitnessApp.SignUpPages
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new SignUpPages.Page3());
+
+            foreach (Window window in Application.Current.Windows)
+            {
+                if (window.GetType() == typeof(SigningWindow))
+                {
+                    (window as SigningWindow).BackCardHeaderTextBlock.Text = "Set up your Profile";
+                }
+            }
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
