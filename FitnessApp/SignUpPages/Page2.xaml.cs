@@ -29,13 +29,10 @@ namespace FitnessApp.SignUpPages
         {
             this.NavigationService.Navigate(new SignUpPages.Page3());
 
-            foreach (Window window in Application.Current.Windows)
-            {
-                if (window.GetType() == typeof(SigningWindow))
-                {
-                    (window as SigningWindow).BackCardHeaderTextBlock.Text = "Set up your Profile";
-                }
-            }
+            //Change Back Card Header
+            FitnessApp.SigningWindow.SigningWindowObject.BackArrowButton.Visibility = Visibility.Hidden;
+            FitnessApp.SigningWindow.SigningWindowObject.BackCardHeaderTextBlock.Text = "Set up your Profile";
+            FitnessApp.SigningWindow.SigningWindowObject.BackCardHeaderTextBlock.Margin = new Thickness(-15);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

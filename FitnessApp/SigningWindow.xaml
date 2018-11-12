@@ -134,7 +134,8 @@
                     <materialDesign:ColorZone Mode="PrimaryDark" Padding="10">
                         <StackPanel Orientation="Horizontal">
 
-                            <Button Style="{StaticResource MaterialDesignToolForegroundButton}"
+                            <Button x:Name="BackArrowButton"
+                                    Style="{StaticResource MaterialDesignToolForegroundButton}"
                                     Command="{x:Static materialDesign:Flipper.FlipCommand}">
                                 <materialDesign:PackIcon Kind="ArrowLeft"/>
                             </Button>

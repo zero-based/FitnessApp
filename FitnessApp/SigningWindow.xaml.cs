@@ -20,9 +20,12 @@ namespace FitnessApp
     /// </summary>
     public partial class SigningWindow : Window
     {
+        public static SigningWindow SigningWindowObject;
+
         public SigningWindow()
         {
             InitializeComponent();
+            SigningWindowObject = this;
         }
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
