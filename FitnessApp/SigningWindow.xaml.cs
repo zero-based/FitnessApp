@@ -32,7 +32,7 @@ namespace FitnessApp
         {
             UserMainWindow AppWindow = new UserMainWindow();
             AppWindow.Show();
-            this.Close();
+            SigningWindowObject.Close();
         }
 
 

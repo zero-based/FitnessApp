@@ -66,7 +66,6 @@ namespace FitnessApp
 
             DataContext = this;
         }
-
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }

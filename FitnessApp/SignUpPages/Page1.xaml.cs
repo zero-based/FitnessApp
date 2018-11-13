@@ -20,14 +20,17 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class Page1 : Page
     {
+        public static Page1 PageOneObject = new Page1();
+
         public Page1()
         {
             InitializeComponent();
+            PageOneObject = this;
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new SignUpPages.Page2());
+            NavigationService.Navigate(FitnessApp.SignUpPages.Page2.PageTwoObject);
         }
     }
 }

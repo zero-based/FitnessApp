@@ -20,15 +20,18 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class Page3 : Page
     {
+        public static Page3 PageThreeObject = new Page3();
+
         public Page3()
         {
             InitializeComponent();
+            PageThreeObject = this;
         }
 
         private void SetUpProfile_Click(object sender, RoutedEventArgs e)
         {
             UserMainWindow AppWindow = new UserMainWindow();
-            SigningWindow.GetWindow(this).Close();
+            SigningWindow.SigningWindowObject.Close();
             AppWindow.ShowDialog();
         }
 
@@ -43,7 +46,6 @@ namespace FitnessApp.SignUpPages
             {
                 UserDPSource.ImageSource = new BitmapImage(new Uri(BrowseImageDialogBox.FileName));
             }
-
         }
     }
 }

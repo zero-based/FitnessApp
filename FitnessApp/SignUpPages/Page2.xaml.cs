@@ -20,9 +20,12 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class Page2 : Page
     {
+        public static Page2 PageTwoObject = new Page2();
+
         public Page2()
         {
             InitializeComponent();
+            PageTwoObject = this;
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
@@ -37,7 +40,7 @@ namespace FitnessApp.SignUpPages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new SignUpPages.Page1());
+            NavigationService.Navigate(FitnessApp.SignUpPages.Page1.PageOneObject);
         }
     }
 }
