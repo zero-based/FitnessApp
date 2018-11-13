@@ -44,7 +44,8 @@ namespace FitnessApp.SignUpPages
               "Portable Network Graphic (*.png)|*.png";
             if (BrowseImageDialogBox.ShowDialog() == true)
             {
-                UserDPSource.ImageSource = new BitmapImage(new Uri(BrowseImageDialogBox.FileName));
+                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(BrowseImageDialogBox.FileName));
+                UserProfilePhoto.Opacity = 1.0;
             }
         }
     }

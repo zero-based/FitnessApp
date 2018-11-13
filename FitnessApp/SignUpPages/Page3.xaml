@@ -29,17 +29,18 @@
                      HorizontalAlignment="Center"
                      VerticalAlignment="Center">
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="UserDPSource"
+                    <ImageBrush x:Name="UserProfilePhoto"
                                 ImageSource="../Images/AccountCircleDefaultIcon.png"
-                                Stretch="UniformToFill"/>
+                                Stretch="UniformToFill"
+                                Opacity="0.75"/>
                 </Ellipse.Fill>
             </Ellipse>
             <Button x:Name="ChooseImageButton"
-                    Click="ChooseImageButton_Click" 
+                    Width="120" 
+                    Height="120" 
+                    Opacity="0"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    Width="125" 
-                    Height="125" 
-                    Opacity="0">
+                    Click="ChooseImageButton_Click">
             </Button>
 
         </Grid> 
