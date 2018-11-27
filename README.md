@@ -26,12 +26,12 @@ This Project is still under development
 
 ```
 
-### 2. XAML Coding Guidelines
+## 2. XAML Coding Guidelines
 
-#### Naming:
+### Naming
 
 - Name elements with the ```x:Name``` attribute.
-- Use Pascal Casing *(i.e. first char should be capitalized)*.
+- Use Pascal Casing *(i.e. first char of each word should be capitalized)*.
 - Suffix XAML names with a type indication.
 - Example:
 
@@ -39,7 +39,7 @@ This Project is still under development
 x:Name = "EmailTextBox"
 ```
 
-#### Code readability:
+### Code readability
 
 - Put one attribute per line.
 - Put the first attribute on the element line.
@@ -54,6 +54,8 @@ x:Name = "EmailTextBox"
 2. Attached properties
    - Grid.Row
    - Grid.Column
+   - Grid.RowSpan
+   - Grid.ColumnSpan
 
 3. Positionning
    - HorizontalAlignment
@@ -61,8 +63,8 @@ x:Name = "EmailTextBox"
    - Margin
    - Padding
    - Stretch
-   - Canvas.
-   - Grid.
+   - Canvas
+   - Grid
 
 4. Box model
   - Width (always first)
@@ -97,13 +99,13 @@ x:Name = "EmailTextBox"
 
 ```
 
-### 3. UI Guidelines
+## 3. UI Guidelines
 
 - Use **Grid** layout instead of StackPanel when possible.
 - Add **15px** spacing between rows and columns.
 - Add **25px** whitespace border in cards and windows.
 
-### 4. Typography Guidelines
+## 4. Typography Guidelines
 
 - Use **Product Sans** Font for buttons and headings.
 - Else, use **Roboto** Font.
