@@ -126,6 +126,7 @@
                         
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="30" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                         
@@ -154,8 +155,7 @@
                     
                     <!--SignUpPages Frame-->
                     <Frame x:Name="SignUpPagesFrame" 
-                           Grid.Row="1"
-                           Margin="0,30,0,0"
+                           Grid.Row="2"
                            NavigationUIVisibility="Hidden">
                     </Frame>
 
