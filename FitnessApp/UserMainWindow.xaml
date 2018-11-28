@@ -100,7 +100,7 @@
                         BorderThickness="0,2,0,0" 
                         BorderBrush="{DynamicResource MaterialDesignDivider}"/>
 
-                <ListBox Grid.Row="7" Grid.ColumnSpan="2">
+                <ListBox Grid.Row="7" Grid.ColumnSpan="3">
 
                     <!--Challenges Button-->
                     <ListBoxItem>
@@ -195,7 +195,7 @@
                 </ListBox>
 
                 <!--Logout Button-->
-                <ListBox Grid.ColumnSpan="3" Grid.Row="9">
+                <ListBox Grid.Row="9" Grid.ColumnSpan="3">
 
                     <ListBoxItem>
                         <Grid>
