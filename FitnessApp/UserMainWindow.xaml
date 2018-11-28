@@ -12,13 +12,13 @@
         Height="720"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
-    
+
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
-        
+
         <materialDesign:DrawerHost.LeftDrawerContent>
-            
+
             <Grid Width="220">
-                
+
                 <!--Menu rows and columns-->
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15"/>
@@ -33,22 +33,22 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="5"/>
                 </Grid.RowDefinitions>
-                
+
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="15"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!--Header Grid-->
                 <Grid Grid.Row="1" Grid.Column="1">
-                    
+
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <!--User display picture-->
                     <Grid Grid.Column="0" Margin="-10,0,0,0">
                         <Ellipse Width="100"
@@ -75,9 +75,9 @@
                                   VerticalAlignment="Top"
                                   Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                                   IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
-                    
+
                 </Grid>
-                
+
                 <!--Full name and User name-->
                 <StackPanel Grid.Row="3" Grid.Column="1">
                     <TextBlock x:Name="FullNameTextBlock"
@@ -101,7 +101,7 @@
                         BorderBrush="{DynamicResource MaterialDesignDivider}"/>
 
                 <ListBox Grid.Row="7" Grid.ColumnSpan="2">
-                    
+
                     <!--Challenges Button-->
                     <ListBoxItem>
                         <Grid>
@@ -112,9 +112,9 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <materialDesign:PackIcon Kind="Account" Grid.Column="1"/>
-                            
+
                             <TextBlock x:Name="ChallengesButtonButton"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
@@ -135,9 +135,9 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <materialDesign:PackIcon Kind="CalendarHeart" Grid.Column="1"/>
-                            
+
                             <TextBlock x:Name="FitnessPlansButton"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
@@ -158,9 +158,9 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <materialDesign:PackIcon Kind="CalculatorVariant" Grid.Column="1"/>
-                            
+
                             <TextBlock x:Name="CaloriesCalculatorButton"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
@@ -191,12 +191,12 @@
                             </TextBlock>
                         </Grid>
                     </ListBoxItem>
-                    
+
                 </ListBox>
 
                 <!--Logout Button-->
                 <ListBox Grid.ColumnSpan="3" Grid.Row="9">
-                    
+
                     <ListBoxItem>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -206,9 +206,9 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
-                            
+
                             <materialDesign:PackIcon Kind="LogoutVariant" Grid.Column="1"/>
-                            
+
                             <TextBlock x:Name="LogoutButton"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
@@ -218,46 +218,52 @@
                             </TextBlock>
                         </Grid>
                     </ListBoxItem>
-                    
+
                 </ListBox>
-                
+
             </Grid>
-            
+
         </materialDesign:DrawerHost.LeftDrawerContent>
-        
-        <DockPanel>
-            <materialDesign:ColorZone Padding="15" 
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                      Mode="PrimaryDark" 
-                                      DockPanel.Dock="Top">
-                <DockPanel>
-                    <ToggleButton Width="25"
-                                  Height="25"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
-                                  IsChecked="False"
-                                  x:Name="MenuToggleButton"/>
-                    <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                        <StackPanel>
-                            <Button Content="Hello World"/>
-                            <Button Content="Nice Popup"/>
-                            <Button Content="Can't Touch This" IsEnabled="False" />
-                            <Separator/>
-                            <Button Content="Goodbye"/>
-                        </StackPanel>
-                    </materialDesign:PopupBox>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Fitness App</TextBlock>
-                </DockPanel>
-            </materialDesign:ColorZone>
-            <Grid>
-                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Width="auto" Height="300">
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
-                    </lvc:CartesianChart.AxisX>
-                </lvc:CartesianChart>
-            </Grid>
-        </DockPanel>
+        <Grid>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <DockPanel>
+                <materialDesign:ColorZone Padding="15" 
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                          Mode="PrimaryDark" 
+                                          DockPanel.Dock="Top">
+                    <DockPanel>
+                        <ToggleButton Width="25"
+                                      Height="25"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                      IsChecked="False"
+                                      x:Name="MenuToggleButton"/>
+                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                            <StackPanel>
+                                <Button Content="Hello World"/>
+                                <Button Content="Nice Popup"/>
+                                <Button Content="Can't Touch This" IsEnabled="False" />
+                                <Separator/>
+                                <Button Content="Goodbye"/>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Fitness App</TextBlock>
+                    </DockPanel>
+                </materialDesign:ColorZone>
+
+                <!--User Main Window Frame-->
+                <Frame x:Name="UserWindowPagesFrame" 
+                       Grid.Row="1"
+                       Margin="0,30,0,0"
+                       NavigationUIVisibility="Hidden">
+                </Frame>
+
+            </DockPanel>
+        </Grid>
+
     </materialDesign:DrawerHost>
 </Window>
