@@ -40,7 +40,7 @@ namespace FitnessApp.SignUpPages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(FitnessApp.SignUpPages.Page1.PageOneObject);
+            NavigationService.Navigate(Page1.PageOneObject);
         }
     }
 }

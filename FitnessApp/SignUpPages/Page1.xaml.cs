@@ -30,7 +30,7 @@ namespace FitnessApp.SignUpPages
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(FitnessApp.SignUpPages.Page2.PageTwoObject);
+            NavigationService.Navigate(Page2.PageTwoObject);
         }
     }
 }
