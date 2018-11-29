@@ -15,6 +15,7 @@
 
     <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
 
+        <!--Side Menu-->
         <materialDesign:DrawerHost.LeftDrawerContent>
 
             <Grid Width="220">
@@ -95,10 +96,7 @@
                     </TextBlock>
                 </StackPanel>
 
-                <Border Grid.Row="5"
-                        Grid.ColumnSpan="3" 
-                        BorderThickness="0,2,0,0" 
-                        BorderBrush="{DynamicResource MaterialDesignDivider}"/>
+                <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
 
                 <ListBox Grid.Row="7" Grid.ColumnSpan="3">
 
@@ -224,46 +222,69 @@
             </Grid>
 
         </materialDesign:DrawerHost.LeftDrawerContent>
+        
+        
+        <!--User Main Window-->
         <Grid>
             
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <DockPanel>
-                <materialDesign:ColorZone Padding="15" 
-                                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                          Mode="PrimaryDark" 
-                                          DockPanel.Dock="Top">
-                    <DockPanel>
-                        <ToggleButton Width="25"
-                                      Height="25"
-                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
-                                      IsChecked="False"
-                                      x:Name="MenuToggleButton"/>
-                        <materialDesign:PopupBox DockPanel.Dock="Right" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                            <StackPanel>
-                                <Button Content="Hello World"/>
-                                <Button Content="Nice Popup"/>
-                                <Button Content="Can't Touch This" IsEnabled="False" />
-                                <Separator/>
-                                <Button Content="Goodbye"/>
-                            </StackPanel>
-                        </materialDesign:PopupBox>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Fitness App</TextBlock>
-                    </DockPanel>
-                </materialDesign:ColorZone>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
 
-                <!--User Main Window Frame-->
-                <Frame x:Name="UserWindowPagesFrame" 
-                       Grid.Row="1"
-                       Margin="0,30,0,0"
-                       NavigationUIVisibility="Hidden">
-                </Frame>
+            
+            <!--User Main Window Header-->
+            <materialDesign:ColorZone Grid.Row="0"
+                                      Grid.ColumnSpan="3"
+                                      Padding="15" 
+                                      Mode="PrimaryDark"
+                                      materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                
+                <DockPanel>
+                    <!--Menu Toogle Button-->
+                    <ToggleButton x:Name="MenuToggleButton"
+                                  Width="25"
+                                  Height="25"
+                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                        
+                    <!--Right side PopupBox and its contents-->
+                    <materialDesign:PopupBox DockPanel.Dock="Right"
+                                             PlacementMode="BottomAndAlignRightEdges">
+                        <StackPanel>
+                            <Button Content="Hello World"/>
+                            <Button Content="Can't Touch This" IsEnabled="False" />
+                            <Separator/>
+                            <Button Content="Goodbye"/>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                    
+                    <!--Header Title-->
+                    <TextBlock HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               FontSize="22">
+                               Fitness App
+                    </TextBlock>
+                    
+                </DockPanel>
+            </materialDesign:ColorZone>
 
-            </DockPanel>
+            <!--User Main Window Frame-->
+            <Frame x:Name="UserWindowPagesFrame" 
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   NavigationUIVisibility="Hidden">
+            </Frame>
+
         </Grid>
 
     </materialDesign:DrawerHost>
+
 </Window>
