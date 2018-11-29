@@ -25,5 +25,31 @@ namespace FitnessApp
         {
             InitializeComponent();
         }
+
+        private void UserMainWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Navigate to selected Page
+            switch (UserMainWindowPagesListBox.SelectedIndex)
+            {
+                case 0:
+                    // Navigate to Challenges Page
+                    break;
+
+                case 1:
+                    // Navigate to Fitness Plans Page
+                    break;
+
+                case 2:
+                    // Navigate to Calories Calculator Page
+                    break;
+
+                case 3:
+                    // Navigate to Settings Page
+                    break;
+            }
+
+            // Close Drawer after Navigation
+            SideMenuDrawer.IsLeftDrawerOpen = false;
+        }
     }
 }

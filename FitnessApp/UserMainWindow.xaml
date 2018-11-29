@@ -13,7 +13,8 @@
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
 
-    <materialDesign:DrawerHost IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+    <materialDesign:DrawerHost x:Name="SideMenuDrawer"
+                               IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
 
         <!--Side Menu-->
         <materialDesign:DrawerHost.LeftDrawerContent>
@@ -98,7 +99,10 @@
 
                 <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
 
-                <ListBox Grid.Row="7" Grid.ColumnSpan="3">
+                <ListBox x:Name="UserMainWindowPagesListBox"
+                         Grid.Row="7"
+                         Grid.ColumnSpan="3"
+                         SelectionChanged="UserMainWindowPagesListBox_SelectionChanged">
 
                     <!--Challenges Button-->
                     <ListBoxItem>
