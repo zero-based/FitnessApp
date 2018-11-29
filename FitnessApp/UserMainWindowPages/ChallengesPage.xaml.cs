@@ -20,9 +20,12 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class ChallengesPage : Page
     {
+        public static ChallengesPage ChallengesPageObject = new ChallengesPage();
+
         public ChallengesPage()
         {
             InitializeComponent();
+            ChallengesPageObject = this;
         }
     }
 }

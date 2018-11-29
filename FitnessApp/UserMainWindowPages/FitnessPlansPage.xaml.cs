@@ -20,9 +20,12 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class FitnessPlansPage : Page
     {
+        public static FitnessPlansPage FitnessPlansPageObject = new FitnessPlansPage();
+
         public FitnessPlansPage()
         {
             InitializeComponent();
+            FitnessPlansPageObject = this;
         }
     }
 }

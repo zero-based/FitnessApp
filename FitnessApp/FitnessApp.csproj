@@ -84,6 +84,18 @@
     <Compile Include="UserMainWindow.xaml.cs">
       <DependentUpon>UserMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserMainWindowPages\CaloriesCalculatorPage.xaml.cs">
+      <DependentUpon>CaloriesCalculatorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserMainWindowPages\ChallengesPage.xaml.cs">
+      <DependentUpon>ChallengesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserMainWindowPages\FitnessPlansPage.xaml.cs">
+      <DependentUpon>FitnessPlansPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserMainWindowPages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="SigningWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +120,22 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="UserMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserMainWindowPages\CaloriesCalculatorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserMainWindowPages\ChallengesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserMainWindowPages\FitnessPlansPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserMainWindowPages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -167,9 +195,7 @@
   <ItemGroup>
     <Resource Include="Images\AccountCircleDefaultIcon.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserMainWindowPages\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\ShowMeTheXAML.MSBuild.1.0.10\build\net45\ShowMeTheXAML.MSBuild.targets" Condition="Exists('..\packages\ShowMeTheXAML.MSBuild.1.0.10\build\net45\ShowMeTheXAML.MSBuild.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
