@@ -32,19 +32,19 @@ namespace FitnessApp
             switch (UserMainWindowPagesListBox.SelectedIndex)
             {
                 case 0:
-                    // Navigate to Challenges Page
+                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.ChallengesPage.ChallengesPageObject);
                     break;
 
                 case 1:
-                    // Navigate to Fitness Plans Page
+                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.FitnessPlansPage.FitnessPlansPageObject);
                     break;
 
                 case 2:
-                    // Navigate to Calories Calculator Page
+                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.CaloriesCalculatorPage.CaloriesCalculatorPageObject);
                     break;
 
                 case 3:
-                    // Navigate to Settings Page
+                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.SettingsPage.SettingsPageObject);
                     break;
             }
 
