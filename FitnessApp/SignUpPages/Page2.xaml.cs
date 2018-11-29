@@ -19,7 +19,7 @@ namespace FitnessApp.SignUpPages
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SignUpPages.Page3());
+            NavigationService.Navigate(Page3.PageThreeObject);
 
             //Change Back Card Header
             SigningWindow.SigningWindowObject.BackArrowButton.Visibility = Visibility.Hidden;
