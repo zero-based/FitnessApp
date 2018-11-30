@@ -8,5 +8,160 @@
 
     <Grid>
         
+        <ListBox x:Name="ChallengesListBox" 
+                 ItemsSource="{Binding ChallengeItems}" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                 materialDesign:RippleAssist.IsDisabled="True" 
+                 Foreground="Transparent">
+
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            
+            <!--Challenge Item Template-->
+            <ListBox.ItemTemplate>
+                
+                <DataTemplate DataType="ChallengeItem">
+                    
+                    <materialDesign:Card Width="485" 
+                                         Height="330" 
+                                         Background="{StaticResource MaterialDesignPaper}">
+                        <Grid>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="140"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="5"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15" />
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="15" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--Challenge Image-->
+                            <Image Grid.Row="0"
+                                   Grid.ColumnSpan="3"
+                                   Source="../Images/LoginHeader.jpg"
+                                   Height="140"
+                                   Width="485"
+                                   Stretch="UniformToFill"/>
+
+                            <!--Join Button-->
+                            <ToggleButton Grid.Row="0"
+                                          Grid.Column="1"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Bottom"
+                                          Margin="0,0,16,-20"
+                                          Width="50"
+                                          Height="50"
+                                          ToolTip="Join Challenge"
+                                          Style="{StaticResource MaterialDesignActionToggleButton}"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2" >
+                                <materialDesign:PackIcon Kind="Add" />
+                            </ToggleButton>
+
+                            <!--Challenge Name-->
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="1"
+                                       FontFamily="{StaticResource ProductSans}"
+                                       FontWeight="Bold" 
+                                       FontSize="18"
+                                       Foreground="Black"
+                                       Text="{Binding ChallengeName}"/>
+
+                            <!--Challenge Description-->
+                            <TextBlock Grid.Row="4"
+                                       Grid.Column="1"
+                                       FontFamily="{StaticResource Roboto}"
+                                       FontSize="14"
+                                       TextWrapping="Wrap"
+                                       Foreground="Black"
+                                       Text="{Binding ChallengeDescription}"/>
+
+                            <!--Challenge Due Date-->
+                            <Grid Grid.Row="6" Grid.Column="1">
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon Kind="Calendar" Grid.Column="0" Foreground="Black"/>
+                                
+                                <TextBlock Grid.Column="2"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15"
+                                           Foreground="Black"
+                                           Text="{Binding ChallengeDueDate}">
+                                </TextBlock>
+                                
+                            </Grid>
+
+                            <!--Challenge Target-->
+                            <Grid  Grid.Row="8" Grid.Column="1">
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <materialDesign:PackIcon Kind="TargetArrow" Grid.Column="0" Foreground="Black"/>
+                                
+                                <TextBlock Grid.Column="2"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15"
+                                           Foreground="Black"
+                                           Text="{Binding ChallengeTarget}">
+                                </TextBlock>
+                                
+                            </Grid>
+
+                            <!--Challenge Reward-->
+                            <Grid Grid.Row="10" Grid.Column="1">
+                                
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                
+                                <materialDesign:PackIcon Kind="TrophyOutline" Grid.Column="0" Foreground="Black"/>
+                                
+                                <TextBlock Grid.Column="2"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15"
+                                           Foreground="Black"
+                                           Text="{Binding ChallengeReward}">
+                                </TextBlock>
+                                
+                            </Grid>
+                            
+                        </Grid>
+                        
+                    </materialDesign:Card>
+                    
+                </DataTemplate>
+                
+            </ListBox.ItemTemplate>
+            
+        </ListBox>
+        
     </Grid>
+    
 </Page>
