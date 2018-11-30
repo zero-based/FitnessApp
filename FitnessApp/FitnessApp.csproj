@@ -97,6 +97,7 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ChallengeItem.cs" />
+    <Compile Include="ViewModels\ChallengesViewModel.cs" />
     <Page Include="SigningWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
