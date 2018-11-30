@@ -13,6 +13,7 @@ namespace FitnessApp.UserMainWindowPages
         {
             InitializeComponent();
             ChallengesPageObject = this;
+            DataContext = new ViewModels.ChallengesViewModel();
         }
     }
 }
