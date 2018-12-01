@@ -115,6 +115,7 @@
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
 
+                            <!--Initially Highlighted-->
                             <materialDesign:PackIcon x:Name="HomeIcon" Kind="Home" Grid.Column="1"/>
 
                             <TextBlock x:Name="HomeTextBlock"
@@ -287,7 +288,7 @@
                     <ToggleButton x:Name="MenuToggleButton"
                                   Width="25"
                                   Height="25"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}" />
+                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
                         
                     <!--Right side PopupBox and its contents-->
                     <materialDesign:PopupBox DockPanel.Dock="Right"
@@ -300,13 +301,12 @@
                         </StackPanel>
                     </materialDesign:PopupBox>
                     
-                    <!--Header Title-->
-                    <TextBlock HorizontalAlignment="Center" 
+                    <!--Page Header-->
+                    <TextBlock x:Name="PageHeaderTextBlock"
+                               HorizontalAlignment="Center" 
                                VerticalAlignment="Center" 
-                               FontSize="22">
-                               Fitness App
-                    </TextBlock>
-                    
+                               FontSize="22"/>
+
                 </DockPanel>
                 
             </materialDesign:ColorZone>
