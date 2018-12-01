@@ -84,6 +84,9 @@
     <Compile Include="UserMainWindow.xaml.cs">
       <DependentUpon>UserMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserMainWindowPages\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserMainWindowPages\CaloriesCalculatorPage.xaml.cs">
       <DependentUpon>CaloriesCalculatorPage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +127,10 @@
     <Page Include="UserMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserMainWindowPages\HomePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserMainWindowPages\CaloriesCalculatorPage.xaml">
       <SubType>Designer</SubType>
