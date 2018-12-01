@@ -103,9 +103,10 @@
                          Grid.ColumnSpan="3"
                          SelectionChanged="UserMainWindowPagesListBox_SelectionChanged">
 
-                    <!--Challenges Button-->
+                    <!--Home Button-->
                     <ListBoxItem>
                         <Grid>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15"/>
                                 <ColumnDefinition Width="auto"/>
@@ -114,21 +115,46 @@
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
 
-                            <materialDesign:PackIcon Kind="Account" Grid.Column="1"/>
+                            <materialDesign:PackIcon x:Name="HomeIcon" Kind="Home" Grid.Column="1"/>
 
-                            <TextBlock x:Name="ChallengesButtonButton"
+                            <TextBlock x:Name="HomeTextBlock"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15"
-                                       Foreground="Black" >
+                                       FontSize="15">
+                                       Home
+                            </TextBlock>
+
+                        </Grid>
+                    </ListBoxItem>
+
+                    <!--Challenges Button-->
+                    <ListBoxItem>
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+                            <materialDesign:PackIcon x:Name="ChallengesIcon" Kind="Account" Grid.Column="1"/>
+
+                            <TextBlock x:Name="ChallengesTextBlock"
+                                       Grid.Column="3"
+                                       FontFamily="{StaticResource ProductSans}"
+                                       FontSize="15">
                                        Challenges
                             </TextBlock>
+
                         </Grid>
                     </ListBoxItem>
 
                     <!--Fitness Plans Button-->
                     <ListBoxItem>
                         <Grid>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15"/>
                                 <ColumnDefinition Width="auto"/>
@@ -137,21 +163,22 @@
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
 
-                            <materialDesign:PackIcon Kind="CalendarHeart" Grid.Column="1"/>
+                            <materialDesign:PackIcon x:Name="FitnessPlansIcon" Kind="CalendarHeart" Grid.Column="1"/>
 
-                            <TextBlock x:Name="FitnessPlansButton"
+                            <TextBlock x:Name="FitnessPlansTextBlock"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15"
-                                       Foreground="Black" >
+                                       FontSize="15">
                                        Fitness Plans
                             </TextBlock>
+
                         </Grid>
                     </ListBoxItem>
 
                     <!--Calories Calculator Button-->
                     <ListBoxItem>
                         <Grid>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15"/>
                                 <ColumnDefinition Width="auto"/>
@@ -160,21 +187,22 @@
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
 
-                            <materialDesign:PackIcon Kind="CalculatorVariant" Grid.Column="1"/>
+                            <materialDesign:PackIcon x:Name="CaloriesCalculatorIcon" Kind="CalculatorVariant" Grid.Column="1"/>
 
-                            <TextBlock x:Name="CaloriesCalculatorButton"
+                            <TextBlock x:Name="CaloriesCalculatorTextBlock"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15"
-                                       Foreground="Black" >
+                                       FontSize="15">
                                        Calories Calculator
                             </TextBlock>
+
                         </Grid>
                     </ListBoxItem>
 
                     <!--Settings Button-->
                     <ListBoxItem>
                         <Grid>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15"/>
                                 <ColumnDefinition Width="auto"/>
@@ -182,14 +210,16 @@
                                 <ColumnDefinition Width="auto"/>
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
-                            <materialDesign:PackIcon Kind="Settings" Grid.Column="1"/>
-                            <TextBlock x:Name="SettingsButton"
+
+                            <materialDesign:PackIcon x:Name="SettingsIcon" Kind="Settings" Grid.Column="1"/>
+
+                            <TextBlock x:Name="SettingsTextBlock"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15"
-                                       Foreground="Black" >
+                                       FontSize="15">
                                        Settings
                             </TextBlock>
+
                         </Grid>
                     </ListBoxItem>
 
@@ -200,6 +230,7 @@
 
                     <ListBoxItem>
                         <Grid>
+
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="15"/>
                                 <ColumnDefinition Width="auto"/>
@@ -213,17 +244,17 @@
                             <TextBlock x:Name="LogoutButton"
                                        Grid.Column="3"
                                        FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15"
-                                       Foreground="Black" >
+                                       FontSize="15">
                                        Logout
                             </TextBlock>
+
                         </Grid>
                     </ListBoxItem>
 
                 </ListBox>
 
             </Grid>
-
+            
         </materialDesign:DrawerHost.LeftDrawerContent>
         
         
@@ -277,6 +308,7 @@
                     </TextBlock>
                     
                 </DockPanel>
+                
             </materialDesign:ColorZone>
 
             <!--User Main Window Frame-->
