@@ -2,9 +2,14 @@
 
 This Project is still under development
 
-# Contributing Guidelines
+## Contributing Guidelines
 
-## 1. Commit Messages Guidelines
+### 1. Commits Guidelines
+
+- Commits **shouldn't contain multiple unrelated changes**; try and make piecemeal changes if you can, to make it easier to review and merge. In particular, don't commit style/whitespace changes and functionality changes in a single commit.
+- Modify **one file** per commit. This'll make merging and pulling easier for everyone.
+
+### 2. Commit Messages Guidelines
 
 - Separate subject from body with a **blank line**.
 - **Do not** end the subject line with a **period**.
@@ -13,6 +18,7 @@ This Project is still under development
 - Wrap lines of the body at **72 characters**.
 - **Asterisks** are used for the bullets in message's body.
 - **Punctuate** your commit message's body.
+- Add two empty lines followed by **Co-authors**, if found, at the end of your commit message.
 - Example:
 
 ```
@@ -24,11 +30,14 @@ This Project is still under development
      * Add Comments to make it easier to read the code.
      * Add whitespaces between code blocks.
 
+    Co-authored-by: Michael Safwat Hanna <michaelsafwat.hanna@gmail.com>
+    Co-authored-by: Youssef Raafat <YoussefRaafatNasry@gmail.com>
+
 ```
 
-## 2. XAML Coding Guidelines
+### 3. XAML Coding Guidelines
 
-### Naming
+#### Naming
 
 - Name elements with the ```x:Name``` attribute.
 - Use Pascal Casing *(i.e. first char of each word should be capitalized)*.
@@ -39,7 +48,7 @@ This Project is still under development
 x:Name = "EmailTextBox"
 ```
 
-### Code readability
+#### Code readability
 
 - Put one attribute per line.
 - Put the first attribute on the element line.
@@ -99,13 +108,13 @@ x:Name = "EmailTextBox"
 
 ```
 
-## 3. UI Guidelines
+### 4. UI Guidelines
 
 - Use **Grid** layout instead of StackPanel when possible.
 - Add **15px** spacing between rows and columns.
 - Add **25px** whitespace border in cards and windows.
 
-## 4. Typography Guidelines
+### 5. Typography Guidelines
 
 - Use **Product Sans** Font for buttons and headings.
 - Else, use **Roboto** Font.
