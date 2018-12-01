@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d">
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Padding="2.55">
@@ -46,8 +47,27 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="15"/>
                             </Grid.ColumnDefinitions>
-                            
-                            
+
+                            <!--Card Header-->
+                            <TextBlock Grid.Row="1"
+                                   Grid.Column="1"
+                                   FontFamily="{StaticResource ProductSans}"
+                                   FontWeight="Bold" 
+                                   FontSize="18"
+                                   Foreground="Black"
+                                   Text="Weight"/>
+
+                            <Grid Grid.Row="3" Grid.Column="1">
+                                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Width="auto" Height="200">
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis Title="Sales" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+                            </Grid>
+
 
                         </Grid>
                     </materialDesign:Card>
@@ -157,7 +177,8 @@
                                      ToolTipService.Placement="Right"
                                      HorizontalAlignment="Right"
                                      VerticalAlignment="Bottom"
-                                     Grid.Column="2">
+                                     Grid.Column="2"
+                                     Margin="5">
                 
                 <StackPanel>
                     
