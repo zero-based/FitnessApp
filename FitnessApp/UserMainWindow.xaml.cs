@@ -12,6 +12,9 @@ namespace FitnessApp
         public UserMainWindow()
         {
             InitializeComponent();
+
+            // Initialize Listbox Selected Index
+            UserMainWindowPagesListBox.SelectedIndex = 0;
         }
 
         private void UserMainWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -43,8 +46,8 @@ namespace FitnessApp
                     break;
 
                 case 4:
-                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.SettingsPage.SettingsPageObject);
                     HighlightItem(SettingsTextBlock, SettingsIcon);
+                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.SettingsPage.SettingsPageObject);
                     break;
             }
         }
@@ -75,9 +78,10 @@ namespace FitnessApp
 
 
 
-            // Highlight the required Item only
+            // Highlight the required Item only and Change Page Header
             _pageTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
             _pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
+            PageHeaderTextBlock.Text  = _pageTextBlock.Text;
         }
     }
 }
