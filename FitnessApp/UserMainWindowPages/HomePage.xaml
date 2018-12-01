@@ -6,7 +6,179 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d">
 
-    <Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Padding="2.55">
+        <Grid Margin="2.5">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="25"/>
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            
+            <!--Left cards grid-->
+            <Grid Grid.Column="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Left Upper Card-->
+                <Grid Grid.Row="0">
+                    <materialDesign:Card 
+                        Width="485" 
+                        Background="{StaticResource MaterialDesignBackground}">
+                        <Grid>
+                            
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            
+
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+
+                <!--Left Lower Card-->
+                <Grid Grid.Row="2">
+                    <materialDesign:Card 
+                        Width="485" 
+                        Background="{StaticResource MaterialDesignBackground}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+
+
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+
+            </Grid>
+
+            <!--Right cards grid-->
+            <Grid Grid.Column="2">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Right Upper Card-->
+                <Grid Grid.Row="0">
+                    <materialDesign:Card 
+                        Width="485" 
+                        Background="{StaticResource MaterialDesignBackground}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+
+
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+
+                <!--Right Lower Card-->
+                <Grid Grid.Row="2">
+                    <materialDesign:Card 
+                        Width="485" 
+                        Background="{StaticResource MaterialDesignBackground}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+
+
+
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+
+            </Grid>
+
+            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                     ToolTipService.Placement="Right"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Bottom"
+                                     Grid.Column="2">
+                
+                <StackPanel>
+                    
+                    <Button>
+                        
+                    </Button>
+                    
+                    <Button>
+                        
+                    </Button>
+
+                    <Button>
+
+                    </Button>
+                    
+                </StackPanel>
+                
+            </materialDesign:PopupBox>
+            
+        </Grid>
         
-    </Grid>
+    </ScrollViewer>
+    
 </Page>
