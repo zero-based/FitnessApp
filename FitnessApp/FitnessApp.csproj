@@ -102,6 +102,7 @@
     <Compile Include="ViewModels\ChallengeItem.cs" />
     <Compile Include="ViewModels\ChallengesViewModel.cs" />
     <Compile Include="ViewModels\PlanItem.cs" />
+    <Compile Include="ViewModels\PlansViewModel.cs" />
     <Page Include="SigningWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
