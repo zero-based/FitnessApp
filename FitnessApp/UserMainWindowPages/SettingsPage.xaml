@@ -6,7 +6,302 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d">
 
-    <Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Hidden">
+
+        <Border Padding="5">
+
+            <materialDesign:Card Width="800"
+                                 Background="{DynamicResource MaterialDesignBackground}">
+
+                <StackPanel>
+
+                    <Expander Header="Profile"
+                              IsExpanded="True">
+
+                        <Grid Width="400">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <!--User display picture-->
+                            <Grid Grid.Row="1">
+
+                                <Ellipse Width="150" Height="150">
+                                    <Ellipse.Fill>
+                                        <ImageBrush x:Name="UserProfilePhoto"
+                                                    ImageSource="../Images/AccountCircleDefaultIcon.png"
+                                                    Stretch="UniformToFill"
+                                                    Opacity="0.75" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                
+                                <Button x:Name="ChooseImageButton"
+                                        Width="120" 
+                                        Height="120" 
+                                        Opacity="0"
+                                        Style="{StaticResource MaterialDesignFloatingActionButton}">
+                                </Button>
+
+                            </Grid>
+
+                            <!--Weight and Height Fields-->
+                            <Grid Grid.Row="3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="WeightTextBox"
+                                         Grid.Column="0"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Weight" />
+
+                                <TextBox x:Name="HeightTextBox"
+                                         Grid.Column="2"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Height" />
+
+                            </Grid>
+
+                            <!--Target Weights Fields-->
+                            <Grid Grid.Row="5">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="TargetWeightTextBox"
+                                         Grid.Column="0"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Target Weight" />
+
+                                <TextBox x:Name="KilosToLosePerWeekTextBox"
+                                         Grid.Column="2"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Kilos to lose/week" />
+
+                            </Grid>
+
+                            <!--Workouts Fields-->
+                            <Grid Grid.Row="7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="WorkoutsPerWeekTextBox"
+                                         Grid.Column="0"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Workouts/week" />
+
+                                <TextBox x:Name="WorkoutHoursPerDayTextBox"
+                                         Grid.Column="2"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Workout Hours/Day" />
+                            </Grid>
+
+                            <!--Update Profile Button-->
+                            <Button x:Name="UpdateProfileButton"
+                                    Grid.Row="9"
+                                    HorizontalAlignment="Right"
+                                    FontFamily="{StaticResource ProductSans}" 
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                    Update Profile
+                            </Button>
+
+                        </Grid>
+
+                    </Expander>
+
+                    
+                    <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+                    
+                    <Expander Header="Account">
+
+                        <Grid Width="400" HorizontalAlignment="Center">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Name Fields-->
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <TextBox x:Name="FirstNameTextBox"
+                                         Grid.Column="0"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="First Name" />
+
+                                <TextBox x:Name="LastNameTextBox"
+                                         Grid.Column="2"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Last Name" />
+                            </Grid>
+
+                            <!--Username and Email Fields-->
+                            <TextBox x:Name="UsernameTextBox"
+                                     Grid.Row="3"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Username" />
+
+                            <TextBox x:Name="EmailTextBox"
+                                     Grid.Row="5"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Email" />
+
+                            <!--Update Account Button-->
+                            <Button x:Name="UpdateAccountButton"
+                                    Grid.Row="7"
+                                    HorizontalAlignment="Right"
+                                    FontFamily="{StaticResource ProductSans}" 
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                    Update Account
+                            </Button>
+
+                        </Grid>
+
+                    </Expander>
+
+                    
+                    <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+                    
+                    <Expander Header="Security">
+
+                        <Grid Width="400" HorizontalAlignment="Center">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Password Fields-->
+                            <TextBox x:Name="OldPasswordTextBox"
+                                     Grid.Row="1"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Old Password" />
+
+                            <TextBox x:Name="NewPasswordTextBox"
+                                     Grid.Row="3"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="New Password" />
+
+                            <TextBox x:Name="ConfirmNewPasswordTextBox"
+                                     Grid.Row="5"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Confirm New Password" />
+
+                            <!--Update Password Button-->
+                            <Button x:Name="UpdatePasswordButton"
+                                    Grid.Row="7"
+                                    HorizontalAlignment="Right"
+                                    FontFamily="{StaticResource ProductSans}" 
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                    Update Password
+                            </Button>
+                            
+                        </Grid>
+                        
+                    </Expander>
+
+                    
+                    <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+                    
+                    <Expander Header="About Fitness App">
+
+                        <TextBlock Margin="25,10"
+                                   TextWrapping="Wrap"
+                                   Opacity="0.75">
+                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                   nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                   culpa qui officia deserunt mollit anim id est laborum.
+                        </TextBlock>
+                        
+                    </Expander>
+
+                    
+                    <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+                    
+                    <Expander Header="Help">
+
+                        <TextBlock Margin="25,10"
+                                   TextWrapping="Wrap"
+                                   Opacity="0.75">
+                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                   nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                   culpa qui officia deserunt mollit anim id est laborum.
+                        </TextBlock>
+
+                    </Expander>
+
+                </StackPanel>
+                
+            </materialDesign:Card>
+
+        </Border>
         
-    </Grid>
+    </ScrollViewer>
+
 </Page>
