@@ -58,7 +58,7 @@
                                        Text="Weight"/>
 
                             <Grid Grid.Row="3" Grid.Column="1">
-                                <lvc:CartesianChart Series="{Binding SeriesCollection}" LegendLocation="Right" Width="auto" Height="200">
+                                <lvc:CartesianChart Series="{Binding SeriesCollection}" Height="200" Width="440" HorizontalAlignment="Left">
                                     <lvc:CartesianChart.AxisY>
                                         <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
