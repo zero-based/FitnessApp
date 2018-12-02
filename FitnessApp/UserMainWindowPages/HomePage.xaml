@@ -150,6 +150,121 @@
                                         <ColumnDefinition Width="25"/>
                                     </Grid.ColumnDefinitions>
 
+                                    <!--Card Header-->
+                                    <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       FontFamily="{StaticResource ProductSans}"
+                                       FontWeight="Regular" 
+                                       FontSize="18"
+                                       Foreground="Black"
+                                       Text="Plans | Day #1"/>
+
+                                    <Grid Grid.Row="3" Grid.Column="1">
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Expander Grid.Row="0"
+                                                  HorizontalAlignment="Stretch"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Header="Breakfast"
+                                                  Background="{StaticResource MaterialDesignBackground}">
+
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
+
+                                                <CheckBox Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            </Grid>
+
+                                        </Expander>
+
+                                        <Expander Grid.Row="1"
+                                                  HorizontalAlignment="Stretch"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Header="Lunch"
+                                                  Background="{StaticResource MaterialDesignBackground}">
+
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
+
+                                                <CheckBox Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            </Grid>
+
+                                        </Expander>
+
+                                        <Expander Grid.Row="2"
+                                                  HorizontalAlignment="Stretch"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Header="Dinner"
+                                                  Background="{StaticResource MaterialDesignBackground}">
+
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
+
+                                                <CheckBox Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            </Grid>
+
+                                        </Expander>
+
+                                        <Expander Grid.Row="3"
+                                                  HorizontalAlignment="Stretch"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Header="Workouts"
+                                                  Background="{StaticResource MaterialDesignBackground}">
+
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
+
+                                                <CheckBox Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            </Grid>
+
+                                        </Expander>
+
+                                    </Grid>
                                 </Grid>
                             </materialDesign:Card>
                         </Grid>
