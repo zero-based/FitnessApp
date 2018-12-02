@@ -7,6 +7,139 @@
       mc:Ignorable="d">
 
     <Grid>
-        
+
+        <ListBox x:Name="PlansListBox" 
+                 ItemsSource="{Binding PlanItems}" 
+                 ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                 materialDesign:RippleAssist.IsDisabled="True" 
+                 Foreground="Transparent">
+
+            <!--Challenge Item Template-->
+            <ListBox.ItemTemplate>
+
+                <DataTemplate DataType="PlanItem">
+
+                    <materialDesign:Card Background="{StaticResource MaterialDesignPaper}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="200"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="15" />
+                            </Grid.ColumnDefinitions>
+
+                            <!--Plan Image-->
+                            <Image Grid.Row="0"
+                                   Grid.ColumnSpan="3"
+                                   Source="../Images/LoginHeader.jpg"
+                                   Stretch="UniformToFill"/>
+
+                            <!--Join Button-->
+                            <ToggleButton Grid.Row="0"
+                                          Grid.Column="1"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Bottom"
+                                          Margin="0,0,16,-20"
+                                          Width="50"
+                                          Height="50"
+                                          ToolTip="Join Challenge"
+                                          Style="{StaticResource MaterialDesignActionToggleButton}"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2" >
+                                <materialDesign:PackIcon Kind="Add" />
+                            </ToggleButton>
+
+                            <!--Plan Name-->
+                            <TextBlock Grid.Row="2"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       FontFamily="{StaticResource ProductSans}"
+                                       FontWeight="Bold" 
+                                       FontSize="18"
+                                       Foreground="Black"
+                                       Text="{Binding PlanName}"/>
+
+                            <!--Plan Description-->
+                            <TextBlock Grid.Row="4"
+                                       Grid.Column="1"
+                                       HorizontalAlignment="Center"
+                                       FontFamily="{StaticResource Roboto}"
+                                       FontSize="14"
+                                       TextWrapping="Wrap"
+                                       TextAlignment="Center"
+                                       Foreground="Black"
+                                       Text="{Binding PlanDescription}"/>
+
+                            <Grid Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="40" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <!--Plan Duration-->
+                            <Grid Grid.Column="0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon Kind="Calendar" Grid.Column="0" Foreground="Black"/>
+
+                                <TextBlock Grid.Column="2"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15"
+                                           Foreground="Black"
+                                           Text="{Binding PlanDuration}">
+                                </TextBlock>
+
+                            </Grid>
+
+                            <!--Plan hardness-->
+                            <Grid Grid.Column="2">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon Kind="ChartFinance" Grid.Column="0" Foreground="Black"/>
+
+                                <TextBlock Grid.Column="2"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15"
+                                           Foreground="Black"
+                                           Text="{Binding PlanHardness}">
+                                </TextBlock>
+
+                            </Grid>
+                                
+                            </Grid>
+                            
+                        </Grid>
+
+                    </materialDesign:Card>
+
+                </DataTemplate>
+
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
     </Grid>
+    
 </Page>
