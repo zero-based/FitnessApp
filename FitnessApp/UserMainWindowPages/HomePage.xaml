@@ -7,210 +7,203 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d">
 
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden" Padding="2.5">
-        <Grid Margin="2.5">
+    <Grid>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+            <Border Padding="2.5">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="25"/>
-                <ColumnDefinition Width="auto" />
-            </Grid.ColumnDefinitions>
-            
-            <!--Left cards grid-->
-            <Grid Grid.Column="0">
+                    <!--Left cards grid-->
+                    <Grid Grid.Column="0">
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-                <!--Left Upper Card-->
-                <Grid Grid.Row="0">
-                    <materialDesign:Card 
-                        Width="485" 
-                        Background="{StaticResource MaterialDesignBackground}">
-                        <Grid>
+                        <!--Left Upper Card-->
+                        <Grid Grid.Row="0">
+                            <materialDesign:Card Width="485"
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                            </Grid.RowDefinitions>
-                            
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
 
-                            <!--Card Header-->
-                            <TextBlock Grid.Row="1"
-                                       Grid.Column="1"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontWeight="Regular" 
-                                       FontSize="18"
-                                       Foreground="Black"
-                                       Text="Weight"/>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!--Card Header-->
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               FontFamily="{StaticResource ProductSans}"
+                                               FontWeight="Regular" 
+                                               FontSize="18"
+                                               Foreground="Black"
+                                               Text="Weight"/>
 
-                            <Grid Grid.Row="3" Grid.Column="1">
-                                <lvc:CartesianChart Series="{Binding SeriesCollection}" Height="200" Width="440" HorizontalAlignment="Left">
-                                    <lvc:CartesianChart.AxisY>
-                                        <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                                    </lvc:CartesianChart.AxisY>
-                                    <lvc:CartesianChart.AxisX>
-                                        <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
-                                    </lvc:CartesianChart.AxisX>
-                                </lvc:CartesianChart>
-                            </Grid>
+                                    <Grid Grid.Row="3" Grid.Column="1">
+                                        <lvc:CartesianChart Series="{Binding SeriesCollection}" Height="200" Width="440" HorizontalAlignment="Left">
+                                            <lvc:CartesianChart.AxisY>
+                                                <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                            </lvc:CartesianChart.AxisY>
+                                            <lvc:CartesianChart.AxisX>
+                                                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+                                            </lvc:CartesianChart.AxisX>
+                                        </lvc:CartesianChart>
+                                    </Grid>
 
-                            <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center">
+                                    <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center">
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="120"/>
-                                    <ColumnDefinition Width="15"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="15"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
 
-                                <TextBox Grid.Column="0"
-                                         FontFamily="{StaticResource Roboto}"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         materialDesign:HintAssist.Hint="Today's Weight in kg"/>
+                                        <TextBox Grid.Column="0"
+                                                 FontFamily="{StaticResource Roboto}"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                 materialDesign:HintAssist.Hint="Today's Weight in kg"/>
 
-                                <Button Grid.Column="2"
-                                        FontFamily="{StaticResource ProductSans}"
-                                        FontSize="12"
-                                        Style="{StaticResource MaterialDesignRaisedDarkButton}">
-                                    Save
-                                </Button>
-                            </Grid>
+                                        <Button Grid.Column="2"
+                                                FontFamily="{StaticResource ProductSans}"
+                                                FontSize="12"
+                                                Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                                Save
+                                        </Button>
+                                    </Grid>
 
+                                </Grid>
+                            </materialDesign:Card>
                         </Grid>
-                    </materialDesign:Card>
+
+                        <!--Left Lower Card-->
+                        <Grid Grid.Row="2">
+                            <materialDesign:Card Width="485" 
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
+
+
+
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+
+                    </Grid>
+
+                    <!--Right cards grid-->
+                    <Grid Grid.Column="2">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="25"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Right Upper Card-->
+                        <Grid Grid.Row="0">
+                            <materialDesign:Card Width="485" 
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
+
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+
+                        <!--Right Lower Card-->
+                        <Grid Grid.Row="2">
+                            <materialDesign:Card Width="485" 
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="10"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
+
+                                </Grid>
+                            </materialDesign:Card>
+                        </Grid>
+
+                    </Grid>
                 </Grid>
 
-                <!--Left Lower Card-->
-                <Grid Grid.Row="2">
-                    <materialDesign:Card 
-                        Width="485" 
-                        Background="{StaticResource MaterialDesignBackground}">
-                        <Grid>
+            </Border>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                            </Grid.RowDefinitions>
-                            
-                            
+        </ScrollViewer>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
+        <!--Floating PopUp Button-->
+        <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                 ToolTipService.Placement="Right"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Bottom"
+                                 Grid.Column="2"
+                                 Margin="5">
 
+            <StackPanel>
 
+                <Button/>
 
-                        </Grid>
-                    </materialDesign:Card>
-                </Grid>
+                <Button/>
 
-            </Grid>
+                <Button/>
 
-            <!--Right cards grid-->
-            <Grid Grid.Column="2">
+            </StackPanel>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="25"/>
-                    <RowDefinition Height="auto"/>
-                </Grid.RowDefinitions>
+        </materialDesign:PopupBox>
 
-                <!--Right Upper Card-->
-                <Grid Grid.Row="0">
-                    <materialDesign:Card Width="485" 
-                                         Background="{StaticResource MaterialDesignBackground}">
-                        <Grid>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                        </Grid>
-                    </materialDesign:Card>
-                </Grid>
-
-                <!--Right Lower Card-->
-                <Grid Grid.Row="2">
-                    <materialDesign:Card Width="485" 
-                                         Background="{StaticResource MaterialDesignBackground}">
-                        <Grid>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="10"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                        </Grid>
-                    </materialDesign:Card>
-                </Grid>
-
-            </Grid>
-
-            <!--Floating PopUp Button-->
-            <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                                     ToolTipService.Placement="Right"
-                                     HorizontalAlignment="Right"
-                                     VerticalAlignment="Bottom"
-                                     Grid.Column="2"
-                                     Margin="5">
-                
-                <StackPanel>
-                    
-                    <Button>
-                        
-                    </Button>
-                    
-                    <Button>
-                        
-                    </Button>
-
-                    <Button>
-
-                    </Button>
-                    
-                </StackPanel>
-                
-            </materialDesign:PopupBox>
-            
-        </Grid>
-        
-    </ScrollViewer>
-    
+    </Grid>
 </Page>
