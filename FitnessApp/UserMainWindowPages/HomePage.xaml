@@ -152,16 +152,17 @@
 
                                     <!--Card Header-->
                                     <TextBlock Grid.Row="1"
-                                       Grid.Column="1"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontWeight="Regular" 
-                                       FontSize="18"
-                                       Foreground="Black"
-                                       Text="Plans | Day #1"/>
+                                               Grid.Column="1"
+                                               FontFamily="{StaticResource ProductSans}"
+                                               FontWeight="Regular" 
+                                               FontSize="18"
+                                               Foreground="Black"
+                                               Text="Plans | Day #1"/>
 
                                     <Grid Grid.Row="3" Grid.Column="1">
 
                                         <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
@@ -264,6 +265,9 @@
 
                                         </Expander>
 
+                                        <ProgressBar Grid.Row="4"
+                                                     Value="50"
+                                                     materialDesign:TransitionAssist.DisableTransitions="True" />
                                     </Grid>
                                 </Grid>
                             </materialDesign:Card>
