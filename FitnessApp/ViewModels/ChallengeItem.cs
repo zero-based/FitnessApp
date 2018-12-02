@@ -21,31 +21,31 @@
         public string ChallengeName
         {
             get { return challengeName; }
-            set { }
+            set { challengeName = value; }
         }
 
         public string ChallengeDescription
         {
             get { return challengeDescription; }
-            set { }
+            set { challengeDescription = value; }
         }
 
         public string ChallengeDueDate
         {
             get { return challengeDueDate; }
-            set { }
+            set { challengeDueDate = value; }
         }
 
         public string ChallengeTarget
         {
             get { return challengeTarget; }
-            set { }
+            set { challengeTarget = value; }
         }
 
         public string ChallengeReward
         {
             get { return challengeReward; }
-            set { }
+            set { challengeReward = value; }
         }
     }
 }
