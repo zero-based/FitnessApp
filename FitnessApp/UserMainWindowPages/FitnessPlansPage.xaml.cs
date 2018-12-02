@@ -13,6 +13,7 @@ namespace FitnessApp.UserMainWindowPages
         {
             InitializeComponent();
             FitnessPlansPageObject = this;
+            DataContext = new ViewModels.PlansViewModel();
         }
     }
 }
