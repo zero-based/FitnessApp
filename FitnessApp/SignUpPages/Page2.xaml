@@ -6,7 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       mc:Ignorable="d">
 
-    <Grid HorizontalAlignment="Center" Width="450">
+    <Grid Width="450" HorizontalAlignment="Center">
         <!--450px Width gives 25px whitespace margin on both sides
              because the total width of the frame is 500px-->
         

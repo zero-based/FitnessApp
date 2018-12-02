@@ -24,7 +24,7 @@ namespace FitnessApp
         }
 
 
-        private void CreateAnAccount_Click(object sender, RoutedEventArgs e)
+        private void CreateAnAccountButton_Click(object sender, RoutedEventArgs e)
         {
             SignUpPagesFrame.NavigationService.Navigate(SignUpPages.Page1.PageOneObject);
         }

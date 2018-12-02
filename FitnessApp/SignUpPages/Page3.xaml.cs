@@ -19,7 +19,7 @@ namespace FitnessApp.SignUpPages
             PageThreeObject = this;
         }
 
-        private void SetUpProfile_Click(object sender, RoutedEventArgs e)
+        private void SetUpProfileButton_Click(object sender, RoutedEventArgs e)
         {
             UserMainWindow AppWindow = new UserMainWindow();
             SigningWindow.SigningWindowObject.Close();

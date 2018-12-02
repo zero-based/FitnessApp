@@ -28,83 +28,95 @@
                 
             <!--Sign In Card-->
             <materialDesign:Flipper.FrontContent>
+                
                 <Grid Width="500" Height="500">
                         
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="180"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="25"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="25"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="25"/>
+                    </Grid.ColumnDefinitions>
                     
                     <!--Header Image-->
                     <Image Source="Images/LoginHeader.jpg"
+                           Grid.ColumnSpan="3"
+                           Height="180"
                            HorizontalAlignment="Center"
-                           Stretch="UniformToFill"
-                           Width="auto"
-                           Height="180"/>
+                           Stretch="UniformToFill"/>
 
                     
                     <!--Header Text-->
-                    <StackPanel Grid.Row="1" Margin="0,35,0,10">
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="1"
+                               FontFamily="{StaticResource ProductSans}"
+                               FontWeight="Bold" 
+                               FontSize="18"
+                               TextAlignment="Center">
+                               Sign in
+                    </TextBlock>
 
-                        <TextBlock FontFamily="{StaticResource ProductSans}"
-                                   FontWeight="Bold" 
-                                   FontSize="18"
-                                   TextAlignment="Center">
-                                   Sign in
-                        </TextBlock>
-
-                        <TextBlock Margin="0,5,0,0"
-                                   FontFamily="{StaticResource Roboto}"
-                                   FontSize="14"
-                                   TextAlignment="Center">
-                                   Use your "Fitness" account
-                        </TextBlock>
-
-                    </StackPanel>
+                    <TextBlock Grid.Row="4"
+                               Grid.Column="1"
+                               FontFamily="{StaticResource Roboto}"
+                               FontSize="14"
+                               TextAlignment="Center">
+                               Use your "Fitness" account
+                    </TextBlock>
 
 
                     <!--Sign in Feilds-->
-                    <StackPanel Grid.Row="2" Margin="25,0">
-                        
-                        <Grid>
-                            <materialDesign:PackIcon Kind="Account" Margin="0,20,0,0"/>
-                            <TextBox x:Name="EmailSignInTextBox"
+                    <Grid Grid.Row="6" Grid.Column="1">
+                        <materialDesign:PackIcon Kind="Account" Margin="0,20,0,0"/>
+                        <TextBox x:Name="EmailSignInTextBox"
+                                 Margin="25,0,0,0"
+                                 FontFamily="{StaticResource Roboto}"
+                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                 materialDesign:HintAssist.Hint="Email"/>
+                    </Grid>
+
+                    <Grid Grid.Row="8" Grid.Column="1">
+                        <materialDesign:PackIcon Kind="Key" Margin="0,20,0,0"/>
+                        <PasswordBox x:Name="PasswordSignInTextBox" 
                                      Margin="25,0,0,0"
                                      FontFamily="{StaticResource Roboto}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     materialDesign:HintAssist.Hint="Email"/>
-                        </Grid>
+                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                     materialDesign:HintAssist.Hint="Password"/>
+                    </Grid>
                         
-                        <Grid Margin="0,15">
-                            <materialDesign:PackIcon Kind="Key" Margin="0,20,0,0"/>
-                            <PasswordBox x:Name="PasswordSignInTextBox" 
-                                         Margin="25,0,0,0"
-                                         FontFamily="{StaticResource Roboto}"
-                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                                         materialDesign:HintAssist.Hint="Password"/>
-                        </Grid>
-                        
-                    </StackPanel>
 
-
+                    
                     <!--Create an account & Sign In Buttons-->
-                    <Grid Grid.Row="3" Margin="25,0">
                         
-                        <Button x:Name="CreateAnAccount"
+                        <Button x:Name="CreateAnAccountButton"
+                                Grid.Row="10" 
+                                Grid.Column="1"
                                 HorizontalAlignment="Left"
                                 FontFamily="{StaticResource ProductSans}"
                                 FontSize="12"
                                 Foreground="{DynamicResource PrimaryHueDarkBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                Click="CreateAnAccount_Click">
+                                Click="CreateAnAccountButton_Click">
                                 Create an account
                         </Button>
 
                         <Button x:Name="SignInButton"
+                                Grid.Row="10" 
+                                Grid.Column="1"
                                 HorizontalAlignment="Right"
                                 FontFamily="{StaticResource ProductSans}"
                                 FontSize="14"
@@ -113,7 +125,6 @@
                                 Sign in
                         </Button>
                         
-                    </Grid>
                         
                 </Grid>
                     

@@ -6,7 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
       mc:Ignorable="d" >
 
-    <Grid HorizontalAlignment="Center" Width="450">
+    <Grid Width="450" HorizontalAlignment="Center">
         <!--450px Width gives 25px whitespace margin on both sides
              because the total width of the frame is 500px-->
         <Grid.RowDefinitions>
@@ -24,17 +24,17 @@
         <!--User display picture-->
         <Grid Grid.Row="0" HorizontalAlignment="Center">
             
-            <Ellipse Width="150"
-                     Height="150"
-                     HorizontalAlignment="Center"
-                     VerticalAlignment="Center">
+            <Ellipse Width="150" Height="150">
+                
                 <Ellipse.Fill>
                     <ImageBrush x:Name="UserProfilePhoto"
                                 ImageSource="../Images/AccountCircleDefaultIcon.png"
                                 Stretch="UniformToFill"
                                 Opacity="0.75"/>
                 </Ellipse.Fill>
+                
             </Ellipse>
+            
             <Button x:Name="ChooseImageButton"
                     Width="120" 
                     Height="120" 
@@ -45,7 +45,7 @@
 
         </Grid> 
         
-        <!--Weight and Height Feilds-->
+        <!--Weight and Height Fields-->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -53,13 +53,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="Weight"
+            <TextBox x:Name="WeightTextBox"
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Weight"/>
 
-            <TextBox x:Name="Height"
+            <TextBox x:Name="HeightTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -67,7 +67,7 @@
             
         </Grid>
         
-        <!--Target Weights Feilds-->
+        <!--Target Weights Fields-->
         <Grid Grid.Row="4">
             
             <Grid.ColumnDefinitions>
@@ -76,13 +76,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="TargetWeight"
+            <TextBox x:Name="TargetWeightTextBox"
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Target Weight"/>
 
-            <TextBox x:Name="KilosToLosePerWeek"
+            <TextBox x:Name="KilosToLosePerWeekTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -90,7 +90,7 @@
 
         </Grid>
         
-        <!--workouts Feilds-->
+        <!--Workouts Fields-->
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -98,13 +98,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="WorkoutsPerWeek"
+            <TextBox x:Name="WorkoutsPerWeekTextBox"
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                      materialDesign:HintAssist.Hint="Workouts/week"/>
 
-            <TextBox x:Name="WorkoutHoursPerDay"
+            <TextBox x:Name="WorkoutHoursPerDayTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -112,13 +112,13 @@
         </Grid>
 
         <!--Setup Profile Button-->
-        <Button x:Name="SetUpProfile"
+        <Button x:Name="SetUpProfileButton"
                 Grid.Row="8"
                 HorizontalAlignment="Right"
                 FontFamily="{StaticResource ProductSans}" 
                 FontSize="14"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                Click="SetUpProfile_Click">
+                Click="SetUpProfileButton_Click">
                 Set up Profile
         </Button>
         
