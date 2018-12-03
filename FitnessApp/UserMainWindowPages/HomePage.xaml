@@ -166,6 +166,7 @@
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="15"/>
                                             <RowDefinition Height="auto"/>
                                         </Grid.RowDefinitions>
 
@@ -265,7 +266,7 @@
 
                                         </Expander>
 
-                                        <ProgressBar Grid.Row="4"
+                                        <ProgressBar Grid.Row="5"
                                                      Value="50"
                                                      materialDesign:TransitionAssist.DisableTransitions="True" />
                                     </Grid>
