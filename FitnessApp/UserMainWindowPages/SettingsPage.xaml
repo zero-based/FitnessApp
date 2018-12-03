@@ -279,6 +279,54 @@
                     
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
+
+                    <Expander Header="Rating and Feedback">
+
+                        <Grid Width="400" HorizontalAlignment="Center">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+
+                            <!--Rating Bar-->
+                            <materialDesign:RatingBar x:Name="RatingBar"
+                                                      Grid.Row="1"
+                                                      HorizontalAlignment="Center"
+                                                      ValueChanged="RatingBar_ValueChanged" />
+
+                            <!--Feedback Field-->
+                            <TextBox x:Name="FeedbackTextBox"
+                                     Grid.Row="3"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     SpellCheck.IsEnabled="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     materialDesign:HintAssist.Hint="Feedback" />
+
+
+                            <!--Submit Feedback-->
+                            <Button x:Name="SubmitFeedbackButton"
+                                    Grid.Row="5"
+                                    HorizontalAlignment="Right"
+                                    FontFamily="{StaticResource ProductSans}" 
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                    Submit
+                            </Button>
+                            
+                        </Grid>
+                        
+                    </Expander>
+
+                    
+                    <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
                     
                     <Expander Header="Help">
 

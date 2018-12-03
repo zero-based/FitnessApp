@@ -14,5 +14,10 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             SettingsPageObject = this;
         }
+
+        private void RatingBar_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<int> e)
+        {
+
+        }
     }
 }
