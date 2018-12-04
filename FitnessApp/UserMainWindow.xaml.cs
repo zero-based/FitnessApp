@@ -9,9 +9,12 @@ namespace FitnessApp
     /// </summary>
     public partial class UserMainWindow : Window
     {
+        public static UserMainWindow UserMainWindowObject;
+
         public UserMainWindow()
         {
             InitializeComponent();
+            UserMainWindowObject = this;
 
             // Initialize Listbox Selected Index
             UserMainWindowPagesListBox.SelectedIndex = 0;
