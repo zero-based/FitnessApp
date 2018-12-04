@@ -43,7 +43,7 @@ namespace FitnessApp.UserMainWindowPages
 
         private void JoinPlanButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 2;
         }
     }
 }
