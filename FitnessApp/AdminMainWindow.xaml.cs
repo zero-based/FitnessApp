@@ -15,6 +15,7 @@ namespace FitnessApp
     public partial class AdminMainWindow : Window
     {
         public static AdminMainWindow AdminMainWindowObject;
+
         public AdminMainWindow()
         {
             InitializeComponent();
@@ -22,15 +23,6 @@ namespace FitnessApp
 
             // Initialize Listbox Selected Index
             AdminMainWindowPagesListBox.SelectedIndex = 0;
-        }
-
-        
-
-        private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            SigningWindow SigningWindowTemp = new SigningWindow();
-            Close();
-            SigningWindowTemp.ShowDialog();
         }
 
         private void AdminMainWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -58,6 +50,7 @@ namespace FitnessApp
                     break;
             }
         }
+
         public void HighlightItem(TextBlock _pageTextBlock, MaterialDesignThemes.Wpf.PackIcon _pageIcon)
         {
             // Set all Items' Foreground to Black 
@@ -82,6 +75,13 @@ namespace FitnessApp
             _pageTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
             _pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
             PageHeaderTextBlock .Text = _pageTextBlock.Text;
+        }
+
+        private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SigningWindow SigningWindowTemp = new SigningWindow();
+            Close();
+            SigningWindowTemp.ShowDialog();
         }
     }
 
