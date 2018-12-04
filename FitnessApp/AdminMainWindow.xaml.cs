@@ -18,6 +18,7 @@ namespace FitnessApp
         public AdminMainWindow()
         {
             InitializeComponent();
+            AdminMainWindowObject = this;
 
             // Initialize Listbox Selected Index
             AdminMainWindowPagesListBox.SelectedIndex = 0;
