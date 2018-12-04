@@ -35,5 +35,15 @@ namespace FitnessApp.UserMainWindowPages
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
+
+        private void SaveWeightButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void JoinPlanButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

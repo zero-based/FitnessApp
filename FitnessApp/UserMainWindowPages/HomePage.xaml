@@ -91,7 +91,8 @@
                                             Grid.Column="2"
                                             FontFamily="{StaticResource ProductSans}"
                                             FontSize="12"
-                                            Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            Click="SaveWeightButton_Click">
                                             Save
                                     </Button>
                                 </Grid>
@@ -293,7 +294,8 @@
                                             FontFamily="{StaticResource ProductSans}" 
                                             FontSize="14"
                                             Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                                            Style="{StaticResource MaterialDesignFlatButton}">
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Click="JoinPlanButton_Click">
                                             Join a plan
                                     </Button>
 
