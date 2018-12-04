@@ -86,5 +86,12 @@ namespace FitnessApp
             _pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
             PageHeaderTextBlock.Text  = _pageTextBlock.Text;
         }
+
+        private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            SigningWindow SigningWindowTemp = new SigningWindow();
+            Close();
+            SigningWindowTemp.ShowDialog();
+        }
     }
 }

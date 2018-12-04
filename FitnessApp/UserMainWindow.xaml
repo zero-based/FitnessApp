@@ -227,7 +227,10 @@
                 </ListBox>
 
                 <!--Logout Button-->
-                <ListBox Grid.Row="9" Grid.ColumnSpan="3">
+                <ListBox x:Name="LogoutListBox"
+                         Grid.Row="9"
+                         Grid.ColumnSpan="3"
+                         SelectionChanged="LogoutListBox_SelectionChanged">
 
                     <ListBoxItem>
                         <Grid>
