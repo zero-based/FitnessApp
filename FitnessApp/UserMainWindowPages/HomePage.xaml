@@ -154,28 +154,34 @@
                                            Grid.Column="1"
                                            FontFamily="{StaticResource ProductSans}"
                                            FontSize="18"
-                                           Text="Plans | Day #1"/>
+                                           Text="Plan Name | Day #1"/>
 
-                                <StackPanel Grid.Row="3" Grid.Column="1">
+                                <StackPanel x:Name="PlanContentStackPanel"
+                                            Grid.Row="3"
+                                            Grid.Column="1">
 
                                     <Expander Header="Breakfast"
                                               FontFamily="{StaticResource ProductSans}"
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="15"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Grid.Column="0"
+                                            <TextBlock x:Name="BreakfastDescriptionTextBlock"
+                                                       Grid.Column="0"
                                                        FontFamily="{StaticResource Roboto}"
                                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                                                        TextWrapping="Wrap" />
 
-                                            <CheckBox Grid.Column="2"
+                                            <CheckBox x:Name="BreakfastCheckBox"
+                                                      Grid.Column="2"
                                                       Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            
                                         </Grid>
 
                                     </Expander>
@@ -185,19 +191,23 @@
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="15"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Grid.Column="0"
+                                            <TextBlock x:Name="LunchDescriptionTextBlock"
+                                                       Grid.Column="0"
                                                        FontFamily="{StaticResource Roboto}"
                                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                                                        TextWrapping="Wrap" />
 
-                                            <CheckBox Grid.Column="2"
+                                            <CheckBox x:Name="LunchCheckBox"
+                                                      Grid.Column="2"
                                                       Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            
                                         </Grid>
 
                                     </Expander>
@@ -207,19 +217,23 @@
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="15"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Grid.Column="0"
+                                            <TextBlock x:Name="DinnerDescriptionTextBlock"
+                                                       Grid.Column="0"
                                                        FontFamily="{StaticResource Roboto}"
                                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                                                        TextWrapping="Wrap" />
 
-                                            <CheckBox Grid.Column="2"
+                                            <CheckBox x:Name="DinnerCheckBox"
+                                                      Grid.Column="2"
                                                       Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            
                                         </Grid>
 
                                     </Expander>
@@ -229,30 +243,37 @@
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="15"/>
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Grid.Column="0"
+                                            <TextBlock x:Name="WorkoutsDescriptionTextBlock"
+                                                       Grid.Column="0"
                                                        FontFamily="{StaticResource Roboto}"
                                                        Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                                                        TextWrapping="Wrap" />
 
-                                            <CheckBox Grid.Column="2"
+                                            <CheckBox x:Name="WorkoutsCheckBox"
+                                                      Grid.Column="2"
                                                       Style="{StaticResource MaterialDesignCheckBox}"/>
+                                            
                                         </Grid>
 
                                     </Expander>
 
-                                    <ProgressBar Value="1"
+                                    <ProgressBar x:Name="PlanProgressBar"
+                                                 Value="1"
                                                  Maximum="30"
                                                  Margin="25,15,25,5"
                                                  materialDesign:TransitionAssist.DisableTransitions="True" />
                                 </StackPanel>
                                     
-                                <StackPanel Grid.Row="3" Grid.Column="1">
+                                <StackPanel x:Name="NoPlanContentStackPanel"
+                                            Grid.Row="3"
+                                            Grid.Column="1">
 
                                     <TextBlock HorizontalAlignment="Center"
                                                FontFamily="{StaticResource Roboto}"
@@ -260,7 +281,8 @@
                                                You haven't joined any plan yet!
                                     </TextBlock>
 
-                                    <Button HorizontalAlignment="Center"
+                                    <Button x:Name="JoinPlanButton"
+                                            HorizontalAlignment="Center"
                                             Margin="0,5,0,0"
                                             FontFamily="{StaticResource ProductSans}" 
                                             FontSize="14"
