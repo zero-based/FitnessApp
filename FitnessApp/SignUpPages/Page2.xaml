@@ -14,9 +14,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="5"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
@@ -44,24 +42,18 @@
                     materialDesign:HintAssist.Hint="Birth Date"/>
 
         
-        <!--Privacy and Not-A-Robot CheckBoxes-->
-        <CheckBox x:Name="AccountPrivacyCheckBox"
-                  Grid.Row="4"
-                  FontFamily="{StaticResource Roboto}"
-                  Style="{StaticResource MaterialDesignCheckBox}">
-                  Private account
-        </CheckBox>
-
+        <!--Not A Robot CheckBoxes-->
         <CheckBox x:Name="NotRobotCheckBox"
-                  Grid.Row="6"
+                  Grid.Row="4"
                   FontFamily="{StaticResource Roboto}"
                   Style="{StaticResource MaterialDesignCheckBox}">
                   I'm not a Robot!
         </CheckBox>
 
+        
         <!--Error TextBlock-->
         <TextBlock x:Name="SignUpErrorTextBlock"
-                   Grid.Row="8"
+                   Grid.Row="6"
                    HorizontalAlignment="Center"
                    FontFamily="{StaticResource Roboto}"
                    FontSize="11"
@@ -69,8 +61,9 @@
                    Use me to display errors
         </TextBlock>
         
+        
         <!--Back and Sign Up Buttons-->
-        <Grid Grid.Row="9">
+        <Grid Grid.Row="7">
             
             <Button x:Name="BackButton" 
                     HorizontalAlignment="Left"
