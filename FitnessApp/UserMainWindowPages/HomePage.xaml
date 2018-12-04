@@ -13,7 +13,9 @@
             
             <Border Padding="5">
                 
+                <!--Main Grid-->
                 <Grid>
+                    
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="25"/>
@@ -328,12 +330,12 @@
         </ScrollViewer>
 
         <!--Floating PopUp Button-->
-        <materialDesign:PopupBox Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                                 ToolTipService.Placement="Right"
+        <materialDesign:PopupBox x:Name="AddPopupBox"
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Bottom"
-                                 Grid.Column="2"
-                                 Margin="5">
+                                 Margin="5"
+                                 Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
+                                 ToolTipService.Placement="Right">
 
             <StackPanel>
 
@@ -348,4 +350,5 @@
         </materialDesign:PopupBox>
 
     </Grid>
+    
 </Page>
