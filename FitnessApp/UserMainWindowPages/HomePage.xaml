@@ -270,6 +270,27 @@
                                                      Value="50"
                                                      materialDesign:TransitionAssist.DisableTransitions="True" />
                                     </Grid>
+                                    
+                                    <StackPanel Grid.Row="3" Grid.Column="1">
+
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   FontFamily="{StaticResource Roboto}"
+                                                   Opacity="0.75">
+                                                   You haven't joined any plan yet!
+                                        </TextBlock>
+
+                                        <Button x:Name="UpdateProfileButton"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,5,0,0"
+                                                FontFamily="{StaticResource ProductSans}" 
+                                                FontSize="14"
+                                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                                Style="{StaticResource MaterialDesignFlatButton}">
+                                            Join a plan
+                                        </Button>
+
+                                    </StackPanel>
+                                    
                                 </Grid>
                             </materialDesign:Card>
                         </Grid>
