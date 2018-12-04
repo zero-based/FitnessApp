@@ -340,16 +340,19 @@
                                  HorizontalAlignment="Right"
                                  VerticalAlignment="Bottom"
                                  Margin="5"
-                                 Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}"
-                                 ToolTipService.Placement="Right">
+                                 Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}">
 
             <StackPanel>
 
-                <Button/>
+                <Button x:Name="AddMealButton"
+                        ToolTip="Add a Meal">
+                    <materialDesign:PackIcon Kind="FoodApple"/>
+                </Button>
 
-                <Button/>
-
-                <Button/>
+                <Button x:Name="AddWorkoutButton"
+                        ToolTip="Add a Workout">
+                    <materialDesign:PackIcon Kind="RunFast"/>
+                </Button>
 
             </StackPanel>
 
