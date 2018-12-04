@@ -29,6 +29,9 @@ namespace FitnessApp.SignUpPages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            Page1.PageOneObject.PasswordTextBox.Password = Page1.PageOneObject.Password;
+            Page1.PageOneObject.ConfirmPasswordTextBox.Password = Page1.PageOneObject.ConfirmedPassword;
+
             NavigationService.Navigate(Page1.PageOneObject);
         }
     }

@@ -17,8 +17,29 @@ namespace FitnessApp.SignUpPages
             PageOneObject = this;
         }
 
+
+
+        private string password;
+        private string confirmedPassword;
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+
+        public string ConfirmedPassword
+        {
+            get { return confirmedPassword; }
+            set { confirmedPassword = value; }
+        }
+
         private void NextButton_Click(object sender, RoutedEventArgs e)
         {
+            // Save entered password and its confirmation
+            password = PasswordTextBox.Password;
+            confirmedPassword = ConfirmPasswordTextBox.Password;
+
             NavigationService.Navigate(Page2.PageTwoObject);
         }
     }
