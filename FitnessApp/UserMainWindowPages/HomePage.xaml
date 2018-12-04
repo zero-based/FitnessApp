@@ -156,21 +156,10 @@
                                            FontSize="18"
                                            Text="Plans | Day #1"/>
 
-                                <Grid Grid.Row="3" Grid.Column="1">
+                                <StackPanel Grid.Row="3" Grid.Column="1">
 
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition Height="15"/>
-                                        <RowDefinition Height="auto"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Expander Grid.Row="0"
-                                              HorizontalAlignment="Stretch"
+                                    <Expander Header="Breakfast"
                                               FontFamily="{StaticResource ProductSans}"
-                                              Header="Breakfast"
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
@@ -191,10 +180,8 @@
 
                                     </Expander>
 
-                                    <Expander Grid.Row="1"
-                                              HorizontalAlignment="Stretch"
+                                    <Expander Header="Lunch"
                                               FontFamily="{StaticResource ProductSans}"
-                                              Header="Lunch"
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
@@ -215,10 +202,8 @@
 
                                     </Expander>
 
-                                    <Expander Grid.Row="2"
-                                              HorizontalAlignment="Stretch"
+                                    <Expander Header="Dinner"
                                               FontFamily="{StaticResource ProductSans}"
-                                              Header="Dinner"
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
@@ -239,10 +224,8 @@
 
                                     </Expander>
 
-                                    <Expander Grid.Row="3"
-                                              HorizontalAlignment="Stretch"
+                                    <Expander Header="Workouts"
                                               FontFamily="{StaticResource ProductSans}"
-                                              Header="Workouts"
                                               Background="{StaticResource MaterialDesignBackground}">
 
                                         <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
@@ -263,21 +246,21 @@
 
                                     </Expander>
 
-                                    <ProgressBar Grid.Row="5"
-                                                 Value="50"
+                                    <ProgressBar Value="1"
+                                                 Maximum="30"
+                                                 Margin="25,15,25,5"
                                                  materialDesign:TransitionAssist.DisableTransitions="True" />
-                                </Grid>
+                                </StackPanel>
                                     
                                 <StackPanel Grid.Row="3" Grid.Column="1">
 
                                     <TextBlock HorizontalAlignment="Center"
                                                FontFamily="{StaticResource Roboto}"
-                                               Opacity="0.75">
+                                               Opacity="0.5">
                                                You haven't joined any plan yet!
                                     </TextBlock>
 
-                                    <Button x:Name="UpdateProfileButton"
-                                            HorizontalAlignment="Center"
+                                    <Button HorizontalAlignment="Center"
                                             Margin="0,5,0,0"
                                             FontFamily="{StaticResource ProductSans}" 
                                             FontSize="14"
