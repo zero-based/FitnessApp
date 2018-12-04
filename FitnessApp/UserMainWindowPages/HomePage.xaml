@@ -71,7 +71,9 @@
                                     </lvc:CartesianChart>
                                 </Grid>
 
-                                <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center">
+                                <Grid Grid.Row="5"
+                                      Grid.Column="1"
+                                      HorizontalAlignment="Center">
 
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="120"/>
@@ -79,12 +81,14 @@
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox Grid.Column="0"
+                                    <TextBox x:Name="TodaysWeightTextBox"
+                                             Grid.Column="0"
                                              FontFamily="{StaticResource Roboto}"
                                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                              materialDesign:HintAssist.Hint="Today's Weight in kg"/>
 
-                                    <Button Grid.Column="2"
+                                    <Button x:Name="SaveWeightButton"
+                                            Grid.Column="2"
                                             FontFamily="{StaticResource ProductSans}"
                                             FontSize="12"
                                             Style="{StaticResource MaterialDesignRaisedDarkButton}">
