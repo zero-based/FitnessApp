@@ -21,9 +21,9 @@ namespace FitnessApp.SignUpPages
 
         private void SetUpProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            UserMainWindow AppWindow = new UserMainWindow();
+            UserMainWindow UserMainWindowTemp = new UserMainWindow();
             SigningWindow.SigningWindowObject.Close();
-            AppWindow.ShowDialog();
+            UserMainWindowTemp.ShowDialog();
         }
 
         private void ChooseImageButton_Click(object sender, RoutedEventArgs e)
