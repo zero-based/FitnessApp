@@ -6,358 +6,467 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d">
+    
+    <materialDesign:DialogHost x:Name="DialogBox">
 
-    <Grid>
-        
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid>
+                <StackPanel x:Name="AddMealDialogBox" Margin="16" Visibility="Collapsed">
+                    <TextBlock>
+                        Add a new Meal.
+                    </TextBlock>
+
+                    <ComboBox materialDesign:HintAssist.Hint="Search"
+                              HorizontalAlignment="Stretch"
+                              Margin="0,8,0,0"
+                              IsEditable="True"
+                              materialDesign:HintAssist.HintOpacity=".26">
+                        <ComboBoxItem>
+                            Apple
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Banana
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Pear
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Orange
+                        </ComboBoxItem>
+                    </ComboBox>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+
+                        <Button x:Name="DialogBoxAddMealButton"
+                                Margin="0,8,8,0"
+                                FontFamily="{StaticResource ProductSans}" 
+                                FontSize="14"
+                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="DialogBoxAddMealButton_Click">
+                                Add
+                        </Button>
+
+                        <Button x:Name="DialogBoxCancelMealButton"
+                                Margin="0,8,8,0"
+                                FontFamily="{StaticResource ProductSans}" 
+                                FontSize="14"
+                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="DialogBoxCancelButton_Click">
+                                Cancel
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel x:Name="AddWorkoutDialogBox" Margin="16" Visibility="Collapsed">
+                    <TextBlock>
+                        Add a new Workout.
+                    </TextBlock>
+
+                    <ComboBox materialDesign:HintAssist.Hint="Search"
+                              HorizontalAlignment="Stretch"
+                              Margin="0,8,0,0"
+                              IsEditable="True"
+                              materialDesign:HintAssist.HintOpacity=".26">
+                        <ComboBoxItem>
+                            Running
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Swimming
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Walking
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Orange
+                        </ComboBoxItem>
+                    </ComboBox>
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+
+                        <Button x:Name="DialogBoxAddWorkoutButton"
+                                Margin="0,8,8,0"
+                                FontFamily="{StaticResource ProductSans}" 
+                                FontSize="14"
+                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="DialogBoxAddWorkoutButton_Click">
+                                Add
+                        </Button>
+
+                        <Button x:Name="DialogBoxCancelWorkoutButton"
+                                Margin="0,8,8,0"
+                                FontFamily="{StaticResource ProductSans}" 
+                                FontSize="14"
+                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Click="DialogBoxCancelButton_Click">
+                                Cancel
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+            </Grid>
+
+        </materialDesign:DialogHost.DialogContent>
+        <Grid>
+       
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
             
-            <Border Padding="5">
+                <Border Padding="5">
                 
-                <!--Main Grid-->
-                <Grid>
+                    <!--Main Grid-->
+                    <Grid>
                     
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="auto" />
-                    </Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="auto" />
+                        </Grid.ColumnDefinitions>
 
-                    <!--Left cards grid-->
-                    <Grid Grid.Column="0">
+                        <!--Left cards grid-->
+                        <Grid Grid.Column="0">
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
 
-                        <!--Left Upper Card-->
-                        <materialDesign:Card Grid.Row="0"
-                                             Width="485"
-                                             Background="{StaticResource MaterialDesignBackground}">
-                            <Grid>
+                            <!--Left Upper Card-->
+                            <materialDesign:Card Grid.Row="0"
+                                                 Width="485"
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="15"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="15"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="25"/>
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="25"/>
-                                </Grid.ColumnDefinitions>
-                                    
-                                <!--Card Header-->
-                                <TextBlock Grid.Row="1"
-                                           Grid.Column="1"
-                                           FontFamily="{StaticResource ProductSans}"
-                                           FontSize="18"
-                                           Text="Weight"/>
-
-                                <Grid Grid.Row="3" Grid.Column="1">
-                                    <lvc:CartesianChart Series="{Binding SeriesCollection}" Height="200" Width="440" HorizontalAlignment="Left">
-                                        <lvc:CartesianChart.AxisY>
-                                            <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                                        </lvc:CartesianChart.AxisY>
-                                        <lvc:CartesianChart.AxisX>
-                                            <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
-                                        </lvc:CartesianChart.AxisX>
-                                    </lvc:CartesianChart>
-                                </Grid>
-
-                                <Grid Grid.Row="5"
-                                      Grid.Column="1"
-                                      HorizontalAlignment="Center">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="15"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="15"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120"/>
-                                        <ColumnDefinition Width="15"/>
-                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
+                                    
+                                    <!--Card Header-->
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               FontFamily="{StaticResource ProductSans}"
+                                               FontSize="18"
+                                               Text="Weight"/>
+
+                                    <Grid Grid.Row="3" Grid.Column="1">
+                                        <lvc:CartesianChart Series="{Binding SeriesCollection}" Height="200" Width="440" HorizontalAlignment="Left">
+                                            <lvc:CartesianChart.AxisY>
+                                                <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                            </lvc:CartesianChart.AxisY>
+                                            <lvc:CartesianChart.AxisX>
+                                                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
+                                            </lvc:CartesianChart.AxisX>
+                                        </lvc:CartesianChart>
+                                    </Grid>
+
+                                    <Grid Grid.Row="5"
+                                          Grid.Column="1"
+                                          HorizontalAlignment="Center">
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="120"/>
+                                            <ColumnDefinition Width="15"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBox x:Name="TodaysWeightTextBox"
+                                                 Grid.Column="0"
+                                                 FontFamily="{StaticResource Roboto}"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                                 materialDesign:HintAssist.Hint="Today's Weight in kg"/>
+
+                                        <Button x:Name="SaveWeightButton"
+                                                Grid.Column="2"
+                                                FontFamily="{StaticResource ProductSans}"
+                                                FontSize="12"
+                                                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                                Click="SaveWeightButton_Click">
+                                                Save
+                                        </Button>
+                                    </Grid>
+
+                                </Grid>
+                            </materialDesign:Card>
+
+                            <!--Left Lower Card-->
+                            <materialDesign:Card Grid.Row="2"
+                                                 Width="485" 
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="15"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBox x:Name="TodaysWeightTextBox"
-                                             Grid.Column="0"
-                                             FontFamily="{StaticResource Roboto}"
-                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                             materialDesign:HintAssist.Hint="Today's Weight in kg"/>
 
-                                    <Button x:Name="SaveWeightButton"
-                                            Grid.Column="2"
-                                            FontFamily="{StaticResource ProductSans}"
-                                            FontSize="12"
-                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                                            Click="SaveWeightButton_Click">
-                                            Save
-                                    </Button>
+
                                 </Grid>
+                            </materialDesign:Card>
 
-                            </Grid>
-                        </materialDesign:Card>
+                        </Grid>
 
-                        <!--Left Lower Card-->
-                        <materialDesign:Card Grid.Row="2"
-                                             Width="485" 
-                                             Background="{StaticResource MaterialDesignBackground}">
-                            <Grid>
+                        <!--Right cards grid-->
+                        <Grid Grid.Column="2">
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="15"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="25"/>
-                                </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
+                            </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="25"/>
-                                </Grid.ColumnDefinitions>
+                            <!--Right Upper Card-->
+                            <materialDesign:Card Grid.Row="0"
+                                                 Width="485" 
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
 
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="15"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
 
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
 
-                            </Grid>
-                        </materialDesign:Card>
+                                    <!--Card Header-->
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               FontFamily="{StaticResource ProductSans}"
+                                               FontSize="18"
+                                               Text="Plan Name | Day #1"/>
 
-                    </Grid>
+                                    <StackPanel x:Name="PlanContentStackPanel"
+                                                Grid.Row="3"
+                                                Grid.Column="1">
 
-                    <!--Right cards grid-->
-                    <Grid Grid.Column="2">
+                                        <Expander Header="Breakfast"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Background="{StaticResource MaterialDesignBackground}">
 
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="25"/>
-                            <RowDefinition Height="auto"/>
-                        </Grid.RowDefinitions>
-
-                        <!--Right Upper Card-->
-                        <materialDesign:Card Grid.Row="0"
-                                             Width="485" 
-                                             Background="{StaticResource MaterialDesignBackground}">
-                            <Grid>
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="15"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="25"/>
-                                </Grid.RowDefinitions>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="25"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!--Card Header-->
-                                <TextBlock Grid.Row="1"
-                                           Grid.Column="1"
-                                           FontFamily="{StaticResource ProductSans}"
-                                           FontSize="18"
-                                           Text="Plan Name | Day #1"/>
-
-                                <StackPanel x:Name="PlanContentStackPanel"
-                                            Grid.Row="3"
-                                            Grid.Column="1">
-
-                                    <Expander Header="Breakfast"
-                                              FontFamily="{StaticResource ProductSans}"
-                                              Background="{StaticResource MaterialDesignBackground}">
-
-                                        <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                             
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="15"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock x:Name="BreakfastDescriptionTextBlock"
-                                                       Grid.Column="0"
-                                                       FontFamily="{StaticResource Roboto}"
-                                                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                       TextWrapping="Wrap" />
+                                                <TextBlock x:Name="BreakfastDescriptionTextBlock"
+                                                           Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
 
-                                            <CheckBox x:Name="BreakfastCheckBox"
-                                                      Grid.Column="2"
-                                                      Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                <CheckBox x:Name="BreakfastCheckBox"
+                                                          Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
                                             
-                                        </Grid>
+                                            </Grid>
 
-                                    </Expander>
+                                        </Expander>
 
-                                    <Expander Header="Lunch"
-                                              FontFamily="{StaticResource ProductSans}"
-                                              Background="{StaticResource MaterialDesignBackground}">
+                                        <Expander Header="Lunch"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Background="{StaticResource MaterialDesignBackground}">
 
-                                        <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                             
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="15"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock x:Name="LunchDescriptionTextBlock"
-                                                       Grid.Column="0"
-                                                       FontFamily="{StaticResource Roboto}"
-                                                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                       TextWrapping="Wrap" />
+                                                <TextBlock x:Name="LunchDescriptionTextBlock"
+                                                           Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
 
-                                            <CheckBox x:Name="LunchCheckBox"
-                                                      Grid.Column="2"
-                                                      Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                <CheckBox x:Name="LunchCheckBox"
+                                                          Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
                                             
-                                        </Grid>
+                                            </Grid>
 
-                                    </Expander>
+                                        </Expander>
 
-                                    <Expander Header="Dinner"
-                                              FontFamily="{StaticResource ProductSans}"
-                                              Background="{StaticResource MaterialDesignBackground}">
+                                        <Expander Header="Dinner"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Background="{StaticResource MaterialDesignBackground}">
 
-                                        <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                             
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="15"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock x:Name="DinnerDescriptionTextBlock"
-                                                       Grid.Column="0"
-                                                       FontFamily="{StaticResource Roboto}"
-                                                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                       TextWrapping="Wrap" />
+                                                <TextBlock x:Name="DinnerDescriptionTextBlock"
+                                                           Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
 
-                                            <CheckBox x:Name="DinnerCheckBox"
-                                                      Grid.Column="2"
-                                                      Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                <CheckBox x:Name="DinnerCheckBox"
+                                                          Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
                                             
-                                        </Grid>
+                                            </Grid>
 
-                                    </Expander>
+                                        </Expander>
 
-                                    <Expander Header="Workouts"
-                                              FontFamily="{StaticResource ProductSans}"
-                                              Background="{StaticResource MaterialDesignBackground}">
+                                        <Expander Header="Workouts"
+                                                  FontFamily="{StaticResource ProductSans}"
+                                                  Background="{StaticResource MaterialDesignBackground}">
 
-                                        <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                            <Grid Margin="24,8,24,16" TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
                                             
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="15"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="15"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock x:Name="WorkoutsDescriptionTextBlock"
-                                                       Grid.Column="0"
-                                                       FontFamily="{StaticResource Roboto}"
-                                                       Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                                                       TextWrapping="Wrap" />
+                                                <TextBlock x:Name="WorkoutsDescriptionTextBlock"
+                                                           Grid.Column="0"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                                                           TextWrapping="Wrap" />
 
-                                            <CheckBox x:Name="WorkoutsCheckBox"
-                                                      Grid.Column="2"
-                                                      Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                <CheckBox x:Name="WorkoutsCheckBox"
+                                                          Grid.Column="2"
+                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
                                             
-                                        </Grid>
+                                            </Grid>
 
-                                    </Expander>
+                                        </Expander>
 
-                                    <ProgressBar x:Name="PlanProgressBar"
-                                                 Value="1"
-                                                 Maximum="30"
-                                                 Margin="25,15,25,5"
-                                                 materialDesign:TransitionAssist.DisableTransitions="True" />
-                                </StackPanel>
+                                        <ProgressBar x:Name="PlanProgressBar"
+                                                     Value="1"
+                                                     Maximum="30"
+                                                     Margin="25,15,25,5"
+                                                     materialDesign:TransitionAssist.DisableTransitions="True" />
+                                    </StackPanel>
                                     
-                                <StackPanel x:Name="NoPlanContentStackPanel"
-                                            Grid.Row="3"
-                                            Grid.Column="1">
+                                    <StackPanel x:Name="NoPlanContentStackPanel"
+                                                Grid.Row="3"
+                                                Grid.Column="1">
 
-                                    <TextBlock HorizontalAlignment="Center"
-                                               FontFamily="{StaticResource Roboto}"
-                                               Opacity="0.5">
-                                               You haven't joined any plan yet!
-                                    </TextBlock>
+                                        <TextBlock HorizontalAlignment="Center"
+                                                   FontFamily="{StaticResource Roboto}"
+                                                   Opacity="0.5">
+                                                   You haven't joined any plan yet!
+                                        </TextBlock>
 
-                                    <Button x:Name="JoinPlanButton"
-                                            HorizontalAlignment="Center"
-                                            Margin="0,5,0,0"
-                                            FontFamily="{StaticResource ProductSans}" 
-                                            FontSize="14"
-                                            Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                                            Style="{StaticResource MaterialDesignFlatButton}"
-                                            Click="JoinPlanButton_Click">
-                                            Join a plan
-                                    </Button>
+                                        <Button x:Name="JoinPlanButton"
+                                                HorizontalAlignment="Center"
+                                                Margin="0,5,0,0"
+                                                FontFamily="{StaticResource ProductSans}" 
+                                                FontSize="14"
+                                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                                Style="{StaticResource MaterialDesignFlatButton}"
+                                                Click="JoinPlanButton_Click">
+                                                Join a plan
+                                        </Button>
 
-                                </StackPanel>
+                                    </StackPanel>
                                     
-                            </Grid>
-                        </materialDesign:Card>
+                                </Grid>
+                            </materialDesign:Card>
 
-                        <!--Right Lower Card-->
-                        <materialDesign:Card Grid.Row="2"
-                                             Width="485" 
-                                             Background="{StaticResource MaterialDesignBackground}">
-                            <Grid>
+                            <!--Right Lower Card-->
+                            <materialDesign:Card Grid.Row="2"
+                                                 Width="485" 
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
 
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="25"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="15"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="25"/>
-                                </Grid.RowDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="15"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="25"/>
-                                </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
 
-                            </Grid>
-                        </materialDesign:Card>
+                                </Grid>
+                            </materialDesign:Card>
 
-                    </Grid>
+                        </Grid>
                     
-                </Grid>
+                    </Grid>
 
-            </Border>
+                </Border>
 
-        </ScrollViewer>
+            </ScrollViewer>
 
-        <!--Floating PopUp Button-->
-        <materialDesign:PopupBox x:Name="AddPopupBox"
-                                 HorizontalAlignment="Right"
-                                 VerticalAlignment="Bottom"
-                                 Margin="5"
-                                 Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}">
+            <!--Floating PopUp Button-->
+            <materialDesign:PopupBox x:Name="AddPopupBox"
+                                     HorizontalAlignment="Right"
+                                     VerticalAlignment="Bottom"
+                                     Margin="5"
+                                     Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}">
 
-            <StackPanel>
+                <StackPanel>
 
-                <Button x:Name="AddMealButton"
-                        ToolTip="Add a Meal">
-                    <materialDesign:PackIcon Kind="FoodApple"/>
-                </Button>
+                    <Button x:Name="AddMealButton"
+                            ToolTip="Add a Meal"
+                            Click="AddMealButton_Click">
+                        <materialDesign:PackIcon Kind="FoodApple"/>
+                    </Button>
 
-                <Button x:Name="AddWorkoutButton"
-                        ToolTip="Add a Workout">
-                    <materialDesign:PackIcon Kind="RunFast"/>
-                </Button>
+                    <Button x:Name="AddWorkoutButton"
+                            ToolTip="Add a Workout"
+                            Click="AddWorkoutButton_Click">
+                        <materialDesign:PackIcon Kind="RunFast"/>
+                    </Button>
 
-            </StackPanel>
+                </StackPanel>
 
-        </materialDesign:PopupBox>
+            </materialDesign:PopupBox>
 
-    </Grid>
-    
+        </Grid>
+
+
+    </materialDesign:DialogHost>
 </Page>
