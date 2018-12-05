@@ -102,6 +102,8 @@
     <Compile Include="UserMainWindowPages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\DaysViewModel.cs" />
+    <Compile Include="ViewModels\DayItem.cs" />
     <Compile Include="ViewModels\ChallengeItem.cs" />
     <Compile Include="ViewModels\ChallengesViewModel.cs" />
     <Compile Include="ViewModels\PlanItem.cs" />
