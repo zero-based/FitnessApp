@@ -61,7 +61,8 @@
                                    Stretch="UniformToFill"/>
 
                             <!--Join Button-->
-                            <ToggleButton Grid.Row="0"
+                            <ToggleButton x:Name="JoinChallengeButton"
+                                          Grid.Row="0"
                                           Grid.Column="1"
                                           HorizontalAlignment="Right"
                                           VerticalAlignment="Bottom"
@@ -70,7 +71,8 @@
                                           Height="50"
                                           ToolTip="Join Challenge"
                                           Style="{StaticResource MaterialDesignActionToggleButton}"
-                                          materialDesign:ShadowAssist.ShadowDepth="Depth2" >
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                          Checked="JoinChallengeButton_Checked">
                                 <materialDesign:PackIcon Kind="Add" />
                             </ToggleButton>
 
