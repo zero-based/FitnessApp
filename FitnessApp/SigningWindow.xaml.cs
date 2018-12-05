@@ -1,5 +1,5 @@
 ﻿using System.Windows;
-
+using MaterialDesignThemes.Wpf;
 
 namespace FitnessApp
 {
@@ -14,6 +14,10 @@ namespace FitnessApp
         {
             InitializeComponent();
             SigningWindowObject = this;
+
+            // Intialize ErrorMessagesQueue and Assign it to ErrorsSnackbar's MessageQueue
+            var ErrorMessagesQueue = new SnackbarMessageQueue(System.TimeSpan.FromMilliseconds(2000));
+            ErrorsSnackbar.MessageQueue = ErrorMessagesQueue;
         }
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)

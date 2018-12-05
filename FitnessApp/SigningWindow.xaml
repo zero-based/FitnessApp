@@ -20,7 +20,9 @@
                         Stretch="UniformToFill"
                         Opacity="0.15"/>
         </Grid.Background>
-
+        
+        <materialDesign:Snackbar x:Name="ErrorsSnackbar" />
+        
         <!--Flip Card-->
         <materialDesign:Flipper HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
