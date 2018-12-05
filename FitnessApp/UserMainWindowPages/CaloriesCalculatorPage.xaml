@@ -8,13 +8,16 @@
 
     <Border Padding="5">
 
-        <materialDesign:Card 
-            Width="700" 
+        <materialDesign:Card Width="700" 
+                             VerticalAlignment="Center"
             Background="{StaticResource MaterialDesignBackground}">
+            
             <Grid>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="auto"/>
@@ -25,111 +28,72 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="30"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="30"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="25"/>
+                    <ColumnDefinition Width="30"/>
                 </Grid.ColumnDefinitions>
 
                 <!--Calculator Description TextBlock-->
                 <TextBlock Grid.Row="1"
                            Grid.Column="1"
-                           FontFamily="{StaticResource ProductSans}"
+                           FontFamily="{StaticResource Roboto}"
                            FontWeight="Regular"
                            TextWrapping="Wrap"
-                           FontSize="18">
+                           FontSize="14">
                            Use our calorie-intake calculator to determine your daily caloric needs based on your height,
                            weight, age and activity level. In addition to determining the calories needed to maintain weight,
                            use this as a calorie burner calculator and figure out how many calories you need to burn in order to drop pounds.
                 </TextBlock>
 
-                <!--Age Feild-->
+                <!--Gender ComboBox-->
                 <Grid Grid.Row="3" Grid.Column="1">
-                    <materialDesign:PackIcon Kind="Numbers" Margin="0,20,0,0" Width="25" Height="25"/>
-                    <TextBox x:Name="AgeTextBox"
+
+                    <materialDesign:PackIcon Kind="GenderMaleFemale" Margin="0,5,0,0" Width="25" Height="25"/>
+
+                    <ComboBox x:Name="GenderComboBox"
+                              Margin="30,0,0,0"
+                              FontFamily="{StaticResource Roboto}"
+                              materialDesign:HintAssist.Hint="Gender">
+                        <ComboBoxItem>
+                            Male
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            Female
+                        </ComboBoxItem>
+                    </ComboBox>
+                </Grid>
+
+                <!--Age Feild-->
+                <Grid Grid.Row="5" Grid.Column="1" >
+
+                        <materialDesign:PackIcon Kind="Numbers" Margin="0,20,0,0" Width="25" Height="25"/>
+                        
+                        <TextBox x:Name="AgeTextBox"
                              Margin="30,0,0,0"
                              FontFamily="{StaticResource Roboto}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              materialDesign:HintAssist.Hint="Age"/>
-                </Grid>
-
-
-
-                <Grid Grid.Row="5" Grid.Column="1">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="240"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="240"/>
-                    </Grid.ColumnDefinitions>
-
-                    <!--Gender ComboBox-->
-                    <Grid Grid.Column="0">
-                        <materialDesign:PackIcon Kind="GenderMaleFemale" Margin="0,5,0,0" Width="25" Height="25"/>
-                        <ComboBox x:Name="GenderComboBox"
-                              Margin="30,0,0,0"
-                              FontFamily="{StaticResource Roboto}"
-                              materialDesign:HintAssist.Hint="Gender">
-                            <ComboBoxItem>
-                                Male
-                            </ComboBoxItem>
-                            <ComboBoxItem>
-                                Female
-                            </ComboBoxItem>
-                        </ComboBox>
+                        
                     </Grid>
-
-                    <!--Gender ComboBox-->
-                    <Grid Grid.Column="2">
-                        <materialDesign:PackIcon Kind="Weights" Margin="0,5,0,0" Width="25" Height="25"/>
-                        <ComboBox x:Name="WorkoutsComboBox"
-                              Margin="30,0,0,0"
-                              FontFamily="{StaticResource Roboto}"
-                              materialDesign:HintAssist.Hint="Activity Level">
-
-                            <ComboBoxItem>
-                                Low Active
-                            </ComboBoxItem>
-
-                            <ComboBoxItem>
-                                Moderate Active
-                            </ComboBoxItem>
-
-                            <ComboBoxItem>
-                                Intense Active
-                            </ComboBoxItem>
-
-                        </ComboBox>
-
-                    </Grid>
-
-
-                </Grid>
-
-                <Grid Grid.Row="7" Grid.Column="1">
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="240"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="240"/>
-                    </Grid.ColumnDefinitions>
 
                     <!--Weight Feild-->
-                    <Grid Grid.Column="0">
+                <Grid Grid.Row="7" Grid.Column="1">
+                        
                         <materialDesign:PackIcon Kind="WeightKilogram" Margin="0,20,0,0" Width="25" Height="25"/>
+                        
                         <TextBox x:Name="WeightTextBox"
                                  Margin="30,0,0,0"
                                  FontFamily="{StaticResource Roboto}"
                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                  materialDesign:HintAssist.Hint="Weight in kg"/>
+                        
                     </Grid>
 
                     <!--Height Feild-->
-                    <Grid Grid.Column="2">
+                <Grid Grid.Row="9" Grid.Column="1">
                         <materialDesign:PackIcon Kind="Altimeter" Margin="0,20,0,0" Width="25" Height="25"/>
                         <TextBox x:Name="HeightTextBox"
                                  Margin="30,0,0,0"
@@ -138,11 +102,10 @@
                                  materialDesign:HintAssist.Hint="Height in cm"/>
                     </Grid>
 
-                </Grid>
 
                 <!--Calculate Button-->
                 <Button x:Name="CalculateButton"
-                        Grid.Row="9" 
+                        Grid.Row="11" 
                         Grid.Column="1"
                         HorizontalAlignment="Right"
                         FontFamily="{StaticResource ProductSans}"
@@ -155,8 +118,9 @@
                 <!--Result TextBlock-->
                 <TextBlock Grid.Row="11"
                            Grid.Column="1"
-                           Margin="15.2,4.933,24,3.067"
-                           FontFamily="{StaticResource Roboto}"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Center"
+                           FontFamily="{StaticResource ProductSans}"
                            Foreground="{StaticResource PrimaryHueMidBrush}"
                            FontWeight="Bold"
                            FontSize="18">
