@@ -22,8 +22,15 @@ namespace FitnessApp
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            UserMainWindow AppWindow = new UserMainWindow();
-            AppWindow.Show();
+            // Open User Main Window
+            UserMainWindow UserMainWindowTemp = new UserMainWindow();
+            UserMainWindowTemp.ShowDialog();
+
+            // Open Admin Main Window
+            //AdminMainWindow AdminMainWindowTemp = new AdminMainWindow();
+            //AdminMainWindowTemp.ShowDialog();
+
+            // Close Signing Window
             SigningWindowObject.Close();
         }
 
