@@ -262,7 +262,8 @@
                                     </Grid.ColumnDefinitions>
 
                                     <!--Card Header-->
-                                    <TextBlock Grid.Row="1"
+                                    <TextBlock x:Name="PlanHeaderTextBlock"
+                                               Grid.Row="1"
                                                Grid.Column="1"
                                                FontFamily="{StaticResource ProductSans}"
                                                FontSize="18"
@@ -292,7 +293,8 @@
 
                                                 <CheckBox x:Name="BreakfastCheckBox"
                                                           Grid.Column="2"
-                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                          Style="{StaticResource MaterialDesignCheckBox}"
+                                                          Checked="BreakfastCheckBox_Checked"/>
                                             
                                             </Grid>
 
@@ -318,7 +320,8 @@
 
                                                 <CheckBox x:Name="LunchCheckBox"
                                                           Grid.Column="2"
-                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                          Style="{StaticResource MaterialDesignCheckBox}"
+                                                          Checked="LunchCheckBox_Checked"/>
                                             
                                             </Grid>
 
@@ -344,7 +347,8 @@
 
                                                 <CheckBox x:Name="DinnerCheckBox"
                                                           Grid.Column="2"
-                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                          Style="{StaticResource MaterialDesignCheckBox}"
+                                                          Checked="DinnerCheckBox_Checked"/>
                                             
                                             </Grid>
 
@@ -370,7 +374,8 @@
 
                                                 <CheckBox x:Name="WorkoutsCheckBox"
                                                           Grid.Column="2"
-                                                          Style="{StaticResource MaterialDesignCheckBox}"/>
+                                                          Style="{StaticResource MaterialDesignCheckBox}"
+                                                          Checked="WorkoutsCheckBox_Checked"/>
                                             
                                             </Grid>
 

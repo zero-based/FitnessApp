@@ -83,5 +83,24 @@ namespace FitnessApp.UserMainWindowPages
             DialogBox.IsOpen = false;
         }
 
+        private void BreakfastCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void LunchCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DinnerCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void WorkoutsCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
