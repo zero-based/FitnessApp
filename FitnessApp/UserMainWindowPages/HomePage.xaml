@@ -165,17 +165,25 @@
                                                FontSize="18"
                                                Text="Weight"/>
 
-                                    <Grid Grid.Row="3" Grid.Column="1">
-                                        <lvc:CartesianChart Series="{Binding SeriesCollection}" Height="200" Width="440" HorizontalAlignment="Left">
-                                            <lvc:CartesianChart.AxisY>
-                                                <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
-                                            </lvc:CartesianChart.AxisY>
-                                            <lvc:CartesianChart.AxisX>
-                                                <lvc:Axis Title="Month" Labels="{Binding Labels}"></lvc:Axis>
-                                            </lvc:CartesianChart.AxisX>
-                                        </lvc:CartesianChart>
-                                    </Grid>
 
+                                    <lvc:CartesianChart x:Name="WeightChart" 
+                                                        Grid.Row="3" 
+                                                        Grid.Column="1"
+                                                        HorizontalAlignment="Left"
+                                                        Width="440"
+                                                        Height="200"  
+                                                        Series="{Binding SeriesCollection}">
+
+                                        <lvc:CartesianChart.AxisY>
+                                            <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"/>
+                                        </lvc:CartesianChart.AxisY>
+                                            
+                                        <lvc:CartesianChart.AxisX>
+                                            <lvc:Axis Title="Month" Labels="{Binding Labels}"/>
+                                        </lvc:CartesianChart.AxisX>
+                                            
+                                    </lvc:CartesianChart>
+                                        
                                     <Grid Grid.Row="5"
                                           Grid.Column="1"
                                           HorizontalAlignment="Center">
