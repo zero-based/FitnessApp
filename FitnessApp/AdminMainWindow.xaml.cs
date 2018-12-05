@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using MaterialDesignThemes.Wpf;
 
 namespace FitnessApp
 {
@@ -23,6 +19,10 @@ namespace FitnessApp
 
             // Initialize Listbox Selected Index
             AdminMainWindowPagesListBox.SelectedIndex = 0;
+
+            // Intialize MessagesQueue and Assign it to MessagesSnackbar's MessageQueue
+            var MessagesQueue = new SnackbarMessageQueue(System.TimeSpan.FromMilliseconds(2000));
+            MessagesSnackbar.MessageQueue = MessagesQueue;
         }
 
         private void AdminMainWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -12,269 +12,275 @@
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
 
-    <materialDesign:DrawerHost x:Name="SideMenuDrawer"
-                               IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+    <Grid>
 
-        <!--Side Menu-->
-        <materialDesign:DrawerHost.LeftDrawerContent>
+        <materialDesign:Snackbar x:Name="MessagesSnackbar"/>
 
-            <Grid Width="220">
+        <materialDesign:DrawerHost x:Name="SideMenuDrawer"
+                                   IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
 
-                <!--Menu rows and columns-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="5"/>
-                </Grid.RowDefinitions>
+            <!--Side Menu-->
+            <materialDesign:DrawerHost.LeftDrawerContent>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="15"/>
-                </Grid.ColumnDefinitions>
+                <Grid Width="220">
 
-                <!--Header Grid-->
-                <Grid Grid.Row="1" Grid.Column="1">
+                    <!--Menu rows and columns-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="5"/>
+                    </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="15"/>
                     </Grid.ColumnDefinitions>
 
-                    <!--App's Logo-->
-                    <Image Grid.Column="0" 
-                           Margin="-10,0,0,0" 
-                           Source="Images/LoginHeader.jpg"/>
+                    <!--Header Grid-->
+                    <Grid Grid.Row="1" Grid.Column="1">
 
-                    <ToggleButton Grid.Column="2"
-                                  Width="25"
-                                  Height="25"
-                                  HorizontalAlignment="Right"
-                                  VerticalAlignment="Top"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
-                                  IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--App's Logo-->
+                        <Image Grid.Column="0" 
+                               Margin="-10,0,0,0" 
+                               Source="Images/LoginHeader.jpg"/>
+
+                        <ToggleButton Grid.Column="2"
+                                      Width="25"
+                                      Height="25"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                      IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+
+                    </Grid>
+
+                    <!--Admin's name and Email-->
+                    <StackPanel Grid.Row="3" Grid.Column="1">
+                        <TextBlock x:Name="FullNameTextBlock"
+                                   FontFamily="{StaticResource ProductSans}"
+                                   FontWeight="Bold" 
+                                   FontSize="18">
+                                   Name
+                        </TextBlock>
+
+                        <TextBlock x:Name="EmailTextBlock"
+                                   FontFamily="{StaticResource ProductSans}"
+                                   FontWeight="Light" 
+                                   FontSize="14">
+                                   admin@FitnessApp.com
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
+
+                    <ListBox x:Name="AdminMainWindowPagesListBox"
+                             Grid.Row="7"
+                             Grid.ColumnSpan="3"
+                             SelectionChanged="AdminMainWindowPagesListBox_SelectionChanged">
+
+                        <!--Home Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--Initially Highlighted-->
+                                <materialDesign:PackIcon x:Name="HomeIcon" Kind="Home" Grid.Column="1"/>
+
+                                <TextBlock x:Name="HomeTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Home
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                        <!--Setup a Challenge Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon x:Name="ChallengesIcon" Kind="PlaylistAdd" Grid.Column="1"/>
+
+                                <TextBlock x:Name="SetupChallengesTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Setup a Challenge
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                        <!--Add a new Admin Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon x:Name="AddNewAdminIcon" Kind="PersonAdd" Grid.Column="1"/>
+
+                                <TextBlock x:Name="AddNewAdminTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Add a new Admin
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                        <!--Settings Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon x:Name="SettingsIcon" Kind="Settings" Grid.Column="1"/>
+
+                                <TextBlock x:Name="SettingsTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Settings
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                    </ListBox>
+
+                    <!--Logout Button-->
+                    <ListBox x:Name="LogoutListBox"
+                             Grid.Row="9"
+                             Grid.ColumnSpan="3"
+                             SelectionChanged="LogoutListBox_SelectionChanged">
+
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon Kind="LogoutVariant" Grid.Column="1"/>
+
+                                <TextBlock x:Name="LogoutButton"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Logout
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                    </ListBox>
 
                 </Grid>
 
-                <!--Admin's name and Email-->
-                <StackPanel Grid.Row="3" Grid.Column="1">
-                    <TextBlock x:Name="FullNameTextBlock"
-                               FontFamily="{StaticResource ProductSans}"
-                               FontWeight="Bold" 
-                               FontSize="18">
-                               Name
-                    </TextBlock>
+            </materialDesign:DrawerHost.LeftDrawerContent>
 
-                    <TextBlock x:Name="EmailTextBlock"
-                               FontFamily="{StaticResource ProductSans}"
-                               FontWeight="Light" 
-                               FontSize="14">
-                               admin@FitnessApp.com
-                    </TextBlock>
-                </StackPanel>
 
-                <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
+            <!--Admin Main Window-->
+            <Grid>
 
-                <ListBox x:Name="AdminMainWindowPagesListBox"
-                         Grid.Row="7"
-                         Grid.ColumnSpan="3"
-                         SelectionChanged="AdminMainWindowPagesListBox_SelectionChanged">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
 
-                    <!--Home Button-->
-                    <ListBoxItem>
-                        <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
 
-                            <!--Initially Highlighted-->
-                            <materialDesign:PackIcon x:Name="HomeIcon" Kind="Home" Grid.Column="1"/>
+                <!--Admin Main Window Header-->
+                <materialDesign:ColorZone Grid.Row="0"
+                                          Grid.ColumnSpan="3"
+                                          Padding="15" 
+                                          Mode="PrimaryDark"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2">
 
-                            <TextBlock x:Name="HomeTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Home
-                            </TextBlock>
+                    <DockPanel>
+                        <!--Menu Toogle Button-->
+                        <ToggleButton x:Name="MenuToggleButton"
+                                      Width="25"
+                                      Height="25"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
-                        </Grid>
-                    </ListBoxItem>
 
-                    <!--Setup a Challenge Button-->
-                    <ListBoxItem>
-                        <Grid>
+                        <!--Page Header-->
+                        <TextBlock x:Name="PageHeaderTextBlock"
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="22"/>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
+                    </DockPanel>
 
-                            <materialDesign:PackIcon x:Name="ChallengesIcon" Kind="PlaylistAdd" Grid.Column="1"/>
+                </materialDesign:ColorZone>
 
-                            <TextBlock x:Name="SetupChallengesTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Setup a Challenge
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                    <!--Add a new Admin Button-->
-                    <ListBoxItem>
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon x:Name="AddNewAdminIcon" Kind="PersonAdd" Grid.Column="1"/>
-
-                            <TextBlock x:Name="AddNewAdminTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Add a new Admin
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                    <!--Settings Button-->
-                    <ListBoxItem>
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon x:Name="SettingsIcon" Kind="Settings" Grid.Column="1"/>
-
-                            <TextBlock x:Name="SettingsTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Settings
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                </ListBox>
-
-                <!--Logout Button-->
-                <ListBox x:Name="LogoutListBox"
-                         Grid.Row="9"
-                         Grid.ColumnSpan="3"
-                         SelectionChanged="LogoutListBox_SelectionChanged">
-
-                    <ListBoxItem>
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon Kind="LogoutVariant" Grid.Column="1"/>
-
-                            <TextBlock x:Name="LogoutButton"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Logout
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                </ListBox>
+                <!--Admin Main Window Frame-->
+                <Frame x:Name="AdminWindowPagesFrame" 
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       NavigationUIVisibility="Hidden">
+                </Frame>
 
             </Grid>
 
-        </materialDesign:DrawerHost.LeftDrawerContent>
-
-
-        <!--Admin Main Window-->
-        <Grid>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
-
-
-            <!--Admin Main Window Header-->
-            <materialDesign:ColorZone Grid.Row="0"
-                                      Grid.ColumnSpan="3"
-                                      Padding="15" 
-                                      Mode="PrimaryDark"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth2">
-
-                <DockPanel>
-                    <!--Menu Toogle Button-->
-                    <ToggleButton x:Name="MenuToggleButton"
-                                  Width="25"
-                                  Height="25"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
-
-
-                    <!--Page Header-->
-                    <TextBlock x:Name="PageHeaderTextBlock"
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" 
-                               FontSize="22"/>
-
-                </DockPanel>
-
-            </materialDesign:ColorZone>
-
-            <!--Admin Main Window Frame-->
-            <Frame x:Name="AdminWindowPagesFrame" 
-                   Grid.Row="2"
-                   Grid.Column="1"
-                   NavigationUIVisibility="Hidden">
-            </Frame>
-
-        </Grid>
-
-    </materialDesign:DrawerHost>
+        </materialDesign:DrawerHost>
+        
+    </Grid>
 
 </Window>
