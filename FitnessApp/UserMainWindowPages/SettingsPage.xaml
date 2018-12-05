@@ -29,8 +29,6 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
                                 <RowDefinition Height="30"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
@@ -121,22 +119,11 @@
                                          FontFamily="{StaticResource Roboto}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Workout Hours/Day" />
-
                             </Grid>
-
-                            <!--Error TextBlock-->
-                            <TextBlock x:Name="EditProfileErrorTextBlock"
-                                           Grid.Row="9"
-                                           HorizontalAlignment="Center"
-                                           FontFamily="{StaticResource Roboto}"
-                                           FontSize="11"
-                                           Foreground="Red">
-                                           Use me to display errors
-                            </TextBlock>
 
                             <!--Update Profile Button-->
                             <Button x:Name="UpdateProfileButton"
-                                    Grid.Row="11"
+                                    Grid.Row="9"
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
@@ -157,8 +144,6 @@
                         <Grid Width="400" HorizontalAlignment="Center">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
@@ -204,19 +189,9 @@
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      materialDesign:HintAssist.Hint="Email" />
 
-                            <!--Error TextBlock-->
-                            <TextBlock x:Name="EditAccountErrorTextBlock"
-                                           Grid.Row="7"
-                                           HorizontalAlignment="Center"
-                                           FontFamily="{StaticResource Roboto}"
-                                           FontSize="11"
-                                           Foreground="Red">
-                                           Use me to display errors
-                            </TextBlock>
-
                             <!--Update Account Button-->
                             <Button x:Name="UpdateAccountButton"
-                                    Grid.Row="9"
+                                    Grid.Row="7"
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
@@ -237,8 +212,6 @@
                         <Grid Width="400" HorizontalAlignment="Center">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
@@ -269,19 +242,9 @@
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      materialDesign:HintAssist.Hint="Confirm New Password" />
 
-                            <!--Error TextBlock-->
-                            <TextBlock x:Name="EditSecurityErrorTextBlock"
-                                           Grid.Row="7"
-                                           HorizontalAlignment="Center"
-                                           FontFamily="{StaticResource Roboto}"
-                                           FontSize="11"
-                                           Foreground="Red">
-                                           Use me to display errors
-                            </TextBlock>
-
                             <!--Update Password Button-->
                             <Button x:Name="UpdatePasswordButton"
-                                    Grid.Row="9"
+                                    Grid.Row="7"
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
