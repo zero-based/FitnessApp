@@ -14,5 +14,10 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             CaloriesCalculatorPageObject = this;
         }
+
+        private void CalculateButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }
