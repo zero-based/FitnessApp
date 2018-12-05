@@ -12,317 +12,321 @@
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
 
-    <materialDesign:DrawerHost x:Name="SideMenuDrawer"
-                               IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+    <Grid>
 
-        <!--Side Menu-->
-        <materialDesign:DrawerHost.LeftDrawerContent>
+        <materialDesign:Snackbar x:Name="MessagesSnackbar"/>
 
-            <Grid Width="220">
+        <materialDesign:DrawerHost x:Name="SideMenuDrawer"
+                                   IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
 
-                <!--Menu rows and columns-->
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="5"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="15"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="5"/>
-                </Grid.RowDefinitions>
+            <!--Side Menu-->
+            <materialDesign:DrawerHost.LeftDrawerContent>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="15"/>
-                </Grid.ColumnDefinitions>
+                <Grid Width="220">
 
-                <!--Header Grid-->
-                <Grid Grid.Row="1" Grid.Column="1">
+                    <!--Menu rows and columns-->
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="5"/>
+                    </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="25"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="15"/>
                     </Grid.ColumnDefinitions>
 
-                    <!--User display picture-->
-                    <Grid Grid.Column="0" Margin="-10,0,0,0">
-                        <Ellipse Width="100"
-                                 Height="100">
-                            <Ellipse.Fill>
-                                <ImageBrush x:Name="UserProfilePhoto"
-                                            ImageSource="./Images/AccountCircleDefaultIcon.png"
-                                            Stretch="UniformToFill"
-                                            Opacity="0.75"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Button x:Name="UserProfileButton"
-                                Width="80"
-                                Height="80"
-                                Opacity="0"
-                                Style="{StaticResource MaterialDesignFloatingActionButton}">
-                        </Button>
+                    <!--Header Grid-->
+                    <Grid Grid.Row="1" Grid.Column="1">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!--User display picture-->
+                        <Grid Grid.Column="0" Margin="-10,0,0,0">
+                            <Ellipse Width="100"
+                                     Height="100">
+                                <Ellipse.Fill>
+                                    <ImageBrush x:Name="UserProfilePhoto"
+                                                ImageSource="./Images/AccountCircleDefaultIcon.png"
+                                                Stretch="UniformToFill"
+                                                Opacity="0.75"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Button x:Name="UserProfileButton"
+                                    Width="80"
+                                    Height="80"
+                                    Opacity="0"
+                                    Style="{StaticResource MaterialDesignFloatingActionButton}">
+                            </Button>
+                        </Grid>
+
+                        <ToggleButton Grid.Column="2"
+                                      Width="25"
+                                      Height="25"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
+                                      IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+
                     </Grid>
 
-                    <ToggleButton Grid.Column="2"
-                                  Width="25"
-                                  Height="25"
-                                  HorizontalAlignment="Right"
-                                  VerticalAlignment="Top"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
-                                  IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
+                    <!--Full name and User name-->
+                    <StackPanel Grid.Row="3" Grid.Column="1">
+                        <TextBlock x:Name="FullNameTextBlock"
+                                   FontFamily="{StaticResource ProductSans}"
+                                   FontWeight="Bold" 
+                                   FontSize="18">
+                                   Name
+                        </TextBlock>
+
+                        <TextBlock x:Name="UserNameTextBlock"
+                                   FontFamily="{StaticResource ProductSans}"
+                                   FontWeight="Light" 
+                                   FontSize="14">
+                                   @userName
+                        </TextBlock>
+                    </StackPanel>
+
+                    <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
+
+                    <ListBox x:Name="UserMainWindowPagesListBox"
+                             Grid.Row="7"
+                             Grid.ColumnSpan="3"
+                             SelectionChanged="UserMainWindowPagesListBox_SelectionChanged">
+
+                        <!--Home Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--Initially Highlighted-->
+                                <materialDesign:PackIcon x:Name="HomeIcon" Kind="Home" Grid.Column="1"/>
+
+                                <TextBlock x:Name="HomeTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Home
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                        <!--Challenges Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon x:Name="ChallengesIcon" Kind="Account" Grid.Column="1"/>
+
+                                <TextBlock x:Name="ChallengesTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Challenges
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                        <!--Fitness Plans Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon x:Name="FitnessPlansIcon" Kind="CalendarHeart" Grid.Column="1"/>
+
+                                <TextBlock x:Name="FitnessPlansTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Fitness Plans
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                        <!--Calories Calculator Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon x:Name="CaloriesCalculatorIcon" Kind="CalculatorVariant" Grid.Column="1"/>
+
+                                <TextBlock x:Name="CaloriesCalculatorTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Calories Calculator
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                        <!--Settings Button-->
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon x:Name="SettingsIcon" Kind="Settings" Grid.Column="1"/>
+
+                                <TextBlock x:Name="SettingsTextBlock"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Settings
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                    </ListBox>
+
+                    <!--Logout Button-->
+                    <ListBox x:Name="LogoutListBox"
+                             Grid.Row="9"
+                             Grid.ColumnSpan="3"
+                             SelectionChanged="LogoutListBox_SelectionChanged">
+
+                        <ListBoxItem>
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="15"/>
+                                </Grid.ColumnDefinitions>
+
+                                <materialDesign:PackIcon Kind="LogoutVariant" Grid.Column="1"/>
+
+                                <TextBlock x:Name="LogoutButton"
+                                           Grid.Column="3"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontSize="15">
+                                           Logout
+                                </TextBlock>
+
+                            </Grid>
+                        </ListBoxItem>
+
+                    </ListBox>
 
                 </Grid>
 
-                <!--Full name and User name-->
-                <StackPanel Grid.Row="3" Grid.Column="1">
-                    <TextBlock x:Name="FullNameTextBlock"
-                               FontFamily="{StaticResource ProductSans}"
-                               FontWeight="Bold" 
-                               FontSize="18">
-                               Name
-                    </TextBlock>
+            </materialDesign:DrawerHost.LeftDrawerContent>
 
-                    <TextBlock x:Name="UserNameTextBlock"
-                               FontFamily="{StaticResource ProductSans}"
-                               FontWeight="Light" 
-                               FontSize="14">
-                               @userName
-                    </TextBlock>
-                </StackPanel>
+            <!--User Main Window-->
+            <Grid>
 
-                <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
 
-                <ListBox x:Name="UserMainWindowPagesListBox"
-                         Grid.Row="7"
-                         Grid.ColumnSpan="3"
-                         SelectionChanged="UserMainWindowPagesListBox_SelectionChanged">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
 
-                    <!--Home Button-->
-                    <ListBoxItem>
-                        <Grid>
+                <!--User Main Window Header-->
+                <materialDesign:ColorZone Grid.Row="0"
+                                          Grid.ColumnSpan="3"
+                                          Padding="15" 
+                                          Mode="PrimaryDark"
+                                          materialDesign:ShadowAssist.ShadowDepth="Depth2">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
+                    <DockPanel>
+                        <!--Menu Toogle Button-->
+                        <ToggleButton x:Name="MenuToggleButton"
+                                      Width="25"
+                                      Height="25"
+                                      Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
-                            <!--Initially Highlighted-->
-                            <materialDesign:PackIcon x:Name="HomeIcon" Kind="Home" Grid.Column="1"/>
+                        <!--Right side PopupBox and its contents-->
+                        <materialDesign:PopupBox DockPanel.Dock="Right"
+                                                 PlacementMode="BottomAndAlignRightEdges">
+                            <StackPanel>
+                                <Button Content="Hello World"/>
+                                <Button Content="Can't Touch This" IsEnabled="False" />
+                                <Separator/>
+                                <Button Content="Goodbye"/>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
 
-                            <TextBlock x:Name="HomeTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Home
-                            </TextBlock>
+                        <!--Page Header-->
+                        <TextBlock x:Name="PageHeaderTextBlock"
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="22"/>
 
-                        </Grid>
-                    </ListBoxItem>
+                    </DockPanel>
 
-                    <!--Challenges Button-->
-                    <ListBoxItem>
-                        <Grid>
+                </materialDesign:ColorZone>
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon x:Name="ChallengesIcon" Kind="Account" Grid.Column="1"/>
-
-                            <TextBlock x:Name="ChallengesTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Challenges
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                    <!--Fitness Plans Button-->
-                    <ListBoxItem>
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon x:Name="FitnessPlansIcon" Kind="CalendarHeart" Grid.Column="1"/>
-
-                            <TextBlock x:Name="FitnessPlansTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Fitness Plans
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                    <!--Calories Calculator Button-->
-                    <ListBoxItem>
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon x:Name="CaloriesCalculatorIcon" Kind="CalculatorVariant" Grid.Column="1"/>
-
-                            <TextBlock x:Name="CaloriesCalculatorTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Calories Calculator
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                    <!--Settings Button-->
-                    <ListBoxItem>
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon x:Name="SettingsIcon" Kind="Settings" Grid.Column="1"/>
-
-                            <TextBlock x:Name="SettingsTextBlock"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Settings
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                </ListBox>
-
-                <!--Logout Button-->
-                <ListBox x:Name="LogoutListBox"
-                         Grid.Row="9"
-                         Grid.ColumnSpan="3"
-                         SelectionChanged="LogoutListBox_SelectionChanged">
-
-                    <ListBoxItem>
-                        <Grid>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                                <ColumnDefinition Width="auto"/>
-                                <ColumnDefinition Width="15"/>
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon Kind="LogoutVariant" Grid.Column="1"/>
-
-                            <TextBlock x:Name="LogoutButton"
-                                       Grid.Column="3"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="15">
-                                       Logout
-                            </TextBlock>
-
-                        </Grid>
-                    </ListBoxItem>
-
-                </ListBox>
+                <!--User Main Window Frame-->
+                <Frame x:Name="UserWindowPagesFrame" 
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       NavigationUIVisibility="Hidden">
+                </Frame>
 
             </Grid>
-            
-        </materialDesign:DrawerHost.LeftDrawerContent>
-        
-        
-        <!--User Main Window-->
-        <Grid>
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="30"/>
-            </Grid.RowDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="30"/>
-            </Grid.ColumnDefinitions>
+        </materialDesign:DrawerHost>
 
-            
-            <!--User Main Window Header-->
-            <materialDesign:ColorZone Grid.Row="0"
-                                      Grid.ColumnSpan="3"
-                                      Padding="15" 
-                                      Mode="PrimaryDark"
-                                      materialDesign:ShadowAssist.ShadowDepth="Depth2">
-                
-                <DockPanel>
-                    <!--Menu Toogle Button-->
-                    <ToggleButton x:Name="MenuToggleButton"
-                                  Width="25"
-                                  Height="25"
-                                  Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
-                        
-                    <!--Right side PopupBox and its contents-->
-                    <materialDesign:PopupBox DockPanel.Dock="Right"
-                                             PlacementMode="BottomAndAlignRightEdges">
-                        <StackPanel>
-                            <Button Content="Hello World"/>
-                            <Button Content="Can't Touch This" IsEnabled="False" />
-                            <Separator/>
-                            <Button Content="Goodbye"/>
-                        </StackPanel>
-                    </materialDesign:PopupBox>
-                    
-                    <!--Page Header-->
-                    <TextBlock x:Name="PageHeaderTextBlock"
-                               HorizontalAlignment="Center" 
-                               VerticalAlignment="Center" 
-                               FontSize="22"/>
-
-                </DockPanel>
-                
-            </materialDesign:ColorZone>
-
-            <!--User Main Window Frame-->
-            <Frame x:Name="UserWindowPagesFrame" 
-                   Grid.Row="2"
-                   Grid.Column="1"
-                   NavigationUIVisibility="Hidden">
-            </Frame>
-
-        </Grid>
-
-    </materialDesign:DrawerHost>
+    </Grid>
 
 </Window>
