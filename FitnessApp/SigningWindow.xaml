@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen">
     
     <Grid>
-
+        
         <!--Background Pattern Image-->
         <Grid.Background>
             <ImageBrush ImageSource="Images/BG.jpg"
@@ -41,9 +41,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="15"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="25"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
@@ -98,46 +96,34 @@
                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                      materialDesign:HintAssist.Hint="Password"/>
                     </Grid>
-
-
-                    <!--Error TextBlock-->
-                    <TextBlock x:Name="SignInErrorTextBlock"
-                               Grid.Row="10"
-                               Grid.Column="1"
-                               HorizontalAlignment="Center"             
-                               FontFamily="{StaticResource Roboto}"
-                               FontSize="11"
-                               Foreground="Red">
-                               Use me to display errors
-                    </TextBlock>
+                        
 
                     
                     <!--Create an account & Sign In Buttons-->
-                    <Button x:Name="CreateAnAccountButton"
-                            Grid.Row="12" 
-                            Grid.Column="1"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            FontFamily="{StaticResource ProductSans}"
-                            FontSize="12"
-                            Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                            Style="{StaticResource MaterialDesignFlatButton}"
-                            Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                            Click="CreateAnAccountButton_Click">
-                            Create an account
-                    </Button>
+                        
+                        <Button x:Name="CreateAnAccountButton"
+                                Grid.Row="10" 
+                                Grid.Column="1"
+                                HorizontalAlignment="Left"
+                                FontFamily="{StaticResource ProductSans}"
+                                FontSize="12"
+                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                                Click="CreateAnAccountButton_Click">
+                                Create an account
+                        </Button>
 
-                    <Button x:Name="SignInButton"
-                            Grid.Row="12" 
-                            Grid.Column="1"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top"
-                            FontFamily="{StaticResource ProductSans}"
-                            FontSize="14"
-                            Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                            Click="SignInButton_Click">
-                            Sign in
-                    </Button>
+                        <Button x:Name="SignInButton"
+                                Grid.Row="10" 
+                                Grid.Column="1"
+                                HorizontalAlignment="Right"
+                                FontFamily="{StaticResource ProductSans}"
+                                FontSize="14"
+                                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                                Click="SignInButton_Click">
+                                Sign in
+                        </Button>
                         
                         
                 </Grid>

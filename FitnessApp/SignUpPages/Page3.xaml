@@ -9,7 +9,6 @@
     <Grid Width="450" HorizontalAlignment="Center">
         <!--450px Width gives 25px whitespace margin on both sides
              because the total width of the frame is 500px-->
-        
         <Grid.RowDefinitions>
             <RowDefinition Height="150"/>
             <RowDefinition Height="15"/>
@@ -18,11 +17,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="15"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
         
         <!--User display picture-->
         <Grid Grid.Row="0" HorizontalAlignment="Center">
@@ -48,7 +45,6 @@
 
         </Grid> 
         
-        
         <!--Weight and Height Fields-->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -70,7 +66,6 @@
                      materialDesign:HintAssist.Hint="Height"/>
             
         </Grid>
-        
         
         <!--Target Weights Fields-->
         <Grid Grid.Row="4">
@@ -95,7 +90,6 @@
 
         </Grid>
         
-        
         <!--Workouts Fields-->
         <Grid Grid.Row="6">
             <Grid.ColumnDefinitions>
@@ -117,21 +111,9 @@
                      materialDesign:HintAssist.Hint="Workout Hours/Day"/>
         </Grid>
 
-
-        <!--Error TextBlock-->
-        <TextBlock x:Name="SetUpProfileErrorTextBlock"
-                   Grid.Row="8"
-                   HorizontalAlignment="Center"
-                   FontFamily="{StaticResource Roboto}"
-                   FontSize="11"
-                   Foreground="Red">
-                   Use me to display errors
-        </TextBlock>
-        
-        
         <!--Setup Profile Button-->
         <Button x:Name="SetUpProfileButton"
-                Grid.Row="9"
+                Grid.Row="8"
                 HorizontalAlignment="Right"
                 FontFamily="{StaticResource ProductSans}" 
                 FontSize="14"

@@ -17,7 +17,6 @@
             <RowDefinition Height="20"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -47,24 +46,12 @@
                   Grid.Row="4"
                   FontFamily="{StaticResource Roboto}"
                   Style="{StaticResource MaterialDesignCheckBox}">
-                  I'm not a Robot!
+            I'm not a Robot!
         </CheckBox>
 
-        
-        <!--Error TextBlock-->
-        <TextBlock x:Name="SignUpErrorTextBlock"
-                   Grid.Row="6"
-                   HorizontalAlignment="Center"
-                   FontFamily="{StaticResource Roboto}"
-                   FontSize="11"
-                   Foreground="Red">
-                   Use me to display errors
-        </TextBlock>
-        
-        
         <!--Back and Sign Up Buttons-->
-        <Grid Grid.Row="7">
-            
+        <Grid Grid.Row="6">
+
             <Button x:Name="BackButton" 
                     HorizontalAlignment="Left"
                     FontFamily="{StaticResource ProductSans}" 

@@ -19,7 +19,6 @@
             <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
             
@@ -84,19 +83,9 @@
         </Grid>
 
         
-        <!--Error TextBlock-->
-        <TextBlock x:Name="SignUpErrorTextBlock"
-                   Grid.Row="8"
-                   HorizontalAlignment="Center"
-                   FontFamily="{StaticResource Roboto}"
-                   FontSize="11"
-                   Foreground="Red">
-                   Use me to display errors
-        </TextBlock>
-        
         <!--Next Button-->
         <Button x:Name="NextButton"
-                Grid.Row="9"
+                Grid.Row="8"
                 HorizontalAlignment="Right"
                 FontFamily="{StaticResource ProductSans}" 
                 FontSize="14"
