@@ -15,5 +15,10 @@ namespace FitnessApp.UserMainWindowPages
             FitnessPlansPageObject = this;
             DataContext = new ViewModels.PlansViewModel();
         }
+
+        private void OpenPlanDaysButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            DaysSideDrawer.IsRightDrawerOpen = true;
+        }
     }
 }
