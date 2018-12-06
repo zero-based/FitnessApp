@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using FitnessApp.ViewModels;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -17,7 +18,11 @@ namespace FitnessApp.UserMainWindowPages
         {
             InitializeComponent();
             ChallengesPageObject = this;
-            DataContext = new ViewModels.ChallengesViewModel();
+
+            // Setting Data context for ChallengesListBox
+            ChallengesViewModel challengesDataContext = new ChallengesViewModel();
+            challengesDataContext.AllChallengesViewModel();
+            DataContext = challengesDataContext;
         }
 
         private void JoinChallengeButton_Checked(object sender, System.Windows.RoutedEventArgs e)

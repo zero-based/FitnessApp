@@ -9,7 +9,7 @@
     <Grid>
         
         <ListBox x:Name="ChallengesListBox" 
-                 ItemsSource="{Binding ChallengeItems}" 
+                 ItemsSource="{Binding AllChallengeItems}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                  ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                  materialDesign:RippleAssist.IsDisabled="True" 
