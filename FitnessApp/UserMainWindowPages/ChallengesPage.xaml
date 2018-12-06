@@ -9,7 +9,7 @@
     <Grid>
         
         <ListBox x:Name="ChallengesListBox" 
-                 ItemsSource="{Binding AllChallengeItems}" 
+                 ItemsSource="{Binding AllChallengeModels}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                  ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                  materialDesign:RippleAssist.IsDisabled="True" 
@@ -24,7 +24,7 @@
             <!--Challenge Item Template-->
             <ListBox.ItemTemplate>
                 
-                <DataTemplate DataType="ChallengeItem">
+                <DataTemplate DataType="ChallengeModel">
                     
                     <materialDesign:Card Width="485" 
                                          Height="330" 
@@ -83,7 +83,7 @@
                                        FontWeight="Bold" 
                                        FontSize="18"
                                        Foreground="Black"
-                                       Text="{Binding ChallengeName}"/>
+                                       Text="{Binding Name}"/>
 
                             <!--Challenge Description-->
                             <TextBlock Grid.Row="4"
@@ -92,7 +92,7 @@
                                        FontSize="14"
                                        TextWrapping="Wrap"
                                        Foreground="Black"
-                                       Text="{Binding ChallengeDescription}"/>
+                                       Text="{Binding Description}"/>
 
                             <!--Challenge Due Date-->
                             <Grid Grid.Row="6" Grid.Column="1">
@@ -109,7 +109,7 @@
                                            FontFamily="{StaticResource ProductSans}"
                                            FontSize="15"
                                            Foreground="Black"
-                                           Text="{Binding ChallengeDueDate}">
+                                           Text="{Binding DueDate}">
                                 </TextBlock>
                                 
                             </Grid>
@@ -129,7 +129,7 @@
                                            FontFamily="{StaticResource ProductSans}"
                                            FontSize="15"
                                            Foreground="Black"
-                                           Text="{Binding ChallengeTarget}">
+                                           Text="{Binding Target}">
                                 </TextBlock>
                                 
                             </Grid>
@@ -149,7 +149,7 @@
                                            FontFamily="{StaticResource ProductSans}"
                                            FontSize="15"
                                            Foreground="Black"
-                                           Text="{Binding ChallengeReward}">
+                                           Text="{Binding Reward}">
                                 </TextBlock>
                                 
                             </Grid>

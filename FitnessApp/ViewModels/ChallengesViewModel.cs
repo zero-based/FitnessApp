@@ -1,61 +1,65 @@
-﻿namespace FitnessApp.ViewModels
+﻿
+using FitnessApp.Models;
+
+namespace FitnessApp.ViewModels
 {
     class ChallengesViewModel
     {
-        private ChallengeItem[] joinedChallengeItems;
-        private ChallengeItem[] allChallengeItems;
+        private ChallengeModel[] joinedChallengeModels;
+        private ChallengeModel[] allChallengeModels;
 
         public ChallengesViewModel() { }
 
         public void JoinedChallengesViewModel()
         {
-            joinedChallengeItems = new[] {
-            new ChallengeItem("Challenge1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            joinedChallengeModels = new[] {
+            new ChallengeModel("Challenge1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge2","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            new ChallengeModel("Challenge2","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge3","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            new ChallengeModel("Challenge3","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge4","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            new ChallengeModel("Challenge4","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge5","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            new ChallengeModel("Challenge5","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories")};
         }
 
         public void AllChallengesViewModel()
         {
-            allChallengeItems = new[] {
-            new ChallengeItem("Challenge1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            allChallengeModels = new[] {
+            new ChallengeModel("Challenge1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation" +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge2","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            new ChallengeModel("Challenge2","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge3","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            new ChallengeModel("Challenge3","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge4","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+            new ChallengeModel("Challenge4","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
                 " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories"),
 
-            new ChallengeItem("Challenge5","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
-                " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories")};
+            new ChallengeModel("Challenge5","Lorem ipsum dolor sit amet, consectetur adipiscing elit," +
+                " ullamco laboris nisi ut aliquip ex ea.", "30-Nov-18", "Run 10 KM", "Lose 1500 Calories")
+            };
         }
 
-        public ChallengeItem[] AllChallengeItems
+        public ChallengeModel[] AllChallengeModels
         {
-            get { return allChallengeItems; }
+            get { return allChallengeModels; }
             set { }
         }
 
-        public ChallengeItem[] JoinedChallengeItems
+        public ChallengeModel[] JoinedChallengeModels
         {
-            get { return joinedChallengeItems; }
+            get { return joinedChallengeModels; }
             set { }
         }
     }

@@ -16,7 +16,7 @@
             <Grid>
                 
                 <ListBox x:Name="PlanDaysListBox" 
-                         ItemsSource="{Binding DayItems}" 
+                         ItemsSource="{Binding DayModels}" 
                          HorizontalAlignment="Center"
                          ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                          materialDesign:RippleAssist.IsDisabled="True" 
@@ -26,7 +26,7 @@
                     <!--Challenge Item Template-->
                     <ListBox.ItemTemplate>
 
-                        <DataTemplate DataType="DayItem">
+                        <DataTemplate DataType="DayModel">
                             
                             <materialDesign:Card Grid.Row="0"
                                                  Width="700"
@@ -127,7 +127,7 @@
         </materialDesign:DrawerHost.RightDrawerContent>
 
         <ListBox x:Name="PlansListBox" 
-                 ItemsSource="{Binding PlanItems}" 
+                 ItemsSource="{Binding PlanModels}" 
                  ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                  materialDesign:RippleAssist.IsDisabled="True" 
                  Foreground="Transparent">
@@ -135,7 +135,7 @@
             <!--Challenge Item Template-->
             <ListBox.ItemTemplate>
 
-                <DataTemplate DataType="PlanItem">
+                <DataTemplate DataType="PlanModels">
                     
                     <materialDesign:Card Background="{StaticResource MaterialDesignPaper}">
 
@@ -205,7 +205,7 @@
                                        FontWeight="Bold" 
                                        FontSize="18"
                                        Foreground="Black"
-                                       Text="{Binding PlanName}"/>
+                                       Text="{Binding Name}"/>
 
                             <!--Plan Description-->
                             <TextBlock Grid.Row="4"
@@ -216,7 +216,7 @@
                                        TextWrapping="Wrap"
                                        TextAlignment="Center"
                                        Foreground="Black"
-                                       Text="{Binding PlanDescription}"/>
+                                       Text="{Binding Description}"/>
 
                             <Grid Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center">
 
@@ -241,7 +241,7 @@
                                                FontFamily="{StaticResource ProductSans}"
                                                FontSize="15"
                                                Foreground="Black"
-                                               Text="{Binding PlanDuration}">
+                                               Text="{Binding Duration}">
                                     </TextBlock>
 
                                 </Grid>
@@ -261,7 +261,7 @@
                                                FontFamily="{StaticResource ProductSans}"
                                                FontSize="15"
                                                Foreground="Black"
-                                               Text="{Binding PlanHardness}">
+                                               Text="{Binding Hardness}">
                                     </TextBlock>
 
                                 </Grid>

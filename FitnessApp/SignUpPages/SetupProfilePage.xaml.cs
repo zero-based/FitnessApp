@@ -7,16 +7,16 @@ using Microsoft.Win32;
 namespace FitnessApp.SignUpPages
 {
     /// <summary>
-    /// Interaction logic for Page3.xaml
+    /// Interaction logic for SetUpProfilePage.xaml
     /// </summary>
-    public partial class Page3 : Page
+    public partial class SetUpProfilePage : Page
     {
-        public static Page3 PageThreeObject = new Page3();
+        public static SetUpProfilePage SetUpProfilePageObject = new SetUpProfilePage();
 
-        public Page3()
+        public SetUpProfilePage()
         {
             InitializeComponent();
-            PageThreeObject = this;
+            SetUpProfilePageObject = this;
         }
 
         private void SetUpProfileButton_Click(object sender, RoutedEventArgs e)

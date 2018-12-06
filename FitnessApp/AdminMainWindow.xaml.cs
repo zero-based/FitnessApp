@@ -51,7 +51,7 @@ namespace FitnessApp
             }
         }
 
-        public void HighlightItem(TextBlock _pageTextBlock, MaterialDesignThemes.Wpf.PackIcon _pageIcon)
+        public void HighlightItem(TextBlock pageTextBlock, MaterialDesignThemes.Wpf.PackIcon pageIcon)
         {
             // Set all Items' Foreground to Black 
 
@@ -72,9 +72,9 @@ namespace FitnessApp
             SettingsIcon     .Foreground = new SolidColorBrush(Colors.Black);
 
             // Highlight the required Item only and Change Page Header
-            _pageTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
-            _pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
-            PageHeaderTextBlock .Text = _pageTextBlock.Text;
+            pageTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
+            pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
+            PageHeaderTextBlock .Text = pageTextBlock.Text;
         }
 
         private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

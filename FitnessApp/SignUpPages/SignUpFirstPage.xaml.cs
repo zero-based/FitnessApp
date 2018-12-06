@@ -5,16 +5,16 @@ using System.Windows.Navigation;
 namespace FitnessApp.SignUpPages
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for SignUpFirstPage.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class SignUpFirstPage : Page
     {
-        public static Page1 PageOneObject = new Page1();
+        public static SignUpFirstPage SignUpFirstPageObject = new SignUpFirstPage();
 
-        public Page1()
+        public SignUpFirstPage()
         {
             InitializeComponent();
-            PageOneObject = this;
+            SignUpFirstPageObject = this;
         }
 
 
@@ -40,7 +40,7 @@ namespace FitnessApp.SignUpPages
             password = PasswordTextBox.Password;
             confirmedPassword = ConfirmPasswordTextBox.Password;
 
-            NavigationService.Navigate(Page2.PageTwoObject);
+            NavigationService.Navigate(SignUpSecondPage.SignUpSecondPageObject);
         }
     }
 }
