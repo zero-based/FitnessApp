@@ -30,6 +30,10 @@ namespace FitnessApp.UserMainWindowPages
             //use selectedChallengeIndex + 1 as Challenge ID while using database
             ToggleButton toggleButton = sender as ToggleButton;
             selectedChallengeIndex = ChallengesListBox.Items.IndexOf(toggleButton.DataContext);
+
+            Models.ChallengeModel joinedChallenge = (Models.ChallengeModel)ChallengesListBox.Items[selectedChallengeIndex];
+
+            //To Get Joined Challenge ID use: joinedChallenge.ID
         }
     }
 }
