@@ -587,11 +587,11 @@
                             </ListBox>
 
                             <!--No Challenge Card-->
-                            <materialDesign:Card Grid.Row="5"
+                            <materialDesign:Card Grid.Row="6"
                                                  Width="475" 
                                                  Padding="25"
                                                  Background="{StaticResource MaterialDesignBackground}"
-                                                 Visibility="Collapsed">
+                                                 Visibility="Visible">
 
                                 <StackPanel x:Name="NoChallengeContentStackPanel">
 
