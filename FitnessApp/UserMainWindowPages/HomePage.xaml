@@ -530,31 +530,38 @@
                                                      Margin="25,15,25,5" 
                                                      materialDesign:TransitionAssist.DisableTransitions="True"/>
                                     </StackPanel>
-                                    
-                                    <StackPanel x:Name="NoPlanContentStackPanel"
-                                                Grid.Row="3"
-                                                Grid.Column="1">
-
-                                        <TextBlock HorizontalAlignment="Center"
-                                                   FontFamily="{StaticResource Roboto}"
-                                                   Opacity="0.5">
-                                                   You haven't joined any plan yet!
-                                        </TextBlock>
-
-                                        <Button x:Name="JoinPlanButton"
-                                                HorizontalAlignment="Center"
-                                                Margin="0,5,0,0"
-                                                FontFamily="{StaticResource ProductSans}" 
-                                                FontSize="14"
-                                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                                                Style="{StaticResource MaterialDesignFlatButton}"
-                                                Click="JoinPlanButton_Click">
-                                                Join a plan
-                                        </Button>
-
-                                    </StackPanel>
-                                    
+                                                                        
                                 </Grid>
+                            </materialDesign:Card>
+
+                            <!--No Plan Card-->
+                            <materialDesign:Card x:Name="NoPlanCard"
+                                                 Grid.Row="0"
+                                                 Width="475" 
+                                                 Padding="25"
+                                                 Background="{StaticResource MaterialDesignBackground}">
+
+                                <StackPanel>
+
+                                    <TextBlock HorizontalAlignment="Center"
+                                               FontFamily="{StaticResource Roboto}"
+                                               Opacity="0.5">
+                                               You haven't joined any plan yet!n
+                                    </TextBlock>
+
+                                    <Button x:Name="JoinPlanButton"
+                                            HorizontalAlignment="Center"
+                                            Margin="0,5,0,0"
+                                            FontFamily="{StaticResource ProductSans}" 
+                                            FontSize="14"
+                                            Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Click="JoinPlanButton_Click">
+                                            Join a plan
+                                    </Button>
+
+                                </StackPanel>
+
                             </materialDesign:Card>
 
                             <!--Right Lower Card-->
