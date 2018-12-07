@@ -16,24 +16,18 @@
                         Add a new Meal.
                     </TextBlock>
 
-                    <ComboBox materialDesign:HintAssist.Hint="Search"
+                    <ComboBox x:Name="MealsComboBox"
+                              materialDesign:HintAssist.Hint="Search"
                               HorizontalAlignment="Stretch"
                               Margin="0,8,0,0"
                               IsEditable="True"
-                              materialDesign:HintAssist.HintOpacity=".26">
-                        <ComboBoxItem>
-                            Apple
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Banana
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Pear
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Orange
-                        </ComboBoxItem>
-                    </ComboBox>
+                              materialDesign:HintAssist.HintOpacity=".26"/>
+                    
+                    <TextBox x:Name="MealQuantityTextBox"
+                             Margin="0,10"
+                             FontFamily="{StaticResource Roboto}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Quantity (grams)"/>
 
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
@@ -65,24 +59,18 @@
                         Add a new Workout.
                     </TextBlock>
 
-                    <ComboBox materialDesign:HintAssist.Hint="Search"
+                    <ComboBox x:Name="WorkoutsComboBox"
+                              materialDesign:HintAssist.Hint="Search"
                               HorizontalAlignment="Stretch"
                               Margin="0,8,0,0"
                               IsEditable="True"
-                              materialDesign:HintAssist.HintOpacity=".26">
-                        <ComboBoxItem>
-                            Running
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Swimming
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Walking
-                        </ComboBoxItem>
-                        <ComboBoxItem>
-                            Orange
-                        </ComboBoxItem>
-                    </ComboBox>
+                              materialDesign:HintAssist.HintOpacity=".26"/>
+
+                    <TextBox x:Name="WorkoutsDurationTextBox"
+                             Margin="0,10"
+                             FontFamily="{StaticResource Roboto}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Duration (minuites)"/>
 
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
