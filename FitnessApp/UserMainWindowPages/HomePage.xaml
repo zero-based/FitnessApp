@@ -344,31 +344,29 @@
                             </ListBox>
 
                             <!--No Challenge Card-->
-                            <materialDesign:Card Width="475" 
-                                                 Grid.Row="2"
+                            <materialDesign:Card Grid.Row="2"
+                                                 Width="475" 
                                                  Padding="25"
                                                  Background="{StaticResource MaterialDesignBackground}"
                                                  Visibility="Collapsed">
-                                
-                                <StackPanel x:Name="NoChallengeContentStackPanel"
-                                                Grid.Row="3"
-                                                Grid.Column="1">
+
+                                <StackPanel x:Name="NoChallengeContentStackPanel">
 
                                     <TextBlock HorizontalAlignment="Center"
-                                                   FontFamily="{StaticResource Roboto}"
-                                                   Opacity="0.5">
-                                                   You haven't joined any Challnge yet!
+                                               FontFamily="{StaticResource Roboto}"
+                                               Opacity="0.5">
+                                               You haven't joined any Challnge yet!
                                     </TextBlock>
 
                                     <Button x:Name="JoinChallengeButton"
-                                                HorizontalAlignment="Center"
-                                                Margin="0,5,0,0"
-                                                FontFamily="{StaticResource ProductSans}" 
-                                                FontSize="14"
-                                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                                                Style="{StaticResource MaterialDesignFlatButton}"
-                                                Click="JoinChallengeButton_Click">
-                                        Join a Challenge
+                                            HorizontalAlignment="Center"
+                                            Margin="0,5,0,0"
+                                            FontFamily="{StaticResource ProductSans}" 
+                                            FontSize="14"
+                                            Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                            Style="{StaticResource MaterialDesignFlatButton}"
+                                            Click="JoinChallengeButton_Click">
+                                            Join a Challenge
                                     </Button>
 
                                 </StackPanel>
