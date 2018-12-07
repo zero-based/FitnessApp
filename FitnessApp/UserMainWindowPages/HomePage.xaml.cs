@@ -34,7 +34,7 @@ namespace FitnessApp.UserMainWindowPages
             // Setting Data context for ChallengesListBox
             ViewModels.ChallengesViewModel challengesDataContext = new ViewModels.ChallengesViewModel();
             challengesDataContext.JoinedChallengesViewModel();
-            ChallengesListBox.DataContext = challengesDataContext;
+            JoinedChallengesListBox.DataContext = challengesDataContext;
 
             WeightChart.DataContext = this;
         }
