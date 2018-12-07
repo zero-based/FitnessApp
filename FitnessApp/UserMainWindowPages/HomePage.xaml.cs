@@ -31,7 +31,12 @@ namespace FitnessApp.UserMainWindowPages
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
             YFormatter = value => value.ToString();
 
-            DataContext = this;
+            // Setting Data context for ChallengesListBox
+            ViewModels.ChallengesViewModel challengesDataContext = new ViewModels.ChallengesViewModel();
+            challengesDataContext.JoinedChallengesViewModel();
+            ChallengesListBox.DataContext = challengesDataContext;
+
+            WeightChart.DataContext = this;
         }
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -101,6 +106,11 @@ namespace FitnessApp.UserMainWindowPages
         private void WorkoutsCheckBox_Checked(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 1;
         }
     }
 }
