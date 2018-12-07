@@ -244,7 +244,7 @@
 
                                         <StackPanel Grid.Column="0">
 
-                                            <TextBlock x:Name="WeightLostPerWeek"
+                                            <TextBlock x:Name="WeightLostPerWeekTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -272,7 +272,7 @@
 
                                         <StackPanel Grid.Column="2">
 
-                                            <TextBlock x:Name="WeightLostPerMonth"
+                                            <TextBlock x:Name="WeightLostPerMonthTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -300,7 +300,7 @@
 
                                         <StackPanel Grid.Column="5">
 
-                                            <TextBlock x:Name="WeightLostPerYear"
+                                            <TextBlock x:Name="WeightLostPerYearTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -363,7 +363,7 @@
 
                                         <StackPanel Grid.Column="0">
 
-                                            <TextBlock x:Name="AverageWeightLostPerWeek"
+                                            <TextBlock x:Name="AverageWeightLostPerWeekTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -391,7 +391,7 @@
 
                                         <StackPanel Grid.Column="2">
 
-                                            <TextBlock x:Name="AverageWeightLostPerMonth"
+                                            <TextBlock x:Name="AverageWeightLostPerMonthTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -419,7 +419,7 @@
 
                                         <StackPanel Grid.Column="5">
 
-                                            <TextBlock x:Name="AverageWeightLostPerYear"
+                                            <TextBlock x:Name="AverageWeightLostPerYearTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -836,7 +836,7 @@
                                                FontSize="18"
                                                Text="Today's Motivation"/>
 
-                                    <TextBlock x:Name="MotiationalQuote"
+                                    <TextBlock x:Name="MotiationalQuoteTextBlock"
                                                Grid.Row="3"
                                                Grid.Column="1"
                                                HorizontalAlignment="Center"
@@ -892,7 +892,7 @@
 
                                         <StackPanel Grid.Column="0">
 
-                                            <TextBlock x:Name="CaloriesNeeded"
+                                            <TextBlock x:Name="CaloriesNeededTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -920,7 +920,7 @@
 
                                         <StackPanel Grid.Column="2">
 
-                                            <TextBlock x:Name="CaloriesGained"
+                                            <TextBlock x:Name="CaloriesGainedTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
@@ -948,7 +948,7 @@
 
                                         <StackPanel Grid.Column="5">
 
-                                            <TextBlock x:Name="CaloriesLost"
+                                            <TextBlock x:Name="CaloriesLostTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
