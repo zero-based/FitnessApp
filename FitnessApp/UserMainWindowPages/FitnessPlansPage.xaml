@@ -19,6 +19,7 @@
                          ItemsSource="{Binding DayModels}" 
                          HorizontalAlignment="Center"
                          ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                         ScrollViewer.CanContentScroll="False"
                          materialDesign:RippleAssist.IsDisabled="True" 
                          Foreground="Transparent"
                          Padding="30,0">
@@ -129,6 +130,7 @@
         <ListBox x:Name="PlansListBox" 
                  ItemsSource="{Binding PlanModels}" 
                  ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                 ScrollViewer.CanContentScroll="False"
                  materialDesign:RippleAssist.IsDisabled="True" 
                  Foreground="Transparent">
 
