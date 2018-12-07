@@ -24,14 +24,14 @@ namespace FitnessApp
         {
             // Open User Main Window
             UserMainWindow UserMainWindowTemp = new UserMainWindow();
-            UserMainWindowTemp.ShowDialog();
+            UserMainWindowTemp.Show();
 
             // Open Admin Main Window
             //AdminMainWindow AdminMainWindowTemp = new AdminMainWindow();
-            //AdminMainWindowTemp.ShowDialog();
+            //AdminMainWindowTemp.Show();
 
             // Close Signing Window
-            SigningWindowObject.Close();
+            Close();
         }
 
 

@@ -23,7 +23,7 @@ namespace FitnessApp.SignUpPages
         {
             UserMainWindow UserMainWindowTemp = new UserMainWindow();
             SigningWindow.SigningWindowObject.Close();
-            UserMainWindowTemp.ShowDialog();
+            UserMainWindowTemp.Show();
         }
 
         private void ChooseImageButton_Click(object sender, RoutedEventArgs e)

@@ -81,7 +81,7 @@ namespace FitnessApp
         {
             SigningWindow SigningWindowTemp = new SigningWindow();
             Close();
-            SigningWindowTemp.ShowDialog();
+            SigningWindowTemp.Show();
         }
     }
 
