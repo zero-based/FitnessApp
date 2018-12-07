@@ -70,6 +70,7 @@
                                           Width="50"
                                           Height="50"
                                           ToolTip="Join Challenge"
+                                          IsChecked="{Binding IsJoined}"
                                           Style="{StaticResource MaterialDesignActionToggleButton}"
                                           materialDesign:ShadowAssist.ShadowDepth="Depth2"
                                           Checked="JoinChallengeButton_Checked">
