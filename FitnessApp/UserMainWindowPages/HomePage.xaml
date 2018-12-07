@@ -625,6 +625,8 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="25"/>
                                 <RowDefinition Height="auto"/>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <!--Right Upper Card-->
@@ -807,8 +809,52 @@
 
                             </materialDesign:Card>
 
-                            <!--Right Lower Card-->
+                            <!--Motivational Quotes Card-->
                             <materialDesign:Card Grid.Row="2"
+                                                 Width="475" 
+                                                 Background="{StaticResource MaterialDesignBackground}">
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="15"/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition Height="25"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="25"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="25"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--Card Header-->
+                                    <TextBlock Grid.Row="1"
+                                               Grid.Column="1"
+                                               FontFamily="{StaticResource ProductSans}"
+                                               FontSize="18"
+                                               Text="Today's Motivation"/>
+
+                                    <TextBlock x:Name="MotiationalQuote"
+                                               Grid.Row="3"
+                                               Grid.Column="1"
+                                               HorizontalAlignment="Center"
+                                               FontFamily="{StaticResource ProductSans}"
+                                               Foreground="{StaticResource PrimaryHueMidBrush}"
+                                               FontWeight="Bold" 
+                                               FontSize="24"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap">
+                                               Everything will be okay.
+                                    </TextBlock>
+
+                                </Grid>
+                                
+                            </materialDesign:Card>
+
+                            <!--Right Lower Card-->
+                            <materialDesign:Card Grid.Row="4"
                                                  Width="475" 
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
@@ -923,9 +969,9 @@
                                         </StackPanel>
 
                                     </Grid>
-                                    
+
                                 </Grid>
-                                
+
                             </materialDesign:Card>
 
                         </Grid>
