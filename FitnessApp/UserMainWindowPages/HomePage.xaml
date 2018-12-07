@@ -444,7 +444,7 @@
                             </materialDesign:Card>
 
 
-                            <!--Joined Challenges ListBox-->
+                            <!--Joined Challenges Cards ListBox-->
                             <ListBox x:Name="JoinedChallengesListBox" 
                                      Grid.Row="6"
                                      ItemsSource="{Binding JoinedChallengeModels}" 
@@ -629,7 +629,7 @@
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
-                            <!--Right Upper Card-->
+                            <!--Plan Card-->
                             <materialDesign:Card Grid.Row="0"
                                                  Width="475" 
                                                  Background="{StaticResource MaterialDesignBackground}">
@@ -853,7 +853,7 @@
                                 
                             </materialDesign:Card>
 
-                            <!--Right Lower Card-->
+                            <!--Calories Card-->
                             <materialDesign:Card Grid.Row="4"
                                                  Width="475" 
                                                  Background="{StaticResource MaterialDesignBackground}">
