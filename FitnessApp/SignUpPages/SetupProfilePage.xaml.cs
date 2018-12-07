@@ -39,5 +39,10 @@ namespace FitnessApp.SignUpPages
                 UserProfilePhoto.Opacity = 1.0;
             }
         }
+
+        private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+
+        }
     }
 }

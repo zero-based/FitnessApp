@@ -57,13 +57,15 @@
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Weight"/>
+                     materialDesign:HintAssist.Hint="Weight"
+                     PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
 
             <TextBox x:Name="HeightTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Height"/>
+                     materialDesign:HintAssist.Hint="Height"
+                     PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
             
         </Grid>
         
@@ -80,13 +82,15 @@
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Target Weight"/>
+                     materialDesign:HintAssist.Hint="Target Weight"
+                     PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
 
             <TextBox x:Name="KilosToLosePerWeekTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Kilos to lose/week"/>
+                     materialDesign:HintAssist.Hint="Kilos to lose/week"
+                     PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
 
         </Grid>
         
@@ -102,13 +106,15 @@
                      Grid.Column="0"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Workouts/week"/>
+                     materialDesign:HintAssist.Hint="Workouts/week"
+                     PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
 
             <TextBox x:Name="WorkoutHoursPerDayTextBox"
                      Grid.Column="2"
                      FontFamily="{StaticResource Roboto}"
                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                     materialDesign:HintAssist.Hint="Workout Hours/Day"/>
+                     materialDesign:HintAssist.Hint="Workout Hours/Day"
+                     PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
         </Grid>
 
         <!--Setup Profile Button-->
