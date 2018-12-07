@@ -5,16 +5,18 @@
         //private string image;
         private int _id;
         private bool _isJoined;
+        private string _type;
         private string _name;
         private string _description;
         private string _dueDate;
         private string _target;
         private string _reward;
 
-        public ChallengeModel(int id, bool isJoined, string name, string description, string dueDate, string target, string reward)
+        public ChallengeModel(int id, bool isJoined, string type, string name, string description, string dueDate, string target, string reward)
         {
             _id = id;
             _isJoined = isJoined;
+            _type = type;
             _name = name;
             _description = description;
             _dueDate = dueDate;
@@ -31,6 +33,11 @@
         {
             get { return _isJoined; }
             set { _isJoined = value; }
+        }
+        public string Type
+        {
+            get { return _type; }
+            set { _type = value; }
         }
 
         public string Name
