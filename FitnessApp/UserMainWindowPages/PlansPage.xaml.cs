@@ -4,17 +4,17 @@ using System.Windows.Controls.Primitives;
 namespace FitnessApp.UserMainWindowPages
 {
     /// <summary>
-    /// Interaction logic for FitnessPlansPage.xaml
+    /// Interaction logic for PlansPage.xaml
     /// </summary>
-    public partial class FitnessPlansPage : Page
+    public partial class PlansPage : Page
     {
-        public static FitnessPlansPage FitnessPlansPageObject = new FitnessPlansPage();
+        public static PlansPage PlansPageObject = new PlansPage();
         int selectedPlanIndex;
 
-        public FitnessPlansPage()
+        public PlansPage()
         {
             InitializeComponent();
-            FitnessPlansPageObject = this;
+            PlansPageObject = this;
             PlansListBox.DataContext = new ViewModels.PlansViewModel();
         }
 

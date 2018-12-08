@@ -44,7 +44,7 @@ namespace FitnessApp
                     break;
 
                 case 2:
-                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.FitnessPlansPage.FitnessPlansPageObject);
+                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.PlansPage.PlansPageObject);
                     HighlightItem(FitnessPlansTextBlock, FitnessPlansIcon);
                     break;
 
