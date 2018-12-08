@@ -32,10 +32,10 @@ namespace FitnessApp.UserMainWindowPages
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
             YFormatter = value => value.ToString();
 
-            // Setting Data context for ChallengesListBox
-            ViewModels.ChallengesViewModel challengesDataContext = new ViewModels.ChallengesViewModel();
-            challengesDataContext.JoinedChallengesViewModel();
-            JoinedChallengesListBox.DataContext = challengesDataContext;
+            // Setting Data context for JoinedChallengesListBox
+            ViewModels.ChallengesViewModel joinedChallengesDataContext = new ViewModels.ChallengesViewModel();
+            joinedChallengesDataContext.JoinedChallengesViewModel();
+            JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
 
             WeightChart.DataContext = this;
         }
