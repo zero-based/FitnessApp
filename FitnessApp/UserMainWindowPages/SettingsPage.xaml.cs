@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -79,11 +80,15 @@ namespace FitnessApp.UserMainWindowPages
                 // Convert Selected Photo to byte array here.
             }
         }
+        
+        private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
 
         private void UpdateProfileButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             // Update Profile Code Here...
-
         }
 
         private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
