@@ -16,8 +16,9 @@
 
                 <StackPanel>
 
-                    <Expander Header="Profile"
-                              IsExpanded="True">
+                    <Expander x:Name="ProfileExpander"
+                              Header="Profile"
+                              Expanded="Expander_Expanded">
 
                         <Grid Width="400">
                             <Grid.RowDefinitions>
@@ -139,7 +140,9 @@
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
                     
-                    <Expander Header="Account">
+                    <Expander x:Name="AccountExpander"
+                              Header="Account"
+                              Expanded="Expander_Expanded">
 
                         <Grid Width="400" HorizontalAlignment="Center">
 
@@ -206,8 +209,10 @@
                     
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
-                    
-                    <Expander Header="Security">
+
+                    <Expander x:Name="SecurityExpander"
+                              Header="Security"
+                              Expanded="Expander_Expanded">
 
                         <Grid Width="400" HorizontalAlignment="Center">
 
@@ -259,8 +264,10 @@
                     
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
-                    
-                    <Expander Header="About Fitness App">
+
+                    <Expander x:Name="AboutExpander"
+                              Header="About Fitness App"
+                              Expanded="Expander_Expanded">
 
                         <TextBlock Margin="25,10"
                                    TextWrapping="Wrap"
@@ -280,7 +287,9 @@
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
 
-                    <Expander Header="Rating and Feedback">
+                    <Expander x:Name="FeedbackExpander"
+                              Header="Rating and Feedback"
+                              Expanded="Expander_Expanded">
 
                         <Grid Width="400" HorizontalAlignment="Center">
 
@@ -327,8 +336,10 @@
                     
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
-                    
-                    <Expander Header="Help">
+
+                    <Expander x:Name="HelpExpander"
+                              Header="Help"
+                              Expanded="Expander_Expanded">
 
                         <TextBlock Margin="25,10"
                                    TextWrapping="Wrap"
