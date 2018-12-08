@@ -6,8 +6,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d">
 
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled"
-                  VerticalScrollBarVisibility="Hidden">
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
 
         <Border Padding="5">
 
@@ -43,15 +42,16 @@
                                         <ImageBrush x:Name="UserProfilePhoto"
                                                     ImageSource="../Images/AccountCircleDefaultIcon.png"
                                                     Stretch="UniformToFill"
-                                                    Opacity="0.75" />
+                                                    Opacity="0.75"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
                                 
-                                <Button x:Name="ChooseImageButton"
+                                <Button x:Name="UpdateImageButton"
                                         Width="120" 
                                         Height="120" 
                                         Opacity="0"
-                                        Style="{StaticResource MaterialDesignFloatingActionButton}">
+                                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                        Click="UpdateImageButton_Click">
                                 </Button>
 
                             </Grid>
@@ -128,7 +128,8 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Click="UpdateProfileButton_Click">
                                     Update Profile
                             </Button>
 
@@ -198,7 +199,8 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Click="UpdateAccountButton_Click">
                                     Update Account
                             </Button>
 
@@ -253,7 +255,8 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Click="UpdatePasswordButton_Click">
                                     Update Password
                             </Button>
                             
@@ -265,30 +268,8 @@
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
 
-                    <Expander x:Name="AboutExpander"
-                              Header="About Fitness App"
-                              Expanded="Expander_Expanded">
-
-                        <TextBlock Margin="25,10"
-                                   TextWrapping="Wrap"
-                                   Opacity="0.75">
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                   nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                   culpa qui officia deserunt mollit anim id est laborum.
-                        </TextBlock>
-                        
-                    </Expander>
-
-                    
-                    <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
-
-
                     <Expander x:Name="FeedbackExpander"
-                              Header="Rating and Feedback"
+                              Header="Feedback"
                               Expanded="Expander_Expanded">
 
                         <Grid Width="400" HorizontalAlignment="Center">
@@ -306,8 +287,7 @@
                             <!--Rating Bar-->
                             <materialDesign:RatingBar x:Name="RatingBar"
                                                       Grid.Row="1"
-                                                      HorizontalAlignment="Center"
-                                                      ValueChanged="RatingBar_ValueChanged" />
+                                                      HorizontalAlignment="Center"/>
 
                             <!--Feedback Field-->
                             <TextBox x:Name="FeedbackTextBox"
@@ -325,15 +305,38 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}">
-                                    Submit
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Click="SubmitFeedbackButton_Click">
+                                Submit
                             </Button>
-                            
+
                         </Grid>
-                        
+
                     </Expander>
 
-                    
+
+                    <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+
+                    <Expander x:Name="AboutExpander"
+                              Header="About"
+                              Expanded="Expander_Expanded">
+
+                        <TextBlock Margin="25,15"
+                                   TextWrapping="Wrap"
+                                   Opacity="0.75">
+                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                   nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                   culpa qui officia deserunt mollit anim id est laborum.
+                        </TextBlock>
+
+                    </Expander>
+
+
                     <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
 
@@ -341,7 +344,7 @@
                               Header="Help"
                               Expanded="Expander_Expanded">
 
-                        <TextBlock Margin="25,10"
+                        <TextBlock Margin="25,15"
                                    TextWrapping="Wrap"
                                    Opacity="0.75">
                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,

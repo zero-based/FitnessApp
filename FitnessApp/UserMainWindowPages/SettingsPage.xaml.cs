@@ -1,4 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using Microsoft.Win32;
+using System;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -16,11 +19,6 @@ namespace FitnessApp.UserMainWindowPages
 
             // Initialize Profile Expander to be expanded
             ProfileExpander.IsExpanded = true;
-        }
-
-        private void RatingBar_ValueChanged(object sender, System.Windows.RoutedPropertyChangedEventArgs<int> e)
-        {
-
         }
 
 
@@ -65,6 +63,42 @@ namespace FitnessApp.UserMainWindowPages
             // Re-add Expanded Event Handler to Current Expander.
             currentExpander.Expanded += Expander_Expanded;
 
+        }
+
+
+        private void UpdateImageButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            OpenFileDialog BrowseImageDialogBox = new OpenFileDialog();
+            BrowseImageDialogBox.Title = "Select a new profile photo";
+            BrowseImageDialogBox.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+              "Portable Network Graphic (*.png)|*.png";
+            if (BrowseImageDialogBox.ShowDialog() == true)
+            {
+                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(BrowseImageDialogBox.FileName));
+                // Convert Selected Photo to byte array here.
+            }
+        }
+
+        private void UpdateProfileButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Update Profile Code Here...
+
+        }
+
+        private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Update Account Code Here...
+        }
+
+        private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Update Password Code Here...
+        }
+
+        private void SubmitFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // Submit Feedback Code Here...
         }
 
     }
