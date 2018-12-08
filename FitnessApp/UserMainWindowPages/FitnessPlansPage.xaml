@@ -13,16 +13,16 @@
         <!--Side Menu-->
         <materialDesign:DrawerHost.RightDrawerContent>
 
-            <Grid>
+            <Grid Margin="15,0">
                 
                 <ListBox x:Name="PlanDaysListBox" 
-                         ItemsSource="{Binding DayModels}" 
                          HorizontalAlignment="Center"
+                         Padding="-8,0"
+                         ItemsSource="{Binding DayModels}" 
                          ScrollViewer.VerticalScrollBarVisibility="Hidden" 
                          ScrollViewer.CanContentScroll="False"
                          materialDesign:RippleAssist.IsDisabled="True" 
-                         Foreground="Transparent"
-                         Padding="30,0">
+                         Foreground="Transparent">
 
                     <!--Challenge Item Template-->
                     <ListBox.ItemTemplate>
@@ -30,7 +30,7 @@
                         <DataTemplate DataType="DayModel">
                             
                             <materialDesign:Card Grid.Row="0"
-                                                 Width="700"
+                                                 Width="500"
                                                  Background="{StaticResource MaterialDesignBackground}"
                                                  TextBlock.Foreground="Black">
                                 <Grid>
@@ -123,162 +123,169 @@
                     </ListBox.ItemTemplate>
 
                 </ListBox>
+                
             </Grid>
 
         </materialDesign:DrawerHost.RightDrawerContent>
 
-        <ListBox x:Name="PlansListBox" 
-                 ItemsSource="{Binding PlanModels}" 
-                 ScrollViewer.VerticalScrollBarVisibility="Hidden" 
-                 ScrollViewer.CanContentScroll="False"
-                 materialDesign:RippleAssist.IsDisabled="True" 
-                 Foreground="Transparent">
+        <Grid Margin="15,0">
+            
+            <ListBox x:Name="PlansListBox" 
+                     HorizontalAlignment="Center"
+                     Padding="-8,0"
+                     ItemsSource="{Binding PlanModels}" 
+                     ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                     ScrollViewer.CanContentScroll="False"
+                     materialDesign:RippleAssist.IsDisabled="True" 
+                     Foreground="Transparent">
 
-            <!--Challenge Item Template-->
-            <ListBox.ItemTemplate>
+                <!--Challenge Item Template-->
+                <ListBox.ItemTemplate>
 
-                <DataTemplate DataType="PlanModels">
+                    <DataTemplate DataType="PlanModels">
                     
-                    <materialDesign:Card Background="{StaticResource MaterialDesignPaper}">
+                        <materialDesign:Card Background="{StaticResource MaterialDesignBackground}">
 
-                        <Grid>
+                            <Grid>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="200"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="auto" />
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="20"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="15" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="15" />
-                            </Grid.ColumnDefinitions>
-
-                            <!--Plan Image-->
-                            <Image Grid.Row="0"
-                                   Grid.ColumnSpan="3"
-                                   Source="../Images/LoginHeader.jpg"
-                                   Stretch="UniformToFill"/>
-
-                            <!--Join Button-->
-                            <ToggleButton x:Name="JoinPlanButton"
-                                          Grid.Row="0"
-                                          Grid.Column="1"
-                                          HorizontalAlignment="Right"
-                                          VerticalAlignment="Bottom"
-                                          Margin="0,0,16,-20"
-                                          Width="50"
-                                          Height="50"
-                                          ToolTip="Join Plan"
-                                          Style="{StaticResource MaterialDesignActionToggleButton}"
-                                          materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                          Click="JoinPlanButton_Click">
-                                <materialDesign:PackIcon Kind="Add" />
-                            </ToggleButton>
-
-                            <!--Plan Days Drawer Button-->
-                            <Button x:Name="ViewMoreButton"
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Bottom"
-                                    Margin="0,0,70,-20"
-                                    Width="50"
-                                    Height="50"
-                                    ToolTip="View More"
-                                    Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                    materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                    Click="ViewMoreButton_Click">
-                                <materialDesign:PackIcon Kind="More"/>
-                            </Button>
-
-
-                            <!--Plan Name-->
-                            <TextBlock Grid.Row="2"
-                                       Grid.Column="1"
-                                       HorizontalAlignment="Center"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontWeight="Bold" 
-                                       FontSize="18"
-                                       Foreground="Black"
-                                       Text="{Binding Name}"/>
-
-                            <!--Plan Description-->
-                            <TextBlock Grid.Row="4"
-                                       Grid.Column="1"
-                                       HorizontalAlignment="Center"
-                                       FontFamily="{StaticResource Roboto}"
-                                       FontSize="14"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       Foreground="Black"
-                                       Text="{Binding Description}"/>
-
-                            <Grid Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="200"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
 
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto" />
-                                    <ColumnDefinition Width="40" />
-                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="15" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="15" />
                                 </Grid.ColumnDefinitions>
 
-                                <!--Plan Duration-->
-                                <Grid Grid.Column="0">
+                                <!--Plan Image-->
+                                <Image Grid.Row="0"
+                                       Grid.ColumnSpan="3"
+                                       Source="../Images/LoginHeader.jpg"
+                                       Stretch="UniformToFill"/>
+
+                                <!--Join Button-->
+                                <ToggleButton x:Name="JoinPlanButton"
+                                              Grid.Row="0"
+                                              Grid.Column="1"
+                                              HorizontalAlignment="Right"
+                                              VerticalAlignment="Bottom"
+                                              Margin="0,0,16,-20"
+                                              Width="50"
+                                              Height="50"
+                                              ToolTip="Join Plan"
+                                              Style="{StaticResource MaterialDesignActionToggleButton}"
+                                              materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                              Click="JoinPlanButton_Click">
+                                    <materialDesign:PackIcon Kind="Add" />
+                                </ToggleButton>
+
+                                <!--Plan Days Drawer Button-->
+                                <Button x:Name="ViewMoreButton"
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Margin="0,0,70,-20"
+                                        Width="50"
+                                        Height="50"
+                                        ToolTip="View More"
+                                        Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                        Click="ViewMoreButton_Click">
+                                    <materialDesign:PackIcon Kind="More"/>
+                                </Button>
+
+
+                                <!--Plan Name-->
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Center"
+                                           FontFamily="{StaticResource ProductSans}"
+                                           FontWeight="Bold" 
+                                           FontSize="18"
+                                           Foreground="Black"
+                                           Text="{Binding Name}"/>
+
+                                <!--Plan Description-->
+                                <TextBlock Grid.Row="4"
+                                           Grid.Column="1"
+                                           HorizontalAlignment="Center"
+                                           FontFamily="{StaticResource Roboto}"
+                                           FontSize="14"
+                                           TextWrapping="Wrap"
+                                           TextAlignment="Center"
+                                           Foreground="Black"
+                                           Text="{Binding Description}"/>
+
+                                <Grid Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center">
 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="40" />
+                                        <ColumnDefinition Width="auto" />
                                     </Grid.ColumnDefinitions>
 
-                                    <materialDesign:PackIcon Kind="Calendar" Grid.Column="0" Foreground="Black"/>
+                                    <!--Plan Duration-->
+                                    <Grid Grid.Column="0">
 
-                                    <TextBlock Grid.Column="2"
-                                               FontFamily="{StaticResource ProductSans}"
-                                               FontSize="15"
-                                               Foreground="Black"
-                                               Text="{Binding Duration}">
-                                    </TextBlock>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
 
-                                </Grid>
+                                        <materialDesign:PackIcon Kind="Calendar" Grid.Column="0" Foreground="Black"/>
 
-                                <!--Plan hardness-->
-                                <Grid Grid.Column="2">
+                                        <TextBlock Grid.Column="2"
+                                                   FontFamily="{StaticResource ProductSans}"
+                                                   FontSize="15"
+                                                   Foreground="Black"
+                                                   Text="{Binding Duration}">
+                                        </TextBlock>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="10"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
+                                    </Grid>
 
-                                    <materialDesign:PackIcon Kind="ChartFinance" Grid.Column="0" Foreground="Black"/>
+                                    <!--Plan hardness-->
+                                    <Grid Grid.Column="2">
 
-                                    <TextBlock Grid.Column="2"
-                                               FontFamily="{StaticResource ProductSans}"
-                                               FontSize="15"
-                                               Foreground="Black"
-                                               Text="{Binding Hardness}">
-                                    </TextBlock>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <materialDesign:PackIcon Kind="ChartFinance" Grid.Column="0" Foreground="Black"/>
+
+                                        <TextBlock Grid.Column="2"
+                                                   FontFamily="{StaticResource ProductSans}"
+                                                   FontSize="15"
+                                                   Foreground="Black"
+                                                   Text="{Binding Hardness}">
+                                        </TextBlock>
+
+                                    </Grid>
 
                                 </Grid>
 
                             </Grid>
 
-                        </Grid>
-
-                    </materialDesign:Card>
+                        </materialDesign:Card>
                                             
-                </DataTemplate>
+                    </DataTemplate>
 
-            </ListBox.ItemTemplate>
+                </ListBox.ItemTemplate>
 
-        </ListBox>
+            </ListBox>
+            
+        </Grid>
 
     </materialDesign:DrawerHost>
     

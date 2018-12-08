@@ -270,20 +270,11 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
 
                 <!--User Main Window Header-->
                 <materialDesign:ColorZone Grid.Row="0"
-                                          Grid.ColumnSpan="3"
                                           Padding="15" 
                                           Mode="PrimaryDark"
                                           materialDesign:ShadowAssist.ShadowDepth="Depth2">
@@ -318,8 +309,7 @@
 
                 <!--User Main Window Frame-->
                 <Frame x:Name="UserWindowPagesFrame" 
-                       Grid.Row="2"
-                       Grid.Column="1"
+                       Grid.Row="1"
                        NavigationUIVisibility="Hidden">
                 </Frame>
 

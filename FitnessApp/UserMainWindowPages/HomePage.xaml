@@ -115,19 +115,18 @@
             </Grid>
 
         </materialDesign:DialogHost.DialogContent>
-        
+
         <Grid>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Hidden">
-
-                <Border Padding="5">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 
                     <!--Main Grid-->
-                    <Grid>
+                    <Grid Margin="15"
+                          HorizontalAlignment="Center">
                     
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="25"/>
+                            <ColumnDefinition Width="15"/>
                             <ColumnDefinition Width="auto" />
                         </Grid.ColumnDefinitions>
 
@@ -136,17 +135,17 @@
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <!--Weight Chart Card-->
                             <materialDesign:Card Grid.Row="0"
-                                                 Width="475"
+                                                 Width="500"
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
 
@@ -224,7 +223,7 @@
 
                             <!--Weight Lost Card-->
                             <materialDesign:Card Grid.Row="2"
-                                                 Width="475" 
+                                                 Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
 
@@ -343,7 +342,7 @@
 
                             <!--Average Weight Lost Card-->
                             <materialDesign:Card Grid.Row="4"
-                                                 Width="475" 
+                                                 Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
 
@@ -462,18 +461,21 @@
 
 
                             <!--Joined Challenges Cards ListBox-->
-                            <ListBox x:Name="JoinedChallengesListBox" 
+                        <ListBox x:Name="JoinedChallengesListBox" 
                                      Grid.Row="6"
+                                     Padding="-8"
                                      ItemsSource="{Binding JoinedChallengeModels}" 
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                      materialDesign:RippleAssist.IsDisabled="True" 
                                      Foreground="Transparent">
 
-                                <!--Challenge Item Template-->
+                            <!--Challenge Item Template-->
                                 <ListBox.ItemTemplate>
 
                                     <DataTemplate DataType="ChallengeModel">
 
-                                        <materialDesign:Card Width="475" 
+                                        <materialDesign:Card Width="500" 
+                                                             Padding="0"
                                                              Background="{StaticResource MaterialDesignBackground}">
                                             <Grid>
 
@@ -606,7 +608,7 @@
                             <!--No Challenge Card-->
                             <materialDesign:Card x:Name="NoChallengesCard"
                                                  Grid.Row="6"
-                                                 Width="475" 
+                                                 Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
 
                                 <Grid>
@@ -664,15 +666,15 @@
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
                             </Grid.RowDefinitions>
 
                             <!--Plan Card-->
                             <materialDesign:Card Grid.Row="0"
-                                                 Width="475" 
+                                                 Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
 
@@ -823,7 +825,7 @@
                             <!--No Plan Card-->
                             <materialDesign:Card x:Name="NoPlanCard"
                                                  Grid.Row="0"
-                                                 Width="475" 
+                                                 Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
 
                                 <Grid>
@@ -876,7 +878,7 @@
 
                             <!--Motivational Quotes Card-->
                             <materialDesign:Card Grid.Row="2"
-                                                 Width="475" 
+                                                 Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
 
@@ -920,7 +922,7 @@
 
                             <!--Calories Card-->
                             <materialDesign:Card Grid.Row="4"
-                                                 Width="475" 
+                                                 Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
 
@@ -1043,15 +1045,14 @@
                     
                     </Grid>
 
-                </Border>
-
+                
             </ScrollViewer>
 
             <!--Floating PopUp Button-->
             <materialDesign:PopupBox x:Name="AddPopupBox"
                                      HorizontalAlignment="Right"
                                      VerticalAlignment="Bottom"
-                                     Margin="5"
+                                     Margin="25"
                                      Style="{StaticResource MaterialDesignMultiFloatingActionPopupBox}">
 
                 <StackPanel>
@@ -1074,6 +1075,6 @@
 
         </Grid>
 
-
     </materialDesign:DialogHost>
+    
 </Page>

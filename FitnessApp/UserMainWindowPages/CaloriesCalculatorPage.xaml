@@ -6,11 +6,11 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d">
 
-    <Border Padding="5">
+    <Grid Margin="15">
 
-        <materialDesign:Card Width="700" 
+        <materialDesign:Card Width="750" 
                              VerticalAlignment="Center"
-            Background="{StaticResource MaterialDesignBackground}">
+                             Background="{StaticResource MaterialDesignBackground}">
             
             <Grid>
 
@@ -129,5 +129,5 @@
 
             </Grid>
         </materialDesign:Card>
-    </Border>
+    </Grid>
 </Page>

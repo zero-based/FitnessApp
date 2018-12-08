@@ -8,9 +8,9 @@
 
     <ScrollViewer VerticalScrollBarVisibility="Hidden">
 
-        <Border Padding="5">
+        <Grid Margin="15">
 
-            <materialDesign:Card Width="800"
+            <materialDesign:Card Width="750"
                                  Background="{DynamicResource MaterialDesignBackground}">
 
                 <StackPanel>
@@ -368,7 +368,7 @@
                 
             </materialDesign:Card>
 
-        </Border>
+        </Grid>
         
     </ScrollViewer>
 

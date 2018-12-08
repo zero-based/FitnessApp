@@ -6,9 +6,11 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d">
 
-    <Grid>
-        
+    <Grid Margin="15,0">
+
         <ListBox x:Name="ChallengesListBox" 
+                 HorizontalAlignment="Center"
+                 Padding="-8,0"
                  ItemsSource="{Binding AllChallengeModels}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
                  ScrollViewer.VerticalScrollBarVisibility="Hidden" 
@@ -26,9 +28,9 @@
                 
                 <DataTemplate DataType="ChallengeModel">
                     
-                    <materialDesign:Card Width="485" 
+                    <materialDesign:Card Width="500" 
                                          Height="330" 
-                                         Background="{StaticResource MaterialDesignPaper}">
+                                         Background="{StaticResource MaterialDesignBackground}">
                         <Grid>
                             
                             <Grid.RowDefinitions>
