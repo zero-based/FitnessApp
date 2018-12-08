@@ -19,15 +19,15 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             HomePageObject = this;
 
-            
+
             SeriesCollection = new SeriesCollection
-        {
-            new LineSeries
             {
-                Title = "Weight",
-                Values = new ChartValues<double> { 40, 41.5, 39}
-            },
-        };
+                new LineSeries
+                {
+                    Title = "Weight",
+                    Values = new ChartValues<double> { 40, 41.5, 39}
+                }
+            };
 
             Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
             YFormatter = value => value.ToString();
@@ -37,13 +37,21 @@ namespace FitnessApp.UserMainWindowPages
             joinedChallengesDataContext.JoinedChallengesViewModel();
             JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
 
+            // Setting Data context for WeightChart
             WeightChart.DataContext = this;
         }
+
+
+        // Weight Chart Properties
 
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
 
+
+
+
+        ////////// All Weight Cards Functions/Event Handlers //////////
 
         private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
@@ -55,12 +63,61 @@ namespace FitnessApp.UserMainWindowPages
 
         }
 
+
+
+
+        ////////// Joined Challenges Cards Functions/Event Handlers //////////
+
+        private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 1;
+        }
+
+
+
+
+        ////////// Joined Plan Card Functions/Event Handlers //////////
+
+        private void DayItemCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox currentCheckBox = sender as CheckBox;
+            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+        }
+
+        private void DayItemCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox currentCheckBox = sender as CheckBox;
+            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+        }
+
         private void JoinPlanButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 2;
         }
 
-        //PopUpBox event handlers
+        //////////////////////////////////////////////////////////////
+
+
+
+
+        ////////// Motivational Quotes Card Functions/Event Handlers //////////
+
+
+        //////////////////////////////////////////////////////////////////////
+
+
+
+
+        ////////// Calories Card Functions/Event Handlers //////////
+
+
+        ///////////////////////////////////////////////////////////
+
+
+
+
+        ////////// PopUpBox Functions/Event Handlers //////////
+
         private void AddMealButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             DialogBox.IsOpen = true;
@@ -73,22 +130,27 @@ namespace FitnessApp.UserMainWindowPages
             AddWorkoutDialogBox.Visibility = Visibility.Visible;
         }
 
-        //Add Meal/Workout event handlers
+        //////////////////////////////////////////////////////
+
+
+
+
+        ////////// DialogBoxes Functions/Event Handlers //////////
+
         private void DialogBoxAddMealButton_Click(object sender, RoutedEventArgs e)
         {
-            //Adding Meal code Here
+            // Adding Meal code Here...
             AddMealDialogBox.Visibility = Visibility.Collapsed;
             DialogBox.IsOpen = false;
         }
 
         private void DialogBoxAddWorkoutButton_Click(object sender, RoutedEventArgs e)
         {
-            //Adding Workout code Here
+            // Adding Workout code Here...
             AddWorkoutDialogBox.Visibility = Visibility.Collapsed;
             DialogBox.IsOpen = false;
         }
 
-        //Cancel DialogBox
         private void DialogBoxCancelButton_Click(object sender, RoutedEventArgs e)
         {
             AddMealDialogBox.Visibility = Visibility.Collapsed;
@@ -96,24 +158,8 @@ namespace FitnessApp.UserMainWindowPages
             DialogBox.IsOpen = false;
         }
 
-
-        private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
-        {
-            UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 1;
-        }
+        ///////////////////////////////////////////////////////////
 
 
-        // Joined Plan CheckBoxes Checked/Unchecked event Handlers
-        private void DayItemCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-            CheckBox currentCheckBox = sender as CheckBox;
-            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
-        }
-
-        private void DayItemCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            CheckBox currentCheckBox = sender as CheckBox;
-            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
-        }
     }
 }
