@@ -725,7 +725,8 @@
                                                 <CheckBox x:Name="BreakfastCheckBox"
                                                           Grid.Column="2"
                                                           Style="{StaticResource MaterialDesignCheckBox}"
-                                                          Checked="BreakfastCheckBox_Checked"/>
+                                                          Checked="DayItemCheckBox_Checked"
+                                                          Unchecked="DayItemCheckBox_Unchecked"/>
                                             
                                             </Grid>
 
@@ -752,7 +753,8 @@
                                                 <CheckBox x:Name="LunchCheckBox"
                                                           Grid.Column="2"
                                                           Style="{StaticResource MaterialDesignCheckBox}"
-                                                          Checked="LunchCheckBox_Checked"/>
+                                                          Checked="DayItemCheckBox_Checked"
+                                                          Unchecked="DayItemCheckBox_Unchecked"/>
                                             
                                             </Grid>
 
@@ -779,7 +781,8 @@
                                                 <CheckBox x:Name="DinnerCheckBox"
                                                           Grid.Column="2"
                                                           Style="{StaticResource MaterialDesignCheckBox}"
-                                                          Checked="DinnerCheckBox_Checked"/>
+                                                          Checked="DayItemCheckBox_Checked"
+                                                          Unchecked="DayItemCheckBox_Unchecked"/>
                                             
                                             </Grid>
 
@@ -806,7 +809,8 @@
                                                 <CheckBox x:Name="WorkoutsCheckBox"
                                                           Grid.Column="2"
                                                           Style="{StaticResource MaterialDesignCheckBox}"
-                                                          Checked="WorkoutsCheckBox_Checked"/>
+                                                          Checked="DayItemCheckBox_Checked"
+                                                          Unchecked="DayItemCheckBox_Unchecked"/>
                                             
                                             </Grid>
 

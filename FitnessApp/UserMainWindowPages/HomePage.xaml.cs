@@ -80,6 +80,7 @@ namespace FitnessApp.UserMainWindowPages
             AddMealDialogBox.Visibility = Visibility.Collapsed;
             DialogBox.IsOpen = false;
         }
+
         private void DialogBoxAddWorkoutButton_Click(object sender, RoutedEventArgs e)
         {
             //Adding Workout code Here
@@ -95,30 +96,24 @@ namespace FitnessApp.UserMainWindowPages
             DialogBox.IsOpen = false;
         }
 
-        private void BreakfastCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void LunchCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void DinnerCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void WorkoutsCheckBox_Checked(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
         {
             UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 1;
         }
 
+
+        // Joined Plan CheckBoxes Checked/Unchecked event Handlers
+        private void DayItemCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox currentCheckBox = sender as CheckBox;
+            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+        }
+
+        private void DayItemCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            CheckBox currentCheckBox = sender as CheckBox;
+            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+        }
     }
 }
