@@ -273,6 +273,12 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!--User Main Window Frame-->
+                <Frame x:Name="UserWindowPagesFrame" 
+                       Grid.Row="1"
+                       NavigationUIVisibility="Hidden">
+                </Frame>
+
                 <!--User Main Window Header-->
                 <materialDesign:ColorZone Grid.Row="0"
                                           Padding="15" 
@@ -295,12 +301,6 @@
                     </DockPanel>
 
                 </materialDesign:ColorZone>
-
-                <!--User Main Window Frame-->
-                <Frame x:Name="UserWindowPagesFrame" 
-                       Grid.Row="1"
-                       NavigationUIVisibility="Hidden">
-                </Frame>
 
             </Grid>
 
