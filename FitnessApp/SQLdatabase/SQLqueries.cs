@@ -11,7 +11,17 @@ namespace FitnessApp.SQLdatabase
 
         ////////// SQL Connection string //////////
         // [IMPORTANT] Add your server name to data source.
+
         SqlConnection Connection = new SqlConnection("data source=MICHA\\SQLEXPRESS; database=FITNESSAPP; integrated security=SSPI");
+
+
+
+
+        ////////// Local Fields //////////
+        public int accountID;
+        public string accountType;
+
+
 
 
         ////////// Helper Functions //////////
@@ -62,6 +72,45 @@ namespace FitnessApp.SQLdatabase
             smtp.EnableSsl = true;
             smtp.Credentials = new System.Net.NetworkCredential("fitness.weightlossapp@gmail.com", "m3leshyFitness21");
             smtp.Send(message);
+        }
+
+
+
+
+        ////////// Queries and Main Functions //////////
+
+        // Sign in query and function.
+        public bool SignIn(string email, string password)
+        {
+            // Encrypt Password
+            string encryptedPassword = PasswordEncryption(password);
+
+            // Create Command
+            SqlCommand cmd = new SqlCommand("select*from AdminAndUserAccount where Email=@email AND Password=@password", Connection);
+            cmd.Parameters.AddWithValue("@email", email);
+            cmd.Parameters.AddWithValue("@password", encryptedPassword);
+
+            // Open Connection and Start Reading
+            Connection.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    // Assigns the account ID and account type to the global variables.
+                    accountID = (int)dr["ID"];
+                    accountType = (string)dr["Type"];
+                    Connection.Close();
+
+                    // If user exists, return true.
+                    return true;
+                }
+            }
+
+            Connection.Close();
+
+            // If user doesn't exist or any other case, return false.
+            return false; 
         }
     }
 }
