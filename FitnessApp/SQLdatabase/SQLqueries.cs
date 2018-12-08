@@ -86,7 +86,7 @@ namespace FitnessApp.SQLdatabase
             string encryptedPassword = PasswordEncryption(password);
 
             // Create Command
-            SqlCommand cmd = new SqlCommand("select*from AdminAndUserAccount where Email=@email AND Password=@password", Connection);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM AdminAndUserAccount WHERE Email = @email AND Password = @password", Connection);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@password", encryptedPassword);
 
@@ -117,7 +117,7 @@ namespace FitnessApp.SQLdatabase
         public bool IsUsernameTaken(string username)
         {
             // Create Command
-            SqlCommand cmd = new SqlCommand("select Username from [User] where Username=@username ;", Connection);
+            SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE Username = @username ;", Connection);
             cmd.Parameters.AddWithValue("@username", username);
 
             // Open Connection and Start Reading
@@ -146,7 +146,7 @@ namespace FitnessApp.SQLdatabase
         public bool IsEmailTaken(string email)
         {
             // Create Command
-            SqlCommand cmd = new SqlCommand("select Email from AdminAndUserAccount where Email=@email ;", Connection);
+            SqlCommand cmd = new SqlCommand("SELECT Email FROM AdminAndUserAccount WHERE Email = @email ;", Connection);
             cmd.Parameters.AddWithValue("@email", email);
 
             // Open Connection and Start Reading
@@ -201,7 +201,7 @@ namespace FitnessApp.SQLdatabase
 
             // Get User's ID
             // Create Query amd Command
-            string query2 = "Select ID from [User] where Username=@username";
+            string query2 = "Select ID FROM [User] WHERE Username = @username";
             SqlCommand cmd2 = new SqlCommand(query2, Connection);
             cmd2.Parameters.AddWithValue("@username", username);
 
