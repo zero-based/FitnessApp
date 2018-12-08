@@ -190,7 +190,8 @@
                                                  Grid.Column="0"
                                                  FontFamily="{StaticResource Roboto}"
                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                                 materialDesign:HintAssist.Hint="Today's Weight in kg"/>
+                                                 materialDesign:HintAssist.Hint="Today's Weight in kg"
+                                                 PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
 
                                         <Button x:Name="SaveWeightButton"
                                                 Grid.Column="2"

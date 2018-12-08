@@ -3,6 +3,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Windows.Controls;
 using System.Windows;
+using System.Text.RegularExpressions;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -42,6 +43,12 @@ namespace FitnessApp.UserMainWindowPages
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
+
+
+        private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+        }
 
         private void SaveWeightButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -112,5 +119,6 @@ namespace FitnessApp.UserMainWindowPages
         {
             UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 1;
         }
+
     }
 }
