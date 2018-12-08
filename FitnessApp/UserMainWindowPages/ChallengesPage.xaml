@@ -56,8 +56,6 @@
                             <Image Grid.Row="0"
                                    Grid.ColumnSpan="3"
                                    Source="../Images/LoginHeader.jpg"
-                                   Height="140"
-                                   Width="485"
                                    Stretch="UniformToFill"/>
 
                             <!--Join Button-->
