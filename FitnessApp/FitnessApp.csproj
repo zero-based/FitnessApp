@@ -84,6 +84,7 @@
     <Compile Include="SignUpPages\SetUpProfilePage.xaml.cs">
       <DependentUpon>SetUpProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SQLdatabase\SQLqueries.cs" />
     <Compile Include="UserMainWindow.xaml.cs">
       <DependentUpon>UserMainWindow.xaml</DependentUpon>
     </Compile>
@@ -96,8 +97,8 @@
     <Compile Include="UserMainWindowPages\ChallengesPage.xaml.cs">
       <DependentUpon>ChallengesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserMainWindowPages\FitnessPlansPage.xaml.cs">
-      <DependentUpon>FitnessPlansPage.xaml</DependentUpon>
+    <Compile Include="UserMainWindowPages\PlansPage.xaml.cs">
+      <DependentUpon>PlansPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserMainWindowPages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -151,9 +152,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserMainWindowPages\FitnessPlansPage.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="UserMainWindowPages\PlansPage.xaml">
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="UserMainWindowPages\SettingsPage.xaml">
       <SubType>Designer</SubType>
