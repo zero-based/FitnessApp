@@ -286,17 +286,6 @@
                                       Height="25"
                                       Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
-                        <!--Right side PopupBox and its contents-->
-                        <materialDesign:PopupBox DockPanel.Dock="Right"
-                                                 PlacementMode="BottomAndAlignRightEdges">
-                            <StackPanel>
-                                <Button Content="Hello World"/>
-                                <Button Content="Can't Touch This" IsEnabled="False" />
-                                <Separator/>
-                                <Button Content="Goodbye"/>
-                            </StackPanel>
-                        </materialDesign:PopupBox>
-
                         <!--Page Header-->
                         <TextBlock x:Name="PageHeaderTextBlock"
                                    HorizontalAlignment="Center" 
