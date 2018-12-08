@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using MaterialDesignThemes.Wpf;
+using FitnessApp.SQLdatabase;
 
 namespace FitnessApp
 {
@@ -9,6 +10,9 @@ namespace FitnessApp
     public partial class SigningWindow : Window
     {
         public static SigningWindow SigningWindowObject;
+
+        // Create object from database class
+        SQLqueries SQLqueriesObject = new SQLqueries();
 
         public SigningWindow()
         {
@@ -22,16 +26,33 @@ namespace FitnessApp
 
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
-            // Open User Main Window
-            UserMainWindow UserMainWindowTemp = new UserMainWindow();
-            UserMainWindowTemp.Show();
 
-            // Open Admin Main Window
-            //AdminMainWindow AdminMainWindowTemp = new AdminMainWindow();
-            //AdminMainWindowTemp.Show();
+            bool isAccountFound = SQLqueriesObject.SignIn(EmailSignInTextBox.Text, PasswordSignInTextBox.Password);
 
-            // Close Signing Window
-            Close();
+            if (isAccountFound == true)
+            {
+                if (SQLqueriesObject.accountType == "User")
+                {
+                    // Open User Main Window
+                    UserMainWindow UserMainWindowTemp = new UserMainWindow();
+                    UserMainWindowTemp.Show();
+                }
+                else
+                {
+                    // Open Admin Main Window
+                    AdminMainWindow AdminMainWindowTemp = new AdminMainWindow();
+                    AdminMainWindowTemp.Show();
+                }
+
+                // Close Signing Window
+                Close();
+            }
+            else
+            {
+                // Display error when the user is not found
+                ErrorsSnackbar.MessageQueue.Enqueue("Incorrect Email Or Password");
+            }
+
         }
 
 
