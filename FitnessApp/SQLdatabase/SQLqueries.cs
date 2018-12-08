@@ -224,7 +224,7 @@ namespace FitnessApp.SQLdatabase
 
             // Insert User's email and password
             // Create Query amd Command
-            string query3 = "INSERT INTO AdminAndUserAccount(ID, Email, Password, Type" +
+            string query3 = "INSERT INTO AdminAndUserAccount(ID, Email, Password, Type) " +
                             "VALUES('" + accountID + "','" + email + "','" + encryptedPassword + "','User');";
             SqlCommand cmd3 = new SqlCommand(query3, Connection);
 
