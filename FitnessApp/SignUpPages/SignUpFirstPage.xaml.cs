@@ -49,7 +49,7 @@ namespace FitnessApp.SignUpPages
             int firstNameLength = FirstNameTextBox.Text.Length;
             int lastNameLength = LastNameTextBox.Text.Length;
             int userNameLength = UsernameTextBox.Text.Length;
-            bool CheckUniqueUserName = objectSqlQueries.IsUsernameTaken(UsernameTextBox.Text);
+            bool CheckUniqueUsername = objectSqlQueries.IsUsernameTaken(UsernameTextBox.Text);
             bool CheckUniqueEmail = objectSqlQueries.IsEmailTaken(EmailTextBox.Text);
             // Constraints , to make sure that texts boxes are not empty
             if (firstNameLength < 1 || lastNameLength < 1 || userNameLength < 1 || passwordLength < 1)
@@ -59,7 +59,7 @@ namespace FitnessApp.SignUpPages
             }
             else
             {
-                if (PasswordTextBox.Password == ConfirmPasswordTextBox.Password && passwordLength > 6 && CheckUniqueUserName == false && CheckUniqueEmail == false)
+                if (PasswordTextBox.Password == ConfirmPasswordTextBox.Password && passwordLength > 6 && CheckUniqueUsername == false && CheckUniqueEmail == false)
                 {
                     if (EmailTextBox.Text.Contains("@"))
                     {
@@ -80,17 +80,17 @@ namespace FitnessApp.SignUpPages
                 }
 
 
-                if (CheckUniqueUserName == true && CheckUniqueEmail == false)
+                if (CheckUniqueUsername == true && CheckUniqueEmail == false)
                 {
                     SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("User Name Is Already Taken ");
 
                 }
 
-                if (CheckUniqueEmail == true && CheckUniqueUserName == false)
+                if (CheckUniqueEmail == true && CheckUniqueUsername == false)
                 {
                     SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue(" Email Is Already Taken");
                 }
-                if (CheckUniqueEmail == true && CheckUniqueUserName == true)
+                if (CheckUniqueEmail == true && CheckUniqueUsername == true)
                 {
                     SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue(" Email and user name are already taken");
                 }

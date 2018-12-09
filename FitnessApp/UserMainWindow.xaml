@@ -92,7 +92,7 @@
                                    Name
                         </TextBlock>
 
-                        <TextBlock x:Name="UserNameTextBlock"
+                        <TextBlock x:Name="UsernameTextBlock"
                                    FontFamily="{StaticResource ProductSans}"
                                    FontWeight="Light" 
                                    FontSize="14"
