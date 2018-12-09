@@ -338,6 +338,34 @@ namespace FitnessApp.SQLdatabase
             return joinedChallengeModels;
         }
 
+        public void JoinChallenge(int accountID, int ChallengeID)
+        {
+            Connection.Open();
+            string query = "INSERT INTO [UserChallenge] " +
+                           "(UserId, ChallengeId, JoiningDate) " +
+                            "Values (" + accountID + ", " + ChallengeID + ", Convert(date, getdate()))";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            Connection.Close();
+        }
+
+        public void UnjoinChallenge(int accountID, int ChallengeID)
+        {
+            Connection.Open();
+            string query = "DELETE [UserChallenge] " +
+                           "WHERE [UserChallenge].UserId = " + accountID + " " +
+                           "AND [UserChallenge].ChallengeId = " + ChallengeID;
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            Connection.Close();
+        }
+
 
     }
 }
