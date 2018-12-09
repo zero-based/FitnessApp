@@ -673,7 +673,8 @@
                             </Grid.RowDefinitions>
 
                             <!--Plan Card-->
-                            <materialDesign:Card Grid.Row="0"
+                            <materialDesign:Card x:Name="JoinedPlanCard"
+                                                 Grid.Row="0"
                                                  Width="500" 
                                                  Background="{StaticResource MaterialDesignBackground}">
                                 <Grid>
