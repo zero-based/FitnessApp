@@ -11,7 +11,7 @@
         <materialDesign:Card Width="750" 
                              VerticalAlignment="Center"
                              Background="{StaticResource MaterialDesignBackground}">
-            
+
             <Grid>
 
                 <Grid.RowDefinitions>
@@ -64,43 +64,47 @@
                             Female
                         </ComboBoxItem>
                     </ComboBox>
+                    
                 </Grid>
 
                 <!--Age Feild-->
                 <Grid Grid.Row="5" Grid.Column="1" >
 
-                        <materialDesign:PackIcon Kind="Numbers" Margin="0,20,0,0" Width="25" Height="25"/>
-                        
-                        <TextBox x:Name="AgeTextBox"
+                    <materialDesign:PackIcon Kind="Numbers" Margin="0,20,0,0" Width="25" Height="25"/>
+
+                    <TextBox x:Name="AgeTextBox"
                              Margin="30,0,0,0"
                              FontFamily="{StaticResource Roboto}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              materialDesign:HintAssist.Hint="Age"/>
-                        
-                    </Grid>
 
-                    <!--Weight Feild-->
+                </Grid>
+
+                <!--Weight Feild-->
                 <Grid Grid.Row="7" Grid.Column="1">
-                        
-                        <materialDesign:PackIcon Kind="WeightKilogram" Margin="0,20,0,0" Width="25" Height="25"/>
-                        
-                        <TextBox x:Name="WeightTextBox"
-                                 Margin="30,0,0,0"
-                                 FontFamily="{StaticResource Roboto}"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 materialDesign:HintAssist.Hint="Weight in kg"/>
-                        
-                    </Grid>
 
-                    <!--Height Feild-->
+                    <materialDesign:PackIcon Kind="WeightKilogram" Margin="0,20,0,0" Width="25" Height="25"/>
+
+                    <TextBox x:Name="WeightTextBox"
+                             Margin="30,0,0,0"
+                             FontFamily="{StaticResource Roboto}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Weight in kg"/>
+
+                </Grid>
+
+                <!--Height Feild-->
                 <Grid Grid.Row="9" Grid.Column="1">
-                        <materialDesign:PackIcon Kind="Altimeter" Margin="0,20,0,0" Width="25" Height="25"/>
-                        <TextBox x:Name="HeightTextBox"
-                                 Margin="30,0,0,0"
-                                 FontFamily="{StaticResource Roboto}"
-                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                 materialDesign:HintAssist.Hint="Height in cm"/>
-                    </Grid>
+                    
+                    <materialDesign:PackIcon Kind="Altimeter" Margin="0,20,0,0" Width="25" Height="25"/>
+                    
+                    <TextBox x:Name="HeightTextBox"
+                             Margin="30,0,0,0"
+                             FontFamily="{StaticResource Roboto}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Height in cm"/>
+                    
+                </Grid>
 
 
                 <!--Calculate Button-->
@@ -112,22 +116,24 @@
                         FontSize="14"
                         Style="{StaticResource MaterialDesignRaisedDarkButton}" 
                         Click="CalculateButton_Click">
-                    Calculate
+                        Calculate
                 </Button>
 
                 <!--Result TextBlock-->
-                <TextBlock Grid.Row="11"
+                <TextBlock x:Name="ResultTextBlock"
+                           Grid.Row="11"
                            Grid.Column="1"
                            HorizontalAlignment="Left"
                            VerticalAlignment="Center"
                            FontFamily="{StaticResource ProductSans}"
                            Foreground="{StaticResource PrimaryHueMidBrush}"
                            FontWeight="Bold"
-                           FontSize="18">
-                           Show Total Calories Here: calories/day
-                </TextBlock>
+                           FontSize="18"/>
 
             </Grid>
+            
         </materialDesign:Card>
+        
     </Grid>
+    
 </Page>
