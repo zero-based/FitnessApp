@@ -86,6 +86,10 @@ namespace FitnessApp.UserMainWindowPages
 
             SQLqueriesObject.UnjoinChallenge(101, currentChallenge.ID);
 
+            // Reloading Data context for JoinedChallengesListBox
+            ViewModels.ChallengesViewModel joinedChallengesDataContext = new ViewModels.ChallengesViewModel();
+            joinedChallengesDataContext.JoinedChallengesViewModel(100);
+            JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
         }
 
 
