@@ -68,7 +68,8 @@
                                     Width="80"
                                     Height="80"
                                     Opacity="0"
-                                    Style="{StaticResource MaterialDesignFloatingActionButton}">
+                                    Style="{StaticResource MaterialDesignFloatingActionButton}"
+                                    Click="UserProfilePhotoButton_Click">
                             </Button>
                         </Grid>
 

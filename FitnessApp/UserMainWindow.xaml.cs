@@ -92,11 +92,18 @@ namespace FitnessApp
             PageHeaderTextBlock.Text  = pageTextBlock.Text;
         }
 
+
+        private void UserProfilePhotoButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserMainWindowPagesListBox.SelectedIndex = 4;
+        }
+
         private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SigningWindow SigningWindowTemp = new SigningWindow();
             Close();
             SigningWindowTemp.Show();
         }
+
     }
 }
