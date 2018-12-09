@@ -20,7 +20,7 @@ namespace FitnessApp.UserMainWindowPages
 
             // Setting Data context for ChallengesListBox
             ChallengesViewModel challengesDataContext = new ChallengesViewModel();
-            challengesDataContext.AllChallengesViewModel();
+            challengesDataContext.AllChallengesViewModel(100);
             DataContext = challengesDataContext;
         }
 
