@@ -29,18 +29,17 @@
                 <Ellipse.Fill>
                     <ImageBrush x:Name="UserProfilePhoto"
                                 ImageSource="../Images/AccountCircleDefaultIcon.png"
-                                Stretch="UniformToFill"
-                                Opacity="0.75"/>
+                                Stretch="UniformToFill"/>
                 </Ellipse.Fill>
                 
             </Ellipse>
             
-            <Button x:Name="ChooseImageButton"
+            <Button x:Name="ChooseUserProfilePhotoButton"
                     Width="120" 
                     Height="120" 
                     Opacity="0"
                     Style="{StaticResource MaterialDesignFloatingActionButton}"
-                    Click="ChooseImageButton_Click">
+                    Click="ChooseUserProfilePhotoButton_Click">
             </Button>
 
         </Grid> 

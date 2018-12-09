@@ -67,18 +67,19 @@ namespace FitnessApp.UserMainWindowPages
         }
 
 
-        private void UpdateImageButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void UpdateUserProfilePhotoButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            OpenFileDialog BrowseImageDialogBox = new OpenFileDialog();
-            BrowseImageDialogBox.Title = "Select a new profile photo";
-            BrowseImageDialogBox.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (BrowseImageDialogBox.ShowDialog() == true)
+            OpenFileDialog browsePhotoDialog = new OpenFileDialog();
+            browsePhotoDialog.Title  = "Select your New Profile Photo";
+            browsePhotoDialog.Filter = "All formats|*.jpg;*.jpeg;*.png|" +
+                                       "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                                       "PNG (*.png)|*.png";
+
+            if (browsePhotoDialog.ShowDialog() == true)
             {
-                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(BrowseImageDialogBox.FileName));
-                // Convert Selected Photo to byte array here.
+                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(browsePhotoDialog.FileName));
             }
+
         }
         
         private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)

@@ -41,17 +41,16 @@
                                     <Ellipse.Fill>
                                         <ImageBrush x:Name="UserProfilePhoto"
                                                     ImageSource="../Images/AccountCircleDefaultIcon.png"
-                                                    Stretch="UniformToFill"
-                                                    Opacity="0.75"/>
+                                                    Stretch="UniformToFill"/>
                                     </Ellipse.Fill>
                                 </Ellipse>
-                                
-                                <Button x:Name="UpdateImageButton"
+
+                                <Button x:Name="UpdateUserProfilePhotoButton"
                                         Width="120" 
                                         Height="120" 
                                         Opacity="0"
                                         Style="{StaticResource MaterialDesignFloatingActionButton}"
-                                        Click="UpdateImageButton_Click">
+                                        Click="UpdateUserProfilePhotoButton_Click">
                                 </Button>
 
                             </Grid>

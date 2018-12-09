@@ -44,7 +44,7 @@ namespace FitnessApp.SignUpPages
             else
             {
                 // Signing up
-                SQLqueriesObject.SignUp(ref img,
+                SQLqueriesObject.SignUp(ref profilePhotoByteArray,
                                         SignUpFirstPage.SignUpFirstPageObject.FirstNameTextBox.Text,
                                         SignUpFirstPage.SignUpFirstPageObject.LastNameTextBox.Text,
                                         SignUpFirstPage.SignUpFirstPageObject.UserNameTextBox.Text,
@@ -64,23 +64,24 @@ namespace FitnessApp.SignUpPages
             }
         }
 
-        public byte[] img = null;
-        private void ChooseImageButton_Click(object sender, RoutedEventArgs e)
+        public byte[] profilePhotoByteArray = null;
+        private void ChooseUserProfilePhotoButton_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog BrowseImageDialogBox = new OpenFileDialog();
-            BrowseImageDialogBox.Title = "Select a picture";
-            BrowseImageDialogBox.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
-              "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
-              "Portable Network Graphic (*.png)|*.png";
-            if (BrowseImageDialogBox.ShowDialog() == true)
+            OpenFileDialog browsePhotoDialog = new OpenFileDialog();
+            browsePhotoDialog.Title  = "Select your Profile Photo";
+            browsePhotoDialog.Filter = "All formats|*.jpg;*.jpeg;*.png|" +
+                                       "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+                                       "PNG (*.png)|*.png";
+
+            if (browsePhotoDialog.ShowDialog() == true)
             {
-                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(BrowseImageDialogBox.FileName));
+                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(browsePhotoDialog.FileName));
                 UserProfilePhoto.Opacity = 1.0;
 
                 // Convert the image to byte[]
-                FileStream fs = new FileStream(BrowseImageDialogBox.FileName, FileMode.Open, FileAccess.Read);
+                FileStream fs = new FileStream(browsePhotoDialog.FileName, FileMode.Open, FileAccess.Read);
                 BinaryReader br = new BinaryReader(fs);
-                img = br.ReadBytes((int)fs.Length);
+                profilePhotoByteArray = br.ReadBytes((int)fs.Length);
             }
         }
 

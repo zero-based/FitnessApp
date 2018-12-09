@@ -172,10 +172,10 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Sign up function
-        public void SignUp(ref byte[] image,    string firstName,   string lastName,
-                           string username,     string email,       string password,
-                           string gender,       string birthDate,   double weight,         double height,
-                           double targetWeight, double kilosToLose, double workoutPerWeek, double workoutPerHours)
+        public void SignUp(ref byte[] profilePhoto, string firstName,   string lastName,
+                           string username,         string email,       string password,
+                           string gender,           string birthDate,   double weight,         double height,
+                           double targetWeight,     double kilosToLose, double workoutPerWeek, double workoutPerHours)
         {
             // Password Encryption
             string encryptedPassword = PasswordEncryption(password);
@@ -183,7 +183,7 @@ namespace FitnessApp.SQLdatabase
             // Create Query amd Command
             string query1 = "INSERT INTO [User] (Image, FirstName, LastName, Username, BirthDate, Gender, "+
                             "TargetWeight, Height, KilosToLosePerWeek, WorkoutsDaysPerWeek, WorkoutsHoursPerDay)" +
-                            "VALUES('" + image + "','" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
+                            "VALUES('" + profilePhoto + "','" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
                             targetWeight + "','" + height + "','" + kilosToLose + "','" + workoutPerWeek + "', '" + workoutPerHours + "') ;";
             SqlCommand cmd1 = new SqlCommand(query1, Connection);
 
