@@ -47,7 +47,7 @@ namespace FitnessApp.SignUpPages
                 SQLqueriesObject.SignUp(ref profilePhotoByteArray,
                                         SignUpFirstPage.SignUpFirstPageObject.FirstNameTextBox.Text,
                                         SignUpFirstPage.SignUpFirstPageObject.LastNameTextBox.Text,
-                                        SignUpFirstPage.SignUpFirstPageObject.UserNameTextBox.Text,
+                                        SignUpFirstPage.SignUpFirstPageObject.UsernameTextBox.Text,
                                         SignUpFirstPage.SignUpFirstPageObject.EmailTextBox.Text,
                                         SignUpFirstPage.SignUpFirstPageObject.Password,
                                         SignUpSecondPage.SignUpSecondPageObject.GenderComboBox.Text,

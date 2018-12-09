@@ -46,7 +46,7 @@
 
 
         <!--Username and Email Feilds-->
-        <TextBox x:Name="UserNameTextBox"
+        <TextBox x:Name="UsernameTextBox"
                  Grid.Row="2"
                  FontFamily="{StaticResource Roboto}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"

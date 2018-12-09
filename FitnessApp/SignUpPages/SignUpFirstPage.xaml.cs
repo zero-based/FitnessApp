@@ -47,8 +47,8 @@ namespace FitnessApp.SignUpPages
             int passwordLength = PasswordTextBox.Password.Length;
             int firstNameLength = FirstNameTextBox.Text.Length;
             int lastNameLength = LastNameTextBox.Text.Length;
-            int userNameLength = UserNameTextBox.Text.Length;
-            bool CheckUniqueUserName = objectSqlQueries.IsUsernameTaken(UserNameTextBox.Text);
+            int userNameLength = UsernameTextBox.Text.Length;
+            bool CheckUniqueUserName = objectSqlQueries.IsUsernameTaken(UsernameTextBox.Text);
             bool CheckUniqueEmail = objectSqlQueries.IsEmailTaken(EmailTextBox.Text);
             // Constraints , to make sure that texts boxes are not empty
             if (firstNameLength < 1 || lastNameLength < 1 || userNameLength < 1 || passwordLength < 1)
