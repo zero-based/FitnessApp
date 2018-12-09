@@ -50,7 +50,7 @@ namespace FitnessApp.SQLdatabase
         // Send email to user function (gmail only)
         private void SendEmail(string email, string name)
         {
-            MailMessage message = new System.Net.Mail.MailMessage();
+            MailMessage message = new MailMessage();
 
             // Reciever's Email
             message.To.Add(email);
@@ -59,7 +59,7 @@ namespace FitnessApp.SQLdatabase
             message.Subject = "Welcome To Our Humble Fitness Application ";
 
             // Sender's Email
-            message.From = new System.Net.Mail.MailAddress("fitness.weightlossapp@gmail.com", "Fitness App");
+            message.From = new MailAddress("fitness.weightlossapp@gmail.com", "Fitness App");
 
             // Email Body
             message.IsBodyHtml = true;
@@ -68,7 +68,7 @@ namespace FitnessApp.SQLdatabase
             message.Body = htmlBody;
 
 
-            System.Net.Mail.SmtpClient smtp = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
             smtp.EnableSsl = true;
             smtp.Credentials = new System.Net.NetworkCredential("fitness.weightlossapp@gmail.com", "m3leshyFitness21");
             smtp.Send(message);
@@ -174,8 +174,8 @@ namespace FitnessApp.SQLdatabase
         // Sign up function
         public void SignUp(ref byte[] profilePhoto, string firstName,   string lastName,
                            string username,         string email,       string password,
-                           string gender,           string birthDate,   double weight,         double height,
-                           double targetWeight,     double kilosToLose, double workoutPerWeek, double workoutPerHours)
+                           string gender,           string birthDate,   double weight,          double height,
+                           double targetWeight,     double kilosToLose, double workoutsPerWeek, double workoutHoursPerDay)
         {
             // Password Encryption
             string encryptedPassword = PasswordEncryption(password);
@@ -184,7 +184,7 @@ namespace FitnessApp.SQLdatabase
             string query1 = "INSERT INTO [User] (Image, FirstName, LastName, Username, BirthDate, Gender, "+
                             "TargetWeight, Height, KilosToLosePerWeek, WorkoutsDaysPerWeek, WorkoutsHoursPerDay)" +
                             "VALUES('" + profilePhoto + "','" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
-                            targetWeight + "','" + height + "','" + kilosToLose + "','" + workoutPerWeek + "', '" + workoutPerHours + "') ;";
+                            targetWeight + "','" + height + "','" + kilosToLose + "','" + workoutsPerWeek + "', '" + workoutHoursPerDay + "') ;";
             SqlCommand cmd1 = new SqlCommand(query1, Connection);
 
             // Open Connection and Start Reading
