@@ -76,7 +76,6 @@ namespace FitnessApp.SignUpPages
             if (browsePhotoDialog.ShowDialog() == true)
             {
                 UserProfilePhoto.ImageSource = new BitmapImage(new Uri(browsePhotoDialog.FileName));
-                UserProfilePhoto.Opacity = 1.0;
 
                 // Convert the image to byte[]
                 FileStream fs = new FileStream(browsePhotoDialog.FileName, FileMode.Open, FileAccess.Read);
