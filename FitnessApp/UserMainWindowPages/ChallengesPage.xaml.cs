@@ -1,6 +1,8 @@
 ﻿using FitnessApp.ViewModels;
 using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
+using FitnessApp.SQLdatabase;
+using System.Windows;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -10,7 +12,7 @@ namespace FitnessApp.UserMainWindowPages
     public partial class ChallengesPage : Page
     {
         public static ChallengesPage ChallengesPageObject = new ChallengesPage();
-
+        SQLqueries SQLqueriesObject = new SQLqueries();
         int selectedChallengeIndex;
 
         public ChallengesPage()
@@ -26,13 +28,30 @@ namespace FitnessApp.UserMainWindowPages
 
         private void JoinChallengeButton_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
-            //use selectedChallengeIndex + 1 as Challenge ID while using database
+
             ToggleButton toggleButton = sender as ToggleButton;
             selectedChallengeIndex = ChallengesListBox.Items.IndexOf(toggleButton.DataContext);
 
-            Models.ChallengeModel joinedChallenge = (Models.ChallengeModel)ChallengesListBox.Items[selectedChallengeIndex];
+            Models.ChallengeModel currentChallenge = (Models.ChallengeModel)ChallengesListBox.Items[selectedChallengeIndex];
 
-            //To Get Joined Challenge ID use: joinedChallenge.ID
+            SQLqueriesObject.JoinChallenge(101, currentChallenge.ID);
+        }
+            
+            
+        
+
+        private void JoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+
+            ToggleButton toggleButton = sender as ToggleButton;
+            selectedChallengeIndex = ChallengesListBox.Items.IndexOf(toggleButton.DataContext);
+
+            Models.ChallengeModel currentChallenge = (Models.ChallengeModel)ChallengesListBox.Items[selectedChallengeIndex];
+
+            SQLqueriesObject.UnjoinChallenge(101, currentChallenge.ID);
+
         }
     }
+
 }
+

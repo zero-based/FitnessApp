@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows;
 using System;
+using System.Windows.Controls.Primitives;
+using FitnessApp.SQLdatabase;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -13,6 +15,8 @@ namespace FitnessApp.UserMainWindowPages
     public partial class HomePage : Page
     {
         public static HomePage HomePageObject = new HomePage();
+        SQLqueries SQLqueriesObject = new SQLqueries();
+        int selectedChallengeIndex;
 
         public HomePage()
         {
@@ -71,6 +75,17 @@ namespace FitnessApp.UserMainWindowPages
         private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
         {
             UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 1;
+        }
+
+        private void JoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ToggleButton toggleButton = sender as ToggleButton;
+            selectedChallengeIndex = JoinedChallengesListBox.Items.IndexOf(toggleButton.DataContext);
+
+            Models.ChallengeModel currentChallenge = (Models.ChallengeModel)JoinedChallengesListBox.Items[selectedChallengeIndex];
+
+            SQLqueriesObject.UnjoinChallenge(101, currentChallenge.ID);
+
         }
 
 
@@ -158,6 +173,7 @@ namespace FitnessApp.UserMainWindowPages
             DialogBox.IsOpen = false;
         }
 
+        
         ///////////////////////////////////////////////////////////
 
 

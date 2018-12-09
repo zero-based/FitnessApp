@@ -505,7 +505,8 @@
                                                               ToolTip="Unjoin Challenge"
                                                               IsChecked="{Binding IsJoined}"
                                                               Style="{StaticResource MaterialDesignActionToggleButton}"
-                                                              materialDesign:ShadowAssist.ShadowDepth="Depth2">
+                                                              materialDesign:ShadowAssist.ShadowDepth="Depth2"
+                                                              Unchecked="JoinChallengeButton_Unchecked">
                                                     <materialDesign:PackIcon Kind="Add" />
                                                 </ToggleButton>
 
