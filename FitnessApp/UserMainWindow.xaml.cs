@@ -72,18 +72,17 @@ namespace FitnessApp
             ChallengesTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             ChallengesIcon     .Foreground = new SolidColorBrush(Colors.Black);
 
-            // Challenges Item
+            // Fitness Plans Item
             FitnessPlansTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             FitnessPlansIcon     .Foreground = new SolidColorBrush(Colors.Black);
 
-            // Challenges Item
+            // Calories Calculator Item
             CaloriesCalculatorTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             CaloriesCalculatorIcon     .Foreground = new SolidColorBrush(Colors.Black);
 
-            // Challenges Item
+            // Settings Item
             SettingsTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             SettingsIcon     .Foreground = new SolidColorBrush(Colors.Black);
-
 
 
             // Highlight the required Item only and Change Page Header
