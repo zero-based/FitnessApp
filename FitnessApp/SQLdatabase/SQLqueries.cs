@@ -346,8 +346,7 @@ namespace FitnessApp.SQLdatabase
                             "Values (" + accountID + ", " + ChallengeID + ", Convert(date, getdate()))";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
+            cmd.ExecuteReader();
 
             Connection.Close();
         }
@@ -360,8 +359,7 @@ namespace FitnessApp.SQLdatabase
                            "AND [UserChallenge].ChallengeId = " + ChallengeID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
+            cmd.ExecuteReader();
 
             Connection.Close();
         }
