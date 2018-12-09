@@ -1,9 +1,9 @@
-﻿using LiveCharts;
-using LiveCharts.Wpf;
-using System;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows;
-using System.Text.RegularExpressions;
+using System;
 
 namespace FitnessApp.UserMainWindowPages
 {

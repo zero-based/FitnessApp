@@ -1,5 +1,4 @@
-﻿
-using FitnessApp.Models;
+﻿using FitnessApp.Models;
 
 namespace FitnessApp.ViewModels
 {

@@ -1,7 +1,8 @@
-﻿using System.Windows;
+﻿using FitnessApp.SQLdatabase;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using FitnessApp.SQLdatabase;
+using System.Windows;
+
 namespace FitnessApp.SignUpPages
 {
     /// <summary>

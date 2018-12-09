@@ -1,8 +1,8 @@
-﻿using System;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
+using System;
 
 namespace FitnessApp.SQLdatabase
 {

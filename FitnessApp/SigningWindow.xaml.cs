@@ -1,6 +1,6 @@
-﻿using System.Windows;
+﻿using FitnessApp.SQLdatabase;
 using MaterialDesignThemes.Wpf;
-using FitnessApp.SQLdatabase;
+using System.Windows;
 
 namespace FitnessApp
 {

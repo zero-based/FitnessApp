@@ -1,7 +1,6 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using FitnessApp.ViewModels;
 using System.Windows.Controls.Primitives;
-using FitnessApp.ViewModels;
+using System.Windows.Controls;
 
 namespace FitnessApp.UserMainWindowPages
 {

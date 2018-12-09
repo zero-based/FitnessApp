@@ -1,7 +1,7 @@
-﻿using System.Windows;
+﻿using MaterialDesignThemes.Wpf;
 using System.Windows.Controls;
 using System.Windows.Media;
-using MaterialDesignThemes.Wpf;
+using System.Windows;
 
 namespace FitnessApp
 {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
+﻿using FitnessApp.SQLdatabase;
 using Microsoft.Win32;
-using FitnessApp.SQLdatabase;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using System.Windows;
+using System;
 
 
 namespace FitnessApp.SignUpPages

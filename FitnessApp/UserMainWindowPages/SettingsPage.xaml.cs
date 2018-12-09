@@ -1,8 +1,8 @@
 ﻿using Microsoft.Win32;
-using System;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System;
 
 namespace FitnessApp.UserMainWindowPages
 {
