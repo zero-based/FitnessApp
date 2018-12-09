@@ -3,6 +3,8 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System;
+using FitnessApp.Models;
+using System.Collections.Generic;
 
 namespace FitnessApp.SQLdatabase
 {
@@ -12,7 +14,7 @@ namespace FitnessApp.SQLdatabase
         ////////// SQL Connection string //////////
         // [IMPORTANT] Add your server name to data source.
 
-        SqlConnection Connection = new SqlConnection("data source=MICHA\\SQLEXPRESS; database=FITNESSAPP; integrated security=SSPI");
+        SqlConnection Connection = new SqlConnection("data source=DESKTOP-LI55M8S\\SQLEXPRESS; database=FITNESSAPP; integrated security=SSPI");
 
 
 
@@ -265,6 +267,76 @@ namespace FitnessApp.SQLdatabase
             }
         }
 
+
+        // Challenges queries and functions.
+        public List<ChallengeModel> LoadAllChallenges(int accountID)
+        {
+            Connection.Open();
+            string query = "SELECT [Challenge].*,[UserChallenge].UserId " +
+                           "FROM [Challenge] Left JOIN [UserChallenge] " +
+                           "ON [Challenge].ID = [UserChallenge].ChallengeId";
+            List<ChallengeModel> allChallengeModels = new List<ChallengeModel>();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                ChallengeModel temp = new ChallengeModel();
+                temp.ID          = (int)reader["ID"];
+                //temp.image
+                temp.Name        = reader["Name"].ToString();
+                temp.Description = reader["Description"].ToString();
+                temp.Target      = reader["Target"].ToString();
+                temp.Reward      = reader["Rewards"].ToString();
+                temp.DueDate     = reader["EndDate"].ToString();
+                temp.WorkoutType = (int)reader["WorkoutId"];
+
+                if (reader["UserId"] != DBNull.Value)
+                    temp.IsJoined = true;
+                else
+                    temp.IsJoined = false;
+               
+                allChallengeModels.Add(temp);
+            }
+            Connection.Close();
+
+            return allChallengeModels;
+        }
+
+        public List<ChallengeModel> LoadJoinedChallenges(int accountID)
+        {
+            Connection.Open();
+            string query = "SELECT [Challenge].*,[UserChallenge].UserId " +
+                           "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
+                           "ON [Challenge].ID = [UserChallenge].ChallengeId";
+
+            List<ChallengeModel> joinedChallengeModels = new List<ChallengeModel>();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                ChallengeModel temp = new ChallengeModel();
+
+                temp.ID          = (int)reader["ID"];
+                //temp.image
+                temp.Name        = reader["Name"].ToString();
+                temp.Description = reader["Description"].ToString();
+                temp.Target      = reader["Target"].ToString();
+                temp.Reward      = reader["Rewards"].ToString();
+                temp.DueDate     = reader["EndDate"].ToString();
+                temp.WorkoutType = (int)reader["WorkoutId"];
+                
+                if (reader["UserId"] != DBNull.Value)
+                    temp.IsJoined = true;
+                else
+                    temp.IsJoined = false;
+                joinedChallengeModels.Add(temp);
+            }
+            Connection.Close();
+
+            return joinedChallengeModels;
+        }
 
 
     }
