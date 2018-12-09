@@ -95,7 +95,8 @@
                         <TextBlock x:Name="UserNameTextBlock"
                                    FontFamily="{StaticResource ProductSans}"
                                    FontWeight="Light" 
-                                   FontSize="14">
+                                   FontSize="14"
+                                   TextWrapping="Wrap">
                                    @userName
                         </TextBlock>
                     </StackPanel>
