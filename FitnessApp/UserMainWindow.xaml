@@ -14,8 +14,6 @@
 
     <Grid>
 
-        <materialDesign:Snackbar x:Name="MessagesSnackbar"/>
-
         <materialDesign:DrawerHost x:Name="SideMenuDrawer"
                                    IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
 
@@ -306,6 +304,8 @@
             </Grid>
 
         </materialDesign:DrawerHost>
+
+        <materialDesign:Snackbar x:Name="MessagesSnackbar"/>
 
     </Grid>
 
