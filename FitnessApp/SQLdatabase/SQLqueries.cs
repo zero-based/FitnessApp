@@ -183,8 +183,8 @@ namespace FitnessApp.SQLdatabase
             string encryptedPassword = PasswordEncryption(password);
 
             // Create Query amd Command
-            string query1 = "INSERT INTO [User] (Image, FirstName, LastName, Username, BirthDate, Gender, "+
-                            "TargetWeight, Height, KilosToLosePerWeek, WorkoutsDaysPerWeek, WorkoutsHoursPerDay)" +
+            string query1 = "INSERT INTO [User] (Photo, FirstName, LastName, Username, BirthDate, Gender, " +
+                            "TargetWeight, Height, KilosToLosePerWeek, WorkoutsPerWeek, WorkoutHoursPerDay)" +
                             "VALUES('" + profilePhoto + "','" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
                             targetWeight + "','" + height + "','" + kilosToLose + "','" + workoutsPerWeek + "', '" + workoutHoursPerDay + "') ;";
             SqlCommand cmd1 = new SqlCommand(query1, Connection);
@@ -244,7 +244,7 @@ namespace FitnessApp.SQLdatabase
 
             // Insert User's weight into multiValued weight table
             // Create Query amd Command
-            string query4 = "INSERT INTO UserWeight(UserId,Weight,Date) " +
+            string query4 = "INSERT INTO UserWeight(UserId, Weight, Date) " +
                             "VALUES('" + accountID + "','" + weight + "', GETDATE());";
             SqlCommand cmd4 = new SqlCommand(query4, Connection);
 
@@ -296,8 +296,8 @@ namespace FitnessApp.SQLdatabase
                     currentUser.Height             = (double)dr["Height"];
                     currentUser.TargetWeight       = (double)dr["TargetWeight"];
                     currentUser.KilosToLose        = (double)dr["KilosToLosePerWeek"];
-                    currentUser.WorkoutsPerWeek    = (double)dr["WorkoutsDaysPerWeek"];
-                    currentUser.WorkoutHoursPerDay = (double)dr["WorkoutsHoursPerDay"];
+                    currentUser.WorkoutsPerWeek    = (double)dr["WorkoutsPerWeek"];
+                    currentUser.WorkoutHoursPerDay = (double)dr["WorkoutHoursPerDay"];
                 }
             }
 
@@ -332,7 +332,7 @@ namespace FitnessApp.SQLdatabase
             {
                 if (dr.HasRows == true)
                 {
-                    currentUser.Email    = (string)dr3[" Email"];
+                    currentUser.Email    = (string)dr3["Email"];
                     currentUser.Password = (string)dr3["Password"];
                 }
             }
@@ -348,11 +348,15 @@ namespace FitnessApp.SQLdatabase
         // Challenges queries and functions.
         public List<ChallengeModel> LoadAllChallenges(int accountID)
         {
+            List<ChallengeModel> allChallengeModels = new List<ChallengeModel>();
+
             Connection.Open();
+
             string query = "SELECT [Challenge].*,[UserChallenge].UserId " +
                            "FROM [Challenge] Left JOIN [UserChallenge] " +
                            "ON [Challenge].ID = [UserChallenge].ChallengeId";
-            List<ChallengeModel> allChallengeModels = new List<ChallengeModel>();
+
+            
             SqlCommand cmd = new SqlCommand(query, Connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -364,8 +368,8 @@ namespace FitnessApp.SQLdatabase
                 temp.Name        = reader["Name"].ToString();
                 temp.Description = reader["Description"].ToString();
                 temp.Target      = reader["Target"].ToString();
-                temp.Reward      = reader["Rewards"].ToString();
-                temp.DueDate     = reader["EndDate"].ToString();
+                temp.Reward      = reader["Reward"].ToString();
+                temp.DueDate     = reader["DueDate"].ToString();
                 temp.WorkoutType = (int)reader["WorkoutId"];
 
                 if (reader["UserId"] != DBNull.Value)
@@ -400,8 +404,8 @@ namespace FitnessApp.SQLdatabase
                 temp.Name        = reader["Name"].ToString();
                 temp.Description = reader["Description"].ToString();
                 temp.Target      = reader["Target"].ToString();
-                temp.Reward      = reader["Rewards"].ToString();
-                temp.DueDate     = reader["EndDate"].ToString();
+                temp.Reward      = reader["Reward"].ToString();
+                temp.DueDate     = reader["DueDate"].ToString();
                 temp.WorkoutType = (int)reader["WorkoutId"];
                 
                 if (reader["UserId"] != DBNull.Value)
