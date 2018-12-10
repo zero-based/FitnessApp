@@ -446,5 +446,42 @@ namespace FitnessApp.SQLdatabase
         }
 
 
+
+        // Plans queries and functions.
+        public List<PlanModel> LoadPlans(int accountID)
+        {
+            Connection.Open();
+            string query = "SELECT [Plan].*,[User].ID " + 
+                           "FROM [Plan] Left JOIN [User] " +
+                           "ON [Plan].ID = [User].PlanId";
+
+            List<PlanModel> plansModels = new List<PlanModel>();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                PlanModel temp = new PlanModel();
+
+                temp.ID = (int)reader[0];
+                //temp.image
+                temp.Name = reader["Name"].ToString();
+                temp.Description = reader["Description"].ToString();
+                temp.Duration = reader["Duration"].ToString();
+                temp.Hardness = reader["Hardness"].ToString();
+
+                if (reader[6] != DBNull.Value)
+                    temp.IsJoined = true;
+                else
+                    temp.IsJoined = false;
+
+                plansModels.Add(temp);
+            }
+            Connection.Close();
+
+            return plansModels;
+        }
+
+
     }
 }
