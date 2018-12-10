@@ -1,42 +1,26 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.SQLdatabase;
+using System.Collections.Generic;
 
 namespace FitnessApp.ViewModels
 {
     class DaysViewModel
     {
-        public DaysViewModel(int planNumber)
+        static SQLqueries SQLqueriesObject = new SQLqueries();
+        private List<DayModel> dayModels;
+
+        public DaysViewModel(int planID)
         {
             //Initialize 30 Days of Plan of ID: planNumber + 1 in DayModels Array
 
-            DayModels = new[] {
-            new DayModel("Day1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
-
-            new DayModel("Day2", "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
-
-            new DayModel("Day3", "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
-
-            new DayModel("Day4", "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli"),
-
-           new DayModel("Day5", "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli",
-            "Lorem ipsum dolor sit amet, consectetur adipiscing eli")
-        };
+            dayModels = SQLqueriesObject.LoadPlanDays(planID);
         }
 
-        public DayModel[] DayModels { get; }
+        public List<DayModel> DayModels
+        {
+            get => dayModels;
+            set { }
+        }
     }
 
 }
