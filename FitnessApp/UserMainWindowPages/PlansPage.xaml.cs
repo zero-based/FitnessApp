@@ -24,11 +24,20 @@ namespace FitnessApp.UserMainWindowPages
             DaysSideDrawer.IsRightDrawerOpen = true;
         }
 
-        private void JoinPlanButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void JoinPlanButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
         {
-            ToggleButton toggleButton  = sender as ToggleButton;
+            ToggleButton toggleButton = sender as ToggleButton;
             selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
 
+            Models.PlanModel currentPlan = (Models.PlanModel)PlansListBox.Items[selectedPlanIndex];
+        }
+
+        private void JoinPlanButton_Checked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ToggleButton toggleButton = sender as ToggleButton;
+            selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
+
+            Models.PlanModel currentPlan = (Models.PlanModel)PlansListBox.Items[selectedPlanIndex];
         }
     }
 }
