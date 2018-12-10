@@ -18,25 +18,27 @@
         private double _workoutsPerWeek;
         private double _workoutHoursPerDay;
 
-        public UserModel(int id,              string firstName,   string lastName,
-                         string username,     string email,       string password,
-                         string gender,       string birthDate,   double weight,          double height,
-                         double targetWeight, double kilosToLose, double workoutsPerWeek, double workoutHoursPerDay)
-        { 
-            _id = id;
-            _firstName         = firstName;
-            _lastName          = lastName;
-            _username          = username;
-            _email             = email;
-            _password          = password;
-            _gender            = gender;
-            _birthDate         = birthDate;
-            _weight            = weight;
-            _height            = height;
-            _targetWeight      = targetWeight;
-            _kilosToLose       = kilosToLose;
-            _workoutsPerWeek   = workoutsPerWeek;
-            _workoutHoursPerDay= workoutHoursPerDay;
+        public UserModel() { }
+
+        public UserModel(int userID)
+        {
+            SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
+            UserModel temp = SQLqueriesObject.LoadUserData(userID);
+
+            _id                 = userID;
+            _firstName          = temp.FirstName;
+            _lastName           = temp.LastName;
+            _username           = temp.Username;
+            _email              = temp.Email;
+            _password           = temp.Password;
+            _gender             = temp.Gender;
+            _birthDate          = temp.BirthDate;
+            _weight             = temp.Weight;
+            _height             = temp.Height;
+            _targetWeight       = temp.TargetWeight;
+            _kilosToLose        = temp.KilosToLose;
+            _workoutsPerWeek    = temp.WorkoutsPerWeek;
+            _workoutHoursPerDay = temp.WorkoutHoursPerDay;
         }
 
         public int ID
