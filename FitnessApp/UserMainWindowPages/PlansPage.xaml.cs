@@ -15,7 +15,7 @@ namespace FitnessApp.UserMainWindowPages
         {
             InitializeComponent();
             PlansPageObject = this;
-            PlansListBox.DataContext = new ViewModels.PlansViewModel();
+            PlansListBox.DataContext = new ViewModels.PlansViewModel(101);
         }
 
         private void ViewMoreButton_Click(object sender, System.Windows.RoutedEventArgs e)
