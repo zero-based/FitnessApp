@@ -268,6 +268,83 @@ namespace FitnessApp.SQLdatabase
         }
 
 
+
+
+        // Load all User's Data
+        public UserModel LoadUserData(int userID)
+        {
+            UserModel currentUser = new UserModel();
+
+            Connection.Open();
+
+            //  Info from Usser Table
+            string query = "SELECT * FROM [User] WHERE ID = @userID";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@userID", userID);
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    currentUser.FirstName          = (string)dr["FirstName"];
+                    currentUser.LastName           = (string)dr["LastName"];
+                    currentUser.Username           = (string)dr["Username"];
+                    currentUser.Gender             = (string)dr["Gender"];
+                    currentUser.BirthDate          = (string)dr["BirthDate"];
+                    currentUser.Height             = (double)dr["Height"];
+                    currentUser.TargetWeight       = (double)dr["TargetWeight"];
+                    currentUser.KilosToLose        = (double)dr["KilosToLosePerWeek"];
+                    currentUser.WorkoutsPerWeek    = (double)dr["WorkoutsDaysPerWeek"];
+                    currentUser.WorkoutHoursPerDay = (double)dr["WorkoutsHoursPerDay"];
+                }
+            }
+
+            dr.Close();
+
+
+            // Info from Weight Table
+            string query2 = "SELECT Weight FROM [UserWeight] WHERE UserId = @userID";
+
+            SqlCommand cmd2 = new SqlCommand(query2, Connection);
+            cmd2.Parameters.AddWithValue("@userID", userID);
+            SqlDataReader dr2 = cmd2.ExecuteReader();
+
+            while (dr2.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    currentUser.Weight = (double)dr2["Weight"];
+                }
+            }
+
+            dr2.Close();
+
+
+            // Info from Accounts Table
+            string query3 = "SELECT Email, Password FROM AdminAndUserAccount WHERE ID = @userID";
+            SqlCommand cmd3 = new SqlCommand(query3, Connection);
+            cmd3.Parameters.AddWithValue("@userID", userID);
+            SqlDataReader dr3 = cmd3.ExecuteReader();
+
+            while (dr3.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    currentUser.Email    = (string)dr3[" Email"];
+                    currentUser.Password = (string)dr3["Password"];
+                }
+            }
+
+            Connection.Close();
+
+            return currentUser;
+        }
+
+
+
+
         // Challenges queries and functions.
         public List<ChallengeModel> LoadAllChallenges(int accountID)
         {
