@@ -2,6 +2,7 @@
 using System.Windows.Controls.Primitives;
 using FitnessApp.Models;
 using FitnessApp.ViewModels;
+using FitnessApp.SQLdatabase;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -11,6 +12,7 @@ namespace FitnessApp.UserMainWindowPages
     public partial class PlansPage : Page
     {
         public static PlansPage PlansPageObject = new PlansPage();
+        SQLqueries SQLqueriesObject = new SQLqueries();
 
         public PlansPage()
         {
@@ -29,18 +31,30 @@ namespace FitnessApp.UserMainWindowPages
             DaysSideDrawer.IsRightDrawerOpen = true;
         }
 
-        private void JoinPlanButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
-        {
-            ToggleButton toggleButton = sender as ToggleButton;
-            int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
-            PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
-        }
 
         private void JoinPlanButton_Checked(object sender, System.Windows.RoutedEventArgs e)
         {
             ToggleButton toggleButton = sender as ToggleButton;
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
+
+            if (SQLqueriesObject.isInPlan(101))
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("You are currently in a plan. Please unjoin it first.");
+            else
+                SQLqueriesObject.JoinPlan(101, currentPlan.ID);
+
+            PlansListBox.DataContext = new PlansViewModel(101);
+        }
+
+        private void JoinPlanButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ToggleButton toggleButton = sender as ToggleButton;
+            int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
+            PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
+
+            SQLqueriesObject.UnjoinPlan(101);
+
+            PlansListBox.DataContext = new PlansViewModel(101);
         }
     }
 }
