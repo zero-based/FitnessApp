@@ -3,17 +3,35 @@
     class PlanModel
     {
         //private string image;
+        private int _id;
+        private bool _isJoined;
         private string _name;
         private string _description;
         private string _duration;
         private string _hardness;
 
-        public PlanModel(string name, string description, string duration, string hardness)
+        public PlanModel() { }
+
+        public PlanModel(int id, bool isJoined, string name, string description, string duration, string hardness)
         {
+            _id = id;
+            _isJoined = isJoined;
             _name = name;
             _description = description;
             _duration = duration;
             _hardness = hardness;
+        }
+
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
+        public bool IsJoined
+        {
+            get { return _isJoined; }
+            set { _isJoined = value; }
         }
 
         public string Name
