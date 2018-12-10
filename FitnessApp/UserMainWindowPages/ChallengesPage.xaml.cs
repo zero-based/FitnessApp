@@ -1,8 +1,9 @@
-﻿using FitnessApp.ViewModels;
-using System.Windows.Controls.Primitives;
+﻿using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using FitnessApp.SQLdatabase;
 using System.Windows;
+using FitnessApp.Models;
+using FitnessApp.ViewModels;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -13,7 +14,6 @@ namespace FitnessApp.UserMainWindowPages
     {
         public static ChallengesPage ChallengesPageObject = new ChallengesPage();
         SQLqueries SQLqueriesObject = new SQLqueries();
-        int selectedChallengeIndex;
 
         public ChallengesPage()
         {
@@ -30,9 +30,9 @@ namespace FitnessApp.UserMainWindowPages
         {
 
             ToggleButton toggleButton = sender as ToggleButton;
-            selectedChallengeIndex = ChallengesListBox.Items.IndexOf(toggleButton.DataContext);
+            int selectedChallengeIndex = ChallengesListBox.Items.IndexOf(toggleButton.DataContext);
 
-            Models.ChallengeModel currentChallenge = (Models.ChallengeModel)ChallengesListBox.Items[selectedChallengeIndex];
+            ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
             SQLqueriesObject.JoinChallenge(101, currentChallenge.ID);
         }
@@ -44,9 +44,9 @@ namespace FitnessApp.UserMainWindowPages
         {
 
             ToggleButton toggleButton = sender as ToggleButton;
-            selectedChallengeIndex = ChallengesListBox.Items.IndexOf(toggleButton.DataContext);
+            int selectedChallengeIndex = ChallengesListBox.Items.IndexOf(toggleButton.DataContext);
 
-            Models.ChallengeModel currentChallenge = (Models.ChallengeModel)ChallengesListBox.Items[selectedChallengeIndex];
+            ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
             SQLqueriesObject.UnjoinChallenge(101, currentChallenge.ID);
 

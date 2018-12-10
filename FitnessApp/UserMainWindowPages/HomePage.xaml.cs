@@ -6,6 +6,8 @@ using System.Windows;
 using System;
 using System.Windows.Controls.Primitives;
 using FitnessApp.SQLdatabase;
+using FitnessApp.Models;
+using FitnessApp.ViewModels;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -16,7 +18,6 @@ namespace FitnessApp.UserMainWindowPages
     {
         public static HomePage HomePageObject = new HomePage();
         SQLqueries SQLqueriesObject = new SQLqueries();
-        int selectedChallengeIndex;
 
         public HomePage()
         {
@@ -37,7 +38,7 @@ namespace FitnessApp.UserMainWindowPages
             YFormatter = value => value.ToString();
 
             // Setting Data context for JoinedChallengesListBox
-            ViewModels.ChallengesViewModel joinedChallengesDataContext = new ViewModels.ChallengesViewModel();
+            ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(100);
             JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
 
@@ -80,14 +81,14 @@ namespace FitnessApp.UserMainWindowPages
         private void JoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = sender as ToggleButton;
-            selectedChallengeIndex = JoinedChallengesListBox.Items.IndexOf(toggleButton.DataContext);
+            int selectedChallengeIndex = JoinedChallengesListBox.Items.IndexOf(toggleButton.DataContext);
 
-            Models.ChallengeModel currentChallenge = (Models.ChallengeModel)JoinedChallengesListBox.Items[selectedChallengeIndex];
+            ChallengeModel currentChallenge = (ChallengeModel) JoinedChallengesListBox.Items[selectedChallengeIndex];
 
             SQLqueriesObject.UnjoinChallenge(101, currentChallenge.ID);
 
             // Reloading Data context for JoinedChallengesListBox
-            ViewModels.ChallengesViewModel joinedChallengesDataContext = new ViewModels.ChallengesViewModel();
+            ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(100);
             JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
         }
