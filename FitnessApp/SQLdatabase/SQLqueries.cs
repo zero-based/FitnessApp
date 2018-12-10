@@ -511,6 +511,56 @@ namespace FitnessApp.SQLdatabase
             return dayModels;
         }
 
+        public bool isInPlan(int accountID)
+        {
+            Connection.Open();
+            string query = "SELECT PlanId " +
+                           "FROM [USER] " +
+                           "WHERE ID = " + accountID;
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+
+            if (cmd.ExecuteScalar() != DBNull.Value)
+            {
+                Connection.Close();
+                return true;
+            }
+            else
+            {
+                Connection.Close();
+                return false;
+            }
+
+        }
+
+        public void JoinPlan(int accountID, int planID)
+        {
+            Connection.Open();
+            string query = "UPDATE [User] " +
+                           "SET PlanId = " + planID + ", " +
+                           "PlanJoiningDate = Convert(date, getdate()) " +
+                           "WHERE [User].ID = " + accountID;
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.ExecuteReader();
+            Connection.Close();
+        }
+
+        public void UnjoinPlan(int accountID)
+        {
+            Connection.Open();
+            string query = "UPDATE [User] " +
+                           "SET PlanId = NULL, " +
+                           "PlanJoiningDate = NULL " +
+                           "WHERE [User].ID = " + accountID;
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.ExecuteReader();
+            Connection.Close();
+        }
+
+        
+
 
 
     }
