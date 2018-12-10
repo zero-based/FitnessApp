@@ -482,6 +482,36 @@ namespace FitnessApp.SQLdatabase
             return plansModels;
         }
 
+        public List<DayModel> LoadPlanDays(int planID)
+        {
+            Connection.Open();
+            string query = "SELECT * FROM[PlanDayDescription] " +
+                           "WHERE[PlanDayDescription].PlanId = " + planID + " " +
+                           "ORDER BY[PlanDayDescription].DayNumber";
+
+            List<DayModel> dayModels = new List<DayModel>();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                DayModel temp = new DayModel();
+
+                temp.DayNumber = (int)reader["DayNumber"];
+                //temp.image
+                temp.BreakfastDescription = reader["BreakfastDescription"].ToString();
+                temp.LunchDescription = reader["LunchDescription"].ToString();
+                temp.DinnerDescription = reader["DinnerDescription"].ToString();
+                temp.WorkoutDescription = reader["WorkoutDescription"].ToString();
+
+                dayModels.Add(temp);
+            }
+            Connection.Close();
+
+            return dayModels;
+        }
+
+
 
     }
 }
