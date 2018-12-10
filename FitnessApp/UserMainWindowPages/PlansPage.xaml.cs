@@ -20,7 +20,11 @@ namespace FitnessApp.UserMainWindowPages
 
         private void ViewMoreButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            PlanDaysListBox.DataContext = new ViewModels.DaysViewModel(selectedPlanIndex + 1);
+            Button button = sender as Button;
+            selectedPlanIndex = PlansListBox.Items.IndexOf(button.DataContext);
+            Models.PlanModel currentPlan = (Models.PlanModel)PlansListBox.Items[selectedPlanIndex];
+
+            PlanDaysListBox.DataContext = new ViewModels.DaysViewModel(currentPlan.ID);
             DaysSideDrawer.IsRightDrawerOpen = true;
         }
 
@@ -28,7 +32,6 @@ namespace FitnessApp.UserMainWindowPages
         {
             ToggleButton toggleButton = sender as ToggleButton;
             selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
-
             Models.PlanModel currentPlan = (Models.PlanModel)PlansListBox.Items[selectedPlanIndex];
         }
 
@@ -36,7 +39,6 @@ namespace FitnessApp.UserMainWindowPages
         {
             ToggleButton toggleButton = sender as ToggleButton;
             selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
-
             Models.PlanModel currentPlan = (Models.PlanModel)PlansListBox.Items[selectedPlanIndex];
         }
     }
