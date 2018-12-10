@@ -2,13 +2,15 @@
 {
     class DayModel
     {
-        private string _dayNumber;
+        private int _dayNumber;
         private string _breakfastDescription;
         private string _lunchDescription;
         private string _dinnerDescription;
         private string _workoutDescription;
 
-        public DayModel(string dayNumber, string breakfastDescription, string lunchDescription, string dinnerDescription, string workoutDescription)
+        public DayModel() { }
+
+        public DayModel(int dayNumber, string breakfastDescription, string lunchDescription, string dinnerDescription, string workoutDescription)
         {
             _dayNumber = dayNumber;
             _breakfastDescription = breakfastDescription;
@@ -17,7 +19,7 @@
             _workoutDescription = workoutDescription;
         }
 
-        public string DayNumber
+        public int DayNumber
         {
             get { return _dayNumber; }
             set { _dayNumber = value; }
