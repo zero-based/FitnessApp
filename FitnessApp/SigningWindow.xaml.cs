@@ -34,7 +34,7 @@ namespace FitnessApp
                 if (SQLqueriesObject.accountType == "User")
                 {
                     // Open User Main Window
-                    UserMainWindow UserMainWindowTemp = new UserMainWindow();
+                    UserMainWindow UserMainWindowTemp = new UserMainWindow(SQLqueriesObject.accountID);
                     UserMainWindowTemp.Show();
                 }
                 else

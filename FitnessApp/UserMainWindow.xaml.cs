@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using FitnessApp.Models;
 
 namespace FitnessApp
 {
@@ -12,10 +13,13 @@ namespace FitnessApp
     {
         public static UserMainWindow UserMainWindowObject;
 
-        public UserMainWindow()
+        public UserMainWindow(int signedInUserID)
         {
             InitializeComponent();
             UserMainWindowObject = this;
+
+            // Initialize User Model
+            UserModel signedInUser = new UserModel(signedInUserID);
 
             // Initialize Listbox Selected Index
             UserMainWindowPagesListBox.SelectedIndex = 0;
