@@ -275,30 +275,24 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Open();
 
-            //  Info from Usser Table
+            // Info from User Table
             string query = "SELECT * FROM [User] WHERE ID = @userID";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@userID", userID);
             SqlDataReader dr = cmd.ExecuteReader();
 
-            while (dr.Read())
-            {
-                if (dr.HasRows == true)
-                {
-                    currentUser.FirstName          = (string)dr["FirstName"];
-                    currentUser.LastName           = (string)dr["LastName"];
-                    currentUser.Username           = (string)dr["Username"];
-                    currentUser.Gender             = (string)dr["Gender"];
-                    currentUser.BirthDate          = (string)dr["BirthDate"];
-                    currentUser.Height             = (double)dr["Height"];
-                    currentUser.TargetWeight       = (double)dr["TargetWeight"];
-                    currentUser.KilosToLose        = (double)dr["KilosToLosePerWeek"];
-                    currentUser.WorkoutsPerWeek    = (double)dr["WorkoutsPerWeek"];
-                    currentUser.WorkoutHoursPerDay = (double)dr["WorkoutHoursPerDay"];
-                }
-            }
-
+            dr.Read();
+            currentUser.FirstName          = dr["FirstName"].ToString();
+            currentUser.LastName           = dr["LastName"] .ToString();
+            currentUser.Username           = dr["Username"] .ToString();
+            currentUser.Gender             = dr["Gender"]   .ToString();
+            currentUser.BirthDate          = dr["BirthDate"].ToString();
+            currentUser.Height             = (double) dr["Height"];
+            currentUser.TargetWeight       = (double) dr["TargetWeight"];
+            currentUser.KilosToLose        = (double) dr["KilosToLosePerWeek"];
+            currentUser.WorkoutsPerWeek    = (int)    dr["WorkoutsPerWeek"];
+            currentUser.WorkoutHoursPerDay = (double) dr["WorkoutHoursPerDay"];
             dr.Close();
 
 
@@ -309,14 +303,8 @@ namespace FitnessApp.SQLdatabase
             cmd2.Parameters.AddWithValue("@userID", userID);
             SqlDataReader dr2 = cmd2.ExecuteReader();
 
-            while (dr2.Read())
-            {
-                if (dr.HasRows == true)
-                {
-                    currentUser.Weight = (double)dr2["Weight"];
-                }
-            }
-
+            dr2.Read();
+            currentUser.Weight = (double) dr2["Weight"];
             dr2.Close();
 
 
@@ -326,14 +314,10 @@ namespace FitnessApp.SQLdatabase
             cmd3.Parameters.AddWithValue("@userID", userID);
             SqlDataReader dr3 = cmd3.ExecuteReader();
 
-            while (dr3.Read())
-            {
-                if (dr.HasRows == true)
-                {
-                    currentUser.Email    = (string)dr3["Email"];
-                    currentUser.Password = (string)dr3["Password"];
-                }
-            }
+            dr3.Read();
+            currentUser.Email    = dr3["Email"]   .ToString();
+            currentUser.Password = dr3["Password"].ToString();
+
 
             Connection.Close();
 
