@@ -6,7 +6,7 @@ using System.Windows;
 namespace FitnessApp
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for UserMainWindow.xaml
     /// </summary>
     public partial class UserMainWindow : Window
     {

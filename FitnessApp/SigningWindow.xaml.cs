@@ -5,7 +5,7 @@ using System.Windows;
 namespace FitnessApp
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for SigningWindow.xaml
     /// </summary>
     public partial class SigningWindow : Window
     {
