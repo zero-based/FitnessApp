@@ -2,9 +2,9 @@
 {
     public class UserModel
     {
-        //private string image;
         private int _id;
         private int _age;
+        private ImageModel _profilePhoto = new ImageModel() { };
         private string _firstName;
         private string _lastName;
         private string _username;
@@ -26,21 +26,22 @@
             SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
             UserModel temp = SQLqueriesObject.LoadUserData(userID);
 
-            _id                 = userID;
-            _age                = temp.Age;
-            _firstName          = temp.FirstName;
-            _lastName           = temp.LastName;
-            _username           = temp.Username;
-            _email              = temp.Email;
-            _password           = temp.Password;
-            _gender             = temp.Gender;
-            _birthDate          = temp.BirthDate;
-            _weight             = temp.Weight;
-            _height             = temp.Height;
-            _targetWeight       = temp.TargetWeight;
-            _kilosToLosePerWeek = temp.KilosToLosePerWeek;
-            _workoutsPerWeek    = temp.WorkoutsPerWeek;
-            _workoutHoursPerDay = temp.WorkoutHoursPerDay;
+            _id                     = userID;
+            _age                    = temp.Age;
+            _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;
+            _firstName              = temp.FirstName;
+            _lastName               = temp.LastName;
+            _username               = temp.Username;
+            _email                  = temp.Email;
+            _password               = temp.Password;
+            _gender                 = temp.Gender;
+            _birthDate              = temp.BirthDate;
+            _weight                 = temp.Weight;
+            _height                 = temp.Height;
+            _targetWeight           = temp.TargetWeight;
+            _kilosToLosePerWeek     = temp.KilosToLosePerWeek;
+            _workoutsPerWeek        = temp.WorkoutsPerWeek;
+            _workoutHoursPerDay     = temp.WorkoutHoursPerDay;
         }
 
         public int ID
@@ -53,6 +54,12 @@
         {
             get { return _age; }
             set { _age = value; }
+        }
+
+        public ImageModel ProfilePhoto
+        {
+            get { return _profilePhoto; }
+            set { _profilePhoto = value; }
         }
 
         public string FirstName

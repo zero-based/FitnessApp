@@ -284,16 +284,17 @@ namespace FitnessApp.SQLdatabase
             SqlDataReader dr = cmd.ExecuteReader();
 
             dr.Read();
-            currentUser.FirstName          = dr["FirstName"].ToString();
-            currentUser.LastName           = dr["LastName"] .ToString();
-            currentUser.Username           = dr["Username"] .ToString();
-            currentUser.Gender             = dr["Gender"]   .ToString();
-            currentUser.BirthDate          = dr["BirthDate"].ToString();
-            currentUser.Height             = (double) dr["Height"];
-            currentUser.TargetWeight       = (double) dr["TargetWeight"];
-            currentUser.KilosToLosePerWeek = (double) dr["KilosToLosePerWeek"];
-            currentUser.WorkoutsPerWeek    = (int)    dr["WorkoutsPerWeek"];
-            currentUser.WorkoutHoursPerDay = (double) dr["WorkoutHoursPerDay"];
+            currentUser.ProfilePhoto.ByteArray = (byte[])dr["Photo"];
+            currentUser.FirstName              = dr["FirstName"].ToString();
+            currentUser.LastName               = dr["LastName"] .ToString();
+            currentUser.Username               = dr["Username"] .ToString();
+            currentUser.Gender                 = dr["Gender"]   .ToString();
+            currentUser.BirthDate              = dr["BirthDate"].ToString();
+            currentUser.Height                 = (double) dr["Height"];
+            currentUser.TargetWeight           = (double) dr["TargetWeight"];
+            currentUser.KilosToLosePerWeek     = (double) dr["KilosToLosePerWeek"];
+            currentUser.WorkoutsPerWeek        = (int)    dr["WorkoutsPerWeek"];
+            currentUser.WorkoutHoursPerDay     = (double) dr["WorkoutHoursPerDay"];
             dr.Close();
 
 
