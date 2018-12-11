@@ -172,10 +172,10 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Sign up function
-        public void SignUp(ref byte[] profilePhoto, string firstName,          string lastName,
-                           string username,         string email,              string password,
-                           string gender,           string birthDate,          double weight,          double height,
-                           double targetWeight,     double kilosToLosePerWeek, double workoutsPerWeek, double workoutHoursPerDay)
+        public void SignUp(byte[] profilePhoto, string firstName,          string lastName,
+                           string username,     string email,              string password,
+                           string gender,       string birthDate,          double weight,          double height,
+                           double targetWeight, double kilosToLosePerWeek, double workoutsPerWeek, double workoutHoursPerDay)
         {
             // Password Encryption
             string encryptedPassword = PasswordEncryption(password);

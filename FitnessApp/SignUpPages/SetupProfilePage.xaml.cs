@@ -6,7 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows;
 using System;
-
+using FitnessApp.Models;
 
 namespace FitnessApp.SignUpPages
 {
@@ -16,6 +16,7 @@ namespace FitnessApp.SignUpPages
     public partial class SetUpProfilePage : Page
     {
         public static SetUpProfilePage SetUpProfilePageObject = new SetUpProfilePage();
+        private ImageModel profilePhoto = new ImageModel() { };
 
         // Create an object from dataBase class
         SQLqueries SQLqueriesObject = new SQLqueries();
@@ -44,7 +45,7 @@ namespace FitnessApp.SignUpPages
             else
             {
                 // Signing up
-                SQLqueriesObject.SignUp(ref profilePhotoByteArray,
+                SQLqueriesObject.SignUp(profilePhoto.ByteArray,
                                         SignUpFirstPage.SignUpFirstPageObject.FirstNameTextBox.Text,
                                         SignUpFirstPage.SignUpFirstPageObject.LastNameTextBox.Text,
                                         SignUpFirstPage.SignUpFirstPageObject.UsernameTextBox.Text,
@@ -64,7 +65,7 @@ namespace FitnessApp.SignUpPages
             }
         }
 
-        public byte[] profilePhotoByteArray = null;
+
         private void ChooseUserProfilePhotoButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog browsePhotoDialog = new OpenFileDialog();
@@ -73,14 +74,11 @@ namespace FitnessApp.SignUpPages
                                        "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
                                        "PNG (*.png)|*.png";
 
+
             if (browsePhotoDialog.ShowDialog() == true)
             {
-                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(browsePhotoDialog.FileName));
-
-                // Convert the image to byte[]
-                FileStream fs = new FileStream(browsePhotoDialog.FileName, FileMode.Open, FileAccess.Read);
-                BinaryReader br = new BinaryReader(fs);
-                profilePhotoByteArray = br.ReadBytes((int)fs.Length);
+                profilePhoto.FilePath = browsePhotoDialog.FileName;
+                UserProfilePhoto.ImageSource = profilePhoto.Source;
             }
         }
 
