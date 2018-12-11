@@ -183,9 +183,10 @@ namespace FitnessApp.SQLdatabase
             // Create Query amd Command
             string query1 = "INSERT INTO [User] (Photo, FirstName, LastName, Username, BirthDate, Gender, " +
                             "TargetWeight, Height, KilosToLosePerWeek, WorkoutsPerWeek, WorkoutHoursPerDay)" +
-                            "VALUES('" + profilePhoto + "','" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
+                            "VALUES(@Photo ,'" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
                             targetWeight + "','" + height + "','" + kilosToLosePerWeek + "','" + workoutsPerWeek + "', '" + workoutHoursPerDay + "') ;";
             SqlCommand cmd1 = new SqlCommand(query1, Connection);
+            cmd1.Parameters.AddWithValue("@Photo", profilePhoto);
 
             // Open Connection and Start Reading
             Connection.Open();
