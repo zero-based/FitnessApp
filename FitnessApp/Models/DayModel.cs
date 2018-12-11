@@ -1,6 +1,6 @@
 ﻿namespace FitnessApp.Models
 {
-    class DayModel
+    public class DayModel
     {
         private int _dayNumber;
         private string _breakfastDescription;

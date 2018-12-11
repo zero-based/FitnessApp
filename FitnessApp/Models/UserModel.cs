@@ -1,6 +1,6 @@
 ﻿namespace FitnessApp.Models
 {
-    class UserModel
+    public class UserModel
     {
         //private string image;
         private int _id;

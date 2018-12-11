@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace FitnessApp.SQLdatabase
 {
-    class SQLqueries
+    public class SQLqueries
     {
 
         ////////// SQL Connection string //////////
