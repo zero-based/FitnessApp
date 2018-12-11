@@ -4,6 +4,7 @@
     {
         //private string image;
         private int _id;
+        private int _age;
         private string _firstName;
         private string _lastName;
         private string _username;
@@ -26,6 +27,7 @@
             UserModel temp = SQLqueriesObject.LoadUserData(userID);
 
             _id                 = userID;
+            _age                = temp.Age;
             _firstName          = temp.FirstName;
             _lastName           = temp.LastName;
             _username           = temp.Username;
@@ -47,6 +49,12 @@
             set { _id = value; }
         }
 
+        public int Age
+        {
+            get { return _age; }
+            set { _age = value; }
+        }
+
         public string FirstName
         {
             get { return _firstName; }
@@ -59,10 +67,20 @@
             set { _lastName = value; }
         }
 
+        public string FullName
+        {
+            get { return _firstName + " " + _lastName; }
+        }
+
         public string Username
         {
             get { return _username; }
             set { _username = value; }
+        }
+
+        public string StyledUsername
+        {
+            get { return "@" + _username; }
         }
 
         public string Email

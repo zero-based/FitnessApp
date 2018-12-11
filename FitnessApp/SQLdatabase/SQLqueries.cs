@@ -317,7 +317,15 @@ namespace FitnessApp.SQLdatabase
             dr3.Read();
             currentUser.Email    = dr3["Email"]   .ToString();
             currentUser.Password = dr3["Password"].ToString();
+            dr3.Close();
 
+
+            string query4 = "SELECT FLOOR(DATEDIFF(DAY, BirthDate, GETDATE()) / 365.25) " +
+                            "FROM [User] WHERE ID = @userID";
+            SqlCommand cmd4 = new SqlCommand(query4, Connection);
+            cmd4.Parameters.AddWithValue("@userID", userID);
+
+            currentUser.Age = Convert.ToInt16(cmd4.ExecuteScalar());
 
             Connection.Close();
 
