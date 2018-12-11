@@ -75,6 +75,7 @@
     <Compile Include="AdminMainWindow.xaml.cs">
       <DependentUpon>AdminMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="SignUpPages\SignUpFirstPage.xaml.cs">
       <DependentUpon>SignUpFirstPage.xaml</DependentUpon>
