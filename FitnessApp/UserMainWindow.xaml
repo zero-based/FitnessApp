@@ -58,7 +58,7 @@
                                      Height="100">
                                 <Ellipse.Fill>
                                     <ImageBrush x:Name="UserProfilePhoto"
-                                                ImageSource="./Images/AccountCircleDefaultIcon.png"
+                                                ImageSource="{Binding ProfilePhoto.Source}"
                                                 Stretch="UniformToFill"/>
                                 </Ellipse.Fill>
                             </Ellipse>
