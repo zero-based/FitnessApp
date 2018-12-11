@@ -493,7 +493,7 @@ namespace FitnessApp.SQLdatabase
             return dayModels;
         }
 
-        public bool isInPlan(int accountID)
+        public bool IsInPlan(int accountID)
         {
             Connection.Open();
             string query = "SELECT PlanId " +

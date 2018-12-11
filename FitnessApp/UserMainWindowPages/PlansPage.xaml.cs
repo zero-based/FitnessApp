@@ -38,7 +38,7 @@ namespace FitnessApp.UserMainWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            if (SQLqueriesObject.isInPlan(101))
+            if (SQLqueriesObject.IsInPlan(101))
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("You are currently in a plan. Please unjoin it first.");
             else
                 SQLqueriesObject.JoinPlan(101, currentPlan.ID);
