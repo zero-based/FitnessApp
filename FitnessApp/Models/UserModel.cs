@@ -15,7 +15,7 @@
         private double _weight;
         private double _height;
         private double _targetWeight;
-        private double _kilosToLose;
+        private double _kilosToLosePerWeek;
         private double _workoutsPerWeek;
         private double _workoutHoursPerDay;
 
@@ -38,7 +38,7 @@
             _weight             = temp.Weight;
             _height             = temp.Height;
             _targetWeight       = temp.TargetWeight;
-            _kilosToLose        = temp.KilosToLose;
+            _kilosToLosePerWeek = temp.KilosToLosePerWeek;
             _workoutsPerWeek    = temp.WorkoutsPerWeek;
             _workoutHoursPerDay = temp.WorkoutHoursPerDay;
         }
@@ -125,10 +125,10 @@
             set { _targetWeight = value; }
         }
 
-        public double KilosToLose
+        public double KilosToLosePerWeek
         {
-            get { return _kilosToLose; }
-            set { _kilosToLose = value; }
+            get { return _kilosToLosePerWeek; }
+            set { _kilosToLosePerWeek = value; }
         }
 
         public double WorkoutsPerWeek

@@ -172,10 +172,10 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Sign up function
-        public void SignUp(ref byte[] profilePhoto, string firstName,   string lastName,
-                           string username,         string email,       string password,
-                           string gender,           string birthDate,   double weight,          double height,
-                           double targetWeight,     double kilosToLose, double workoutsPerWeek, double workoutHoursPerDay)
+        public void SignUp(ref byte[] profilePhoto, string firstName,          string lastName,
+                           string username,         string email,              string password,
+                           string gender,           string birthDate,          double weight,          double height,
+                           double targetWeight,     double kilosToLosePerWeek, double workoutsPerWeek, double workoutHoursPerDay)
         {
             // Password Encryption
             string encryptedPassword = PasswordEncryption(password);
@@ -184,7 +184,7 @@ namespace FitnessApp.SQLdatabase
             string query1 = "INSERT INTO [User] (Photo, FirstName, LastName, Username, BirthDate, Gender, " +
                             "TargetWeight, Height, KilosToLosePerWeek, WorkoutsPerWeek, WorkoutHoursPerDay)" +
                             "VALUES('" + profilePhoto + "','" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
-                            targetWeight + "','" + height + "','" + kilosToLose + "','" + workoutsPerWeek + "', '" + workoutHoursPerDay + "') ;";
+                            targetWeight + "','" + height + "','" + kilosToLosePerWeek + "','" + workoutsPerWeek + "', '" + workoutHoursPerDay + "') ;";
             SqlCommand cmd1 = new SqlCommand(query1, Connection);
 
             // Open Connection and Start Reading
@@ -290,7 +290,7 @@ namespace FitnessApp.SQLdatabase
             currentUser.BirthDate          = dr["BirthDate"].ToString();
             currentUser.Height             = (double) dr["Height"];
             currentUser.TargetWeight       = (double) dr["TargetWeight"];
-            currentUser.KilosToLose        = (double) dr["KilosToLosePerWeek"];
+            currentUser.KilosToLosePerWeek = (double) dr["KilosToLosePerWeek"];
             currentUser.WorkoutsPerWeek    = (int)    dr["WorkoutsPerWeek"];
             currentUser.WorkoutHoursPerDay = (double) dr["WorkoutHoursPerDay"];
             dr.Close();

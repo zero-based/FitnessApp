@@ -101,7 +101,7 @@
                                 <TextBox x:Name="KilosToLosePerWeekTextBox"
                                          Grid.Column="2"
                                          FontFamily="{StaticResource Roboto}"
-                                         Text="{Binding KilosToLose}"
+                                         Text="{Binding KilosToLosePerWeek}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Kilos to lose/week"
                                          PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
