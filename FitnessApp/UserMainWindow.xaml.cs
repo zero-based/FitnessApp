@@ -22,6 +22,9 @@ namespace FitnessApp
             // Initialize User Model
             signedInUser = new UserModel(signedInUserID);
 
+            // Initialize DataContext with signedInUser Model
+            DataContext = signedInUser;
+
             // Initialize Listbox Selected Index
             UserMainWindowPagesListBox.SelectedIndex = 0;
 

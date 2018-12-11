@@ -20,6 +20,9 @@ namespace FitnessApp.UserMainWindowPages
 
             // Initialize Profile Expander to be expanded
             ProfileExpander.IsExpanded = true;
+
+            // Initialize DataContext with signedInUser Model
+            DataContext = UserMainWindow.signedInUser;
         }
 
 
