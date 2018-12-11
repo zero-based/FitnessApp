@@ -85,6 +85,7 @@
     <Compile Include="SignUpPages\SetUpProfilePage.xaml.cs">
       <DependentUpon>SetUpProfilePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SQLdatabase\ServerDetails.cs" />
     <Compile Include="SQLdatabase\SQLqueries.cs" />
     <Compile Include="UserMainWindow.xaml.cs">
       <DependentUpon>UserMainWindow.xaml</DependentUpon>

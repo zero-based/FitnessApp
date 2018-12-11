@@ -12,10 +12,8 @@ namespace FitnessApp.SQLdatabase
     {
 
         ////////// SQL Connection string //////////
-        // [IMPORTANT] Add your server name to data source.
-
-        SqlConnection Connection = new SqlConnection("data source=DESKTOP-LI55M8S\\SQLEXPRESS; database=FITNESSAPP; integrated security=SSPI");
-
+        // [IMPORTANT] Add your server name to ServerDetails Class.
+        SqlConnection Connection = new SqlConnection(ServerDetails.ConnectionString);
 
 
 
