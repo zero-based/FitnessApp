@@ -12,6 +12,7 @@ namespace FitnessApp
     public partial class UserMainWindow : Window
     {
         public static UserMainWindow UserMainWindowObject;
+        public static UserModel signedInUser;
 
         public UserMainWindow(int signedInUserID)
         {
@@ -19,7 +20,7 @@ namespace FitnessApp
             UserMainWindowObject = this;
 
             // Initialize User Model
-            UserModel signedInUser = new UserModel(signedInUserID);
+            signedInUser = new UserModel(signedInUserID);
 
             // Initialize Listbox Selected Index
             UserMainWindowPagesListBox.SelectedIndex = 0;
