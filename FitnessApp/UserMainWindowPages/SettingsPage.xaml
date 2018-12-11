@@ -66,6 +66,7 @@
                                 <TextBox x:Name="WeightTextBox"
                                          Grid.Column="0"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding Weight}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Weight" 
                                          PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
@@ -73,6 +74,7 @@
                                 <TextBox x:Name="HeightTextBox"
                                          Grid.Column="2"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding Height}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Height"
                                          PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
@@ -91,6 +93,7 @@
                                 <TextBox x:Name="TargetWeightTextBox"
                                          Grid.Column="0"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding TargetWeight}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Target Weight"
                                          PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
@@ -98,6 +101,7 @@
                                 <TextBox x:Name="KilosToLosePerWeekTextBox"
                                          Grid.Column="2"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding KilosToLose}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Kilos to lose/week"
                                          PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
@@ -115,6 +119,7 @@
                                 <TextBox x:Name="WorkoutsPerWeekTextBox"
                                          Grid.Column="0"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding WorkoutsPerWeek}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Workouts/week"
                                          PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
@@ -122,6 +127,7 @@
                                 <TextBox x:Name="WorkoutHoursPerDayTextBox"
                                          Grid.Column="2"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding WorkoutHoursPerDay}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Workout Hours/Day"
                                          PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
@@ -175,12 +181,14 @@
                                 <TextBox x:Name="FirstNameTextBox"
                                          Grid.Column="0"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding FirstName}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="First Name" />
 
                                 <TextBox x:Name="LastNameTextBox"
                                          Grid.Column="2"
                                          FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding LastName}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          materialDesign:HintAssist.Hint="Last Name" />
                             </Grid>
@@ -189,12 +197,14 @@
                             <TextBox x:Name="UsernameTextBox"
                                      Grid.Row="3"
                                      FontFamily="{StaticResource Roboto}"
+                                     Text="{Binding Username}"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      materialDesign:HintAssist.Hint="Username" />
 
                             <TextBox x:Name="EmailTextBox"
                                      Grid.Row="5"
                                      FontFamily="{StaticResource Roboto}"
+                                     Text="{Binding Email}"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                      materialDesign:HintAssist.Hint="Email" />
 

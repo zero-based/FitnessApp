@@ -56,6 +56,7 @@
                     <ComboBox x:Name="GenderComboBox"
                               Margin="30,0,0,0"
                               FontFamily="{StaticResource Roboto}"
+                              Text="{Binding Gender}"
                               materialDesign:HintAssist.Hint="Gender">
                         <ComboBoxItem>
                             Male
@@ -75,6 +76,7 @@
                     <TextBox x:Name="AgeTextBox"
                              Margin="30,0,0,0"
                              FontFamily="{StaticResource Roboto}"
+                             Text="{Binding Age}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              materialDesign:HintAssist.Hint="Age"/>
 
@@ -88,6 +90,7 @@
                     <TextBox x:Name="WeightTextBox"
                              Margin="30,0,0,0"
                              FontFamily="{StaticResource Roboto}"
+                             Text="{Binding Weight}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              materialDesign:HintAssist.Hint="Weight in kg"/>
 
@@ -101,6 +104,7 @@
                     <TextBox x:Name="HeightTextBox"
                              Margin="30,0,0,0"
                              FontFamily="{StaticResource Roboto}"
+                             Text="{Binding Height}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              materialDesign:HintAssist.Hint="Height in cm"/>
                     

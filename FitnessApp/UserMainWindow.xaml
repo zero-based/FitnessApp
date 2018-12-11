@@ -86,17 +86,15 @@
                         <TextBlock x:Name="FullNameTextBlock"
                                    FontFamily="{StaticResource ProductSans}"
                                    FontWeight="Bold" 
-                                   FontSize="18">
-                                   Name
-                        </TextBlock>
+                                   FontSize="18"
+                                   Text="{Binding FullName}"/>
 
                         <TextBlock x:Name="UsernameTextBlock"
                                    FontFamily="{StaticResource ProductSans}"
                                    FontWeight="Light" 
                                    FontSize="14"
-                                   TextWrapping="Wrap">
-                                   @userName
-                        </TextBlock>
+                                   TextWrapping="Wrap"
+                                   Text="{Binding StyledUsername}"/>
                     </StackPanel>
 
                     <Separator Grid.Row="5" Grid.ColumnSpan="3"/>
