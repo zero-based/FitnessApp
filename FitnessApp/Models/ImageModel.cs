@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -6,7 +8,7 @@ namespace FitnessApp.Models
 {
     public class ImageModel
     {
-        private byte[] _byteArray;
+        private byte[] _byteArray = null;
         private ImageSource _source;
 
         public ImageModel() { }
@@ -17,8 +19,8 @@ namespace FitnessApp.Models
         {
             get
             {
-                if (FilePath == null) return _byteArray;
-                else return ConvertImageFileToByteArray();
+                if (FilePath == null) { return _byteArray; }
+                else { return ConvertImageFileToByteArray(); }
             }
 
             set { _byteArray = value; }
@@ -26,7 +28,12 @@ namespace FitnessApp.Models
 
         public ImageSource Source
         {
-            get { return ConvertByteArrayToImageSource(); }
+            get
+            {
+                if (FilePath == null) { return ConvertByteArrayToImageSource(); }
+                else { return new BitmapImage(new Uri(FilePath, UriKind.RelativeOrAbsolute)); }
+            }
+
             set { _source = value; }
         }
 
@@ -34,8 +41,6 @@ namespace FitnessApp.Models
         // Convert Image to Byte array
         private byte[] ConvertImageFileToByteArray()
         {
-            if (FilePath == null) return _byteArray;
-
             FileStream fileSteam = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
             BinaryReader binaryReader = new BinaryReader(fileSteam);
 
@@ -47,7 +52,7 @@ namespace FitnessApp.Models
         private ImageSource ConvertByteArrayToImageSource()
         {
             BitmapImage bitmapImage = new BitmapImage();
-            MemoryStream memoryStream = new MemoryStream(ByteArray);
+            MemoryStream memoryStream = new MemoryStream(_byteArray);
 
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = memoryStream;
