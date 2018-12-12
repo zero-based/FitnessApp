@@ -355,9 +355,9 @@ namespace FitnessApp.SQLdatabase
 
             string query = "SELECT [Challenge].*,[UserChallenge].UserId " +
                            "FROM [Challenge] Left JOIN [UserChallenge] " +
-                           "ON [Challenge].ID = [UserChallenge].ChallengeId";
+                           "ON [Challenge].ID = [UserChallenge].ChallengeId " +
+                           "AND UserId = " + accountID;
 
-            
             SqlCommand cmd = new SqlCommand(query, Connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -390,7 +390,8 @@ namespace FitnessApp.SQLdatabase
             Connection.Open();
             string query = "SELECT [Challenge].*,[UserChallenge].UserId " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
-                           "ON [Challenge].ID = [UserChallenge].ChallengeId";
+                           "ON [Challenge].ID = [UserChallenge].ChallengeId " +
+                           "WHERE UserId = " + accountID;
 
             List<ChallengeModel> joinedChallengeModels = new List<ChallengeModel>();
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -485,7 +486,7 @@ namespace FitnessApp.SQLdatabase
             SqlDataReader reader = cmd.ExecuteReader();
             reader.Read();
 
-            string joiningDate = reader["joiningDate"].ToString();
+            string joiningDate = reader["JoiningDate"].ToString();
 
             Connection.Close();
 
