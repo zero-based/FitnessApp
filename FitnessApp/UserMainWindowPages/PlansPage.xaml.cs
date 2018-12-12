@@ -18,7 +18,7 @@ namespace FitnessApp.UserMainWindowPages
         {
             InitializeComponent();
             PlansPageObject = this;
-            PlansListBox.DataContext = new PlansViewModel(101);
+            PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
         }
 
         private void ViewMoreButton_Click(object sender, System.Windows.RoutedEventArgs e)
@@ -38,12 +38,12 @@ namespace FitnessApp.UserMainWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            if (SQLqueriesObject.IsInPlan(101))
+            if (SQLqueriesObject.IsInPlan(UserMainWindow.signedInUser.ID))
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("You are currently in a plan. Please unjoin it first.");
             else
-                SQLqueriesObject.JoinPlan(101, currentPlan.ID);
+                SQLqueriesObject.JoinPlan(UserMainWindow.signedInUser.ID, currentPlan.ID);
 
-            PlansListBox.DataContext = new PlansViewModel(101);
+            PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
         }
 
         private void JoinPlanButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
@@ -52,9 +52,9 @@ namespace FitnessApp.UserMainWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            SQLqueriesObject.UnjoinPlan(101);
+            SQLqueriesObject.UnjoinPlan(UserMainWindow.signedInUser.ID);
 
-            PlansListBox.DataContext = new PlansViewModel(101);
+            PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
         }
     }
 }

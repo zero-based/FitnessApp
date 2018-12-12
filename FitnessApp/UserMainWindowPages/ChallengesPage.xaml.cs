@@ -22,7 +22,7 @@ namespace FitnessApp.UserMainWindowPages
 
             // Setting Data context for ChallengesListBox
             ChallengesViewModel challengesDataContext = new ChallengesViewModel();
-            challengesDataContext.AllChallengesViewModel(100);
+            challengesDataContext.AllChallengesViewModel(UserMainWindow.signedInUser.ID);
             DataContext = challengesDataContext;
         }
 
@@ -34,7 +34,7 @@ namespace FitnessApp.UserMainWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.JoinChallenge(101, currentChallenge.ID);
+            SQLqueriesObject.JoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
         }
             
             
@@ -48,7 +48,7 @@ namespace FitnessApp.UserMainWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.UnjoinChallenge(101, currentChallenge.ID);
+            SQLqueriesObject.UnjoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
 
         }
     }
