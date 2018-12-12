@@ -1,0 +1,192 @@
+﻿<Page x:Class="FitnessApp.AdminMainWindowPages.AdminSettingsPage"
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      mc:Ignorable="d">
+
+    <Grid Margin="15">
+
+        <materialDesign:Card Width="750"
+                             Background="{DynamicResource MaterialDesignBackground}">
+
+            <StackPanel>
+
+                <Expander x:Name="AccountExpander"
+                              Header="Account"
+                              Expanded="Expander_Expanded">
+
+                    <Grid Width="400" HorizontalAlignment="Center">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Name Fields-->
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox x:Name="FirstNameTextBox"
+                                         Grid.Column="0"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding FirstName}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="First Name" />
+
+                            <TextBox x:Name="LastNameTextBox"
+                                         Grid.Column="2"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Text="{Binding LastName}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="Last Name" />
+                        </Grid>
+
+                        <!--Username and Email Fields-->
+                        <TextBox x:Name="UsernameTextBox"
+                                     Grid.Row="3"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Text="{Binding Username}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Username" />
+
+                        <TextBox x:Name="EmailTextBox"
+                                     Grid.Row="5"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Text="{Binding Email}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Email" />
+
+                        <!--Update Account Button-->
+                        <Button x:Name="UpdateAccountButton"
+                                    Grid.Row="7"
+                                    HorizontalAlignment="Right"
+                                    FontFamily="{StaticResource ProductSans}" 
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Click="UpdateAccountButton_Click">
+                            Update Account
+                        </Button>
+
+                    </Grid>
+
+                </Expander>
+
+
+                <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+
+                <Expander x:Name="SecurityExpander"
+                              Header="Security"
+                              Expanded="Expander_Expanded">
+
+                    <Grid Width="400" HorizontalAlignment="Center">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
+                        </Grid.RowDefinitions>
+
+                        <!--Password Fields-->
+                        <TextBox x:Name="OldPasswordTextBox"
+                                     Grid.Row="1"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Old Password" />
+
+                        <TextBox x:Name="NewPasswordTextBox"
+                                     Grid.Row="3"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="New Password" />
+
+                        <TextBox x:Name="ConfirmNewPasswordTextBox"
+                                     Grid.Row="5"
+                                     FontFamily="{StaticResource Roboto}"
+                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     materialDesign:HintAssist.Hint="Confirm New Password" />
+
+                        <!--Update Password Button-->
+                        <Button x:Name="UpdatePasswordButton"
+                                    Grid.Row="7"
+                                    HorizontalAlignment="Right"
+                                    FontFamily="{StaticResource ProductSans}" 
+                                    FontSize="14"
+                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Click="UpdatePasswordButton_Click">
+                            Update Password
+                        </Button>
+
+                    </Grid>
+
+                </Expander>
+
+
+                <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+
+                <Expander x:Name="AboutExpander"
+                              Header="About"
+                              Expanded="Expander_Expanded">
+
+                    <TextBlock Margin="25,15"
+                                   TextWrapping="Wrap"
+                                   Opacity="0.75">
+                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                   nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                   culpa qui officia deserunt mollit anim id est laborum.
+                    </TextBlock>
+
+                </Expander>
+
+
+                <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
+
+
+                <Expander x:Name="HelpExpander"
+                              Header="Help"
+                              Expanded="Expander_Expanded">
+
+                    <TextBlock Margin="25,15"
+                                   TextWrapping="Wrap"
+                                   Opacity="0.75">
+                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                                   nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                                   culpa qui officia deserunt mollit anim id est laborum.
+                    </TextBlock>
+
+                </Expander>
+
+            </StackPanel>
+
+        </materialDesign:Card>
+
+    </Grid>
+</Page>
