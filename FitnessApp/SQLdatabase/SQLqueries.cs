@@ -5,6 +5,7 @@ using System.Text;
 using System;
 using FitnessApp.Models;
 using System.Collections.Generic;
+using System.Data;
 
 namespace FitnessApp.SQLdatabase
 {
@@ -186,7 +187,11 @@ namespace FitnessApp.SQLdatabase
                             "VALUES(@Photo ,'" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
                             targetWeight + "','" + height + "','" + kilosToLosePerWeek + "','" + workoutsPerWeek + "', '" + workoutHoursPerDay + "') ;";
             SqlCommand cmd1 = new SqlCommand(query1, Connection);
-            cmd1.Parameters.AddWithValue("@Photo", profilePhoto);
+
+            if (profilePhoto == null)
+                cmd1.Parameters.Add("@Photo", SqlDbType.Image).Value = DBNull.Value;
+            else
+                cmd1.Parameters.AddWithValue("@Photo", profilePhoto);
 
             // Open Connection and Start Reading
             Connection.Open();
@@ -284,7 +289,10 @@ namespace FitnessApp.SQLdatabase
             SqlDataReader dr = cmd.ExecuteReader();
 
             dr.Read();
-            currentUser.ProfilePhoto.ByteArray = (byte[])dr["Photo"];
+
+            if (dr["Photo"] != DBNull.Value)
+                currentUser.ProfilePhoto.ByteArray = (byte[])dr["Photo"];
+
             currentUser.FirstName              = dr["FirstName"].ToString();
             currentUser.LastName               = dr["LastName"] .ToString();
             currentUser.Username               = dr["Username"] .ToString();
@@ -295,6 +303,7 @@ namespace FitnessApp.SQLdatabase
             currentUser.KilosToLosePerWeek     = (double) dr["KilosToLosePerWeek"];
             currentUser.WorkoutsPerWeek        = (int)    dr["WorkoutsPerWeek"];
             currentUser.WorkoutHoursPerDay     = (double) dr["WorkoutHoursPerDay"];
+
             dr.Close();
 
 
