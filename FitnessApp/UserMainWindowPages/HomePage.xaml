@@ -594,7 +594,8 @@
                                                 <ProgressBar x:Name="ChallengeProgressBar"
                                                              Grid.Row="5"
                                                              Grid.Column="1"
-                                                             Value="15"/>
+                                                             Maximum="{Binding Target}"
+                                                             Value="{Binding Progress}"/>
 
                                             </Grid>
 
