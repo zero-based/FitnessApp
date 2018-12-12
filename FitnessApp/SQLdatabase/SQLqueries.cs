@@ -437,6 +437,51 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
+        public int GetChallengeProgress(int accountID, string joiningDate, string endDate, int workoutType)
+        {
+            Connection.Open();
+
+            string query = "SELECT SUM(MinutesOfWork) " +
+                           "From UserWorkout " +
+                           "WHERE UserId = " + accountID + " " +
+                           "AND DateOfToday Between '" + joiningDate + "' and '" + endDate + "' " +
+                           "AND WorkoutId = " + workoutType;
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+            int progress;
+            if (reader[0] != DBNull.Value)
+                progress = (int)reader[0];
+            else
+                progress = -1;
+
+            Connection.Close();
+
+            return progress;
+        }
+
+        public string GetChallengeJoiningDate(int accountID, int challengeID)
+        {
+            Connection.Open();
+
+            string query = "SELECT JoiningDate " +
+                           "FROM [UserChallenge] " +
+                           "WHERE UserId = " + accountID + " " +
+                           "AND ChallengeId = " + challengeID;
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Read();
+
+            string joiningDate = reader["joiningDate"].ToString();
+
+            Connection.Close();
+
+            return joiningDate;
+        }
 
 
         // Plans queries and functions.
