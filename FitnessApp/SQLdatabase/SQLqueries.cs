@@ -359,7 +359,7 @@ namespace FitnessApp.SQLdatabase
                 //temp.image
                 temp.Name        = reader["Name"].ToString();
                 temp.Description = reader["Description"].ToString();
-                temp.Target      = reader["Target"].ToString();
+                temp.Target      = (int)reader["Target"];
                 temp.Reward      = reader["Reward"].ToString();
                 temp.DueDate     = reader["DueDate"].ToString();
                 temp.WorkoutType = (int)reader["WorkoutId"];
@@ -395,7 +395,7 @@ namespace FitnessApp.SQLdatabase
                 //temp.image
                 temp.Name        = reader["Name"].ToString();
                 temp.Description = reader["Description"].ToString();
-                temp.Target      = reader["Target"].ToString();
+                temp.Target      = (int)reader["Target"];
                 temp.Reward      = reader["Reward"].ToString();
                 temp.DueDate     = reader["DueDate"].ToString();
                 temp.WorkoutType = (int)reader["WorkoutId"];
