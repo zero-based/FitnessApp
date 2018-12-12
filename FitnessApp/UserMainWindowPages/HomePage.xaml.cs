@@ -41,6 +41,7 @@ namespace FitnessApp.UserMainWindowPages
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(100);
             JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+            ControlNoChallengesCard(joinedChallengesDataContext);
 
             // Setting Data context for WeightChart
             WeightChart.DataContext = this;
@@ -91,6 +92,14 @@ namespace FitnessApp.UserMainWindowPages
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(100);
             JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+        }
+
+        private void ControlNoChallengesCard(ChallengesViewModel challengesViewModel)
+        {
+            if (challengesViewModel.JoinedChallengeModels.Count > 0)
+                NoChallengesCard.Visibility = Visibility.Collapsed;
+            else
+                NoChallengesCard.Visibility = Visibility.Visible;
         }
 
 
