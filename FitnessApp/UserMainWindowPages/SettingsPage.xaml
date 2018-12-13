@@ -246,23 +246,23 @@
                             </Grid.RowDefinitions>
 
                             <!--Password Fields-->
-                            <TextBox x:Name="OldPasswordTextBox"
-                                     Grid.Row="1"
-                                     FontFamily="{StaticResource Roboto}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     materialDesign:HintAssist.Hint="Old Password" />
+                            <PasswordBox x:Name="OldPasswordTextBox"
+                                         Grid.Row="1"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                         materialDesign:HintAssist.Hint="Old Password" />
 
-                            <TextBox x:Name="NewPasswordTextBox"
-                                     Grid.Row="3"
-                                     FontFamily="{StaticResource Roboto}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     materialDesign:HintAssist.Hint="New Password" />
+                            <PasswordBox x:Name="NewPasswordTextBox"
+                                         Grid.Row="3"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                         materialDesign:HintAssist.Hint="New Password" />
 
-                            <TextBox x:Name="ConfirmNewPasswordTextBox"
-                                     Grid.Row="5"
-                                     FontFamily="{StaticResource Roboto}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     materialDesign:HintAssist.Hint="Confirm New Password" />
+                            <PasswordBox x:Name="ConfirmNewPasswordTextBox"
+                                         Grid.Row="5"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                                         materialDesign:HintAssist.Hint="Confirm New Password" />
 
                             <!--Update Password Button-->
                             <Button x:Name="UpdatePasswordButton"
@@ -322,7 +322,7 @@
                                     FontSize="14"
                                     Style="{StaticResource MaterialDesignRaisedDarkButton}"
                                     Click="SubmitFeedbackButton_Click">
-                                Submit
+                                    Submit
                             </Button>
 
                         </Grid>
