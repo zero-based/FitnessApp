@@ -8,6 +8,8 @@ using System.Windows.Controls.Primitives;
 using FitnessApp.SQLdatabase;
 using FitnessApp.Models;
 using FitnessApp.ViewModels;
+using System.Collections.Generic;
+using LiveCharts.Helpers;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -23,41 +25,44 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             UserMainWindow.HomePageObject = this;
 
+            LoadWeightChart(UserMainWindow.signedInUser.ID);
             LoadMotivationalQuoteCard();
-
-            SeriesCollection = new SeriesCollection
-            {
-                new LineSeries
-                {
-                    Title = "Weight",
-                    Values = new ChartValues<double> { 40, 41.5, 39}
-                }
-            };
-
-            Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" };
-            YFormatter = value => value.ToString();
 
             // Setting Data context for JoinedChallengesListBox
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
             JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
-            ControlNoChallengesCard(joinedChallengesDataContext);
-
-            // Setting Data context for WeightChart
-            WeightChart.DataContext = this;
+            ControlNoChallengesCard(joinedChallengesDataContext);   
         }
 
 
         // Weight Chart Properties
 
         public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
+        public List<string> Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
 
 
 
 
         ////////// All Weight Cards Functions/Event Handlers //////////
+
+        private void LoadWeightChart(int userID)
+        {
+            SeriesCollection = new SeriesCollection
+            {
+                new LineSeries
+                {
+                    Title = "Weight",
+                    Values = SQLqueriesObject.GetWeightValues(userID).AsChartValues()
+                }
+            };
+
+            Labels = SQLqueriesObject.GetWeightDateValues(userID);
+            YFormatter = value => value.ToString();
+            // Setting Data context for WeightChart
+            WeightChart.DataContext = this;
+        }
 
         private void DecimalNumbersOnlyFieldValidation(object sender, TextCompositionEventArgs e)
         {
@@ -66,9 +71,10 @@ namespace FitnessApp.UserMainWindowPages
             e.Handled = !double.TryParse(text, out double d);
         }
 
-        private void SaveWeightButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void SaveWeightButton_Click(object sender, RoutedEventArgs e)
         {
-
+            SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserMainWindow.signedInUser.ID);
+            WeightChart.Series[0].Values.Add(double.Parse(TodaysWeightTextBox.Text));
         }
 
 

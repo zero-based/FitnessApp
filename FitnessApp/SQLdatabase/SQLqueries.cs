@@ -730,6 +730,108 @@ namespace FitnessApp.SQLdatabase
 
 
         // Home Page queries and Functions
+
+        // Load Weights Chart Values
+        public List<double> GetWeightValues(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select count(*) from UserWeight where FK_UserWeight_UserID = @UserId", Connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@UserId", accountID);
+
+            int countUserWeightInputs = (int)cmd.ExecuteScalar();
+
+            SqlCommand CommandString = new SqlCommand("select Weight, DATENAME(month, Date)[0] from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
+            CommandString.CommandType = CommandType.Text;
+            CommandString.Parameters.AddWithValue("@UserId", accountID);
+
+            SqlDataReader ReaderString = CommandString.ExecuteReader();
+
+
+            List<double> weightValues = new List<double>();
+
+            if (countUserWeightInputs < 10)
+            {
+                for (int i = 0; ReaderString.Read(); i++)
+                {
+                    if (ReaderString.HasRows == true)
+                    {
+                        weightValues.Add((double)ReaderString["Weight"]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; ReaderString.Read() && i < 10; i++)
+                {
+                    if (ReaderString.HasRows == true)
+                    {
+                        weightValues.Add((double)ReaderString["Weight"]);
+                    }
+
+                }
+            }
+
+            Connection.Close();
+
+            return weightValues;
+        }
+
+        public List<string> GetWeightDateValues(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select count(*) from UserWeight where FK_UserWeight_UserID = @UserId", Connection);
+            cmd.CommandType = CommandType.Text;
+            cmd.Parameters.AddWithValue("@UserId", accountID);
+
+            int countUserWeightInputs = (int)cmd.ExecuteScalar();
+
+            SqlCommand CommandString = new SqlCommand("select Weight, DATENAME(month, Date)[0] from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
+            CommandString.CommandType = CommandType.Text;
+            CommandString.Parameters.AddWithValue("@UserId", accountID);
+
+            SqlDataReader ReaderString = CommandString.ExecuteReader();
+
+            List<string> dateValues = new List<string>();
+
+            if (countUserWeightInputs < 10)
+            {
+                for (int i = 0; ReaderString.Read(); i++)
+                {
+                    if (ReaderString.HasRows == true)
+                        dateValues.Add((string)ReaderString["0"]);
+                }
+            }
+            else
+            {
+                for (int i = 0; ReaderString.Read() && i < 10; i++)
+                {
+                    if (ReaderString.HasRows == true)
+                        dateValues.Add((string)ReaderString["0"]);
+                }
+            }
+
+            Connection.Close();
+
+            return dateValues;
+        }
+
+        // Insert a new Weight
+        public void AddNewWeight(double NewWeight, int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("AddNewWeight", Connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@UserId", accountID));
+            cmd.Parameters.Add(new SqlParameter("@AddedWeight", NewWeight));
+            cmd.ExecuteNonQuery();
+
+            Connection.Close();
+        }
+
         public string GetMotivationalQuote()
         {
             Connection.Open();
