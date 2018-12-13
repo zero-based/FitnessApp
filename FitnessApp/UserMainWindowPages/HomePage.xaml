@@ -964,57 +964,57 @@
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <StackPanel Grid.Column="0">
+                                    <StackPanel Grid.Column="0">
 
-                                            <TextBlock x:Name="CaloriesNeededTextBlock"
+                                        <TextBlock x:Name="CaloriesGainedTextBlock"
                                                        FontFamily="{StaticResource ProductSans}"
                                                        Foreground="{StaticResource PrimaryHueMidBrush}"
                                                        FontWeight="Bold" 
                                                        FontSize="28"
                                                        TextAlignment="Center">
                                                        1000
-                                            </TextBlock>
+                                        </TextBlock>
 
-                                            <TextBlock Margin="0,5"
-                                                       Width="70"
-                                                       FontFamily="{StaticResource Roboto}"
-                                                       FontSize="14"
-                                                       TextAlignment="Center"
-                                                       TextWrapping="Wrap">
-                                                       Calories Needed
-                                            </TextBlock>
-
-                                        </StackPanel>
-
-                                        <Separator Grid.Column="1" Margin="0,10">
-                                            <Separator.LayoutTransform>
-                                                <RotateTransform Angle="90"/>
-                                            </Separator.LayoutTransform>
-                                        </Separator>
-
-                                        <StackPanel Grid.Column="2">
-
-                                            <TextBlock x:Name="CaloriesGainedTextBlock"
-                                                       FontFamily="{StaticResource ProductSans}"
-                                                       Foreground="{StaticResource PrimaryHueMidBrush}"
-                                                       FontWeight="Bold" 
-                                                       FontSize="28"
-                                                       TextAlignment="Center">
-                                                       1000
-                                            </TextBlock>
-
-                                            <TextBlock Margin="0,5"
+                                        <TextBlock Margin="0,5"
                                                        Width="70"
                                                        FontFamily="{StaticResource Roboto}"
                                                        FontSize="14"
                                                        TextAlignment="Center"
                                                        TextWrapping="Wrap">
                                                        Calories Gained
-                                            </TextBlock>
+                                        </TextBlock>
 
-                                        </StackPanel>
+                                    </StackPanel>
+                                        
+                                        <Separator Grid.Column="1" Margin="0,10">
+                                            <Separator.LayoutTransform>
+                                                <RotateTransform Angle="90"/>
+                                            </Separator.LayoutTransform>
+                                        </Separator>
 
-                                        <Separator Grid.Column="3" Margin="0,10">
+                                    <StackPanel Grid.Column="2">
+
+                                        <TextBlock x:Name="CaloriesNeededTextBlock"
+                                                       FontFamily="{StaticResource ProductSans}"
+                                                       Foreground="{StaticResource PrimaryHueMidBrush}"
+                                                       FontWeight="Bold" 
+                                                       FontSize="28"
+                                                       TextAlignment="Center">
+                                                       1000
+                                        </TextBlock>
+
+                                        <TextBlock Margin="0,5"
+                                                       Width="70"
+                                                       FontFamily="{StaticResource Roboto}"
+                                                       FontSize="14"
+                                                       TextAlignment="Center"
+                                                       TextWrapping="Wrap">
+                                                       Calories Needed
+                                        </TextBlock>
+
+                                    </StackPanel>
+
+                                    <Separator Grid.Column="3" Margin="0,10">
                                             <Separator.LayoutTransform>
                                                 <RotateTransform Angle="90"/>
                                             </Separator.LayoutTransform>
