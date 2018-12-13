@@ -34,6 +34,8 @@
                             <RowDefinition Height="15"/>
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
                         </Grid.RowDefinitions>
 
                         <Grid.ColumnDefinitions>
@@ -49,7 +51,7 @@
                                    FontSize="18"
                                    Text="Add a New Challenge"/>
 
-                        <!--Challenge Description-->
+                        <!--Challenge Name-->
                         <Grid Grid.Row="3" Grid.Column="1">
                             <materialDesign:PackIcon Kind="RenameBox" Margin="0,20,0,0"/>
                             <TextBox x:Name="ChallengeNameTextBox"
@@ -80,9 +82,19 @@
                                         Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                         </Grid>
 
+                        <!--Challenge Type-->
+                        <Grid Grid.Row="9" Grid.Column="1">
+                            <materialDesign:PackIcon Kind="Weights" Margin="0,20,0,0"/>
+                            <ComboBox x:Name="WorkoutTypeComboBox"
+                              materialDesign:HintAssist.Hint="Workout Type"
+                              HorizontalAlignment="Stretch"
+                              Margin="25,5,0,0"
+                              IsEditable="True"
+                              materialDesign:HintAssist.HintOpacity="0.25"/>
+                        </Grid>
 
                         <!--Challenge Target-->
-                        <Grid Grid.Row="9" Grid.Column="1">
+                        <Grid Grid.Row="11" Grid.Column="1">
                             <materialDesign:PackIcon Kind="TargetArrow" Margin="0,20,0,0"/>
 
 
@@ -95,7 +107,7 @@
                         </Grid>
 
                         <!--Challenge Reward-->
-                        <Grid Grid.Row="11" Grid.Column="1">
+                        <Grid Grid.Row="13" Grid.Column="1">
                             <materialDesign:PackIcon Kind="TrophyOutline" Margin="0,20,0,0"/>
                             <TextBox x:Name="ChallengeRewardTextBox"
                                      Margin="25,0,0,0"
@@ -105,7 +117,7 @@
                                      PreviewTextInput="TextBoxesNumbersOnly_PreviewTextInput"/>
                         </Grid>
 
-                        <StackPanel Grid.Row="13"
+                        <StackPanel Grid.Row="15"
                                     Grid.Column="1"
                                     Orientation="Horizontal"
                                     HorizontalAlignment="Center">
