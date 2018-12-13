@@ -84,6 +84,7 @@
     <Compile Include="AdminMainWindowPages\ChallengesSetupPage.xaml.cs">
       <DependentUpon>ChallengesSetupPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\FeedbackModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="SignUpPages\SignUpFirstPage.xaml.cs">
@@ -120,6 +121,7 @@
     <Compile Include="Models\ChallengeModel.cs" />
     <Compile Include="ViewModels\ChallengesViewModel.cs" />
     <Compile Include="Models\PlanModel.cs" />
+    <Compile Include="ViewModels\FeedbacksViewModel.cs" />
     <Compile Include="ViewModels\PlansViewModel.cs" />
     <Page Include="AdminMainWindow.xaml">
       <SubType>Designer</SubType>
