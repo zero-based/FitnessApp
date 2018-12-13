@@ -215,9 +215,20 @@ namespace FitnessApp.UserMainWindowPages
 
         private void DialogBoxAddWorkoutButton_Click(object sender, RoutedEventArgs e)
         {
-            // Adding Workout code Here...
-            AddWorkoutDialogBox.Visibility = Visibility.Collapsed;
-            DialogBox.IsOpen = false;
+
+            if (WorkoutsComboBox.SelectedIndex == -1)
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please choose Workout!");
+
+            else if (WorkoutsDurationTextBox.Text == "")
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter Workout Duration!");
+
+            else
+            {
+                SQLqueriesObject.AddWorkout(WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text), UserMainWindow.signedInUser);
+                AddWorkoutDialogBox.Visibility = Visibility.Collapsed;
+                DialogBox.IsOpen = false;
+            }
+
         }
 
         private void DialogBoxCancelButton_Click(object sender, RoutedEventArgs e)

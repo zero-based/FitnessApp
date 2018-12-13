@@ -1012,5 +1012,44 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
 
         }
+
+        public void AddWorkout(string workout, double duration, UserModel currentUser)
+        {
+
+            double TotalCalories = 0;
+            int workoutID = 0;
+
+            if (currentUser.Gender == "Female")
+            {
+                TotalCalories = ((currentUser.Age * 0.074) - (currentUser.LatestWeight * 0.05741) + (100 * 0.4472) - 20.4022) * (duration / 4.184);
+            }
+            else
+            {
+                TotalCalories = ((currentUser.Age * 0.2017) - (currentUser.LatestWeight * 0.09036) + (100 * 0.6309) - 55.0969) * (duration / 4.184);
+
+            }
+
+            // Get Workout ID
+
+            Connection.Open();
+            SqlCommand cmd4 = new SqlCommand("select PK_WorkoutID from Workout where Name=@name", Connection);
+            cmd4.Parameters.AddWithValue("@name", workout);
+            SqlDataReader dr = cmd4.ExecuteReader();
+            while (dr.Read())
+            {
+                workoutID = (int)(dr["PK_WorkoutID"]);
+            }
+            dr.Close();
+
+            // Insert Workout in UserWorkout Table
+            SqlCommand Cmd3 = new SqlCommand("Insert into UserWorkout (FK_UserWorkout_UserID,FK_UserWorkout_WorkoutID,MinutesOfWork,CaloriesLost,DateOfToday) Values(@userid,@workoutid,@duration,@calories,convert (date ,getdate()))", Connection);
+            Cmd3.Parameters.AddWithValue("@userid", currentUser.ID);
+            Cmd3.Parameters.AddWithValue("@workoutid", workoutID);
+            Cmd3.Parameters.AddWithValue("@duration", duration);
+            Cmd3.Parameters.AddWithValue("@calories", Math.Round(TotalCalories, 2));
+            Cmd3.ExecuteNonQuery();
+
+            Connection.Close();
+        }
     }
 }
