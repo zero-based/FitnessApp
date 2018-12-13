@@ -344,6 +344,64 @@ namespace FitnessApp.SQLdatabase
         }
 
 
+        // Update User Profile
+        public void UpdateUserProfile(UserModel currentUser)
+        {
+            Connection.Open();
+
+            string query = "UPDATE [User] " +
+                           "SET Photo = @Photo " +
+                           "WHERE [User].ID = @UserId";
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@UserId", currentUser.ID);
+            cmd.Parameters.AddWithValue("@Photo", currentUser.ProfilePhoto.ByteArray);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            SqlCommand cmd1 = new SqlCommand("AddNewWeight", Connection);
+            cmd1.CommandType = CommandType.StoredProcedure;
+            cmd1.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd1.Parameters.Add(new SqlParameter("@AddedWeight", currentUser.Weight));
+            SqlDataReader reader1 = cmd1.ExecuteReader();
+            reader1.Close();
+
+            SqlCommand cmd2 = new SqlCommand("ChangeHeight", Connection);
+            cmd2.CommandType = CommandType.StoredProcedure;
+            cmd2.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd2.Parameters.Add(new SqlParameter("@Height", currentUser.Height));
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            reader2.Close();
+
+            SqlCommand cmd3 = new SqlCommand("ChangeTargetWeight", Connection);
+            cmd3.CommandType = CommandType.StoredProcedure;
+            cmd3.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd3.Parameters.Add(new SqlParameter("@TargetWeight", currentUser.TargetWeight));
+            SqlDataReader reader3 = cmd3.ExecuteReader();
+            reader3.Close();
+
+            SqlCommand cmd4 = new SqlCommand("ChangeKilosToLosePerWeek", Connection);
+            cmd4.CommandType = CommandType.StoredProcedure;
+            cmd4.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd4.Parameters.Add(new SqlParameter("@KilosToLosePerWeek", currentUser.KilosToLosePerWeek));
+            SqlDataReader reader4 = cmd4.ExecuteReader();
+            reader4.Close();
+
+            SqlCommand cmd5 = new SqlCommand("ChangeWorkoutsDaysPerWeek", Connection);
+            cmd5.CommandType = CommandType.StoredProcedure;
+            cmd5.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd5.Parameters.Add(new SqlParameter("@Days", currentUser.WorkoutsPerWeek));
+            SqlDataReader reader5 = cmd5.ExecuteReader();
+            reader5.Close();
+
+            SqlCommand cmd6 = new SqlCommand("ChangeWorkoutsHoursPerDay", Connection);
+            cmd6.CommandType = CommandType.StoredProcedure;
+            cmd6.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd6.Parameters.Add(new SqlParameter("@Hours", currentUser.WorkoutHoursPerDay));
+            SqlDataReader reader6 = cmd6.ExecuteReader();
+            reader6.Close();
+
+            Connection.Close();
+        }
 
 
         // Challenges queries and functions.
