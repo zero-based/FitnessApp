@@ -16,13 +16,12 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class HomePage : Page
     {
-        public static HomePage HomePageObject = new HomePage();
         SQLqueries SQLqueriesObject = new SQLqueries();
 
         public HomePage()
         {
             InitializeComponent();
-            HomePageObject = this;
+            UserMainWindow.HomePageObject = this;
 
 
             SeriesCollection = new SeriesCollection

@@ -12,13 +12,12 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class ChallengesPage : Page
     {
-        public static ChallengesPage ChallengesPageObject = new ChallengesPage();
         SQLqueries SQLqueriesObject = new SQLqueries();
 
         public ChallengesPage()
         {
             InitializeComponent();
-            ChallengesPageObject = this;
+            UserMainWindow.ChallengesPageObject = this;
 
             // Setting Data context for ChallengesListBox
             ChallengesViewModel challengesDataContext = new ChallengesViewModel();

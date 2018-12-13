@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 using FitnessApp.Models;
+using FitnessApp.UserMainWindowPages;
 
 namespace FitnessApp
 {
@@ -14,6 +15,13 @@ namespace FitnessApp
         public static UserMainWindow UserMainWindowObject;
         public static UserModel signedInUser;
 
+        // Declare UserMainWindowPages Objects
+        public static HomePage HomePageObject;
+        public static ChallengesPage ChallengesPageObject;
+        public static PlansPage PlansPageObject;
+        public static CaloriesCalculatorPage CaloriesCalculatorPageObject;
+        public static SettingsPage SettingsPageObject;
+
         public UserMainWindow(int signedInUserID)
         {
             InitializeComponent();
@@ -24,6 +32,13 @@ namespace FitnessApp
 
             // Initialize DataContext with signedInUser Model
             DataContext = signedInUser;
+
+            // Initialize UserMainWindowPages Objects
+            HomePageObject               = new HomePage();
+            ChallengesPageObject         = new ChallengesPage();
+            PlansPageObject              = new PlansPage();
+            CaloriesCalculatorPageObject = new CaloriesCalculatorPage();
+            SettingsPageObject           = new SettingsPage();
 
             // Initialize Listbox Selected Index
             UserMainWindowPagesListBox.SelectedIndex = 0;
@@ -42,28 +57,28 @@ namespace FitnessApp
             switch (UserMainWindowPagesListBox.SelectedIndex)
             {
                 case 0:
-                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.HomePage.HomePageObject);
+                    UserWindowPagesFrame.NavigationService.Navigate(HomePageObject);
                     HighlightItem(HomeTextBlock, HomeIcon);
                     break;
 
                 case 1:
-                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.ChallengesPage.ChallengesPageObject);
+                    UserWindowPagesFrame.NavigationService.Navigate(ChallengesPageObject);
                     HighlightItem(ChallengesTextBlock, ChallengesIcon);
                     break;
 
                 case 2:
-                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.PlansPage.PlansPageObject);
+                    UserWindowPagesFrame.NavigationService.Navigate(PlansPageObject);
                     HighlightItem(FitnessPlansTextBlock, FitnessPlansIcon);
                     break;
 
                 case 3:
-                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.CaloriesCalculatorPage.CaloriesCalculatorPageObject);
+                    UserWindowPagesFrame.NavigationService.Navigate(CaloriesCalculatorPageObject);
                     HighlightItem(CaloriesCalculatorTextBlock, CaloriesCalculatorIcon);
                     break;
 
                 case 4:
                     HighlightItem(SettingsTextBlock, SettingsIcon);
-                    UserWindowPagesFrame.NavigationService.Navigate(UserMainWindowPages.SettingsPage.SettingsPageObject);
+                    UserWindowPagesFrame.NavigationService.Navigate(SettingsPageObject);
                     break;
             }
         }

@@ -11,12 +11,11 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class SettingsPage : Page
     {
-        public static SettingsPage SettingsPageObject = new SettingsPage();
 
         public SettingsPage()
         {
             InitializeComponent();
-            SettingsPageObject = this;
+            UserMainWindow.SettingsPageObject = this;
 
             // Initialize Profile Expander to be expanded
             ProfileExpander.IsExpanded = true;

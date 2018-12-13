@@ -11,13 +11,12 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class PlansPage : Page
     {
-        public static PlansPage PlansPageObject = new PlansPage();
         SQLqueries SQLqueriesObject = new SQLqueries();
 
         public PlansPage()
         {
             InitializeComponent();
-            PlansPageObject = this;
+            UserMainWindow.PlansPageObject = this;
             PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
         }
 

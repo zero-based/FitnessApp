@@ -7,12 +7,11 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class CaloriesCalculatorPage : Page
     {
-        public static CaloriesCalculatorPage CaloriesCalculatorPageObject = new CaloriesCalculatorPage();
 
         public CaloriesCalculatorPage()
         {
             InitializeComponent();
-            CaloriesCalculatorPageObject = this;
+            UserMainWindow.CaloriesCalculatorPageObject = this;
 
             // Initialize DataContext with signedInUser Model
             DataContext = UserMainWindow.signedInUser;
