@@ -821,11 +821,11 @@ namespace FitnessApp.SQLdatabase
         {
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("AddNewWeight", Connection);
-            cmd.CommandType = CommandType.StoredProcedure;
+            string query = "INSERT INTO [UserWeight] VALUES (@UserId, @AddedWeight, getdate())";
+            SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.Add(new SqlParameter("@UserId", accountID));
             cmd.Parameters.Add(new SqlParameter("@AddedWeight", NewWeight));
-            cmd.ExecuteNonQuery();
+            cmd.ExecuteReader();
 
             Connection.Close();
         }
