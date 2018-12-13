@@ -116,7 +116,7 @@
                                 
                             </Grid>
 
-                            <!--Challenge Target-->
+                            <!--Challenge Target Minutes-->
                             <Grid  Grid.Row="8" Grid.Column="1">
                                 
                                 <Grid.ColumnDefinitions>
@@ -131,7 +131,7 @@
                                            FontFamily="{StaticResource ProductSans}"
                                            FontSize="15"
                                            Foreground="Black"
-                                           Text="{Binding Target}">
+                                           Text="{Binding TargetMinutes}">
                                 </TextBlock>
                                 
                             </Grid>

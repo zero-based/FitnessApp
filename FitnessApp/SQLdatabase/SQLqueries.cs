@@ -486,14 +486,14 @@ namespace FitnessApp.SQLdatabase
             while (reader.Read())
             {
                 ChallengeModel temp = new ChallengeModel();
-                temp.ID          = (int)reader["PK_ChallengeID"];
-                //temp.image
-                temp.Name        = reader["Name"].ToString();
-                temp.Description = reader["Description"].ToString();
-                temp.Target      = (int)reader["TargetMinutes"];
-                temp.Reward      = reader["Reward"].ToString();
-                temp.DueDate     = reader["DueDate"].ToString();
-                temp.WorkoutType = (int)reader["FK_Challenge_WorkoutID"];
+                temp.ID             = (int)reader["PK_ChallengeID"];
+                //temp.image        
+                temp.Name           = reader["Name"].ToString();
+                temp.Description    = reader["Description"].ToString();
+                temp.TargetMinutes  = (int)reader["TargetMinutes"];
+                temp.Reward         = reader["Reward"].ToString();
+                temp.DueDate        = reader["DueDate"].ToString();
+                temp.WorkoutType    = (int)reader["FK_Challenge_WorkoutID"];
 
                 if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
                     temp.IsJoined = true;
@@ -523,14 +523,14 @@ namespace FitnessApp.SQLdatabase
             {
                 ChallengeModel temp = new ChallengeModel();
 
-                temp.ID          = (int)reader["PK_ChallengeID"];
-                //temp.image
-                temp.Name        = reader["Name"].ToString();
-                temp.Description = reader["Description"].ToString();
-                temp.Target      = (int)reader["TargetMinutes"];
-                temp.Reward      = reader["Reward"].ToString();
-                temp.DueDate     = reader["DueDate"].ToString();
-                temp.WorkoutType = (int)reader["FK_Challenge_WorkoutID"];
+                temp.ID             = (int)reader["PK_ChallengeID"];
+                //temp.image        
+                temp.Name           = reader["Name"].ToString();
+                temp.Description    = reader["Description"].ToString();
+                temp.TargetMinutes  = (int)reader["TargetMinutes"];
+                temp.Reward         = reader["Reward"].ToString();
+                temp.DueDate        = reader["DueDate"].ToString();
+                temp.WorkoutType    = (int)reader["FK_Challenge_WorkoutID"];
                 
                 if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
                     temp.IsJoined = true;

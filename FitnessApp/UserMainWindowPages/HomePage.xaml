@@ -549,7 +549,7 @@
 
                                                     </Grid>
 
-                                                    <!--Challenge Target-->
+                                                    <!--Challenge Target Minutes-->
                                                     <Grid Grid.Column="1">
 
                                                         <Grid.ColumnDefinitions>
@@ -564,7 +564,7 @@
                                                                    FontFamily="{StaticResource ProductSans}"
                                                                    FontSize="13"
                                                                    Foreground="Black"
-                                                                   Text="{Binding Target}">
+                                                                   Text="{Binding TargetMinutes}">
                                                         </TextBlock>
 
                                                     </Grid>
@@ -594,7 +594,7 @@
                                                 <ProgressBar x:Name="ChallengeProgressBar"
                                                              Grid.Row="5"
                                                              Grid.Column="1"
-                                                             Maximum="{Binding Target}"
+                                                             Maximum="{Binding TargetMinutes}"
                                                              Value="{Binding Progress}"/>
 
                                             </Grid>
