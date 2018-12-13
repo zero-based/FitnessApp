@@ -1,4 +1,5 @@
 ﻿using FitnessApp.SQLdatabase;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +17,7 @@ namespace FitnessApp.AdminMainWindowPages
         public ChallengesSetupPage()
         {
             InitializeComponent();
+            LoadWorkoutTypeComboBox();
         }
         private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
@@ -37,13 +39,21 @@ namespace FitnessApp.AdminMainWindowPages
 
         private void DialogBoxAddButton_Click(object sender, RoutedEventArgs e)
         {
-            DialogBox.IsOpen = true;
+            DialogBox.IsOpen = false;
             AddChallengeDialogBox.Visibility = Visibility.Collapsed;
         }
 
         private void AddChallengePhotoButton_Click(object sender, RoutedEventArgs e)
         {
+            DialogBox.IsOpen = false;
+            AddChallengeDialogBox.Visibility = Visibility.Collapsed;
+        }
 
+        private void LoadWorkoutTypeComboBox()
+        {
+            List<string> items = new List<string>();
+            items.Add("new-item");
+            WorkoutTypeComboBox.ItemsSource = items;
         }
     }
 }
