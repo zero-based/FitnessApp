@@ -87,7 +87,7 @@ namespace FitnessApp.SQLdatabase
             string encryptedPassword = EncryptPassword(password);
 
             // Create Command
-            SqlCommand cmd = new SqlCommand("SELECT * FROM AdminAndUserAccount WHERE Email = @email AND Password = @password", Connection);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM [Account] WHERE Email = @email AND Password = @password", Connection);
             cmd.Parameters.AddWithValue("@email", email);
             cmd.Parameters.AddWithValue("@password", encryptedPassword);
 
@@ -99,7 +99,7 @@ namespace FitnessApp.SQLdatabase
                 if (dr.HasRows == true)
                 {
                     // Assigns the account ID and account type to the global variables.
-                    accountID = (int)dr["ID"];
+                    accountID = (int)dr["AccountID"];
                     accountType = (string)dr["Type"];
                     Connection.Close();
 
@@ -147,7 +147,7 @@ namespace FitnessApp.SQLdatabase
         public bool IsEmailTaken(string email)
         {
             // Create Command
-            SqlCommand cmd = new SqlCommand("SELECT Email FROM AdminAndUserAccount WHERE Email = @email ;", Connection);
+            SqlCommand cmd = new SqlCommand("SELECT Email FROM [Account] WHERE Email = @email ;", Connection);
             cmd.Parameters.AddWithValue("@email", email);
 
             // Open Connection and Start Reading
@@ -207,7 +207,7 @@ namespace FitnessApp.SQLdatabase
 
             // Get User's ID
             // Create Query amd Command
-            string query2 = "Select ID FROM [User] WHERE Username = @username";
+            string query2 = "Select PK_UserID FROM [User] WHERE Username = @username";
             SqlCommand cmd2 = new SqlCommand(query2, Connection);
             cmd2.Parameters.AddWithValue("@username", username);
 
@@ -220,7 +220,7 @@ namespace FitnessApp.SQLdatabase
             {
                 if (dr2.HasRows == true)
                 {
-                    accountID = (int)dr2["ID"];
+                    accountID = (int)dr2["PK_UserID"];
                 }
 
             }
@@ -230,7 +230,7 @@ namespace FitnessApp.SQLdatabase
 
             // Insert User's email and password
             // Create Query amd Command
-            string query3 = "INSERT INTO AdminAndUserAccount(ID, Email, Password, Type) " +
+            string query3 = "INSERT INTO [Account](AccountID, Email, Password, Type) " +
                             "VALUES('" + accountID + "','" + email + "','" + encryptedPassword + "','User');";
             SqlCommand cmd3 = new SqlCommand(query3, Connection);
 
@@ -248,7 +248,7 @@ namespace FitnessApp.SQLdatabase
 
             // Insert User's weight into multiValued weight table
             // Create Query amd Command
-            string query4 = "INSERT INTO UserWeight(UserId, Weight, Date) " +
+            string query4 = "INSERT INTO UserWeight(FK_UserWeight_UserID, Weight, Date) " +
                             "VALUES('" + accountID + "','" + weight + "', GETDATE());";
             SqlCommand cmd4 = new SqlCommand(query4, Connection);
 
@@ -282,7 +282,7 @@ namespace FitnessApp.SQLdatabase
             Connection.Open();
 
             // Info from User Table
-            string query = "SELECT * FROM [User] WHERE ID = @userID";
+            string query = "SELECT * FROM [User] WHERE PK_UserID = @userID";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@userID", userID);
@@ -308,7 +308,7 @@ namespace FitnessApp.SQLdatabase
 
 
             // Info from Weight Table
-            string query2 = "SELECT Weight FROM [UserWeight] WHERE UserId = @userID";
+            string query2 = "SELECT Weight FROM [UserWeight] WHERE FK_UserWeight_UserID = @userID";
 
             SqlCommand cmd2 = new SqlCommand(query2, Connection);
             cmd2.Parameters.AddWithValue("@userID", userID);
@@ -320,7 +320,7 @@ namespace FitnessApp.SQLdatabase
 
 
             // Info from Accounts Table
-            string query3 = "SELECT Email, Password FROM AdminAndUserAccount WHERE ID = @userID";
+            string query3 = "SELECT Email, Password FROM [Account] WHERE AccountID = @userID";
             SqlCommand cmd3 = new SqlCommand(query3, Connection);
             cmd3.Parameters.AddWithValue("@userID", userID);
             SqlDataReader dr3 = cmd3.ExecuteReader();
@@ -331,8 +331,8 @@ namespace FitnessApp.SQLdatabase
             dr3.Close();
 
 
-            string query4 = "SELECT FLOOR(DATEDIFF(DAY, BirthDate, GETDATE()) / 365.25) " +
-                            "FROM [User] WHERE ID = @userID";
+            string query4 = "SELECT FLOOR (DATEDIFF (DAY, BirthDate, GETDATE()) / 365.25) " +
+                            "FROM [User] WHERE PK_UserID = @userID";
             SqlCommand cmd4 = new SqlCommand(query4, Connection);
             cmd4.Parameters.AddWithValue("@userID", userID);
 
@@ -350,7 +350,7 @@ namespace FitnessApp.SQLdatabase
 
             string query = "UPDATE [User] " +
                            "SET Photo = @Photo " +
-                           "WHERE [User].ID = @UserId";
+                           "WHERE PK_UserID = @UserId";
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@UserId", currentUser.ID);
             cmd.Parameters.AddWithValue("@Photo", currentUser.ProfilePhoto.ByteArray);
@@ -475,10 +475,10 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Open();
 
-            string query = "SELECT [Challenge].*,[UserChallenge].UserId " +
+            string query = "SELECT [Challenge].*,[UserChallenge].FK_UserChallenge_UserID " +
                            "FROM [Challenge] Left JOIN [UserChallenge] " +
-                           "ON [Challenge].ID = [UserChallenge].ChallengeId " +
-                           "AND UserId = " + accountID;
+                           "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
+                           "AND FK_UserChallenge_UserID = " + accountID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             SqlDataReader reader = cmd.ExecuteReader();
@@ -486,16 +486,16 @@ namespace FitnessApp.SQLdatabase
             while (reader.Read())
             {
                 ChallengeModel temp = new ChallengeModel();
-                temp.ID          = (int)reader["ID"];
+                temp.ID          = (int)reader["PK_ChallengeID"];
                 //temp.image
                 temp.Name        = reader["Name"].ToString();
                 temp.Description = reader["Description"].ToString();
-                temp.Target      = (int)reader["Target"];
+                temp.Target      = (int)reader["TargetMinutes"];
                 temp.Reward      = reader["Reward"].ToString();
                 temp.DueDate     = reader["DueDate"].ToString();
-                temp.WorkoutType = (int)reader["WorkoutId"];
+                temp.WorkoutType = (int)reader["FK_Challenge_WorkoutID"];
 
-                if (reader["UserId"] != DBNull.Value)
+                if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
                     temp.IsJoined = true;
                 else
                     temp.IsJoined = false;
@@ -510,10 +510,10 @@ namespace FitnessApp.SQLdatabase
         public List<ChallengeModel> LoadJoinedChallenges(int accountID)
         {
             Connection.Open();
-            string query = "SELECT [Challenge].*,[UserChallenge].UserId " +
+            string query = "SELECT [Challenge].*,[UserChallenge].FK_UserChallenge_UserID " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
-                           "ON [Challenge].ID = [UserChallenge].ChallengeId " +
-                           "WHERE UserId = " + accountID;
+                           "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
+                           "WHERE FK_UserChallenge_UserID = " + accountID;
 
             List<ChallengeModel> joinedChallengeModels = new List<ChallengeModel>();
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -523,16 +523,16 @@ namespace FitnessApp.SQLdatabase
             {
                 ChallengeModel temp = new ChallengeModel();
 
-                temp.ID          = (int)reader["ID"];
+                temp.ID          = (int)reader["PK_ChallengeID"];
                 //temp.image
                 temp.Name        = reader["Name"].ToString();
                 temp.Description = reader["Description"].ToString();
-                temp.Target      = (int)reader["Target"];
+                temp.Target      = (int)reader["TargetMinutes"];
                 temp.Reward      = reader["Reward"].ToString();
                 temp.DueDate     = reader["DueDate"].ToString();
-                temp.WorkoutType = (int)reader["WorkoutId"];
+                temp.WorkoutType = (int)reader["FK_Challenge_WorkoutID"];
                 
-                if (reader["UserId"] != DBNull.Value)
+                if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
                     temp.IsJoined = true;
                 else
                     temp.IsJoined = false;
@@ -547,7 +547,7 @@ namespace FitnessApp.SQLdatabase
         {
             Connection.Open();
             string query = "INSERT INTO [UserChallenge] " +
-                           "(UserId, ChallengeId, JoiningDate) " +
+                           "(FK_UserChallenge_UserID, FK_UserChallenge_ChallengeID, JoiningDate) " +
                             "Values (" + accountID + ", " + ChallengeID + ", Convert(date, getdate()))";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -560,8 +560,8 @@ namespace FitnessApp.SQLdatabase
         {
             Connection.Open();
             string query = "DELETE [UserChallenge] " +
-                           "WHERE [UserChallenge].UserId = " + accountID + " " +
-                           "AND [UserChallenge].ChallengeId = " + ChallengeID;
+                           "WHERE [UserChallenge].FK_UserChallenge_UserID = " + accountID + " " +
+                           "AND [UserChallenge].FK_UserChallenge_ChallengeID = " + ChallengeID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.ExecuteReader();
@@ -575,9 +575,9 @@ namespace FitnessApp.SQLdatabase
 
             string query = "SELECT SUM(MinutesOfWork) " +
                            "From UserWorkout " +
-                           "WHERE UserId = " + accountID + " " +
+                           "WHERE FK_UserWorkout_UserID = " + accountID + " " +
                            "AND DateOfToday Between '" + joiningDate + "' and '" + endDate + "' " +
-                           "AND WorkoutId = " + workoutType;
+                           "AND FK_UserWorkout_WorkoutID = " + workoutType;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
 
@@ -600,8 +600,8 @@ namespace FitnessApp.SQLdatabase
 
             string query = "SELECT JoiningDate " +
                            "FROM [UserChallenge] " +
-                           "WHERE UserId = " + accountID + " " +
-                           "AND ChallengeId = " + challengeID;
+                           "WHERE FK_UserChallenge_UserID = " + accountID + " " +
+                           "AND FK_UserChallenge_ChallengeID = " + challengeID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
 
@@ -620,9 +620,9 @@ namespace FitnessApp.SQLdatabase
         public List<PlanModel> LoadPlans(int accountID)
         {
             Connection.Open();
-            string query = "SELECT [Plan].*,[User].ID " + 
+            string query = "SELECT [Plan].*,[User].PK_UserID " + 
                            "FROM [Plan] Left JOIN [User] " +
-                           "ON [Plan].ID = [User].PlanId";
+                           "ON [Plan].PK_PlanID = [User].FK_User_PlanID";
 
             List<PlanModel> plansModels = new List<PlanModel>();
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -655,7 +655,7 @@ namespace FitnessApp.SQLdatabase
         {
             Connection.Open();
             string query = "SELECT * FROM[PlanDayDescription] " +
-                           "WHERE[PlanDayDescription].PlanId = " + planID + " " +
+                           "WHERE[PlanDayDescription].FK_PlanDayDescription_PlanID = " + planID + " " +
                            "ORDER BY[PlanDayDescription].DayNumber";
 
             List<DayModel> dayModels = new List<DayModel>();
@@ -683,9 +683,9 @@ namespace FitnessApp.SQLdatabase
         public bool IsInPlan(int accountID)
         {
             Connection.Open();
-            string query = "SELECT PlanId " +
+            string query = "SELECT FK_User_PlanID " +
                            "FROM [USER] " +
-                           "WHERE ID = " + accountID;
+                           "WHERE PK_UserID = " + accountID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
 
@@ -706,9 +706,9 @@ namespace FitnessApp.SQLdatabase
         {
             Connection.Open();
             string query = "UPDATE [User] " +
-                           "SET PlanId = " + planID + ", " +
+                           "SET FK_User_PlanID = " + planID + ", " +
                            "PlanJoiningDate = Convert(date, getdate()) " +
-                           "WHERE [User].ID = " + accountID;
+                           "WHERE [User].PK_UserID = " + accountID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.ExecuteReader();
@@ -719,9 +719,9 @@ namespace FitnessApp.SQLdatabase
         {
             Connection.Open();
             string query = "UPDATE [User] " +
-                           "SET PlanId = NULL, " +
+                           "SET FK_User_PlanID = NULL, " +
                            "PlanJoiningDate = NULL " +
-                           "WHERE [User].ID = " + accountID;
+                           "WHERE [User].PK_UserID = " + accountID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.ExecuteReader();
