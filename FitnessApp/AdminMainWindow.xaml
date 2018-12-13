@@ -267,6 +267,93 @@
             
         </materialDesign:DrawerHost>
 
+        <!--Update Password Grid Content-->
+        <Grid x:Name="UpdatePasswordGrid">
+
+            <!--Background Pattern Image-->
+            <Grid.Background>
+                <ImageBrush ImageSource="Images/BG.jpg"
+                        Stretch="UniformToFill"/>
+            </Grid.Background>
+
+            <materialDesign:Card Width="500"
+                                 Padding="25"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"
+                                 Background="{StaticResource MaterialDesignBackground}"
+                                 Visibility="Visible">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Card Header-->
+                    <TextBlock Grid.Row="0"
+                               FontFamily="{StaticResource ProductSans}"
+                               FontSize="18"
+                               Text="Welcome"/>
+
+                    <TextBlock Grid.Row="2"
+                               FontFamily="{StaticResource ProductSans}"
+                               FontSize="18"
+                               Text="Update your password"/>
+
+                    <TextBlock Grid.Row="4"
+                               FontFamily="{StaticResource Roboto}"
+                               FontSize="14"
+                               TextWrapping="Wrap">
+                               You need to update your password because this is the first time you are signing in.
+                    </TextBlock>
+
+                    <!--Password Fields-->
+                    <TextBox x:Name="OldPasswordTextBox"
+                             Grid.Row="6"
+                             FontFamily="{StaticResource Roboto}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Old Password" />
+
+                    <TextBox x:Name="NewPasswordTextBox"
+                             Grid.Row="8"
+                             FontFamily="{StaticResource Roboto}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="New Password" />
+
+                    <TextBox x:Name="ConfirmNewPasswordTextBox"
+                             Grid.Row="10"
+                             FontFamily="{StaticResource Roboto}"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                             materialDesign:HintAssist.Hint="Confirm New Password" />
+
+                    <!--Update Password Button-->
+                    <Button x:Name="UpdatePasswordButton"
+                            Grid.Row="12"
+                            FontFamily="{StaticResource ProductSans}" 
+                            FontSize="14"
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Click="UpdatePasswordButton_Click">
+                        Update Password
+                    </Button>
+
+
+                </Grid>
+
+            </materialDesign:Card>
+
+        </Grid>
+
         <materialDesign:Snackbar x:Name="MessagesSnackbar"/>
 
     </Grid>

@@ -80,6 +80,11 @@ namespace FitnessApp
             PageHeaderTextBlock .Text = pageTextBlock.Text;
         }
 
+        private void UpdatePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdatePasswordGrid.Visibility = Visibility.Collapsed;
+        }
+
         private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SigningWindow SigningWindowTemp = new SigningWindow();
