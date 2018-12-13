@@ -197,9 +197,20 @@ namespace FitnessApp.UserMainWindowPages
 
         private void DialogBoxAddFoodButton_Click(object sender, RoutedEventArgs e)
         {
-            // Adding Food code Here...
-            AddFoodDialogBox.Visibility = Visibility.Collapsed;
-            DialogBox.IsOpen = false;
+
+            if (FoodComboBox.SelectedIndex == -1)
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please choose Food!");
+
+            else if (FoodQuantityTextBox.Text == "")
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter Food Quantity!");
+
+            else
+            {
+                SQLqueriesObject.AddFood(FoodComboBox.Text, double.Parse(FoodQuantityTextBox.Text), UserMainWindow.signedInUser.ID);
+                AddFoodDialogBox.Visibility = Visibility.Collapsed;
+                DialogBox.IsOpen = false;
+            }
+
         }
 
         private void DialogBoxAddWorkoutButton_Click(object sender, RoutedEventArgs e)

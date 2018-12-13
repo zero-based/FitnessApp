@@ -950,6 +950,55 @@ namespace FitnessApp.SQLdatabase
             return food;
         }
 
-        
+        public void AddFood(string food, double quantiy, int accountID)
+        {
+            Connection.Open();
+
+            int FoodID = 0;
+            double TotalCalories = 0;
+
+            // Calculate Total Calories gained
+            SqlCommand cmd = new SqlCommand("select Type from Food where Name=@food", Connection);
+            cmd.Parameters.AddWithValue("@food", food);
+            string FoodType = cmd.ExecuteScalar().ToString();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (FoodType == "Protein")
+                {
+                    TotalCalories += 4 * quantiy;
+                }
+                else if (FoodType == "Fats")
+                {
+                    TotalCalories += 9 * quantiy;
+                }
+                else if (FoodType == "Carbohydrates")
+                {
+                    TotalCalories += 4 * quantiy;
+                }
+            }
+            reader.Close();
+
+            // Get Food ID
+            SqlCommand cmd2 = new SqlCommand("select PK_FoodID from Food where Name=@food", Connection);
+            cmd2.Parameters.AddWithValue("@food", food);
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            while (reader2.Read())
+            {
+                FoodID = (int)(reader2["PK_FoodID"]);
+            }
+            reader2.Close();
+
+            // Insert Food in UserFood Table
+            SqlCommand cmd3 = new SqlCommand("insert into [UserFood] (FK_UserFood_UserID, FK_UserFood_FoodID, CaloriesGained,DateOfToday) Values (@UserId, @FoodId, @Calories, convert (date ,getdate()))", Connection);
+            cmd3.Parameters.AddWithValue("@UserId", accountID);
+            cmd3.Parameters.AddWithValue("@FoodId", FoodID);
+            cmd3.Parameters.AddWithValue("@Calories", TotalCalories);
+            cmd3.ExecuteReader();
+
+            Connection.Close();
+
+        }
     }
 }
