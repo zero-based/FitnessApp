@@ -453,7 +453,19 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
+        // Save Feedback
+        public void SaveFeedback(int userID, int rating, string feedback)
+        {
+            Connection.Open();
 
+            string query = "INSERT INTO [Feedback] (FK_Feedback_UserID, Rating, Feedback) " +
+                           "VALUES('" + userID + "','" + rating + "','" + feedback + "')";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.ExecuteReader();
+
+            Connection.Close();
+        }
 
 
         // Challenges queries and functions.

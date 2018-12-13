@@ -214,7 +214,7 @@ namespace FitnessApp.UserMainWindowPages
 
         private void SubmitFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Submit Feedback Code Here...
+            SQLqueriesObject.SaveFeedback(UserMainWindow.signedInUser.ID, RatingBar.Value , FeedbackTextBox.Text);
         }
 
     }
