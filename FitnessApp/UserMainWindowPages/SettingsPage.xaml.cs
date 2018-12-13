@@ -138,6 +138,10 @@ namespace FitnessApp.UserMainWindowPages
                 // Refresh CaloriesCalculatorPage DataContext
                 UserMainWindow.CaloriesCalculatorPageObject.DataContext = null;
                 UserMainWindow.CaloriesCalculatorPageObject.DataContext = UserMainWindow.signedInUser;
+
+                // Confirmation Message
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Profile Updated!");
+
             }
         }
 
@@ -183,6 +187,9 @@ namespace FitnessApp.UserMainWindowPages
                 UserMainWindow.UserMainWindowObject.DataContext = null;
                 UserMainWindow.UserMainWindowObject.DataContext = UserMainWindow.signedInUser;
 
+                // Confirmation Message
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Account Updated!");
+
             }
         }
 
@@ -210,12 +217,18 @@ namespace FitnessApp.UserMainWindowPages
                 // Update User's Password in database
                 SQLqueriesObject.UpdateUserPassword(UserMainWindow.signedInUser);
 
+                // Confirmation Message
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");
             }
         }
 
         private void SubmitFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             SQLqueriesObject.SaveFeedback(UserMainWindow.signedInUser.ID, RatingBar.Value , FeedbackTextBox.Text);
+
+            // Confirmation Message
+            UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Thank you for your feedback!");
+
         }
 
     }
