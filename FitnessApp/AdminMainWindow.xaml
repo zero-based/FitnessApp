@@ -7,14 +7,12 @@
         mc:Ignorable="d"
                
         Title="Fitness App" 
-        Width="1080"         
+        Width="1080"
         Height="720"
         ResizeMode="CanMinimize"
         WindowStartupLocation="CenterScreen">
 
     <Grid>
-
-        <materialDesign:Snackbar x:Name="MessagesSnackbar"/>
 
         <materialDesign:DrawerHost x:Name="SideMenuDrawer"
                                    IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
@@ -228,26 +226,22 @@
             </materialDesign:DrawerHost.LeftDrawerContent>
 
 
-            <!--Admin Main Window-->
+            <!--User Main Window-->
             <Grid>
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
-                    <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="30"/>
                 </Grid.RowDefinitions>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="30"/>
-                </Grid.ColumnDefinitions>
+                <!--User Main Window Frame-->
+                <Frame x:Name="AdminWindowPagesFrame" 
+                       Grid.Row="1"
+                       NavigationUIVisibility="Hidden">
+                </Frame>
 
-
-                <!--Admin Main Window Header-->
+                <!--User Main Window Header-->
                 <materialDesign:ColorZone Grid.Row="0"
-                                          Grid.ColumnSpan="3"
                                           Padding="15" 
                                           Mode="PrimaryDark"
                                           materialDesign:ShadowAssist.ShadowDepth="Depth2">
@@ -259,7 +253,6 @@
                                       Height="25"
                                       Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
-
                         <!--Page Header-->
                         <TextBlock x:Name="PageHeaderTextBlock"
                                    HorizontalAlignment="Center" 
@@ -270,17 +263,12 @@
 
                 </materialDesign:ColorZone>
 
-                <!--Admin Main Window Frame-->
-                <Frame x:Name="AdminWindowPagesFrame" 
-                       Grid.Row="2"
-                       Grid.Column="1"
-                       NavigationUIVisibility="Hidden">
-                </Frame>
-
             </Grid>
-
+            
         </materialDesign:DrawerHost>
-        
+
+        <materialDesign:Snackbar x:Name="MessagesSnackbar"/>
+
     </Grid>
 
 </Window>
