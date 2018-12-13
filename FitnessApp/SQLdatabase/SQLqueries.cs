@@ -306,18 +306,12 @@ namespace FitnessApp.SQLdatabase
 
             dr.Close();
 
+            Connection.Close();
 
             // Info from Weight Table
-            string query2 = "SELECT Weight FROM [UserWeight] WHERE FK_UserWeight_UserID = @userID";
+            currentUser.Weight = GetLastWeight(userID);
 
-            SqlCommand cmd2 = new SqlCommand(query2, Connection);
-            cmd2.Parameters.AddWithValue("@userID", userID);
-            SqlDataReader dr2 = cmd2.ExecuteReader();
-
-            dr2.Read();
-            currentUser.Weight = (double) dr2["Weight"];
-            dr2.Close();
-
+            Connection.Open();
 
             // Info from Accounts Table
             string query3 = "SELECT Email, Password FROM [Account] WHERE AccountID = @userID";
@@ -341,6 +335,24 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
 
             return currentUser;
+        }
+
+        public double GetLastWeight(int userID)
+        {
+            Connection.Open();
+
+            string query = "SELECT Weight " +
+                           "FROM [UserWeight] " +
+                           "WHERE FK_UserWeight_UserID = @UserId";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@UserId", userID);
+
+            double userWeight = (double)cmd.ExecuteScalar();
+
+            Connection.Close();
+
+            return userWeight;
         }
 
         // Update User Profile
