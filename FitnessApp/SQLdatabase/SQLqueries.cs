@@ -343,7 +343,6 @@ namespace FitnessApp.SQLdatabase
             return currentUser;
         }
 
-
         // Update User Profile
         public void UpdateUserProfile(UserModel currentUser)
         {
@@ -438,6 +437,24 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Close();
         }
+
+        // Update User Password
+        public void UpdateUserPassword(UserModel currentUser)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("ChangePassword", Connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd.Parameters.Add(new SqlParameter("@Password", currentUser.Password));
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            Connection.Close();
+        }
+
+
+
 
         // Challenges queries and functions.
         public List<ChallengeModel> LoadAllChallenges(int accountID)
