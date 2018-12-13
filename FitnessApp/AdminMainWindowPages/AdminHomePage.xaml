@@ -7,7 +7,6 @@
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
       mc:Ignorable="d">
 
-    <Grid>
         <Grid>
 
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
@@ -227,5 +226,4 @@
             </ScrollViewer>
 
         </Grid>
-    </Grid>
 </Page>
