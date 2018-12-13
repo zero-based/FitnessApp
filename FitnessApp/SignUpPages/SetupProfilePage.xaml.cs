@@ -1,12 +1,9 @@
 ﻿using FitnessApp.SQLdatabase;
 using Microsoft.Win32;
-using System.IO;
-using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 using System.Windows;
-using System;
 using FitnessApp.Models;
+using System.Windows.Input;
 
 namespace FitnessApp.SignUpPages
 {
@@ -83,10 +80,11 @@ namespace FitnessApp.SignUpPages
             }
         }
 
-        private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void DecimalNumbersOnlyFieldValidation(object sender, TextCompositionEventArgs e)
         {
-            Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text);
+            var s = sender as TextBox;
+            var text = s.Text.Insert(s.SelectionStart, e.Text);
+            e.Handled = !double.TryParse(text, out double d);
         }
     }
 }

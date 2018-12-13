@@ -1,5 +1,5 @@
 ﻿using Microsoft.Win32;
-using System.Text.RegularExpressions;
+using System.Windows.Input;
 using System.Windows.Controls;
 using FitnessApp.Models;
 using FitnessApp.SQLdatabase;
@@ -88,9 +88,11 @@ namespace FitnessApp.UserMainWindowPages
 
         }
         
-        private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void DecimalNumbersOnlyFieldValidation(object sender, TextCompositionEventArgs e)
         {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
+            var s = sender as TextBox;
+            var text = s.Text.Insert(s.SelectionStart, e.Text);
+            e.Handled = !double.TryParse(text, out double d);
         }
 
         private void UpdateProfileButton_Click(object sender, System.Windows.RoutedEventArgs e)
