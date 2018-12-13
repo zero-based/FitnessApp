@@ -187,7 +187,29 @@ namespace FitnessApp.UserMainWindowPages
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Update Password Code Here...
+            if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != UserMainWindow.signedInUser.Password)
+            {
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
+                OldPasswordTextBox.Password = "";
+            }
+
+            if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
+            {
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
+                NewPasswordTextBox.Password = "";
+                ConfirmNewPasswordTextBox.Password = "";
+            }
+
+            else
+            {
+
+                // Update signedInUser User Model
+                UserMainWindow.signedInUser.Password = SQLqueriesObject.EncryptPassword(NewPasswordTextBox.Password);
+
+                // Update User's Password in database
+                SQLqueriesObject.UpdateUserPassword(UserMainWindow.signedInUser);
+
+            }
         }
 
         private void SubmitFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
