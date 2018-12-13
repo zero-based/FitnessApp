@@ -7,8 +7,7 @@
       mc:Ignorable="d">
 
 
-    <materialDesign:DrawerHost x:Name="DaysSideDrawer"
-                               IsRightDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+    <materialDesign:DrawerHost x:Name="DaysSideDrawer">
 
         <!--Side Menu-->
         <materialDesign:DrawerHost.RightDrawerContent>
