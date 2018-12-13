@@ -13,16 +13,16 @@
             
             <Grid>
                 
-                <StackPanel x:Name="AddMealDialogBox"
+                <StackPanel x:Name="AddFoodDialogBox"
                             Margin="15"
                             Width="200"
                             Visibility="Collapsed">
                     
                     <TextBlock>
-                        Add a new Meal
+                        Add a new Food
                     </TextBlock>
 
-                    <ComboBox x:Name="MealsComboBox"
+                    <ComboBox x:Name="FoodComboBox"
                               materialDesign:HintAssist.Hint="Search"
                               HorizontalAlignment="Stretch"
                               Margin="0,15,0,0"
@@ -30,7 +30,7 @@
                               materialDesign:HintAssist.HintOpacity="0.25"/>
 
 
-                    <TextBox x:Name="MealQuantityTextBox"
+                    <TextBox x:Name="FoodQuantityTextBox"
                              Margin="0,10,0,0"
                              FontFamily="{StaticResource Roboto}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -39,17 +39,17 @@
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
 
-                        <Button x:Name="DialogBoxAddMealButton"
+                        <Button x:Name="DialogBoxAddFoodButton"
                                 Margin="0,15,15,0"
                                 FontFamily="{StaticResource ProductSans}" 
                                 FontSize="14"
                                 Foreground="{DynamicResource PrimaryHueDarkBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
-                                Click="DialogBoxAddMealButton_Click">
+                                Click="DialogBoxAddFoodButton_Click">
                                 Add
                         </Button>
 
-                        <Button x:Name="DialogBoxCancelMealButton"
+                        <Button x:Name="DialogBoxCancelFoodButton"
                                 Margin="0,15,0,0"
                                 FontFamily="{StaticResource ProductSans}" 
                                 FontSize="14"
@@ -1064,9 +1064,9 @@
 
                 <StackPanel>
 
-                    <Button x:Name="AddMealButton"
-                            ToolTip="Add a Meal"
-                            Click="AddMealButton_Click">
+                    <Button x:Name="AddFoodButton"
+                            ToolTip="Add Food"
+                            Click="AddFoodButton_Click">
                         <materialDesign:PackIcon Kind="FoodApple"/>
                     </Button>
 

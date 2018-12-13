@@ -174,13 +174,13 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// PopUpBox Functions/Event Handlers //////////
 
-        private void AddMealButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void AddFoodButton_Click(object sender, RoutedEventArgs e)
         {
             DialogBox.IsOpen = true;
-            AddMealDialogBox.Visibility = Visibility.Visible;
+            AddFoodDialogBox.Visibility = Visibility.Visible;
         }
 
-        private void AddWorkoutButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void AddWorkoutButton_Click(object sender, RoutedEventArgs e)
         {
             DialogBox.IsOpen = true;
             AddWorkoutDialogBox.Visibility = Visibility.Visible;
@@ -193,10 +193,10 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// DialogBoxes Functions/Event Handlers //////////
 
-        private void DialogBoxAddMealButton_Click(object sender, RoutedEventArgs e)
+        private void DialogBoxAddFoodButton_Click(object sender, RoutedEventArgs e)
         {
-            // Adding Meal code Here...
-            AddMealDialogBox.Visibility = Visibility.Collapsed;
+            // Adding Food code Here...
+            AddFoodDialogBox.Visibility = Visibility.Collapsed;
             DialogBox.IsOpen = false;
         }
 
@@ -209,7 +209,7 @@ namespace FitnessApp.UserMainWindowPages
 
         private void DialogBoxCancelButton_Click(object sender, RoutedEventArgs e)
         {
-            AddMealDialogBox.Visibility = Visibility.Collapsed;
+            AddFoodDialogBox.Visibility = Visibility.Collapsed;
             AddWorkoutDialogBox.Visibility = Visibility.Collapsed;
             DialogBox.IsOpen = false;
         }
