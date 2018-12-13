@@ -872,6 +872,48 @@ namespace FitnessApp.SQLdatabase
             return weightValue;
         }
 
+        public double GetAverageWeightLostPerWeek(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select Avg(Weight) from UserWeight where DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+
+            Connection.Close();
+
+            return weightValue;
+        }
+
+        public double GetAverageWeightLostPerMonth(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select Avg(Weight) from UserWeight where DATEPART(MONTH,Date)=DATEPART(MONTH,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+
+            Connection.Close();
+
+            return weightValue;
+        }
+
+        public double GetAverageWeightLostPerYear(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select Avg(Weight) from UserWeight where DATEPART(YEAR,Date)=DATEPART(YEAR,GETDATE()) AND FK_UserWeight_UserID = @id; ", Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+
+            Connection.Close();
+
+            return weightValue;
+        }
+
         public string GetMotivationalQuote()
         {
             Connection.Open();
