@@ -112,6 +112,7 @@ namespace FitnessApp.UserMainWindowPages
                 if (WorkoutHoursPerDayTextBox.Text == "")
                     UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workout Hours Per Day Is Empty!");
             }
+
             else
             {
 
@@ -156,14 +157,14 @@ namespace FitnessApp.UserMainWindowPages
             }
 
             // Check Email Validation
-            if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
+            else if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
 
             // Check Email/Username Availability
-            if (SQLqueriesObject.IsEmailTaken(EmailTextBox.Text))
+            else if (SQLqueriesObject.IsEmailTaken(EmailTextBox.Text) || EmailTextBox.Text != UserMainWindow.signedInUser.Email)
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
 
-            if (SQLqueriesObject.IsUsernameTaken(UsernameTextBox.Text))
+            else if (SQLqueriesObject.IsUsernameTaken(UsernameTextBox.Text) || UsernameTextBox.Text != UserMainWindow.signedInUser.Username)
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
 
             else
@@ -193,7 +194,7 @@ namespace FitnessApp.UserMainWindowPages
                 OldPasswordTextBox.Password = "";
             }
 
-            if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
+            else if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
             {
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
                 NewPasswordTextBox.Password = "";
