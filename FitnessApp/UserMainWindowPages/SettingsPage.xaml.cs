@@ -142,7 +142,47 @@ namespace FitnessApp.UserMainWindowPages
 
         private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Update Account Code Here...
+            if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" ||
+                UsernameTextBox.Text == ""  || EmailTextBox.Text == ""     )
+            {
+                if (FirstNameTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
+                if (LastNameTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
+                if (UsernameTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username Is Empty!");
+                if (EmailTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
+            }
+
+            // Check Email Validation
+            if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
+
+            // Check Email/Username Availability
+            if (SQLqueriesObject.IsEmailTaken(EmailTextBox.Text))
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
+
+            if (SQLqueriesObject.IsUsernameTaken(UsernameTextBox.Text))
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
+
+            else
+            {
+
+                // Update signedInUser User Model
+                UserMainWindow.signedInUser.FirstName = FirstNameTextBox.Text;
+                UserMainWindow.signedInUser.LastName  = LastNameTextBox.Text;
+                UserMainWindow.signedInUser.Username  = UsernameTextBox.Text;
+                UserMainWindow.signedInUser.Email     = EmailTextBox.Text;
+
+                // Update User's Account in database
+                SQLqueriesObject.UpdateUserAccount(UserMainWindow.signedInUser);
+
+                // Refresh UserMainWindow DataContext
+                UserMainWindow.UserMainWindowObject.DataContext = null;
+                UserMainWindow.UserMainWindowObject.DataContext = UserMainWindow.signedInUser;
+
+            }
         }
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
