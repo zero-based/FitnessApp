@@ -2,6 +2,8 @@
 {
     public class UserModel
     {
+        SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
+
         private ImageModel _profilePhoto = new ImageModel() { };
 
         private int _id;
@@ -24,7 +26,6 @@
 
         public UserModel(int userID)
         {
-            SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
             UserModel temp = SQLqueriesObject.LoadUserData(userID);
 
             _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;
@@ -124,6 +125,12 @@
         public double Weight
         {
             get { return _weight; }
+            set { _weight = value; }
+        }
+
+        public double LatestWeight
+        {
+            get { return SQLqueriesObject.GetLastWeight(ID); }
             set { _weight = value; }
         }
 
