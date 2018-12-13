@@ -28,7 +28,7 @@ namespace FitnessApp.SQLdatabase
         ////////// Helper Functions //////////
 
         // Encrypt given password
-        private string PasswordEncryption(string password)
+        public string EncryptPassword(string password)
         {
             string hash = "f0le@rn";
             string encryptedPassword;
@@ -84,7 +84,7 @@ namespace FitnessApp.SQLdatabase
         public bool SignIn(string email, string password)
         {
             // Encrypt Password
-            string encryptedPassword = PasswordEncryption(password);
+            string encryptedPassword = EncryptPassword(password);
 
             // Create Command
             SqlCommand cmd = new SqlCommand("SELECT * FROM AdminAndUserAccount WHERE Email = @email AND Password = @password", Connection);
@@ -179,7 +179,7 @@ namespace FitnessApp.SQLdatabase
                            double targetWeight, double kilosToLosePerWeek, double workoutsPerWeek, double workoutHoursPerDay)
         {
             // Password Encryption
-            string encryptedPassword = PasswordEncryption(password);
+            string encryptedPassword = EncryptPassword(password);
 
             // Create Query amd Command
             string query1 = "INSERT INTO [User] (Photo, FirstName, LastName, Username, BirthDate, Gender, " +
