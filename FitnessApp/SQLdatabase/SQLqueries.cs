@@ -731,7 +731,6 @@ namespace FitnessApp.SQLdatabase
 
         // Home Page queries and Functions
 
-        // Load Weights Chart Values
         public List<double> GetWeightValues(int accountID)
         {
             Connection.Open();
@@ -818,7 +817,6 @@ namespace FitnessApp.SQLdatabase
             return dateValues;
         }
 
-        // Insert a new Weight
         public void AddNewWeight(double NewWeight, int accountID)
         {
             Connection.Open();
@@ -830,6 +828,48 @@ namespace FitnessApp.SQLdatabase
             cmd.ExecuteNonQuery();
 
             Connection.Close();
+        }
+
+        public double GetTotalWeightLostPerWeek(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select SUM(Weight) from UserWeight where DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+           
+            Connection.Close();
+
+            return weightValue;
+        }
+
+        public double GetTotalWeightLostPerMonth(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select SUM(Weight) from UserWeight where DATEPART(month,Date)=DATEPART(month,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+
+            Connection.Close();
+
+            return weightValue;
+        }
+
+        public double GetTotalWeightLostPerYear(int accountID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("select SUM(Weight) from UserWeight where DATEPART(year,Date)=DATEPART(year,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+
+            Connection.Close();
+
+            return weightValue;
         }
 
         public string GetMotivationalQuote()

@@ -26,7 +26,9 @@ namespace FitnessApp.UserMainWindowPages
             UserMainWindow.HomePageObject = this;
 
             LoadWeightChart(UserMainWindow.signedInUser.ID);
+            LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadMotivationalQuoteCard();
+            
 
             // Setting Data context for JoinedChallengesListBox
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
@@ -75,6 +77,13 @@ namespace FitnessApp.UserMainWindowPages
         {
             SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserMainWindow.signedInUser.ID);
             WeightChart.Series[0].Values.Add(double.Parse(TodaysWeightTextBox.Text));
+        }
+
+        private void LoadTotalWeightLostCard(int userID)
+        {
+            WeightLostPerWeekTextBlock.Text  = SQLqueriesObject.GetTotalWeightLostPerWeek(userID).ToString();
+            WeightLostPerMonthTextBlock.Text = SQLqueriesObject.GetTotalWeightLostPerMonth(userID).ToString();
+            WeightLostPerYearTextBlock.Text  = SQLqueriesObject.GetTotalWeightLostPerYear(userID).ToString();
         }
 
 
