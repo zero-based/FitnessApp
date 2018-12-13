@@ -403,6 +403,41 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
+        // Update User Account
+        public void UpdateUserAccount(UserModel currentUser)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("ChangeFirstName", Connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd.Parameters.Add(new SqlParameter("@FirstName", currentUser.FirstName));
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            SqlCommand cmd2 = new SqlCommand("ChangeLastName", Connection);
+            cmd2.CommandType = CommandType.StoredProcedure;
+            cmd2.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd2.Parameters.Add(new SqlParameter("@LastNmae", currentUser.LastName));
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            reader2.Close();
+
+            SqlCommand cmd3 = new SqlCommand("ChangeUserName", Connection);
+            cmd3.CommandType = CommandType.StoredProcedure;
+            cmd3.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd3.Parameters.Add(new SqlParameter("@UserName", currentUser.Username));
+            SqlDataReader reader3 = cmd3.ExecuteReader();
+            reader3.Close();
+
+            SqlCommand cmd4 = new SqlCommand("ChangeEmail", Connection);
+            cmd4.CommandType = CommandType.StoredProcedure;
+            cmd4.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            cmd4.Parameters.Add(new SqlParameter("@Email", currentUser.Email));
+            SqlDataReader reader4 = cmd4.ExecuteReader();
+            reader4.Close();
+
+            Connection.Close();
+        }
 
         // Challenges queries and functions.
         public List<ChallengeModel> LoadAllChallenges(int accountID)
