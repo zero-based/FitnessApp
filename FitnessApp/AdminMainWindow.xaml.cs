@@ -34,10 +34,12 @@ namespace FitnessApp
             switch (AdminMainWindowPagesListBox.SelectedIndex)
             {
                 case 0:
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.AdminHomePage.AdminHomePageObject);
                     HighlightItem(HomeTextBlock, HomeIcon);
                     break;
 
                 case 1:
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.ChallengesSetupPage.ChallengesSetupPageObject);
                     HighlightItem(SetupChallengesTextBlock, ChallengesIcon);
                     break;
 
@@ -46,6 +48,7 @@ namespace FitnessApp
                     break;
 
                 case 3:
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.AdminSettingsPage.AdminSettingsPageObject);
                     HighlightItem(SettingsTextBlock, SettingsIcon);
                     break;
             }
