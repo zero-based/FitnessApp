@@ -25,6 +25,8 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             UserMainWindow.HomePageObject = this;
 
+            FoodComboBox.ItemsSource = SQLqueriesObject.GetAllFood();
+
             LoadWeightChart(UserMainWindow.signedInUser.ID);
             LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
