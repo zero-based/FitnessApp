@@ -23,6 +23,7 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             UserMainWindow.HomePageObject = this;
 
+            LoadMotivationalQuoteCard();
 
             SeriesCollection = new SeriesCollection
             {
@@ -132,6 +133,10 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// Motivational Quotes Card Functions/Event Handlers //////////
 
+        private void LoadMotivationalQuoteCard()
+        {
+            MotiationalQuoteTextBlock.Text = SQLqueriesObject.GetMotivationalQuote();
+        }
 
         //////////////////////////////////////////////////////////////////////
 

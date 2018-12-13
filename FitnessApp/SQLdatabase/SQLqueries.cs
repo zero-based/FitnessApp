@@ -728,8 +728,22 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
-        
 
+        // Home Page queries and Functions
+        public string GetMotivationalQuote()
+        {
+            Connection.Open();
+
+            string query = "SELECT Quote FROM MotivationalQuote " +
+                           "WHERE PK_MotivationalQuoteID = DATEPART(DAY,GETDATE())";
+            SqlCommand CMD = new SqlCommand(query, Connection);
+
+            string Quote = CMD.ExecuteScalar().ToString();
+
+            Connection.Close();
+
+            return Quote;
+        }
 
 
     }
