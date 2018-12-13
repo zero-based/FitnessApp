@@ -86,8 +86,111 @@
 
                     </materialDesign:Card>
 
-                    <!--Number Of Users Card-->
+                    <!--User feedbacks ListBox-->
                     <materialDesign:Card Grid.Row="2"
+                                         Width="500" 
+                                         Background="{StaticResource MaterialDesignBackground}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Card Header-->
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       FontFamily="{StaticResource ProductSans}"
+                                       FontSize="18"
+                                       Text="User feedbacks"/>
+
+                            <!--Feedbacks ListBox-->
+                            <ListBox x:Name="FeedbacksListBox" 
+                                     Grid.Row="3"
+                                     Grid.Column="1"
+                                     Padding="-8"
+                                     ItemsSource="{Binding FeedbackModels}" 
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                     materialDesign:RippleAssist.IsDisabled="True" 
+                                     Foreground="Transparent">
+
+                                <!--Feedback Item Template-->
+                                <ListBox.ItemTemplate>
+
+                                    <DataTemplate DataType="FeedbackModel">
+
+                                        <Grid Width="450">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="10"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--UserName-->
+                                            <TextBlock Grid.Column="0"
+                                                       HorizontalAlignment="Left"
+                                                       FontFamily="{StaticResource ProductSans}"
+                                                       FontWeight="Regular" 
+                                                       FontSize="15"
+                                                       Foreground="Black"
+                                                       Text="{Binding UserName}"
+                                                       TextWrapping="Wrap"/>
+
+                                            <!--Feedback Body-->
+                                            <TextBlock Grid.Column="0"
+                                                       Margin="0,20,0,0"
+                                                       HorizontalAlignment="Left"
+                                                       FontFamily="{StaticResource Roboto}"
+                                                       FontWeight="Regular" 
+                                                       FontSize="14"
+                                                       Foreground="Black"
+                                                       Text="{Binding Feedback}"
+                                                       TextWrapping="Wrap"/>
+
+                                            <Button x:Name="DeleteFeedbackButton"
+                                                    Grid.Column="2"
+                                                    HorizontalAlignment="Right"
+                                                    Background="Transparent"
+                                                    BorderThickness="0"
+                                                    Click="DeleteFeedbackButton_Click">
+                                                <materialDesign:PackIcon Kind="DeleteSweep" Foreground="Black"/>
+                                            </Button>
+
+                                        </Grid>
+
+                                    </DataTemplate>
+
+                                </ListBox.ItemTemplate>
+
+                            </ListBox>
+                        </Grid>
+                    </materialDesign:Card>
+                </Grid>
+                
+                <!--Right cards grid-->
+                <Grid Grid.Column="2">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="15"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+
+                    <!--Number Of Users Card-->
+                    <materialDesign:Card Grid.Row="0"
                                          Width="500" 
                                          Background="{StaticResource MaterialDesignBackground}">
                         <Grid>
@@ -142,53 +245,6 @@
                         </Grid>
                     </materialDesign:Card>
 
-                </Grid>
-
-                <!--Right cards grid-->
-                <Grid Grid.Column="2">
-
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="15"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="15"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-
-                    <!--Card-->
-                    <materialDesign:Card Grid.Row="0"
-                                         Width="500"
-                                         Background="{StaticResource MaterialDesignBackground}">
-                        <Grid>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="25"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="25"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--Card Header-->
-                            <TextBlock Grid.Row="1"
-                                       Grid.Column="1"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="18"
-                                       Text="Card Header"/>
-
-                        </Grid>
-
-                    </materialDesign:Card>
-                        
                     <!--Card-->
                     <materialDesign:Card Grid.Row="2"
                                          Width="500" 
@@ -266,8 +322,7 @@
                 </Grid>
 
             </Grid>
-
-
+                
         </ScrollViewer>
 
     </Grid>
