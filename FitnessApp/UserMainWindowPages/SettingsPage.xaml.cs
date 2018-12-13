@@ -118,7 +118,7 @@ namespace FitnessApp.UserMainWindowPages
                 // Update signedInUser User Model
 
                 if (currentProfilePhoto != null) // Check if profile photo is updated
-                    UserMainWindow.signedInUser.ProfilePhoto.ByteArray = currentProfilePhoto.ByteArray;
+                    UserMainWindow.signedInUser.ProfilePhoto.FilePath = currentProfilePhoto.FilePath;
 
                 UserMainWindow.signedInUser.Weight             = double.Parse(WeightTextBox            .Text);
                 UserMainWindow.signedInUser.Height             = double.Parse(HeightTextBox            .Text);
