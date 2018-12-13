@@ -962,32 +962,32 @@ namespace FitnessApp.SQLdatabase
             return food;
         }
 
-        public void AddFood(string food, double quantiy, int accountID)
+        public void AddFood(string food, double quantity, int accountID)
         {
             Connection.Open();
 
-            int FoodID = 0;
-            double TotalCalories = 0;
+            int foodID = 0;
+            double totalCaloriesGained = 0;
 
             // Calculate Total Calories gained
             SqlCommand cmd = new SqlCommand("select Type from Food where Name=@food", Connection);
             cmd.Parameters.AddWithValue("@food", food);
-            string FoodType = cmd.ExecuteScalar().ToString();
+            string foodType = cmd.ExecuteScalar().ToString();
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
-                if (FoodType == "Protein")
+                if (foodType == "Protein")
                 {
-                    TotalCalories += 4 * quantiy;
+                    totalCaloriesGained += 4 * quantity;
                 }
-                else if (FoodType == "Fats")
+                else if (foodType == "Fats")
                 {
-                    TotalCalories += 9 * quantiy;
+                    totalCaloriesGained += 9 * quantity;
                 }
-                else if (FoodType == "Carbohydrates")
+                else if (foodType == "Carbohydrates")
                 {
-                    TotalCalories += 4 * quantiy;
+                    totalCaloriesGained += 4 * quantity;
                 }
             }
             reader.Close();
@@ -998,15 +998,15 @@ namespace FitnessApp.SQLdatabase
             SqlDataReader reader2 = cmd2.ExecuteReader();
             while (reader2.Read())
             {
-                FoodID = (int)(reader2["PK_FoodID"]);
+                foodID = (int)(reader2["PK_FoodID"]);
             }
             reader2.Close();
 
             // Insert Food in UserFood Table
-            SqlCommand cmd3 = new SqlCommand("insert into [UserFood] (FK_UserFood_UserID, FK_UserFood_FoodID, CaloriesGained,DateOfToday) Values (@UserId, @FoodId, @Calories, convert (date ,getdate()))", Connection);
+            SqlCommand cmd3 = new SqlCommand("insert into [UserFood] (FK_UserFood_UserID, FK_UserFood_FoodID, CaloriesGained,DateOfToday) Values (@UserId, @FoodId, @Calories,convert (date ,getdate()))", Connection);
             cmd3.Parameters.AddWithValue("@UserId", accountID);
-            cmd3.Parameters.AddWithValue("@FoodId", FoodID);
-            cmd3.Parameters.AddWithValue("@Calories", TotalCalories);
+            cmd3.Parameters.AddWithValue("@FoodId", foodID);
+            cmd3.Parameters.AddWithValue("@Calories", totalCaloriesGained);
             cmd3.ExecuteReader();
 
             Connection.Close();
@@ -1015,23 +1015,21 @@ namespace FitnessApp.SQLdatabase
 
         public void AddWorkout(string workout, double duration, UserModel currentUser)
         {
-
-            double TotalCalories = 0;
             int workoutID = 0;
+            double totalCaloriesLost = 0;
 
             if (currentUser.Gender == "Female")
             {
-                TotalCalories = ((currentUser.Age * 0.074) - (currentUser.LatestWeight * 0.05741) + (100 * 0.4472) - 20.4022) * (duration / 4.184);
+                totalCaloriesLost = ((currentUser.Age * 0.074) - (currentUser.LatestWeight * 0.05741) + (100 * 0.4472) - 20.4022) * (duration / 4.184);
             }
             else
             {
-                TotalCalories = ((currentUser.Age * 0.2017) - (currentUser.LatestWeight * 0.09036) + (100 * 0.6309) - 55.0969) * (duration / 4.184);
-
+                totalCaloriesLost = ((currentUser.Age * 0.2017) - (currentUser.LatestWeight * 0.09036) + (100 * 0.6309) - 55.0969) * (duration / 4.184);
             }
 
-            // Get Workout ID
-
             Connection.Open();
+
+            // Get Workout ID
             SqlCommand cmd4 = new SqlCommand("select PK_WorkoutID from Workout where Name=@name", Connection);
             cmd4.Parameters.AddWithValue("@name", workout);
             SqlDataReader dr = cmd4.ExecuteReader();
@@ -1042,11 +1040,11 @@ namespace FitnessApp.SQLdatabase
             dr.Close();
 
             // Insert Workout in UserWorkout Table
-            SqlCommand Cmd3 = new SqlCommand("Insert into UserWorkout (FK_UserWorkout_UserID,FK_UserWorkout_WorkoutID,MinutesOfWork,CaloriesLost,DateOfToday) Values(@userid,@workoutid,@duration,@calories,convert (date ,getdate()))", Connection);
+            SqlCommand Cmd3 = new SqlCommand("Insert into UserWorkout (FK_UserWorkout_UserID,FK_UserWorkout_WorkoutID,MinutesOfWork,CaloriesLost,DateOfToday) Values(@userid, @workoutid, @duration, @calories, convert (date ,getdate()))", Connection);
             Cmd3.Parameters.AddWithValue("@userid", currentUser.ID);
             Cmd3.Parameters.AddWithValue("@workoutid", workoutID);
             Cmd3.Parameters.AddWithValue("@duration", duration);
-            Cmd3.Parameters.AddWithValue("@calories", Math.Round(TotalCalories, 2));
+            Cmd3.Parameters.AddWithValue("@calories", Math.Round(totalCaloriesLost, 2));
             Cmd3.ExecuteNonQuery();
 
             Connection.Close();
