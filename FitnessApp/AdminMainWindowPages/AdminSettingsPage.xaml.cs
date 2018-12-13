@@ -16,8 +16,8 @@ namespace FitnessApp.AdminMainWindowPages
             // Initialize Profile Expander to be expanded
             AccountExpander.IsExpanded = true;
 
-            // Initialize DataContext with signedInUser Model
-            DataContext = UserMainWindow.signedInUser;
+            // Initialize DataContext with signedInAdmin Model
+            //DataContext = AdminMainWindow.signedInUser;
         }
 
         private void Expander_Expanded(object sender, System.Windows.RoutedEventArgs e)
@@ -27,19 +27,16 @@ namespace FitnessApp.AdminMainWindowPages
             // recursively.
             AccountExpander.Expanded  -= Expander_Expanded;
             SecurityExpander.Expanded -= Expander_Expanded;
-            AboutExpander.Expanded    -= Expander_Expanded;
             HelpExpander.Expanded     -= Expander_Expanded;
 
             // Close all Expanders.
             AccountExpander.IsExpanded  = false;
             SecurityExpander.IsExpanded = false;
-            AboutExpander.IsExpanded    = false;
             HelpExpander.IsExpanded     = false;
 
             // Re-add Expanded Event Handler to all Expanders.
             AccountExpander.Expanded  += Expander_Expanded;
             SecurityExpander.Expanded += Expander_Expanded;
-            AboutExpander.Expanded    += Expander_Expanded;
             HelpExpander.Expanded     += Expander_Expanded;
 
 
@@ -55,13 +52,6 @@ namespace FitnessApp.AdminMainWindowPages
             // Re-add Expanded Event Handler to Current Expander.
             currentExpander.Expanded += Expander_Expanded;
 
-        }
-
-
-
-        private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
         }
 
 

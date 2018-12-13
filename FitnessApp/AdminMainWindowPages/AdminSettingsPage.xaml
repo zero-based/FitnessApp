@@ -144,28 +144,6 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
 
 
-                <Expander x:Name="AboutExpander"
-                              Header="About"
-                              Expanded="Expander_Expanded">
-
-                    <TextBlock Margin="25,15"
-                                   TextWrapping="Wrap"
-                                   Opacity="0.75">
-                                   Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                                   sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                                   nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                   reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                   pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                   culpa qui officia deserunt mollit anim id est laborum.
-                    </TextBlock>
-
-                </Expander>
-
-
-                <Border Height="1" Background="{DynamicResource MaterialDesignDivider}" />
-
-
                 <Expander x:Name="HelpExpander"
                               Header="Help"
                               Expanded="Expander_Expanded">
