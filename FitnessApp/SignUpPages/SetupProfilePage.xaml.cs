@@ -16,7 +16,7 @@ namespace FitnessApp.SignUpPages
     public partial class SetUpProfilePage : Page
     {
         public static SetUpProfilePage SetUpProfilePageObject = new SetUpProfilePage();
-        private ImageModel profilePhoto = new ImageModel() { };
+        private ImageModel profilePhoto = new ImageModel();
 
         // Create an object from dataBase class
         SQLqueries SQLqueriesObject = new SQLqueries();
@@ -53,11 +53,12 @@ namespace FitnessApp.SignUpPages
                                         SignUpFirstPage.SignUpFirstPageObject.Password,
                                         SignUpSecondPage.SignUpSecondPageObject.GenderComboBox.Text,
                                         SignUpSecondPage.SignUpSecondPageObject.BirthDatePicker.Text,
-                                        double.Parse(WeightTextBox.Text), double.Parse(HeightTextBox.Text),
+                                        double.Parse(WeightTextBox.Text),
+                                        double.Parse(HeightTextBox.Text),
                                         double.Parse(TargetWeightTextBox.Text),
                                         double.Parse(KilosToLosePerWeekTextBox.Text),
-                                        int.Parse(WorkoutsPerWeekTextBox.Text),
-                                        int.Parse(WorkoutHoursPerDayTextBox.Text));
+                                        double.Parse(WorkoutsPerWeekTextBox.Text),
+                                        double.Parse(WorkoutHoursPerDayTextBox.Text));
 
                 UserMainWindow UserMainWindowTemp = new UserMainWindow(SQLqueriesObject.accountID);
                 SigningWindow.SigningWindowObject.Close();

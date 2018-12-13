@@ -301,7 +301,7 @@ namespace FitnessApp.SQLdatabase
             currentUser.Height                 = (double) dr["Height"];
             currentUser.TargetWeight           = (double) dr["TargetWeight"];
             currentUser.KilosToLosePerWeek     = (double) dr["KilosToLosePerWeek"];
-            currentUser.WorkoutsPerWeek        = (int)    dr["WorkoutsPerWeek"];
+            currentUser.WorkoutsPerWeek        = (double) dr["WorkoutsPerWeek"];
             currentUser.WorkoutHoursPerDay     = (double) dr["WorkoutHoursPerDay"];
 
             dr.Close();
