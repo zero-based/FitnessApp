@@ -1,7 +1,9 @@
 ﻿using FitnessApp.SQLdatabase;
+using FitnessApp.ViewModels;
 using LiveCharts;
 using LiveCharts.Wpf;
 using System;
+using System.Collections.Generic;
 using System.Windows.Controls;
 
 namespace FitnessApp.AdminMainWindowPages
@@ -30,9 +32,16 @@ namespace FitnessApp.AdminMainWindowPages
             Formatter = value => value.ToString("N");
 
             FeedbackRatingChart.DataContext = this;
+            FeedbacksListBox.DataContext = new FeedbacksViewModel();
         }
+
         public SeriesCollection SeriesCollection { get; set; }
         public string[] Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
+
+        private void DeleteFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }
