@@ -1,8 +1,8 @@
 ﻿using Microsoft.Win32;
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using System;
+using FitnessApp.Models;
+using FitnessApp.SQLdatabase;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -11,6 +11,8 @@ namespace FitnessApp.UserMainWindowPages
     /// </summary>
     public partial class SettingsPage : Page
     {
+        // Create an object from dataBase class
+        SQLqueries SQLqueriesObject = new SQLqueries();
 
         public SettingsPage()
         {
@@ -68,6 +70,7 @@ namespace FitnessApp.UserMainWindowPages
 
         }
 
+        private ImageModel currentProfilePhoto;
 
         private void UpdateUserProfilePhotoButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -79,7 +82,8 @@ namespace FitnessApp.UserMainWindowPages
 
             if (browsePhotoDialog.ShowDialog() == true)
             {
-                UserProfilePhoto.ImageSource = new BitmapImage(new Uri(browsePhotoDialog.FileName));
+                currentProfilePhoto = new ImageModel { FilePath = browsePhotoDialog.FileName };
+                UserProfilePhoto.ImageSource = currentProfilePhoto.Source;
             }
 
         }
@@ -91,7 +95,49 @@ namespace FitnessApp.UserMainWindowPages
 
         private void UpdateProfileButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Update Profile Code Here...
+
+            if (WeightTextBox.Text == ""             || HeightTextBox.Text == ""          || TargetWeightTextBox.Text == ""     ||
+                KilosToLosePerWeekTextBox.Text == "" || WorkoutsPerWeekTextBox.Text == "" || WorkoutHoursPerDayTextBox.Text == "")
+            {
+                if (WeightTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Weight Is Empty!");
+                if (HeightTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Height Is Empty!");
+                if (TargetWeightTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Target Weight Is Empty!");
+                if (KilosToLosePerWeekTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Kilos To Lose Per Week Is Empty!");
+                if (WorkoutsPerWeekTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workouts Per Week Is Empty!");
+                if (WorkoutHoursPerDayTextBox.Text == "")
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workout Hours Per Day Is Empty!");
+            }
+            else
+            {
+
+                // Update signedInUser User Model
+
+                if (currentProfilePhoto != null) // Check if profile photo is updated
+                    UserMainWindow.signedInUser.ProfilePhoto.ByteArray = currentProfilePhoto.ByteArray;
+
+                UserMainWindow.signedInUser.Weight             = double.Parse(WeightTextBox            .Text);
+                UserMainWindow.signedInUser.Height             = double.Parse(HeightTextBox            .Text);
+                UserMainWindow.signedInUser.TargetWeight       = double.Parse(TargetWeightTextBox      .Text);
+                UserMainWindow.signedInUser.KilosToLosePerWeek = double.Parse(KilosToLosePerWeekTextBox.Text);
+                UserMainWindow.signedInUser.WorkoutsPerWeek    = double.Parse(WorkoutsPerWeekTextBox   .Text);
+                UserMainWindow.signedInUser.WorkoutHoursPerDay = double.Parse(WorkoutHoursPerDayTextBox.Text);
+
+                // Update User's Profile in database
+                SQLqueriesObject.UpdateUserProfile(UserMainWindow.signedInUser);
+
+                // Refresh UserMainWindow DataContext
+                UserMainWindow.UserMainWindowObject.DataContext = null;
+                UserMainWindow.UserMainWindowObject.DataContext = UserMainWindow.signedInUser;
+
+                // Refresh CaloriesCalculatorPage DataContext
+                UserMainWindow.CaloriesCalculatorPageObject.DataContext = null;
+                UserMainWindow.CaloriesCalculatorPageObject.DataContext = UserMainWindow.signedInUser;
+            }
         }
 
         private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
