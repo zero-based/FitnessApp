@@ -403,9 +403,15 @@ namespace FitnessApp.UserMainWindowPages
                 DialogBox.IsOpen = false;
             }
 
+            
+            // Update Progress of the Challenges having the same type as the entered workout
+            SQLqueriesObject.UpdateChallengesProgress(UserMainWindow.signedInUser.ID, WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text));
+
+            // Refresh Challenges card
+            LoadJoinedChallengesCards();
+
             WorkoutsComboBox.SelectedIndex = -1;
             WorkoutsDurationTextBox.Text = "";
-            LoadJoinedChallengesCards();
         }
 
         private void DialogBoxCancelButton_Click(object sender, RoutedEventArgs e)

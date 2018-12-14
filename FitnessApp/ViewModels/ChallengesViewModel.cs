@@ -28,14 +28,7 @@ namespace FitnessApp.ViewModels
 
             foreach (var item in joinedChallengeModels)
             {
-                string joiningDate = SQLqueriesObject.GetChallengeJoiningDate(accountID, item.ID);
-
-                int tempProgress = SQLqueriesObject.GetChallengeProgress (accountID, joiningDate, item.DueDate, item.WorkoutType);
-
-                if (tempProgress > -1)
-                {
-                    item.Progress = tempProgress;
-                }
+                // Classify Challenges
                 if (item.Progress < item.TargetMinutes)
                     uncompletedJoinedChallengeModels.Add(item);
                 else

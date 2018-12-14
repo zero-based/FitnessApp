@@ -487,7 +487,7 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Open();
 
-            string query = "SELECT [Challenge].*,[UserChallenge].FK_UserChallenge_UserID " +
+            string query = "SELECT [Challenge].*,[UserChallenge].* " +
                            "FROM [Challenge] Left JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "AND FK_UserChallenge_UserID = " + accountID;
@@ -522,7 +522,7 @@ namespace FitnessApp.SQLdatabase
         public List<ChallengeModel> LoadJoinedChallenges(int accountID)
         {
             Connection.Open();
-            string query = "SELECT [Challenge].*,[UserChallenge].FK_UserChallenge_UserID " +
+            string query = "SELECT [Challenge].*,[UserChallenge].* " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "WHERE FK_UserChallenge_UserID = " + accountID;
@@ -543,11 +543,9 @@ namespace FitnessApp.SQLdatabase
                 temp.Reward         = reader["Reward"].ToString();
                 temp.DueDate        = reader["DueDate"].ToString().Split(' ')[0];
                 temp.WorkoutType    = (int)reader["FK_Challenge_WorkoutID"];
-                
-                if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
-                    temp.IsJoined = true;
-                else
-                    temp.IsJoined = false;
+                temp.Progress       = (int)reader["Progress"];
+                temp.IsJoined       = true;
+
                 joinedChallengeModels.Add(temp);
             }
             Connection.Close();
@@ -559,8 +557,8 @@ namespace FitnessApp.SQLdatabase
         {
             Connection.Open();
             string query = "INSERT INTO [UserChallenge] " +
-                           "(FK_UserChallenge_UserID, FK_UserChallenge_ChallengeID, JoiningDate) " +
-                            "Values (" + accountID + ", " + ChallengeID + ", Convert(date, getdate()))";
+                           "(FK_UserChallenge_UserID, FK_UserChallenge_ChallengeID, JoiningDate, Progress) " +
+                            "Values (" + accountID + ", " + ChallengeID + ", getdate(), 0)";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.ExecuteReader();
@@ -581,51 +579,30 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
-        public int GetChallengeProgress(int accountID, string joiningDate, string endDate, int workoutType)
+        public void UpdateChallengesProgress(int accountID, string workout, double duration)
         {
             Connection.Open();
 
-            string query = "SELECT SUM(MinutesOfWork) " +
-                           "From UserWorkout " +
-                           "WHERE FK_UserWorkout_UserID = " + accountID + " " +
-                           "AND DateOfToday Between '" + joiningDate + "' and '" + endDate + "' " +
-                           "AND FK_UserWorkout_WorkoutID = " + workoutType;
+            string query = "UPDATE [UserChallenge] " +
+                           "SET progress += @workoutDuration " +
+                           "SELECT [Challenge].*, [UserChallenge].* , [Workout].[Name] " +
+                           "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
+                           "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
+                           "RIGHT JOIN [Workout] " +
+                           "ON [Challenge].Fk_Challenge_WorkoutID = [Workout].PK_WorkoutID " +
+                           "WHERE FK_UserChallenge_UserID = @userID " +
+                           "AND getdate() Between JoiningDate and DueDate " +
+                           "AND [Workout].[Name] = @workoutName";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-            int progress;
-            if (reader[0] != DBNull.Value)
-                progress = (int)reader[0];
-            else
-                progress = -1;
+            cmd.Parameters.AddWithValue("@workoutDuration", duration);
+            cmd.Parameters.AddWithValue("@userID", accountID);
+            cmd.Parameters.AddWithValue("@workoutName", workout);
+            cmd.ExecuteReader();
 
             Connection.Close();
-
-            return progress;
         }
 
-        public string GetChallengeJoiningDate(int accountID, int challengeID)
-        {
-            Connection.Open();
-
-            string query = "SELECT JoiningDate " +
-                           "FROM [UserChallenge] " +
-                           "WHERE FK_UserChallenge_UserID = " + accountID + " " +
-                           "AND FK_UserChallenge_ChallengeID = " + challengeID;
-
-            SqlCommand cmd = new SqlCommand(query, Connection);
-
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Read();
-
-            string joiningDate = reader["JoiningDate"].ToString();
-
-            Connection.Close();
-
-            return joiningDate;
-        }
 
 
         // Plans queries and functions.
