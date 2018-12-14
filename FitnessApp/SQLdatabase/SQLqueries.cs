@@ -1070,5 +1070,48 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Close();
         }
+
+        //////// Joined Plan ////////
+        
+        // Get Joined Plan ID and Name 
+        public int PlanId(int accountID)
+        {
+            int SQLplanID = 0;
+            string query = "select PlanId from [User] where ID= @accountID;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+
+                    SQLplanID = (int)dr["PlanId"];
+
+                }
+            }
+            dr.Close();
+            Connection.Close();
+
+            return SQLplanID;
+
+        }
+
+        public string PlanName(int accountID)
+        {
+            int SQLplanID = PlanId(accountID);
+            string SQLplanName = "";
+            string query = "select Name from [Plan] where ID=@SQLplanID;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+            SQLplanName = (string)dr["Name"];
+            Connection.Close();
+            return SQLplanName;
+        }
+
     }
 }
