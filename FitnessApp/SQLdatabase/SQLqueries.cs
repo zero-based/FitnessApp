@@ -1003,7 +1003,7 @@ namespace FitnessApp.SQLdatabase
             reader2.Close();
 
             // Insert Food in UserFood Table
-            SqlCommand cmd3 = new SqlCommand("insert into [UserFood] (FK_UserFood_UserID, FK_UserFood_FoodID, CaloriesGained,DateOfToday) Values (@UserId, @FoodId, @Calories,convert (date ,getdate()))", Connection);
+            SqlCommand cmd3 = new SqlCommand("insert into [UserFood] (FK_UserFood_UserID, FK_UserFood_FoodID, CaloriesGained,DateOfToday) Values (@UserId, @FoodId, @Calories, getdate())", Connection);
             cmd3.Parameters.AddWithValue("@UserId", accountID);
             cmd3.Parameters.AddWithValue("@FoodId", foodID);
             cmd3.Parameters.AddWithValue("@Calories", totalCaloriesGained);
@@ -1040,7 +1040,7 @@ namespace FitnessApp.SQLdatabase
             dr.Close();
 
             // Insert Workout in UserWorkout Table
-            SqlCommand Cmd3 = new SqlCommand("Insert into UserWorkout (FK_UserWorkout_UserID,FK_UserWorkout_WorkoutID,MinutesOfWork,CaloriesLost,DateOfToday) Values(@userid, @workoutid, @duration, @calories, convert (date ,getdate()))", Connection);
+            SqlCommand Cmd3 = new SqlCommand("Insert into UserWorkout (FK_UserWorkout_UserID,FK_UserWorkout_WorkoutID,MinutesOfWork,CaloriesLost,DateOfToday) Values(@userid, @workoutid, @duration, @calories, getdate())", Connection);
             Cmd3.Parameters.AddWithValue("@userid", currentUser.ID);
             Cmd3.Parameters.AddWithValue("@workoutid", workoutID);
             Cmd3.Parameters.AddWithValue("@duration", duration);
