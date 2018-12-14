@@ -158,10 +158,14 @@ namespace FitnessApp.UserMainWindowPages
         {
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
-            UncompletedJoinedChallengesListBox.DataContext = joinedChallengesDataContext;
             CompletedJoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+
+            ChallengesViewModel uncompletedJoinedChallengesDataContext = new ChallengesViewModel();
+            uncompletedJoinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
+            UncompletedJoinedChallengesListBox.DataContext = uncompletedJoinedChallengesDataContext;
             ControlNoChallengesCard(joinedChallengesDataContext);
         }
+
 
         private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -193,7 +197,14 @@ namespace FitnessApp.UserMainWindowPages
 
         private void CompletedChallengeButton_Click(object sender, RoutedEventArgs e)
         {
+            Button button = sender as Button;
+            int selectedChallengeIndex = CompletedJoinedChallengesListBox.Items.IndexOf(button.DataContext);
 
+            ChallengeModel currentChallenge = (ChallengeModel)CompletedJoinedChallengesListBox.Items[selectedChallengeIndex];
+
+            SQLqueriesObject.UnjoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
+
+            LoadJoinedChallengesCards();
         }
 
 
