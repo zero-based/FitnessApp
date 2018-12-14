@@ -584,7 +584,8 @@
                                                                    FontFamily="{StaticResource ProductSans}"
                                                                    FontSize="13"
                                                                    Foreground="Black"
-                                                                   Text="{Binding Reward}">
+                                                                   Text="{Binding Reward}"
+                                                                   TextWrapping="Wrap">
                                                         </TextBlock>
 
                                                     </Grid>
@@ -701,6 +702,7 @@
                                                Grid.Column="1"
                                                FontFamily="{StaticResource ProductSans}"
                                                FontSize="18"
+                                               TextWrapping="Wrap"
                                                Text="Plan Name | Day #1"/>
 
                                     <StackPanel x:Name="PlanContentStackPanel"

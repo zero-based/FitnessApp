@@ -213,7 +213,8 @@
                                            FontWeight="Bold" 
                                            FontSize="18"
                                            Foreground="Black"
-                                           Text="{Binding Name}"/>
+                                           Text="{Binding Name}"
+                                           TextWrapping="Wrap"/>
 
                                 <!--Plan Description-->
                                 <TextBlock Grid.Row="4"
@@ -221,10 +222,10 @@
                                            HorizontalAlignment="Center"
                                            FontFamily="{StaticResource Roboto}"
                                            FontSize="14"
-                                           TextWrapping="Wrap"
                                            TextAlignment="Center"
                                            Foreground="Black"
-                                           Text="{Binding Description}"/>
+                                           Text="{Binding Description}"
+                                           TextWrapping="Wrap"/>
 
                                 <Grid Grid.Row="6" Grid.Column="1" HorizontalAlignment="Center">
 

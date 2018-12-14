@@ -85,16 +85,18 @@
                                        FontWeight="Bold" 
                                        FontSize="18"
                                        Foreground="Black"
-                                       Text="{Binding Name}"/>
+                                       Text="{Binding Name}"
+                                       TextWrapping="Wrap"/>
 
                             <!--Challenge Description-->
                             <TextBlock Grid.Row="4"
                                        Grid.Column="1"
                                        FontFamily="{StaticResource Roboto}"
                                        FontSize="14"
-                                       TextWrapping="Wrap"
+                                       
                                        Foreground="Black"
-                                       Text="{Binding Description}"/>
+                                       Text="{Binding Description}"
+                                       TextWrapping="Wrap"/>
 
                             <!--Challenge Due Date-->
                             <Grid Grid.Row="6" Grid.Column="1">
@@ -151,7 +153,8 @@
                                            FontFamily="{StaticResource ProductSans}"
                                            FontSize="15"
                                            Foreground="Black"
-                                           Text="{Binding Reward}">
+                                           Text="{Binding Reward}"
+                                           TextWrapping="Wrap">
                                 </TextBlock>
                                 
                             </Grid>
