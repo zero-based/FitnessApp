@@ -856,89 +856,174 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
+
+        // Total Weight Lost
         public double GetTotalWeightLostPerWeek(int accountID)
         {
+
+            double WeekWeightLost = 0;
+            List<double> WeekWeight = new List<double>();
+
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select SUM(Weight) from UserWeight where DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
+            SqlCommand cmd = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE()) Order by Date", Connection);
             cmd.Parameters.AddWithValue("@id", accountID);
+            SqlDataReader rd = cmd.ExecuteReader();
 
-            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
-           
+            while (rd.Read())
+            {
+                WeekWeight.Add((double)(rd["Weight"]));
+            }
+
             Connection.Close();
 
-            return weightValue;
+            for (int i = 0; i < (WeekWeight.Count - 1); i++)
+            {
+                WeekWeightLost += (WeekWeight[i] - WeekWeight[i + 1]);
+            }
+
+            return WeekWeightLost;
+
         }
 
         public double GetTotalWeightLostPerMonth(int accountID)
         {
+
+            double MonthWeightLost = 0;
+            List<double> MonthWeight = new List<double>();
+
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select SUM(Weight) from UserWeight where DATEPART(month,Date)=DATEPART(month,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
-            cmd.Parameters.AddWithValue("@id", accountID);
-
-            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+            SqlCommand cmd1 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(MONTH,Date) = DATEPART(MONTH,GETDATE()) Order by Date", Connection);
+            cmd1.Parameters.AddWithValue("@id", accountID);
+            SqlDataReader rd1 = cmd1.ExecuteReader();
+            while (rd1.Read())
+            {
+                MonthWeight.Add((double)(rd1["Weight"]));
+            }
 
             Connection.Close();
 
-            return weightValue;
+            for (int i = 0; i < (MonthWeight.Count - 1); i++)
+            {
+                MonthWeightLost += (MonthWeight[i] - MonthWeight[i + 1]);
+            }
+
+            return MonthWeightLost;
+
         }
 
         public double GetTotalWeightLostPerYear(int accountID)
         {
+
+            double YearWeightLost = 0;
+            List<double> YearWeight = new List<double>();
+
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select SUM(Weight) from UserWeight where DATEPART(year,Date)=DATEPART(year,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
-            cmd.Parameters.AddWithValue("@id", accountID);
+            SqlCommand cmd2 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(YEAR,Date) = DATEPART(YEAR,GETDATE()) Order by Date", Connection);
+            cmd2.Parameters.AddWithValue("@id", accountID);
+            SqlDataReader rd2 = cmd2.ExecuteReader();
 
-            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+            while (rd2.Read())
+            {
+                YearWeight.Add((double)(rd2["Weight"]));
+            }
 
             Connection.Close();
 
-            return weightValue;
+            for (int i = 0; i < (YearWeight.Count - 1); i++)
+            {
+                YearWeightLost += (YearWeight[i] - YearWeight[i + 1]);
+            }
+
+            return YearWeightLost;
+
         }
 
+
+        // Average Weight Lost
         public double GetAverageWeightLostPerWeek(int accountID)
         {
+            double WeekWeightLost = 0;
+            List<double> WeekWeight = new List<double>();
+
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select Avg(Weight) from UserWeight where DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
+            SqlCommand cmd = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE()) Order by Date", Connection);
             cmd.Parameters.AddWithValue("@id", accountID);
+            SqlDataReader rd = cmd.ExecuteReader();
 
-            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+            while (rd.Read())
+            {
+                WeekWeight.Add((double)(rd["Weight"]));
+            }
 
             Connection.Close();
 
-            return weightValue;
+            for (int i = 0; i < (WeekWeight.Count - 1); i++)
+            {
+                WeekWeightLost += (WeekWeight[i] - WeekWeight[i + 1]);
+            }
+
+            return Math.Round((WeekWeightLost / WeekWeight.Count), 2);
+
         }
 
         public double GetAverageWeightLostPerMonth(int accountID)
         {
+            double MonthWeightLost = 0;
+            List<double> MonthWeight = new List<double>();
+
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select Avg(Weight) from UserWeight where DATEPART(MONTH,Date)=DATEPART(MONTH,GETDATE())  AND FK_UserWeight_UserID = @id; ", Connection);
-            cmd.Parameters.AddWithValue("@id", accountID);
-
-            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+            SqlCommand cmd1 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(MONTH,Date) = DATEPART(MONTH,GETDATE()) Order by Date", Connection);
+            cmd1.Parameters.AddWithValue("@id", accountID);
+            SqlDataReader rd1 = cmd1.ExecuteReader();
+            while (rd1.Read())
+            {
+                MonthWeight.Add((double)(rd1["Weight"]));
+            }
 
             Connection.Close();
 
-            return weightValue;
+            for (int i = 0; i < (MonthWeight.Count - 1); i++)
+            {
+                MonthWeightLost += (MonthWeight[i] - MonthWeight[i + 1]);
+            }
+
+            return Math.Round((MonthWeightLost / MonthWeight.Count), 2);
+
         }
 
         public double GetAverageWeightLostPerYear(int accountID)
         {
+
+            double YearWeightLost = 0;
+            List<double> YearWeight = new List<double>();
+
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select Avg(Weight) from UserWeight where DATEPART(YEAR,Date)=DATEPART(YEAR,GETDATE()) AND FK_UserWeight_UserID = @id; ", Connection);
-            cmd.Parameters.AddWithValue("@id", accountID);
+            SqlCommand cmd2 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(YEAR,Date) = DATEPART(YEAR,GETDATE()) Order by Date", Connection);
+            cmd2.Parameters.AddWithValue("@id", accountID);
+            SqlDataReader rd2 = cmd2.ExecuteReader();
 
-            double weightValue = Math.Round((double)cmd.ExecuteScalar(), 2);
+            while (rd2.Read())
+            {
+                YearWeight.Add((double)(rd2["Weight"]));
+            }
 
             Connection.Close();
 
-            return weightValue;
+            for (int i = 0; i < (YearWeight.Count - 1); i++)
+            {
+                YearWeightLost += (YearWeight[i] - YearWeight[i + 1]);
+            }
+
+            return Math.Round((YearWeightLost / YearWeight.Count), 2);
+
         }
+
 
         public string GetMotivationalQuote()
         {
