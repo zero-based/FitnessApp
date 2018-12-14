@@ -31,6 +31,7 @@ namespace FitnessApp.UserMainWindowPages
             LoadWeightChart(UserMainWindow.signedInUser.ID);
             LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
+            LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
             LoadMotivationalQuoteCard();
             
             // Setting Data context for JoinedChallengesListBox
@@ -133,16 +134,82 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// Joined Plan Card Functions/Event Handlers //////////
 
+
+        private void LoadJoinedPlanCard(int userID)
+        {
+            bool checkJoinedInPlan = SQLqueriesObject.IsInPlan(userID);
+
+            if (checkJoinedInPlan == true)
+            {
+                // Load Header
+                string planName = SQLqueriesObject.GetJoinedPlanName(userID).ToString();
+                int planDayNum = SQLqueriesObject.GetJoinedPlanDayNumber(userID);
+                NoPlanCard.Visibility = Visibility.Collapsed;
+                PlanHeaderTextBlock.Text = planName + " | Day #" + planDayNum;
+
+                // Load CheckBoxes
+                BreakfastCheckBox.IsChecked = SQLqueriesObject.GetDayBreakfastStatus(userID);
+                LunchCheckBox.IsChecked = SQLqueriesObject.GetDayLunchStatus(userID);
+                DinnerCheckBox.IsChecked = SQLqueriesObject.GetDayDinnerStatus(userID);
+                WorkoutsCheckBox.IsChecked = SQLqueriesObject.GetDayWorkoutStatus(userID);
+
+                // Load Descriptions
+                BreakfastDescriptionTextBlock.Text = SQLqueriesObject.GetDayBreakfastDescription(userID);
+                LunchDescriptionTextBlock.Text = SQLqueriesObject.GetDayLucnchDescription(userID);
+                DinnerDescriptionTextBlock.Text = SQLqueriesObject.GetDayDinnerDescription(userID);
+                WorkoutsDescriptionTextBlock.Text = SQLqueriesObject.GetDayWorkoutDescription(userID);
+
+                // Load Progress Bar
+                PlanProgressBar.Value = planDayNum;
+            }
+        }
+
         private void DayItemCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox currentCheckBox = sender as CheckBox;
-            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+
+            switch (currentCheckBox.Name)
+            {
+                case "BreakfastCheckBox":
+                    SQLqueriesObject.UpdateDayBreakfastStatus(true, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "LunchCheckBox":
+                    SQLqueriesObject.UpdateDayLunchStatus(true, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "DinnerCheckBox":
+                    SQLqueriesObject.UpdateDayDinnerStatus(true, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "WorkoutsCheckBox":
+                    SQLqueriesObject.UpdateDayWorkoutStatus(true, UserMainWindow.signedInUser.ID);
+                    break;
+            }
         }
 
         private void DayItemCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox currentCheckBox = sender as CheckBox;
-            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+
+            switch (currentCheckBox.Name)
+            {
+                case "BreakfastCheckBox":
+                    SQLqueriesObject.UpdateDayBreakfastStatus(false, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "LunchCheckBox":
+                    SQLqueriesObject.UpdateDayLunchStatus(false, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "DinnerCheckBox":
+                    SQLqueriesObject.UpdateDayDinnerStatus(false, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "WorkoutsCheckBox":
+                    SQLqueriesObject.UpdateDayWorkoutStatus(false, UserMainWindow.signedInUser.ID);
+                    break;
+            }
         }
 
         private void JoinPlanButton_Click(object sender, System.Windows.RoutedEventArgs e)
