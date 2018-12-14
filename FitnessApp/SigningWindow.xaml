@@ -18,7 +18,7 @@
         <Grid.Background>
             <ImageBrush ImageSource="Images/BG.jpg"
                         Stretch="UniformToFill"
-                        Opacity="0.15"/>
+                        Opacity="0.40"/>
         </Grid.Background>
         
         <materialDesign:Snackbar x:Name="ErrorsSnackbar" />
