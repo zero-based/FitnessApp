@@ -504,7 +504,7 @@ namespace FitnessApp.SQLdatabase
                 temp.Description    = reader["Description"].ToString();
                 temp.TargetMinutes  = (int)reader["TargetMinutes"];
                 temp.Reward         = reader["Reward"].ToString();
-                temp.DueDate        = reader["DueDate"].ToString();
+                temp.DueDate        = reader["DueDate"].ToString().ToString().Split(' ')[0];
                 temp.WorkoutType    = (int)reader["FK_Challenge_WorkoutID"];
 
                 if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
@@ -541,7 +541,7 @@ namespace FitnessApp.SQLdatabase
                 temp.Description    = reader["Description"].ToString();
                 temp.TargetMinutes  = (int)reader["TargetMinutes"];
                 temp.Reward         = reader["Reward"].ToString();
-                temp.DueDate        = reader["DueDate"].ToString();
+                temp.DueDate        = reader["DueDate"].ToString().Split(' ')[0];
                 temp.WorkoutType    = (int)reader["FK_Challenge_WorkoutID"];
                 
                 if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
