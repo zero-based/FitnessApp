@@ -1113,47 +1113,19 @@ namespace FitnessApp.SQLdatabase
             return SQLplanName;
         }
 
-
         // Get Joined Plan Day Number
-        private string GetPlanJoiningDate(int accountID)
-        {
-            string joinedDate = "";
-            string query = "select PlanJoiningDate from [User] where PK_UserID= @accountID ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-
-            try
-            {
-                joinedDate = cmd.ExecuteScalar().ToString();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            Connection.Close();
-
-            return joinedDate;
-        }
-
         public int GetJoinedPlanDayNumber(int accountID)
         {
-            string joinedDate = GetPlanJoiningDate(accountID);
-            string dateDiff = "select DATEDIFF(day, @joinedDate , getdate()) from UserPlanDay where FK_UserPlanDay_UserID = @accountID ;";
             Connection.Open();
+
+            string dateDiff = "select DATEDIFF(day, PlanJoiningDate , getdate()) from [user] where PK_UserID = @userID";
             SqlCommand cmd = new SqlCommand(dateDiff, Connection);
-            cmd.Parameters.AddWithValue(" @joinedDate", joinedDate);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
+            cmd.Parameters.AddWithValue("@userID", accountID);
+
             int dayNumber = 0;
-            try
-            {
-                dayNumber = (int)cmd.ExecuteScalar();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+            
+            dayNumber = (int)cmd.ExecuteScalar();
+
             Connection.Close();
 
             // to make it begin with 1 instead of zero
