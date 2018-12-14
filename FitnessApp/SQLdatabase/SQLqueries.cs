@@ -1354,5 +1354,94 @@ namespace FitnessApp.SQLdatabase
 
             return SqlWorkout;
         }
+
+
+        //Modify Joined Plan Checkboxes
+
+        public void ModifyBreakfast(bool checkedBreakfast, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  BreakfastIsDone=@checkedBreakfast where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedBreakfast", checkedBreakfast);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Connection.Close();
+        }
+
+        public void ModifyLunch(bool checkedLunch, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  LunchIsDone=@checkedLunch where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedLunch", checkedLunch);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Connection.Close();
+        }
+
+        public void ModifyDinner(bool checkedDinner, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  DinnerIsDone=@checkedDinner where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedDinner", checkedDinner);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Connection.Close();
+        }
+
+        public void ModifyWorkout(bool checkedWorkout, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  WorkoutsIsDone=@checkedWorkout where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedWorkout", checkedWorkout);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Connection.Close();
+        }
     }
 }
