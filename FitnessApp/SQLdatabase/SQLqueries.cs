@@ -6,6 +6,7 @@ using System;
 using FitnessApp.Models;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows;
 
 namespace FitnessApp.SQLdatabase
 {
