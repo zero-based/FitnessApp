@@ -1078,7 +1078,7 @@ namespace FitnessApp.SQLdatabase
         public int PlanId(int accountID)
         {
             int SQLplanID = 0;
-            string query = "select PlanId from [User] where ID= @accountID;";
+            string query = "select FK_User_PlanID from [User] where PK_UserID= @accountID;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@accountID", accountID);
@@ -1088,7 +1088,7 @@ namespace FitnessApp.SQLdatabase
                 if (dr.HasRows == true)
                 {
 
-                    SQLplanID = (int)dr["PlanId"];
+                    SQLplanID = (int)dr["FK_User_PlanID"];
 
                 }
             }
@@ -1103,7 +1103,7 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanID = PlanId(accountID);
             string SQLplanName = "";
-            string query = "select Name from [Plan] where ID=@SQLplanID;";
+            string query = "select Name from [Plan] where PK_PlanID=@SQLplanID;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
@@ -1119,7 +1119,7 @@ namespace FitnessApp.SQLdatabase
         private string JoinedDate(int accountID)
         {
             string joinedDate = "";
-            string query = "select PlanJoiningDate from [User] where ID= @accountID ;";
+            string query = "select PlanJoiningDate from [User] where PK_UserID= @accountID ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
 
@@ -1141,7 +1141,7 @@ namespace FitnessApp.SQLdatabase
         public int GetDate(int accountID)
         {
             string joinedDate = JoinedDate(accountID);
-            string dateDiff = "select DATEDIFF(day, @joinedDate , getdate()) from UserPlanDay where UserId = @accountID ;";
+            string dateDiff = "select DATEDIFF(day, @joinedDate , getdate()) from UserPlanDay where FK_UserPlanDay_UserID = @accountID ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(dateDiff, Connection);
             cmd.Parameters.AddWithValue(" @joinedDate", joinedDate);
@@ -1171,7 +1171,7 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetDate(accountID);
             int SQLplanID = PlanId(accountID);
             string breakfastDiscription = "";
-            string query = "select BreakfastDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            string query = "select BreakfastDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
@@ -1195,7 +1195,7 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetDate(accountID);
             int SQLplanID = PlanId(accountID);
             string lucnchDiscription = "";
-            string query = "select LunchDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            string query = "select LunchDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
@@ -1219,7 +1219,7 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetDate(accountID);
             int SQLplanID = PlanId(accountID);
             string dinnerDiscription = "";
-            string query = "select DinnerDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            string query = "select DinnerDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
@@ -1243,7 +1243,7 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetDate(accountID);
             int SQLplanID = PlanId(accountID);
             string workoutDiscription = "";
-            string query = "select WorkoutDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            string query = "select WorkoutDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
@@ -1268,7 +1268,7 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetDate(accountID);
             bool SqlBreakfast = false;
-            string query = " select BreakfastIsDone from UserPlanDay where UserId = @accountID and DayNumber = @SQLplanDay ;";
+            string query = " select BreakfastIsDone from UserPlanDay where FK_UserPlanDay_UserID = @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
@@ -1291,7 +1291,7 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetDate(accountID);
             bool SqlLunch = false;
-            string query = " select LunchIsDone from UserPlanDay where UserId = @accountID and DayNumber = @SQLplanDay ;";
+            string query = " select LunchIsDone from UserPlanDay where FK_UserPlanDay_UserID = @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@accountID", accountID);
@@ -1314,7 +1314,7 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetDate(accountID);
             bool SqlDinner = false;
-            string query = " select DinnerIsDone from UserPlanDay where UserId=@accountID and DayNumber = @SQLplanDay ;";
+            string query = " select DinnerIsDone from UserPlanDay where FK_UserPlanDay_UserID=@accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@accountID", accountID);
@@ -1337,7 +1337,7 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetDate(accountID);
             bool SqlWorkout = false;
-            string query = " select WorkoutsIsDone from UserPlanDay where UserId= @accountID and DayNumber = @SQLplanDay ;";
+            string query = " select WorkoutsIsDone from UserPlanDay where FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@accountID", accountID);
@@ -1362,7 +1362,7 @@ namespace FitnessApp.SQLdatabase
         public void ModifyBreakfast(bool checkedBreakfast, int accountID)
         {
             int SQLplanDay = GetDate(accountID);
-            string query = "Update UserPlanDay SET  BreakfastIsDone=@checkedBreakfast where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            string query = "Update UserPlanDay SET  BreakfastIsDone=@checkedBreakfast where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
@@ -1383,7 +1383,7 @@ namespace FitnessApp.SQLdatabase
         public void ModifyLunch(bool checkedLunch, int accountID)
         {
             int SQLplanDay = GetDate(accountID);
-            string query = "Update UserPlanDay SET  LunchIsDone=@checkedLunch where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            string query = "Update UserPlanDay SET  LunchIsDone=@checkedLunch where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
@@ -1404,7 +1404,7 @@ namespace FitnessApp.SQLdatabase
         public void ModifyDinner(bool checkedDinner, int accountID)
         {
             int SQLplanDay = GetDate(accountID);
-            string query = "Update UserPlanDay SET  DinnerIsDone=@checkedDinner where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            string query = "Update UserPlanDay SET  DinnerIsDone=@checkedDinner where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
@@ -1426,7 +1426,7 @@ namespace FitnessApp.SQLdatabase
         public void ModifyWorkout(bool checkedWorkout, int accountID)
         {
             int SQLplanDay = GetDate(accountID);
-            string query = "Update UserPlanDay SET  WorkoutsIsDone=@checkedWorkout where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            string query = "Update UserPlanDay SET  WorkoutsIsDone=@checkedWorkout where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
