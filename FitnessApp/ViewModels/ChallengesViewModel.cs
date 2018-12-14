@@ -10,7 +10,9 @@ namespace FitnessApp.ViewModels
     {
         static SQLqueries SQLqueriesObject = new SQLqueries();
         private List<ChallengeModel> allChallengeModels;
-        private List<ChallengeModel> joinedChallengeModels;
+        private List<ChallengeModel> uncompletedJoinedChallengeModels = new List<ChallengeModel>();
+        private List<ChallengeModel> completedJoinedChallengeModels = new List<ChallengeModel>();
+
 
         public ChallengesViewModel() { }
 
@@ -21,19 +23,23 @@ namespace FitnessApp.ViewModels
 
         public void JoinedChallengesViewModel(int accountID)
         {
-            joinedChallengeModels = SQLqueriesObject.LoadJoinedChallenges(accountID);
+
+            List<ChallengeModel> joinedChallengeModels = SQLqueriesObject.LoadJoinedChallenges(accountID);
 
             foreach (var item in joinedChallengeModels)
             {
                 string joiningDate = SQLqueriesObject.GetChallengeJoiningDate(accountID, item.ID);
 
-                int tempProgress = SQLqueriesObject.GetChallengeProgress
-                                    (accountID, joiningDate, item.DueDate, item.WorkoutType);
+                int tempProgress = SQLqueriesObject.GetChallengeProgress (accountID, joiningDate, item.DueDate, item.WorkoutType);
 
                 if (tempProgress > -1)
                 {
                     item.Progress = tempProgress;
                 }
+                if (item.Progress < item.TargetMinutes)
+                    uncompletedJoinedChallengeModels.Add(item);
+                else
+                    completedJoinedChallengeModels.Add(item);
             }
 
         }
@@ -44,9 +50,15 @@ namespace FitnessApp.ViewModels
             set { }
         }
 
-        public List<ChallengeModel> JoinedChallengeModels
+        public List<ChallengeModel> UncompletedJoinedChallengeModels
         {
-            get => joinedChallengeModels;
+            get => uncompletedJoinedChallengeModels;
+            set { }
+        }
+
+        public List<ChallengeModel> CompletedJoinedChallengeModels
+        {
+            get => completedJoinedChallengeModels;
             set { }
         }
     }
