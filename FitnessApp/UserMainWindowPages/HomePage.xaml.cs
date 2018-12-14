@@ -10,6 +10,7 @@ using FitnessApp.Models;
 using FitnessApp.ViewModels;
 using System.Collections.Generic;
 using LiveCharts.Helpers;
+using System.Windows.Media;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -77,21 +78,75 @@ namespace FitnessApp.UserMainWindowPages
         {
             SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserMainWindow.signedInUser.ID);
             WeightChart.Series[0].Values.Add(double.Parse(TodaysWeightTextBox.Text));
+
+            // Refresh Weight-Related Cards
+            LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
+            LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
         }
 
         private void LoadTotalWeightLostCard(int userID)
         {
-            WeightLostPerWeekTextBlock.Text  = SQLqueriesObject.GetTotalWeightLostPerWeek(userID).ToString();
-            WeightLostPerMonthTextBlock.Text = SQLqueriesObject.GetTotalWeightLostPerMonth(userID).ToString();
-            WeightLostPerYearTextBlock.Text  = SQLqueriesObject.GetTotalWeightLostPerYear(userID).ToString();
+
+            double WeightLostPerWeek = SQLqueriesObject.GetTotalWeightLostPerWeek(userID);
+            double WeightLostPerMonth = SQLqueriesObject.GetTotalWeightLostPerMonth(userID);
+            double WeightLostPerYear = SQLqueriesObject.GetTotalWeightLostPerYear(userID);
+
+
+            // Set Colours
+            if (WeightLostPerWeek < 0)
+                WeightLostPerWeekTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+            else
+                WeightLostPerWeekTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
+
+            if (WeightLostPerWeek < 0)
+                WeightLostPerMonthTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+            else
+                WeightLostPerMonthTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
+
+            if (WeightLostPerWeek < 0)
+                WeightLostPerYearTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+            else
+                WeightLostPerYearTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
+
+
+            // Assign Values to TextBoxes
+            WeightLostPerWeekTextBlock.Text = WeightLostPerWeek.ToString();
+            WeightLostPerMonthTextBlock.Text = WeightLostPerMonth.ToString();
+            WeightLostPerYearTextBlock.Text = WeightLostPerYear.ToString();
+
         }
 
         private void LoadAverageWeightLostCard(int userID)
         {
-            AverageWeightLostPerWeekTextBlock.Text  = SQLqueriesObject.GetAverageWeightLostPerWeek(userID).ToString();
-            AverageWeightLostPerMonthTextBlock.Text = SQLqueriesObject.GetAverageWeightLostPerMonth(userID).ToString();
-            AverageWeightLostPerYearTextBlock.Text  = SQLqueriesObject.GetAverageWeightLostPerYear(userID).ToString();
+
+            double AverageWeightLostPerWeek = SQLqueriesObject.GetAverageWeightLostPerWeek(userID);
+            double AverageWeightLostPerMonth = SQLqueriesObject.GetAverageWeightLostPerMonth(userID);
+            double AverageWeightLostPerYear = SQLqueriesObject.GetAverageWeightLostPerYear(userID);
+
+
+            // Set Colours
+            if (AverageWeightLostPerWeek < 0)
+                AverageWeightLostPerWeekTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+            else
+                AverageWeightLostPerWeekTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
+
+            if (AverageWeightLostPerMonth < 0)
+                AverageWeightLostPerMonthTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+            else
+                AverageWeightLostPerMonthTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
+
+            if (AverageWeightLostPerYear < 0)
+                AverageWeightLostPerYearTextBlock.Foreground = new SolidColorBrush(Colors.Red);
+            else
+                AverageWeightLostPerYearTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
+
+
+            // Assign Values to TextBoxes
+            AverageWeightLostPerWeekTextBlock.Text = AverageWeightLostPerWeek.ToString();
+            AverageWeightLostPerMonthTextBlock.Text = AverageWeightLostPerMonth.ToString();
+            AverageWeightLostPerYearTextBlock.Text = AverageWeightLostPerYear.ToString();
         }
+
 
 
 
