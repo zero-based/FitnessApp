@@ -141,6 +141,8 @@
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="15"/>
                             <RowDefinition Height="auto"/>
+                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
                         <!--Weight Chart Card-->
@@ -459,12 +461,11 @@
                             </Grid>
                         </materialDesign:Card>
 
-
-                        <!--Joined Challenges Cards ListBox-->
-                        <ListBox x:Name="JoinedChallengesListBox" 
+                        <!--Uncompleted Joined Challenges Cards ListBox-->
+                        <ListBox x:Name="UncompletedJoinedChallengesListBox" 
                                  Grid.Row="6"
                                  Padding="-8"
-                                 ItemsSource="{Binding JoinedChallengeModels}" 
+                                 ItemsSource="{Binding UncompletedJoinedChallengeModels}" 
                                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                                  materialDesign:RippleAssist.IsDisabled="True" 
                                  Foreground="Transparent">
@@ -661,6 +662,71 @@
                             </Grid>
                                 
                         </materialDesign:Card>
+
+                        <!--Completed Joined Challenges Cards ListBox-->
+                        <ListBox x:Name="CompletedJoinedChallengesListBox" 
+                                 Grid.Row="8"
+                                 Padding="-8"
+                                 ItemsSource="{Binding CompletedJoinedChallengeModels}" 
+                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                 materialDesign:RippleAssist.IsDisabled="True" 
+                                 Foreground="Transparent">
+
+                            <!--Challenge Item Template-->
+                            <ListBox.ItemTemplate>
+
+                                <DataTemplate DataType="ChallengeModel">
+
+                                    <materialDesign:Card Width="500" 
+                                                         Padding="0"
+                                                         Background="{StaticResource MaterialDesignBackground}">
+                                        <Grid>
+
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="25"/>
+                                                <RowDefinition Height="auto"/>
+                                                <RowDefinition Height="25"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="25" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="25" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Row="1" Grid.Column="1" >
+                                                
+                                                <!--Challenge Name-->
+                                                <TextBlock 
+                                                    HorizontalAlignment="Center"
+                                                    FontFamily="{StaticResource ProductSans}"
+                                                    FontWeight="Regular" 
+                                                    FontSize="18"
+                                                    Foreground="Black"
+                                                    Text="{Binding Name}"
+                                                    TextWrapping="Wrap"/>
+
+
+                                                <Button x:Name="CompletedChallengeButton"
+                                                        HorizontalAlignment="Center"
+                                                        Margin="0,5,0,0"
+                                                        FontFamily="{StaticResource ProductSans}" 
+                                                        FontSize="18"
+                                                        Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                                        Style="{StaticResource MaterialDesignFlatButton}"
+                                                        Click="CompletedChallengeButton_Click">
+                                                        Completed
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+
+                                    </materialDesign:Card>
+
+                                </DataTemplate>
+
+                            </ListBox.ItemTemplate>
+
+                        </ListBox>
 
                     </Grid>
                         
