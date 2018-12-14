@@ -723,7 +723,14 @@ namespace FitnessApp.SQLdatabase
                            "WHERE [User].PK_UserID = " + accountID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.ExecuteReader();
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            query = "INSERT INTO UserPlanDay (FK_UserPlanDay_UserID, DayNumber) VALUES (@userID, 1)";
+            cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@userID", accountID);
+            reader = cmd.ExecuteReader();
+
             Connection.Close();
         }
 
@@ -736,7 +743,14 @@ namespace FitnessApp.SQLdatabase
                            "WHERE [User].PK_UserID = " + accountID;
 
             SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.ExecuteReader();
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            query = "DELETE FROM UserPlanDay WHERE FK_UserPlanDay_UserID = @userID";
+            cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@userID", accountID);
+            reader = cmd.ExecuteReader();
+
             Connection.Close();
         }
 
@@ -1133,8 +1147,6 @@ namespace FitnessApp.SQLdatabase
 
             return SQLplanDay;
         }
-
-
 
         // Get Joined Plan items' Descriptions
         public string GetDayBreakfastDescription(int accountID)
