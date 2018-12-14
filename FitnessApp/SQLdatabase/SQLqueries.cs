@@ -6,7 +6,6 @@ using System;
 using FitnessApp.Models;
 using System.Collections.Generic;
 using System.Data;
-using System.Windows;
 
 namespace FitnessApp.SQLdatabase
 {
@@ -1368,15 +1367,8 @@ namespace FitnessApp.SQLdatabase
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
             cmd.Parameters.AddWithValue("@checkedBreakfast", checkedBreakfast);
             cmd.Parameters.AddWithValue("@accountID", accountID);
-            try
-            {
+            cmd.ExecuteNonQuery();
 
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
             Connection.Close();
         }
 
@@ -1389,15 +1381,8 @@ namespace FitnessApp.SQLdatabase
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
             cmd.Parameters.AddWithValue("@checkedLunch", checkedLunch);
             cmd.Parameters.AddWithValue("@accountID", accountID);
-            try
-            {
+            cmd.ExecuteNonQuery();
 
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
             Connection.Close();
         }
 
@@ -1410,16 +1395,8 @@ namespace FitnessApp.SQLdatabase
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
             cmd.Parameters.AddWithValue("@checkedDinner", checkedDinner);
             cmd.Parameters.AddWithValue("@accountID", accountID);
+            cmd.ExecuteNonQuery();
 
-            try
-            {
-
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
             Connection.Close();
         }
 
@@ -1432,15 +1409,8 @@ namespace FitnessApp.SQLdatabase
             cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
             cmd.Parameters.AddWithValue("@checkedWorkout", checkedWorkout);
             cmd.Parameters.AddWithValue("@accountID", accountID);
+            cmd.ExecuteNonQuery();
 
-            try
-            {
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
 
             Connection.Close();
         }
