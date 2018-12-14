@@ -1161,5 +1161,104 @@ namespace FitnessApp.SQLdatabase
 
             return SQLplanDay;
         }
+
+
+
+        // Get Joined Plan items' Descriptions
+        public string BreakfastDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string breakfastDiscription = "";
+            string query = "select BreakfastDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    breakfastDiscription = (string)dr["BreakfastDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return breakfastDiscription;
+        }
+
+        public string LucnchDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string lucnchDiscription = "";
+            string query = "select LunchDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    lucnchDiscription = (string)dr["LunchDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return lucnchDiscription;
+        }
+
+        public string DinnerDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string dinnerDiscription = "";
+            string query = "select DinnerDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    dinnerDiscription = (string)dr["DinnerDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return dinnerDiscription;
+        }
+
+        public string WorkoutDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string workoutDiscription = "";
+            string query = "select WorkoutDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    workoutDiscription = (string)dr["WorkoutDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return workoutDiscription;
+        }
     }
 }
