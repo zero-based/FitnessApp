@@ -158,6 +158,7 @@ namespace FitnessApp.UserMainWindowPages
                     // Load Header
                     string planName = SQLqueriesObject.GetJoinedPlanName(userID).ToString();
                     PlanHeaderTextBlock.Text = planName + " | Day #" + planDayNum;
+                    SQLqueriesObject.UpdatePlanDayNumber(userID, planDayNum);
 
                     // Load CheckBoxes
                     BreakfastCheckBox.IsChecked = SQLqueriesObject.GetDayBreakfastStatus(userID);

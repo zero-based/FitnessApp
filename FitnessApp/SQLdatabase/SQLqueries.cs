@@ -1342,6 +1342,36 @@ namespace FitnessApp.SQLdatabase
 
         //Modify Joined Plan Checkboxes
 
+        public void UpdatePlanDayNumber(int accountID, int dayNumber)
+        {
+            Connection.Open();
+            string query = "SELECT DayNumber " +
+                           "FROM UserPlanDay " +
+                           "Where FK_UserPlanDay_UserID = @userID";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@userID", accountID);
+
+            if ((int)cmd.ExecuteScalar() != dayNumber)
+            {
+                query = "UPDATE [UserPlanDay] "          +
+                        "SET DayNumber   = @dayNumber, " +
+                        "BreakfastIsDone = 0, "          +
+                        "LunchIsDone     = 0, "          +
+                        "DinnerIsDone    = 0, "          +
+                        "WorkoutsIsDone  = 0 "           +
+                        "WHERE FK_UserPlanDay_UserID = @userID";
+
+                cmd = new SqlCommand(query, Connection);
+                cmd.Parameters.AddWithValue("@dayNumber", dayNumber);
+                cmd.Parameters.AddWithValue("@userID", accountID);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+            }
+
+            Connection.Close();
+        }
+
         public void UpdateDayBreakfastStatus(bool checkedBreakfast, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
