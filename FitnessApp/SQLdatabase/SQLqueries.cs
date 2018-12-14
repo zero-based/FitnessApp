@@ -767,7 +767,7 @@ namespace FitnessApp.SQLdatabase
 
             int countUserWeightInputs = (int)cmd.ExecuteScalar();
 
-            SqlCommand CommandString = new SqlCommand("select Weight, DATENAME(month, Date)[0] from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
+            SqlCommand CommandString = new SqlCommand("select Weight from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
             CommandString.CommandType = CommandType.Text;
             CommandString.Parameters.AddWithValue("@UserId", accountID);
 
@@ -813,7 +813,7 @@ namespace FitnessApp.SQLdatabase
 
             int countUserWeightInputs = (int)cmd.ExecuteScalar();
 
-            SqlCommand CommandString = new SqlCommand("select Weight, DATENAME(month, Date)[0] from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
+            SqlCommand CommandString = new SqlCommand("select FORMAT(Date, 'MMM yy') AS [Date] from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
             CommandString.CommandType = CommandType.Text;
             CommandString.Parameters.AddWithValue("@UserId", accountID);
 
@@ -826,7 +826,7 @@ namespace FitnessApp.SQLdatabase
                 for (int i = 0; ReaderString.Read(); i++)
                 {
                     if (ReaderString.HasRows == true)
-                        dateValues.Add((string)ReaderString["0"]);
+                        dateValues.Add((string)ReaderString["Date"]);
                 }
             }
             else
@@ -834,7 +834,7 @@ namespace FitnessApp.SQLdatabase
                 for (int i = 0; ReaderString.Read() && i < 10; i++)
                 {
                     if (ReaderString.HasRows == true)
-                        dateValues.Add((string)ReaderString["0"]);
+                        dateValues.Add((string)ReaderString["Date"]);
                 }
             }
 
