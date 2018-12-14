@@ -312,6 +312,8 @@ namespace FitnessApp.UserMainWindowPages
                 DialogBox.IsOpen = false;
             }
 
+            FoodComboBox.SelectedIndex = -1;
+            FoodQuantityTextBox.Text = "";
         }
 
         private void DialogBoxAddWorkoutButton_Click(object sender, RoutedEventArgs e)
@@ -330,6 +332,9 @@ namespace FitnessApp.UserMainWindowPages
                 DialogBox.IsOpen = false;
             }
 
+            WorkoutsComboBox.SelectedIndex = -1;
+            WorkoutsDurationTextBox.Text = "";
+            LoadJoinedChallengesCards();
         }
 
         private void DialogBoxCancelButton_Click(object sender, RoutedEventArgs e)
@@ -337,6 +342,12 @@ namespace FitnessApp.UserMainWindowPages
             AddFoodDialogBox.Visibility = Visibility.Collapsed;
             AddWorkoutDialogBox.Visibility = Visibility.Collapsed;
             DialogBox.IsOpen = false;
+
+            WorkoutsComboBox.SelectedIndex = -1;
+            WorkoutsDurationTextBox.Text = "";
+
+            FoodComboBox.SelectedIndex = -1;
+            FoodQuantityTextBox.Text = "";
         }
 
 
