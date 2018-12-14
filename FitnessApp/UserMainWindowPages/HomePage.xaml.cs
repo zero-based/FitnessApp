@@ -158,7 +158,8 @@ namespace FitnessApp.UserMainWindowPages
         {
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
-            JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+            UncompletedJoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+            CompletedJoinedChallengesListBox.DataContext = joinedChallengesDataContext;
             ControlNoChallengesCard(joinedChallengesDataContext);
         }
 
@@ -170,26 +171,30 @@ namespace FitnessApp.UserMainWindowPages
         private void JoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = sender as ToggleButton;
-            int selectedChallengeIndex = JoinedChallengesListBox.Items.IndexOf(toggleButton.DataContext);
+            int selectedChallengeIndex = UncompletedJoinedChallengesListBox.Items.IndexOf(toggleButton.DataContext);
 
-            ChallengeModel currentChallenge = (ChallengeModel) JoinedChallengesListBox.Items[selectedChallengeIndex];
+            ChallengeModel currentChallenge = (ChallengeModel)UncompletedJoinedChallengesListBox.Items[selectedChallengeIndex];
 
             SQLqueriesObject.UnjoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
 
             // Reloading Data context for JoinedChallengesListBox
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
-            JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+            UncompletedJoinedChallengesListBox.DataContext = joinedChallengesDataContext;
         }
 
         private void ControlNoChallengesCard(ChallengesViewModel challengesViewModel)
         {
-            if (challengesViewModel.JoinedChallengeModels.Count > 0)
+            if (challengesViewModel.UncompletedJoinedChallengeModels.Count > 0)
                 NoChallengesCard.Visibility = Visibility.Collapsed;
             else
                 NoChallengesCard.Visibility = Visibility.Visible;
         }
 
+        private void CompletedChallengeButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
 
 
@@ -404,7 +409,6 @@ namespace FitnessApp.UserMainWindowPages
             FoodComboBox.SelectedIndex = -1;
             FoodQuantityTextBox.Text = "";
         }
-
 
         ///////////////////////////////////////////////////////////
 
