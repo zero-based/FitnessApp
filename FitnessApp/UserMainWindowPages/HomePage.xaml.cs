@@ -139,28 +139,46 @@ namespace FitnessApp.UserMainWindowPages
         {
             bool checkJoinedInPlan = SQLqueriesObject.IsInPlan(userID);
 
-            if (checkJoinedInPlan == true)
+            NoPlanCard.Visibility = Visibility.Visible;
+            JoinedPlanCard.Visibility = Visibility.Visible;
+            PlanCompletedCard.Visibility = Visibility.Visible;
+
+            if (checkJoinedInPlan)
             {
-                // Load Header
-                string planName = SQLqueriesObject.GetJoinedPlanName(userID).ToString();
-                int planDayNum = SQLqueriesObject.GetJoinedPlanDayNumber(userID);
                 NoPlanCard.Visibility = Visibility.Collapsed;
-                PlanHeaderTextBlock.Text = planName + " | Day #" + planDayNum;
 
-                // Load CheckBoxes
-                BreakfastCheckBox.IsChecked = SQLqueriesObject.GetDayBreakfastStatus(userID);
-                LunchCheckBox.IsChecked = SQLqueriesObject.GetDayLunchStatus(userID);
-                DinnerCheckBox.IsChecked = SQLqueriesObject.GetDayDinnerStatus(userID);
-                WorkoutsCheckBox.IsChecked = SQLqueriesObject.GetDayWorkoutStatus(userID);
+                int planDayNum = SQLqueriesObject.GetJoinedPlanDayNumber(userID);
 
-                // Load Descriptions
-                BreakfastDescriptionTextBlock.Text = SQLqueriesObject.GetDayBreakfastDescription(userID);
-                LunchDescriptionTextBlock.Text = SQLqueriesObject.GetDayLucnchDescription(userID);
-                DinnerDescriptionTextBlock.Text = SQLqueriesObject.GetDayDinnerDescription(userID);
-                WorkoutsDescriptionTextBlock.Text = SQLqueriesObject.GetDayWorkoutDescription(userID);
+                if (planDayNum > 30)
+                    JoinedPlanCard.Visibility = Visibility.Collapsed;
+                else
+                {
+                    PlanCompletedCard.Visibility = Visibility.Collapsed;
 
-                // Load Progress Bar
-                PlanProgressBar.Value = planDayNum;
+                    // Load Header
+                    string planName = SQLqueriesObject.GetJoinedPlanName(userID).ToString();
+                    PlanHeaderTextBlock.Text = planName + " | Day #" + planDayNum;
+
+                    // Load CheckBoxes
+                    BreakfastCheckBox.IsChecked = SQLqueriesObject.GetDayBreakfastStatus(userID);
+                    LunchCheckBox.IsChecked = SQLqueriesObject.GetDayLunchStatus(userID);
+                    DinnerCheckBox.IsChecked = SQLqueriesObject.GetDayDinnerStatus(userID);
+                    WorkoutsCheckBox.IsChecked = SQLqueriesObject.GetDayWorkoutStatus(userID);
+
+                    // Load Descriptions
+                    BreakfastDescriptionTextBlock.Text = SQLqueriesObject.GetDayBreakfastDescription(userID);
+                    LunchDescriptionTextBlock.Text = SQLqueriesObject.GetDayLucnchDescription(userID);
+                    DinnerDescriptionTextBlock.Text = SQLqueriesObject.GetDayDinnerDescription(userID);
+                    WorkoutsDescriptionTextBlock.Text = SQLqueriesObject.GetDayWorkoutDescription(userID);
+
+                    // Load Progress Bar
+                    PlanProgressBar.Value = planDayNum;
+                }
+            }
+            else
+            {
+                JoinedPlanCard.Visibility = Visibility.Collapsed;
+                PlanCompletedCard.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -216,6 +234,14 @@ namespace FitnessApp.UserMainWindowPages
         {
             UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 2;
         }
+
+        private void DismissPlanButton_Click(object sender, RoutedEventArgs e)
+        {
+            SQLqueriesObject.UnjoinPlan(UserMainWindow.signedInUser.ID);
+            LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
+            UserMainWindow.PlansPageObject.PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
+        }
+
 
         //////////////////////////////////////////////////////////////
 
@@ -306,7 +332,7 @@ namespace FitnessApp.UserMainWindowPages
             DialogBox.IsOpen = false;
         }
 
-        
+
         ///////////////////////////////////////////////////////////
 
 
