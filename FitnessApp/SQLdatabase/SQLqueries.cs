@@ -6,6 +6,7 @@ using System;
 using FitnessApp.Models;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows;
 
 namespace FitnessApp.SQLdatabase
 {
@@ -1068,6 +1069,379 @@ namespace FitnessApp.SQLdatabase
             Cmd3.Parameters.AddWithValue("@calories", Math.Round(totalCaloriesLost, 2));
             Cmd3.ExecuteNonQuery();
 
+            Connection.Close();
+        }
+
+        //////// Joined Plan ////////
+        
+        // Get Joined Plan ID and Name 
+        public int PlanId(int accountID)
+        {
+            int SQLplanID = 0;
+            string query = "select PlanId from [User] where ID= @accountID;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+
+                    SQLplanID = (int)dr["PlanId"];
+
+                }
+            }
+            dr.Close();
+            Connection.Close();
+
+            return SQLplanID;
+
+        }
+
+        public string PlanName(int accountID)
+        {
+            int SQLplanID = PlanId(accountID);
+            string SQLplanName = "";
+            string query = "select Name from [Plan] where ID=@SQLplanID;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+            SQLplanName = (string)dr["Name"];
+            Connection.Close();
+            return SQLplanName;
+        }
+
+
+        // Get Joined Plan Day Number
+        private string JoinedDate(int accountID)
+        {
+            string joinedDate = "";
+            string query = "select PlanJoiningDate from [User] where ID= @accountID ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+
+            try
+            {
+                joinedDate = cmd.ExecuteScalar().ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Connection.Close();
+
+            return joinedDate;
+        }
+
+        public int GetDate(int accountID)
+        {
+            string joinedDate = JoinedDate(accountID);
+            string dateDiff = "select DATEDIFF(day, @joinedDate , getdate()) from UserPlanDay where UserId = @accountID ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(dateDiff, Connection);
+            cmd.Parameters.AddWithValue(" @joinedDate", joinedDate);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            int dayNumber = 0;
+            try
+            {
+                dayNumber = (int)cmd.ExecuteScalar();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            Connection.Close();
+
+            // to make it begin with 1 instead of zero
+            int SQLplanDay = dayNumber + 1;
+
+            return SQLplanDay;
+        }
+
+
+
+        // Get Joined Plan items' Descriptions
+        public string BreakfastDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string breakfastDiscription = "";
+            string query = "select BreakfastDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    breakfastDiscription = (string)dr["BreakfastDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return breakfastDiscription;
+        }
+
+        public string LucnchDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string lucnchDiscription = "";
+            string query = "select LunchDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    lucnchDiscription = (string)dr["LunchDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return lucnchDiscription;
+        }
+
+        public string DinnerDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string dinnerDiscription = "";
+            string query = "select DinnerDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    dinnerDiscription = (string)dr["DinnerDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return dinnerDiscription;
+        }
+
+        public string WorkoutDiscription(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            int SQLplanID = PlanId(accountID);
+            string workoutDiscription = "";
+            string query = "select WorkoutDescription from PlanDayDescription where PlanId=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    workoutDiscription = (string)dr["WorkoutDescription"];
+
+                }
+            }
+
+            Connection.Close();
+            return workoutDiscription;
+        }
+
+
+        // Get Joined Plan Checkboxes' Status
+        public bool SQLbreakfast(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            bool SqlBreakfast = false;
+            string query = " select BreakfastIsDone from UserPlanDay where UserId = @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    SqlBreakfast = (bool)dr["BreakfastIsDone"];
+
+                }
+            }
+            Connection.Close();
+
+            return SqlBreakfast;
+        }
+
+        public bool SQLlunch(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            bool SqlLunch = false;
+            string query = " select LunchIsDone from UserPlanDay where UserId = @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    SqlLunch = (bool)dr["LunchIsDone"];
+
+                }
+            }
+            Connection.Close();
+
+            return SqlLunch;
+        }
+
+        public bool SQLdinner(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            bool SqlDinner = false;
+            string query = " select DinnerIsDone from UserPlanDay where UserId=@accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    SqlDinner = (bool)dr["DinnerIsDone"];
+
+                }
+            }
+            Connection.Close();
+
+            return SqlDinner;
+        }
+
+        public bool SQLworkout(int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            bool SqlWorkout = false;
+            string query = " select WorkoutsIsDone from UserPlanDay where UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                if (dr.HasRows == true)
+                {
+                    SqlWorkout = (bool)dr["WorkoutsIsDone"];
+
+                }
+            }
+            Connection.Close();
+
+            return SqlWorkout;
+        }
+
+
+        //Modify Joined Plan Checkboxes
+
+        public void ModifyBreakfast(bool checkedBreakfast, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  BreakfastIsDone=@checkedBreakfast where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedBreakfast", checkedBreakfast);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Connection.Close();
+        }
+
+        public void ModifyLunch(bool checkedLunch, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  LunchIsDone=@checkedLunch where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedLunch", checkedLunch);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Connection.Close();
+        }
+
+        public void ModifyDinner(bool checkedDinner, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  DinnerIsDone=@checkedDinner where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedDinner", checkedDinner);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            Connection.Close();
+        }
+
+        public void ModifyWorkout(bool checkedWorkout, int accountID)
+        {
+            int SQLplanDay = GetDate(accountID);
+            string query = "Update UserPlanDay SET  WorkoutsIsDone=@checkedWorkout where  UserId= @accountID and DayNumber = @SQLplanDay ;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            cmd.Parameters.AddWithValue("@checkedWorkout", checkedWorkout);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+
+            try
+            {
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
             Connection.Close();
         }
     }
