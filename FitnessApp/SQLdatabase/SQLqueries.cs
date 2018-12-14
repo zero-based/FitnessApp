@@ -1075,7 +1075,7 @@ namespace FitnessApp.SQLdatabase
         //////// Joined Plan ////////
         
         // Get Joined Plan ID and Name 
-        public int PlanId(int accountID)
+        public int GetJoinedPlanID(int accountID)
         {
             int SQLplanID = 0;
             string query = "select FK_User_PlanID from [User] where PK_UserID= @accountID;";
@@ -1099,9 +1099,9 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public string PlanName(int accountID)
+        public string GetJoinedPlanName(int accountID)
         {
-            int SQLplanID = PlanId(accountID);
+            int SQLplanID = GetJoinedPlanID(accountID);
             string SQLplanName = "";
             string query = "select Name from [Plan] where PK_PlanID=@SQLplanID;";
             Connection.Open();
@@ -1116,7 +1116,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Get Joined Plan Day Number
-        private string JoinedDate(int accountID)
+        private string GetPlanJoiningDate(int accountID)
         {
             string joinedDate = "";
             string query = "select PlanJoiningDate from [User] where PK_UserID= @accountID ;";
@@ -1138,9 +1138,9 @@ namespace FitnessApp.SQLdatabase
             return joinedDate;
         }
 
-        public int GetDate(int accountID)
+        public int GetJoinedPlanDayNumber(int accountID)
         {
-            string joinedDate = JoinedDate(accountID);
+            string joinedDate = GetPlanJoiningDate(accountID);
             string dateDiff = "select DATEDIFF(day, @joinedDate , getdate()) from UserPlanDay where FK_UserPlanDay_UserID = @accountID ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(dateDiff, Connection);
@@ -1166,10 +1166,10 @@ namespace FitnessApp.SQLdatabase
 
 
         // Get Joined Plan items' Descriptions
-        public string BreakfastDiscription(int accountID)
+        public string GetDayBreakfastDescription(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
-            int SQLplanID = PlanId(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
+            int SQLplanID = GetJoinedPlanID(accountID);
             string breakfastDiscription = "";
             string query = "select BreakfastDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1190,10 +1190,10 @@ namespace FitnessApp.SQLdatabase
             return breakfastDiscription;
         }
 
-        public string LucnchDiscription(int accountID)
+        public string GetDayLucnchDescription(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
-            int SQLplanID = PlanId(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
+            int SQLplanID = GetJoinedPlanID(accountID);
             string lucnchDiscription = "";
             string query = "select LunchDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1214,10 +1214,10 @@ namespace FitnessApp.SQLdatabase
             return lucnchDiscription;
         }
 
-        public string DinnerDiscription(int accountID)
+        public string GetDayDinnerDescription(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
-            int SQLplanID = PlanId(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
+            int SQLplanID = GetJoinedPlanID(accountID);
             string dinnerDiscription = "";
             string query = "select DinnerDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1238,10 +1238,10 @@ namespace FitnessApp.SQLdatabase
             return dinnerDiscription;
         }
 
-        public string WorkoutDiscription(int accountID)
+        public string GetDayWorkoutDescription(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
-            int SQLplanID = PlanId(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
+            int SQLplanID = GetJoinedPlanID(accountID);
             string workoutDiscription = "";
             string query = "select WorkoutDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1264,9 +1264,9 @@ namespace FitnessApp.SQLdatabase
 
 
         // Get Joined Plan Checkboxes' Status
-        public bool SQLbreakfast(int accountID)
+        public bool GetDayBreakfastStatus(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlBreakfast = false;
             string query = " select BreakfastIsDone from UserPlanDay where FK_UserPlanDay_UserID = @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1287,9 +1287,9 @@ namespace FitnessApp.SQLdatabase
             return SqlBreakfast;
         }
 
-        public bool SQLlunch(int accountID)
+        public bool GetDayLunchStatus(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlLunch = false;
             string query = " select LunchIsDone from UserPlanDay where FK_UserPlanDay_UserID = @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1310,9 +1310,9 @@ namespace FitnessApp.SQLdatabase
             return SqlLunch;
         }
 
-        public bool SQLdinner(int accountID)
+        public bool GetDayDinnerStatus(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlDinner = false;
             string query = " select DinnerIsDone from UserPlanDay where FK_UserPlanDay_UserID=@accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1333,9 +1333,9 @@ namespace FitnessApp.SQLdatabase
             return SqlDinner;
         }
 
-        public bool SQLworkout(int accountID)
+        public bool GetDayWorkoutStatus(int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlWorkout = false;
             string query = " select WorkoutsIsDone from UserPlanDay where FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
@@ -1359,9 +1359,9 @@ namespace FitnessApp.SQLdatabase
 
         //Modify Joined Plan Checkboxes
 
-        public void ModifyBreakfast(bool checkedBreakfast, int accountID)
+        public void UpdateDayBreakfastStatus(bool checkedBreakfast, int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             string query = "Update UserPlanDay SET  BreakfastIsDone=@checkedBreakfast where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -1380,9 +1380,9 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
-        public void ModifyLunch(bool checkedLunch, int accountID)
+        public void UpdateDayLunchStatus(bool checkedLunch, int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             string query = "Update UserPlanDay SET  LunchIsDone=@checkedLunch where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -1401,9 +1401,9 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
-        public void ModifyDinner(bool checkedDinner, int accountID)
+        public void UpdateDayDinnerStatus(bool checkedDinner, int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             string query = "Update UserPlanDay SET  DinnerIsDone=@checkedDinner where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -1423,9 +1423,9 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
-        public void ModifyWorkout(bool checkedWorkout, int accountID)
+        public void UpdateDayWorkoutStatus(bool checkedWorkout, int accountID)
         {
-            int SQLplanDay = GetDate(accountID);
+            int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             string query = "Update UserPlanDay SET  WorkoutsIsDone=@checkedWorkout where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
             Connection.Open();
             SqlCommand cmd = new SqlCommand(query, Connection);
@@ -1435,13 +1435,13 @@ namespace FitnessApp.SQLdatabase
 
             try
             {
-
                 cmd.ExecuteNonQuery();
             }
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
             Connection.Close();
         }
     }

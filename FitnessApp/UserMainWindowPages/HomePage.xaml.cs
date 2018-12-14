@@ -142,25 +142,25 @@ namespace FitnessApp.UserMainWindowPages
             if (checkJoinedInPlan == true)
             {
                 // Load Header
-                string planName = SQLqueriesObject.PlanName(userID).ToString();
-                int planDayNum = SQLqueriesObject.GetDate(userID);
+                string planName = SQLqueriesObject.GetJoinedPlanName(userID).ToString();
+                int planDayNum = SQLqueriesObject.GetJoinedPlanDayNumber(userID);
                 NoPlanCard.Visibility = Visibility.Collapsed;
                 PlanHeaderTextBlock.Text = planName + " | Day #" + planDayNum;
 
                 // Load CheckBoxes
-                BreakfastCheckBox.IsChecked = SQLqueriesObject.SQLbreakfast(userID);
-                LunchCheckBox.IsChecked = SQLqueriesObject.SQLlunch(userID);
-                DinnerCheckBox.IsChecked = SQLqueriesObject.SQLdinner(userID);
-                WorkoutsCheckBox.IsChecked = SQLqueriesObject.SQLworkout(userID);
+                BreakfastCheckBox.IsChecked = SQLqueriesObject.GetDayBreakfastStatus(userID);
+                LunchCheckBox.IsChecked = SQLqueriesObject.GetDayLunchStatus(userID);
+                DinnerCheckBox.IsChecked = SQLqueriesObject.GetDayDinnerStatus(userID);
+                WorkoutsCheckBox.IsChecked = SQLqueriesObject.GetDayWorkoutStatus(userID);
 
                 // Load Descriptions
-                BreakfastDescriptionTextBlock.Text = SQLqueriesObject.BreakfastDiscription(userID);
-                LunchDescriptionTextBlock.Text = SQLqueriesObject.LucnchDiscription(userID);
-                DinnerDescriptionTextBlock.Text = SQLqueriesObject.DinnerDiscription(userID);
-                WorkoutsDescriptionTextBlock.Text = SQLqueriesObject.WorkoutDiscription(userID);
+                BreakfastDescriptionTextBlock.Text = SQLqueriesObject.GetDayBreakfastDescription(userID);
+                LunchDescriptionTextBlock.Text = SQLqueriesObject.GetDayLucnchDescription(userID);
+                DinnerDescriptionTextBlock.Text = SQLqueriesObject.GetDayDinnerDescription(userID);
+                WorkoutsDescriptionTextBlock.Text = SQLqueriesObject.GetDayWorkoutDescription(userID);
 
                 // Load Progress Bar
-                PlanProgressBar.Value = SQLqueriesObject.GetDate(userID);
+                PlanProgressBar.Value = planDayNum;
             }
         }
 
@@ -171,19 +171,19 @@ namespace FitnessApp.UserMainWindowPages
             switch (currentCheckBox.Name)
             {
                 case "BreakfastCheckBox":
-                    SQLqueriesObject.ModifyBreakfast(true, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayBreakfastStatus(true, UserMainWindow.signedInUser.ID);
                     break;
 
                 case "LunchCheckBox":
-                    SQLqueriesObject.ModifyLunch(true, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayLunchStatus(true, UserMainWindow.signedInUser.ID);
                     break;
 
                 case "DinnerCheckBox":
-                    SQLqueriesObject.ModifyDinner(true, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayDinnerStatus(true, UserMainWindow.signedInUser.ID);
                     break;
 
                 case "WorkoutsCheckBox":
-                    SQLqueriesObject.ModifyWorkout(true, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayWorkoutStatus(true, UserMainWindow.signedInUser.ID);
                     break;
             }
         }
@@ -195,19 +195,19 @@ namespace FitnessApp.UserMainWindowPages
             switch (currentCheckBox.Name)
             {
                 case "BreakfastCheckBox":
-                    SQLqueriesObject.ModifyBreakfast(false, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayBreakfastStatus(false, UserMainWindow.signedInUser.ID);
                     break;
 
                 case "LunchCheckBox":
-                    SQLqueriesObject.ModifyLunch(false, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayLunchStatus(false, UserMainWindow.signedInUser.ID);
                     break;
 
                 case "DinnerCheckBox":
-                    SQLqueriesObject.ModifyDinner(false, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayDinnerStatus(false, UserMainWindow.signedInUser.ID);
                     break;
 
                 case "WorkoutsCheckBox":
-                    SQLqueriesObject.ModifyWorkout(false, UserMainWindow.signedInUser.ID);
+                    SQLqueriesObject.UpdateDayWorkoutStatus(false, UserMainWindow.signedInUser.ID);
                     break;
             }
         }
