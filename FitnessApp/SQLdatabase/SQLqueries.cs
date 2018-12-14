@@ -962,6 +962,27 @@ namespace FitnessApp.SQLdatabase
             return food;
         }
 
+        public List<String> GetAllWorkouts()
+        {
+            Connection.Open();
+
+            List<String> workouts = new List<string>();
+
+            SqlCommand cmd = new SqlCommand("select Name from Workout", Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                string WorkoutName = reader["Name"].ToString();
+                workouts.Add(WorkoutName);
+            }
+            reader.Close();
+
+            Connection.Close();
+
+            return workouts;
+        }
+
         public void AddFood(string food, double quantity, int accountID)
         {
             Connection.Open();
