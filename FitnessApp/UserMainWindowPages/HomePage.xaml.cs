@@ -31,6 +31,7 @@ namespace FitnessApp.UserMainWindowPages
             LoadWeightChart(UserMainWindow.signedInUser.ID);
             LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
+            LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
             LoadMotivationalQuoteCard();
             
             // Setting Data context for JoinedChallengesListBox
@@ -133,16 +134,82 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// Joined Plan Card Functions/Event Handlers //////////
 
+
+        private void LoadJoinedPlanCard(int userID)
+        {
+            bool checkJoinedInPlan = SQLqueriesObject.IsInPlan(userID);
+
+            if (checkJoinedInPlan == true)
+            {
+                // Load Header
+                string planName = SQLqueriesObject.PlanName(userID).ToString();
+                int planDayNum = SQLqueriesObject.GetDate(userID);
+                NoPlanCard.Visibility = Visibility.Collapsed;
+                PlanHeaderTextBlock.Text = planName + " | Day #" + planDayNum;
+
+                // Load CheckBoxes
+                BreakfastCheckBox.IsChecked = SQLqueriesObject.SQLbreakfast(userID);
+                LunchCheckBox.IsChecked = SQLqueriesObject.SQLlunch(userID);
+                DinnerCheckBox.IsChecked = SQLqueriesObject.SQLdinner(userID);
+                WorkoutsCheckBox.IsChecked = SQLqueriesObject.SQLworkout(userID);
+
+                // Load Descriptions
+                BreakfastDescriptionTextBlock.Text = SQLqueriesObject.BreakfastDiscription(userID);
+                LunchDescriptionTextBlock.Text = SQLqueriesObject.LucnchDiscription(userID);
+                DinnerDescriptionTextBlock.Text = SQLqueriesObject.DinnerDiscription(userID);
+                WorkoutsDescriptionTextBlock.Text = SQLqueriesObject.WorkoutDiscription(userID);
+
+                // Load Progress Bar
+                PlanProgressBar.Value = SQLqueriesObject.GetDate(userID);
+            }
+        }
+
         private void DayItemCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             CheckBox currentCheckBox = sender as CheckBox;
-            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+
+            switch (currentCheckBox.Name)
+            {
+                case "BreakfastCheckBox":
+                    SQLqueriesObject.ModifyBreakfast(true, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "LunchCheckBox":
+                    SQLqueriesObject.ModifyLunch(true, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "DinnerCheckBox":
+                    SQLqueriesObject.ModifyDinner(true, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "WorkoutsCheckBox":
+                    SQLqueriesObject.ModifyWorkout(true, UserMainWindow.signedInUser.ID);
+                    break;
+            }
         }
 
         private void DayItemCheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
             CheckBox currentCheckBox = sender as CheckBox;
-            MessageBox.Show(currentCheckBox.Name.ToString() + "is: " + currentCheckBox.IsChecked.ToString());
+
+            switch (currentCheckBox.Name)
+            {
+                case "BreakfastCheckBox":
+                    SQLqueriesObject.ModifyBreakfast(false, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "LunchCheckBox":
+                    SQLqueriesObject.ModifyLunch(false, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "DinnerCheckBox":
+                    SQLqueriesObject.ModifyDinner(false, UserMainWindow.signedInUser.ID);
+                    break;
+
+                case "WorkoutsCheckBox":
+                    SQLqueriesObject.ModifyWorkout(false, UserMainWindow.signedInUser.ID);
+                    break;
+            }
         }
 
         private void JoinPlanButton_Click(object sender, System.Windows.RoutedEventArgs e)
