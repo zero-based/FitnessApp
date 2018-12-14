@@ -33,12 +33,8 @@ namespace FitnessApp.UserMainWindowPages
             LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
             LoadMotivationalQuoteCard();
-            
-            // Setting Data context for JoinedChallengesListBox
-            ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
-            joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
-            JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
-            ControlNoChallengesCard(joinedChallengesDataContext);   
+
+            LoadJoinedChallengesCards();
         }
 
 
@@ -100,6 +96,16 @@ namespace FitnessApp.UserMainWindowPages
 
 
         ////////// Joined Challenges Cards Functions/Event Handlers //////////
+
+
+        // Setting Data context for JoinedChallengesListBox
+        private void LoadJoinedChallengesCards()
+        {
+            ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
+            joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
+            JoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+            ControlNoChallengesCard(joinedChallengesDataContext);
+        }
 
         private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
         {
