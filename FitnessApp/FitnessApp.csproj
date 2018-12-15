@@ -240,6 +240,8 @@
   <ItemGroup>
     <Resource Include="Images\AccountCircleDefaultIcon.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\No-Image.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
