@@ -6,14 +6,14 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d">
 
-        
-    <materialDesign:DialogHost x:Name="DialogBox">
 
+    <materialDesign:DialogHost x:Name="DialogBox">
+        
         <!--DialogBox Content-->
         <materialDesign:DialogHost.DialogContent>
 
             <Grid>
-                    
+
                 <!--Add A Challenge DialogBox-->
                 <Grid x:Name="AddChallengeDialogBox"
                       Width="500"
@@ -131,7 +131,7 @@
                                 Foreground="{DynamicResource PrimaryHueDarkBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="AddChallengePhotoButton_Click">
-                                Add Challenge Photo
+                            Add Challenge Photo
                         </Button>
 
                         <Button x:Name="DialogBoxAddButton"
@@ -141,7 +141,7 @@
                                 Foreground="{DynamicResource PrimaryHueDarkBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="DialogBoxAddButton_Click">
-                                Add
+                            Add
                         </Button>
 
                         <Button x:Name="DialogBoxCancelButton"
@@ -151,19 +151,20 @@
                                 Foreground="{DynamicResource PrimaryHueDarkBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="DialogBoxCancelButton_Click">
-                                Cancel
+                            Cancel
                         </Button>
 
                     </StackPanel>
 
                 </Grid>
-                    
+
             </Grid>
 
         </materialDesign:DialogHost.DialogContent>
+        
+        <Grid>
+            <Grid HorizontalAlignment="Center" Margin="5">
 
-        <Grid HorizontalAlignment="Center" Margin="5">
-                
             <!--All Challenges ListBox-->
             <ListBox x:Name="ChallengesListBox" 
                      Width="1016"
@@ -322,8 +323,12 @@
 
             </ListBox>
 
-            <!--Floating Button-->
-            <Button x:Name="AddChallengeButton"
+
+
+        </Grid>
+
+        <!--Floating Button-->
+        <Button x:Name="AddChallengeButton"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="25"
@@ -331,12 +336,11 @@
                     ToolTip="Add a Challenge"
                     Click="ChallengeDialogBoxAddButton_Click">
 
-                <materialDesign:PackIcon Kind="Add"/>
+            <materialDesign:PackIcon Kind="Add"/>
 
-            </Button>
-                
+        </Button>
         </Grid>
-            
+
     </materialDesign:DialogHost>
         
 </Page>
