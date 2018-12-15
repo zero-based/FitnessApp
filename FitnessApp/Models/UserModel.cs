@@ -4,10 +4,8 @@
     {
         SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
 
-        private ImageModel _profilePhoto = new ImageModel() { };
-
         private int _id;
-        private int _age;
+        private ImageModel _profilePhoto = new ImageModel();
         private string _firstName;
         private string _lastName;
         private string _username;
@@ -15,6 +13,7 @@
         private string _password;
         private string _gender;
         private string _birthDate;
+        private int    _age;
         private double _weight;
         private double _height;
         private double _targetWeight;
@@ -26,6 +25,8 @@
 
         public UserModel(int userID)
         {
+            _id = userID;
+
             UserModel temp = SQLqueriesObject.LoadUserData(userID);
 
             _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;
@@ -35,8 +36,6 @@
             if (_profilePhoto.ByteArray == null)
                 _profilePhoto.FilePath = @"..\..\Images\AccountCircleDefaultIcon.png";
 
-            _id                     = userID;
-            _age                    = temp.Age;
             _firstName              = temp.FirstName;
             _lastName               = temp.LastName;
             _username               = temp.Username;
@@ -44,6 +43,7 @@
             _password               = temp.Password;
             _gender                 = temp.Gender;
             _birthDate              = temp.BirthDate;
+            _age                    = temp.Age;
             _weight                 = temp.Weight;
             _height                 = temp.Height;
             _targetWeight           = temp.TargetWeight;
@@ -58,18 +58,12 @@
             set { _id = value; }
         }
 
-        public int Age
-        {
-            get { return _age; }
-            set { _age = value; }
-        }
-
         public ImageModel ProfilePhoto
         {
             get { return _profilePhoto; }
             set { _profilePhoto = value; }
         }
-
+           
         public string FirstName
         {
             get { return _firstName; }
@@ -120,6 +114,12 @@
         {
             get { return _birthDate; }
             set { _birthDate = value; }
+        }
+
+        public int Age
+        {
+            get { return _age; }
+            set { _age = value; }
         }
 
         public double Weight
