@@ -139,31 +139,7 @@
 
                             </Grid>
                         </ListBoxItem>
-
-                        <!--Add a new Admin Button-->
-                        <ListBoxItem>
-                            <Grid>
-
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="15"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="15"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="15"/>
-                                </Grid.ColumnDefinitions>
-
-                                <materialDesign:PackIcon x:Name="AddNewAdminIcon" Kind="PersonAdd" Grid.Column="1"/>
-
-                                <TextBlock x:Name="AddNewAdminTextBlock"
-                                           Grid.Column="3"
-                                           FontFamily="{StaticResource ProductSans}"
-                                           FontSize="15">
-                                           Add a new Admin
-                                </TextBlock>
-
-                            </Grid>
-                        </ListBoxItem>
-
+                        
                         <!--Settings Button-->
                         <ListBoxItem>
                             <Grid>

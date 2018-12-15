@@ -44,10 +44,6 @@ namespace FitnessApp
                     break;
 
                 case 2:
-                    HighlightItem(AddNewAdminTextBlock, AddNewAdminIcon);
-                    break;
-
-                case 3:
                     AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.AdminSettingsPage.AdminSettingsPageObject);
                     HighlightItem(SettingsTextBlock, SettingsIcon);
                     break;
@@ -65,10 +61,6 @@ namespace FitnessApp
             // Setup Challenges Item
             SetupChallengesTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             ChallengesIcon          .Foreground = new SolidColorBrush(Colors.Black);
-
-            // Add New Admin Item
-            AddNewAdminTextBlock.Foreground = new SolidColorBrush(Colors.Black);
-            AddNewAdminIcon     .Foreground = new SolidColorBrush(Colors.Black);
 
             // Settings Item
             SettingsTextBlock.Foreground = new SolidColorBrush(Colors.Black);
