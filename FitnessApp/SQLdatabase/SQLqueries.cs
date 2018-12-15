@@ -483,6 +483,10 @@ namespace FitnessApp.SQLdatabase
         // Challenges queries and functions.
         public List<ChallengeModel> LoadAllChallenges(int accountID)
         {
+
+            // Remove All Overdue Challenges before reading data
+            RemoveOverdueChallenges();
+
             List<ChallengeModel> allChallengeModels = new List<ChallengeModel>();
 
             Connection.Open();
@@ -521,13 +525,18 @@ namespace FitnessApp.SQLdatabase
 
         public List<ChallengeModel> LoadJoinedChallenges(int accountID)
         {
+            // Remove All Overdue Challenges before reading data
+            RemoveOverdueChallenges();
+
+            List<ChallengeModel> joinedChallengeModels = new List<ChallengeModel>();
+
             Connection.Open();
+
             string query = "SELECT [Challenge].*,[UserChallenge].* " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "WHERE FK_UserChallenge_UserID = " + accountID;
 
-            List<ChallengeModel> joinedChallengeModels = new List<ChallengeModel>();
             SqlCommand cmd = new SqlCommand(query, Connection);
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -579,6 +588,29 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
+        public void RemoveOverdueChallenges()
+        {
+
+            Connection.Open();
+
+            string query = "DELETE [UserChallenge] " +
+                           "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
+                           "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
+                           "WHERE [Challenge].DueDate <= getdate()";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            query = "DELETE FROM[Challenge] WHERE[Challenge].DueDate <= getdate()";
+
+            cmd = new SqlCommand(query, Connection);
+            reader = cmd.ExecuteReader();
+
+            Connection.Close();
+
+        }
+
         public void UpdateChallengesProgress(int accountID, string workout, double duration)
         {
             Connection.Open();
@@ -602,7 +634,6 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Close();
         }
-
 
 
         // Plans queries and functions.
