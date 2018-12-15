@@ -43,5 +43,10 @@ namespace FitnessApp.AdminMainWindowPages
         {
 
         }
+
+        private void AddNewAdminButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

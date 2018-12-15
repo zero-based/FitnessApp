@@ -245,7 +245,7 @@
                         </Grid>
                     </materialDesign:Card>
 
-                    <!--Card-->
+                    <!--New Admin Card-->
                     <materialDesign:Card Grid.Row="2"
                                          Width="500" 
                                          Background="{StaticResource MaterialDesignBackground}">
@@ -253,6 +253,10 @@
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
@@ -270,7 +274,41 @@
                                        Grid.Column="1"
                                        FontFamily="{StaticResource ProductSans}"
                                        FontSize="18"
-                                       Text="Card Header"/>
+                                       Text="Add a new Admin"/>
+
+                            <!--New Admin's Name Feild-->
+                            <Grid Grid.Row="3" Grid.Column="1">
+                                
+                                <materialDesign:PackIcon Kind="RenameBox" Margin="0,20,0,0"/>
+                                <TextBox x:Name="NewAdminName"
+                                         Margin="25,0,0,0"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="New Admin's Name"/>
+                            </Grid>
+                            
+                            <!--New Admin's email Feild-->
+                            <Grid Grid.Row="5" Grid.Column="1">
+                                
+                                <materialDesign:PackIcon Kind="AccountPlus" Margin="0,20,0,0"/>
+                                <TextBox x:Name="NewAdminEmail"
+                                         Margin="25,0,0,0"
+                                         FontFamily="{StaticResource Roboto}"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         materialDesign:HintAssist.Hint="New Admin's email"/>
+                            </Grid>
+
+                            <Button x:Name="AddNewAdminButton"
+                                    Grid.Row="7" 
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    FontFamily="{StaticResource ProductSans}"
+                                    FontSize="14"
+                                    Foreground="{DynamicResource PrimaryHueMidBrush}" 
+                                    Style="{StaticResource MaterialDesignFlatButton}"
+                                    Click="AddNewAdminButton_Click">
+                                    Add
+                            </Button>
 
                         </Grid>
 
