@@ -27,16 +27,17 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             UserMainWindow.HomePageObject = this;
 
-            FoodComboBox.ItemsSource     = SQLqueriesObject.GetAllFood();
-            WorkoutsComboBox.ItemsSource = SQLqueriesObject.GetAllWorkouts();
-
             LoadWeightChart(UserMainWindow.signedInUser.ID);
             LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
+            LoadJoinedChallengesCards();
+
             LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
             LoadMotivationalQuoteCard();
+            LoadCaloriesCard(UserMainWindow.signedInUser.ID);
 
-            LoadJoinedChallengesCards();
+            FoodComboBox    .ItemsSource = SQLqueriesObject.GetAllFood();
+            WorkoutsComboBox.ItemsSource = SQLqueriesObject.GetAllWorkouts();
         }
 
 
@@ -365,6 +366,26 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// Calories Card Functions/Event Handlers //////////
 
+        private void LoadCaloriesCard(int userID)
+        {
+            CaloriesGainedTextBlock.Text = SQLqueriesObject.GetCaloriesGainedToday(userID).ToString();
+            CaloriesNeededTextBlock.Text = CalculateCaloriedNeeded().ToString();
+            CaloriesLostTextBlock  .Text = SQLqueriesObject.GetCaloriesLostToday(userID).ToString();
+        }
+
+        private double CalculateCaloriedNeeded()
+        {
+
+            if (UserMainWindow.signedInUser.Gender == "Male")
+                return  66 + (13.7 * UserMainWindow.signedInUser.LatestWeight)
+                           + (1.8  * UserMainWindow.signedInUser.Height)
+                           - (4.7  * UserMainWindow.signedInUser.Age);
+            else
+                return 665 + (9.6 * UserMainWindow.signedInUser.LatestWeight)
+                           + (1.8 * UserMainWindow.signedInUser.Height)
+                           - (4.7 * UserMainWindow.signedInUser.Age);
+
+        }
 
         ///////////////////////////////////////////////////////////
 
