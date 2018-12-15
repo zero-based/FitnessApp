@@ -480,6 +480,8 @@ namespace FitnessApp.SQLdatabase
         }
 
 
+
+
         // Challenges queries and functions.
         public List<ChallengeModel> LoadAllChallenges(int accountID)
         {
@@ -636,6 +638,7 @@ namespace FitnessApp.SQLdatabase
         }
 
 
+
         // Plans queries and functions.
         public List<PlanModel> LoadPlans(int accountID)
         {
@@ -763,8 +766,10 @@ namespace FitnessApp.SQLdatabase
         }
 
 
-        // Home Page queries and Functions
 
+        //////// Weight ////////
+
+        // Weight chart
         public List<double> GetWeightValues(int accountID)
         {
             Connection.Open();
@@ -864,7 +869,6 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
-
         // Total Weight Lost
         public double GetTotalWeightLostPerWeek(int accountID)
         {
@@ -949,7 +953,6 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-
         // Average Weight Lost
         public double GetAverageWeightLostPerWeek(int accountID)
         {
@@ -1033,6 +1036,9 @@ namespace FitnessApp.SQLdatabase
         }
 
 
+
+        //////// Motivational Quote ////////
+
         public string GetMotivationalQuote()
         {
             Connection.Open();
@@ -1047,6 +1053,59 @@ namespace FitnessApp.SQLdatabase
 
             return Quote;
         }
+
+
+
+        //////// Calories ////////
+
+        public double GetCaloriesGainedToday(int accountID)
+        {
+            double caloriesGained = 0;
+
+            Connection.Open();
+
+            string query = "SELECT SUM(CaloriesGained) " +
+                           "FROM UserFood " +
+                           "WHERE FK_UserFood_UserID = @id " +
+                           "AND DateOfToday = getdate()";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            if (cmd.ExecuteScalar() != DBNull.Value)
+                caloriesGained = (double)cmd.ExecuteScalar();
+
+            Connection.Close();
+
+            return caloriesGained;
+        }
+
+        public double GetCaloriesLostToday(int accountID)
+        {
+            double caloriesLost = 0;
+
+            Connection.Open();
+
+            string query = "SELECT SUM(CaloriesLost) " +
+                           "FROM UserWorkout " +
+                           "WHERE FK_UserWorkout_UserID = @id " +
+                           "AND DateOfToday = getdate()";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@id", accountID);
+
+            if (cmd.ExecuteScalar() != DBNull.Value)
+                caloriesLost = (double)cmd.ExecuteScalar();
+
+            Connection.Close();
+
+            return caloriesLost;
+        }
+
+
+
+
+        //////// Food/Workout ////////
 
         public List<String> GetAllFood()
         {
@@ -1177,6 +1236,9 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Close();
         }
+
+
+
 
         //////// Joined Plan ////////
         
