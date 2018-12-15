@@ -72,6 +72,16 @@
     <Compile Include="AdminMainWindow.xaml.cs">
       <DependentUpon>AdminMainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdminMainWindowPages\AdminHomePage.xaml.cs">
+      <DependentUpon>AdminHomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMainWindowPages\AdminSettingsPage.xaml.cs">
+      <DependentUpon>AdminSettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMainWindowPages\ChallengesSetupPage.xaml.cs">
+      <DependentUpon>ChallengesSetupPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FeedbackModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="SignUpPages\SignUpFirstPage.xaml.cs">
@@ -108,8 +118,22 @@
     <Compile Include="Models\ChallengeModel.cs" />
     <Compile Include="ViewModels\ChallengesViewModel.cs" />
     <Compile Include="Models\PlanModel.cs" />
+    <Compile Include="ViewModels\FeedbacksViewModel.cs" />
     <Compile Include="ViewModels\PlansViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Page Include="AdminMainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminMainWindowPages\AdminHomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminMainWindowPages\AdminSettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdminMainWindowPages\ChallengesSetupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

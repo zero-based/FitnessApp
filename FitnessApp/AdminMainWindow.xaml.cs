@@ -34,18 +34,17 @@ namespace FitnessApp
             switch (AdminMainWindowPagesListBox.SelectedIndex)
             {
                 case 0:
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.AdminHomePage.AdminHomePageObject);
                     HighlightItem(HomeTextBlock, HomeIcon);
                     break;
 
                 case 1:
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.ChallengesSetupPage.ChallengesSetupPageObject);
                     HighlightItem(SetupChallengesTextBlock, ChallengesIcon);
                     break;
 
                 case 2:
-                    HighlightItem(AddNewAdminTextBlock, AddNewAdminIcon);
-                    break;
-
-                case 3:
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.AdminSettingsPage.AdminSettingsPageObject);
                     HighlightItem(SettingsTextBlock, SettingsIcon);
                     break;
             }
@@ -63,10 +62,6 @@ namespace FitnessApp
             SetupChallengesTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             ChallengesIcon          .Foreground = new SolidColorBrush(Colors.Black);
 
-            // Add New Admin Item
-            AddNewAdminTextBlock.Foreground = new SolidColorBrush(Colors.Black);
-            AddNewAdminIcon     .Foreground = new SolidColorBrush(Colors.Black);
-
             // Settings Item
             SettingsTextBlock.Foreground = new SolidColorBrush(Colors.Black);
             SettingsIcon     .Foreground = new SolidColorBrush(Colors.Black);
@@ -75,6 +70,11 @@ namespace FitnessApp
             pageTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
             pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
             PageHeaderTextBlock .Text = pageTextBlock.Text;
+        }
+
+        private void UpdatePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            UpdatePasswordGrid.Visibility = Visibility.Collapsed;
         }
 
         private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
