@@ -123,6 +123,7 @@
     <Compile Include="Models\PlanModel.cs" />
     <Compile Include="ViewModels\FeedbacksViewModel.cs" />
     <Compile Include="ViewModels\PlansViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
     <Page Include="AdminMainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
