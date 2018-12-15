@@ -11,6 +11,7 @@ using FitnessApp.ViewModels;
 using System.Collections.Generic;
 using LiveCharts.Helpers;
 using System.Windows.Media;
+using System.Linq;
 
 namespace FitnessApp.UserMainWindowPages
 {
@@ -52,17 +53,41 @@ namespace FitnessApp.UserMainWindowPages
 
         private void LoadWeightChart(int userID)
         {
+            // Calculate Ideal Weight Here...
+            double idealWeight = 10;
+
             SeriesCollection = new SeriesCollection
             {
                 new LineSeries
                 {
                     Title = "Weight",
                     Values = SQLqueriesObject.GetWeightValues(userID).AsChartValues()
+                },
+
+                new LineSeries
+                {
+                    Title = "Target Weight",
+                    Values = Enumerable.Repeat(UserMainWindow.signedInUser.TargetWeight, 10).AsChartValues(),
+                    PointGeometry = null,
+                    Fill = Brushes.Transparent,
+                    Stroke = Brushes.Red,
+                    StrokeDashArray = new DoubleCollection {3},
+                },
+
+                new LineSeries
+                {
+                    Title = "Ideal Weight",
+                    Values = Enumerable.Repeat(idealWeight, 10).AsChartValues(),
+                    PointGeometry = null,
+                    Fill = Brushes.Transparent,
+                    Stroke = Brushes.ForestGreen,
+                    StrokeDashArray = new DoubleCollection {3},
                 }
             };
 
             Labels = SQLqueriesObject.GetWeightDateValues(userID);
             YFormatter = value => value.ToString();
+
             // Setting Data context for WeightChart
             WeightChart.DataContext = this;
         }
