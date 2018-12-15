@@ -6,10 +6,11 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d">
 
-    <Grid Margin="15,0">
+    <Grid Margin="15,0" HorizontalAlignment="Center">
 
         <ListBox x:Name="ChallengesListBox" 
-                 HorizontalAlignment="Center"
+                 Width="1016"
+                 HorizontalAlignment="Left"
                  Padding="-8,0"
                  ItemsSource="{Binding AllChallengeModels}" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
