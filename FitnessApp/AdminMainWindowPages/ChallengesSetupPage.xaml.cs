@@ -19,8 +19,8 @@ namespace FitnessApp.AdminMainWindowPages
         public ChallengesSetupPage()
         {
             InitializeComponent();
+            LoadAllChallenges();
             LoadWorkoutTypeComboBox();
-
         }
 
         private void TextBoxesNumbersOnly_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
@@ -41,6 +41,14 @@ namespace FitnessApp.AdminMainWindowPages
             List<string> items = new List<string>();
             // GetAllWorkouts Here From Database
             WorkoutTypeComboBox.ItemsSource = items;
+        }
+
+        private void LoadAllChallenges()
+        {
+            ChallengesViewModel challengesDataContext = new ChallengesViewModel();
+            challengesDataContext.AllChallengesViewModel(0);
+            AllChallengesListBox.DataContext = challengesDataContext;
+
         }
 
         private void AddChallengePhotoButton_Click(object sender, RoutedEventArgs e)
