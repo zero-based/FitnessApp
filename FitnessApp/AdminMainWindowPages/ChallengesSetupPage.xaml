@@ -166,7 +166,7 @@
             <Grid HorizontalAlignment="Center" Margin="5">
 
             <!--All Challenges ListBox-->
-            <ListBox x:Name="ChallengesListBox" 
+            <ListBox x:Name="AllChallengesListBox" 
                      Width="1016"
                      Padding="-8,0"
                      HorizontalAlignment="Left"
