@@ -82,7 +82,7 @@ namespace FitnessApp.UserMainWindowPages
 
             if (browsePhotoDialog.ShowDialog() == true)
             {
-                currentProfilePhoto = new ImageModel { FilePath = browsePhotoDialog.FileName };
+                currentProfilePhoto = new ImageModel(browsePhotoDialog.FileName);
                 UserProfilePhoto.ImageSource = currentProfilePhoto.Source;
             }
 
@@ -121,7 +121,7 @@ namespace FitnessApp.UserMainWindowPages
                 // Update signedInUser User Model
 
                 if (currentProfilePhoto != null) // Check if profile photo is updated
-                    UserMainWindow.signedInUser.ProfilePhoto.FilePath = currentProfilePhoto.FilePath;
+                    UserMainWindow.signedInUser.ProfilePhoto   = currentProfilePhoto;
 
                 UserMainWindow.signedInUser.Weight             = double.Parse(WeightTextBox            .Text);
                 UserMainWindow.signedInUser.Height             = double.Parse(HeightTextBox            .Text);

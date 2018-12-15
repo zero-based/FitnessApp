@@ -13,16 +13,17 @@ namespace FitnessApp.Models
 
         public ImageModel() { }
 
-        public string FilePath { get; set; }
+        public ImageModel(string imageFilePath)
+        {
+            _byteArray = ConvertImageFileToByteArray(imageFilePath);
+            _source = new BitmapImage(new Uri(imageFilePath, UriKind.RelativeOrAbsolute));
+        }
+
+        public string Default { get; set; }
 
         public byte[] ByteArray
         {
-            get
-            {
-                if (FilePath == null) { return _byteArray; }
-                else { return ConvertImageFileToByteArray(); }
-            }
-
+            get  { return _byteArray; }
             set { _byteArray = value; }
         }
 
@@ -30,8 +31,9 @@ namespace FitnessApp.Models
         {
             get
             {
-                if (FilePath == null) { return ConvertByteArrayToImageSource(); }
-                else { return new BitmapImage(new Uri(FilePath, UriKind.RelativeOrAbsolute)); }
+                if (Default == null ) { return _source; }
+                else if (_byteArray != null) { return ConvertByteArrayToImageSource(); }
+                else { return new BitmapImage(new Uri(Default, UriKind.RelativeOrAbsolute)); }
             }
 
             set { _source = value; }
@@ -39,9 +41,9 @@ namespace FitnessApp.Models
 
        
         // Convert Image to Byte array
-        private byte[] ConvertImageFileToByteArray()
+        private byte[] ConvertImageFileToByteArray(string imageFilePath)
         {
-            FileStream fileSteam = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
+            FileStream fileSteam = new FileStream(imageFilePath, FileMode.Open, FileAccess.Read);
             BinaryReader binaryReader = new BinaryReader(fileSteam);
 
             return binaryReader.ReadBytes((int)fileSteam.Length);

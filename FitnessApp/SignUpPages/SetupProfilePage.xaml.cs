@@ -75,7 +75,7 @@ namespace FitnessApp.SignUpPages
 
             if (browsePhotoDialog.ShowDialog() == true)
             {
-                profilePhoto.FilePath = browsePhotoDialog.FileName;
+                profilePhoto = new ImageModel(browsePhotoDialog.FileName);
                 UserProfilePhoto.ImageSource = profilePhoto.Source;
             }
         }

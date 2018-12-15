@@ -5,7 +5,7 @@
         SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
 
         private int _id;
-        private ImageModel _profilePhoto = new ImageModel();
+        private ImageModel _profilePhoto = new ImageModel() { Default = @"..\..\Images\AccountCircleDefaultIcon.png" };
         private string _firstName;
         private string _lastName;
         private string _username;
@@ -25,17 +25,10 @@
 
         public UserModel(int userID)
         {
-            _id = userID;
-
             UserModel temp = SQLqueriesObject.LoadUserData(userID);
 
+            _id                     = userID;
             _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;
-
-            // Set Profile Photo to Default Photo, in case 
-            // there is no Photo saved in the database.
-            if (_profilePhoto.ByteArray == null)
-                _profilePhoto.FilePath = @"..\..\Images\AccountCircleDefaultIcon.png";
-
             _firstName              = temp.FirstName;
             _lastName               = temp.LastName;
             _username               = temp.Username;
