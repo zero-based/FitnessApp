@@ -283,20 +283,35 @@
                                           Mode="PrimaryDark"
                                           materialDesign:ShadowAssist.ShadowDepth="Depth2">
 
-                    <DockPanel>
+                    <Grid Width="1035">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+
                         <!--Menu Toogle Button-->
                         <ToggleButton x:Name="MenuToggleButton"
+                                      Grid.Column="0"
                                       Width="25"
                                       Height="25"
                                       Style="{StaticResource MaterialDesignHamburgerToggleButton}"/>
 
                         <!--Page Header-->
                         <TextBlock x:Name="PageHeaderTextBlock"
+                                   Grid.Column="1"
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Center" 
                                    FontSize="22"/>
 
-                    </DockPanel>
+                        <!--Logo-->
+                        <Image Grid.Column="2"
+                               Source="Images/Logo.png" 
+                               Stretch="Fill"
+                               Width="30" 
+                               Height="30"/>
+
+                    </Grid>
 
                 </materialDesign:ColorZone>
 
