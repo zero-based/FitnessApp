@@ -1073,7 +1073,7 @@ namespace FitnessApp.SQLdatabase
             string query = "SELECT SUM(CaloriesGained) " +
                            "FROM UserFood " +
                            "WHERE FK_UserFood_UserID = @id " +
-                           "AND DateOfToday = getdate()";
+                           "AND DateOfToday = convert (date ,getdate())";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@id", accountID);
@@ -1095,7 +1095,7 @@ namespace FitnessApp.SQLdatabase
             string query = "SELECT SUM(CaloriesLost) " +
                            "FROM UserWorkout " +
                            "WHERE FK_UserWorkout_UserID = @id " +
-                           "AND DateOfToday = getdate()";
+                           "AND DateOfToday = convert (date ,getdate())";
 
             SqlCommand cmd = new SqlCommand(query, Connection);
             cmd.Parameters.AddWithValue("@id", accountID);
