@@ -32,6 +32,7 @@ namespace FitnessApp.AdminMainWindowPages
             Formatter = value => value.ToString("N");
 
             FeedbackRatingChart.DataContext = this;
+
             FeedbacksListBox.DataContext = new FeedbacksViewModel();
         }
 
@@ -48,5 +49,11 @@ namespace FitnessApp.AdminMainWindowPages
         {
 
         }
+
+        private void UserSearchButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
     }
 }
