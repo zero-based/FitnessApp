@@ -505,7 +505,10 @@ namespace FitnessApp.SQLdatabase
             {
                 ChallengeModel temp = new ChallengeModel();
                 temp.ID             = (int)reader["PK_ChallengeID"];
-                //temp.image        
+
+                if (reader["Photo"] != DBNull.Value)
+                    temp.Photo.ByteArray = (byte[])reader["Photo"];
+
                 temp.Name           = reader["Name"].ToString();
                 temp.Description    = reader["Description"].ToString();
                 temp.TargetMinutes  = (int)reader["TargetMinutes"];
@@ -547,7 +550,6 @@ namespace FitnessApp.SQLdatabase
                 ChallengeModel temp = new ChallengeModel();
 
                 temp.ID             = (int)reader["PK_ChallengeID"];
-                //temp.image        
                 temp.Name           = reader["Name"].ToString();
                 temp.Description    = reader["Description"].ToString();
                 temp.TargetMinutes  = (int)reader["TargetMinutes"];
@@ -559,6 +561,7 @@ namespace FitnessApp.SQLdatabase
 
                 joinedChallengeModels.Add(temp);
             }
+
             Connection.Close();
 
             return joinedChallengeModels;
@@ -656,7 +659,10 @@ namespace FitnessApp.SQLdatabase
                 PlanModel temp = new PlanModel();
 
                 temp.ID = (int)reader[0];
-                //temp.image
+
+                if (reader["Photo"] != DBNull.Value)
+                    temp.Photo.ByteArray = (byte[])reader["Photo"];
+
                 temp.Name = reader["Name"].ToString();
                 temp.Description = reader["Description"].ToString();
                 temp.Duration = reader["Duration"].ToString();

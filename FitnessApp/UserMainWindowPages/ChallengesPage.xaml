@@ -58,7 +58,7 @@
                             <!--Challenge Image-->
                             <Image Grid.Row="0"
                                    Grid.ColumnSpan="3"
-                                   Source="../Images/LoginHeader.jpg"
+                                   Source="{Binding Photo.Source}"
                                    Stretch="UniformToFill"/>
 
                             <!--Join Button-->

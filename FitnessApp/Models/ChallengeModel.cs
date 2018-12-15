@@ -2,8 +2,8 @@
 {
     public class ChallengeModel
     {
-        //private string image;
         private int _id;
+        private ImageModel _photo = new ImageModel() { Default = @"..\..\Images\No-Image.jpg" };
         private bool _isJoined;
         private int _progress;
         private int _workoutType;
@@ -32,6 +32,12 @@
         {
             get { return _id; }
             set { _id = value; }
+        }
+
+        public ImageModel Photo
+        {
+            get { return _photo; }
+            set { _photo = value; }
         }
 
         public bool IsJoined
