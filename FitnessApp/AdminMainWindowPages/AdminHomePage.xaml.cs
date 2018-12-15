@@ -34,6 +34,8 @@ namespace FitnessApp.AdminMainWindowPages
             FeedbackRatingChart.DataContext = this;
 
             FeedbacksListBox.DataContext = new FeedbacksViewModel();
+
+            DeleteUserListBox.DataContext = new UserViewModel();
         }
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -51,6 +53,11 @@ namespace FitnessApp.AdminMainWindowPages
         }
 
         private void UserSearchButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void DeleteUserButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
 
         }
