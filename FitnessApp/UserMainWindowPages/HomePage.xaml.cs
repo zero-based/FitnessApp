@@ -38,27 +38,36 @@ namespace FitnessApp.UserMainWindowPages
 
             FoodComboBox    .ItemsSource = SQLqueriesObject.GetAllFood();
             WorkoutsComboBox.ItemsSource = SQLqueriesObject.GetAllWorkouts();
+
+
+            // Setting Data context for WeightChart
+            WeightChart.DataContext = this;
         }
-
-
-        // Weight Chart Properties
-
-        public SeriesCollection SeriesCollection { get; set; }
-        public List<string> Labels { get; set; }
-        public Func<double, string> YFormatter { get; set; }
-
-
 
 
         ////////// All Weight Cards Functions/Event Handlers //////////
 
+        // Weight Chart Properties
+
+        public SeriesCollection WeightsSeriesCollection { get; set; }
+        public List<string> Labels { get; set; }
+        public Func<double, string> YFormatter { get; set; }
+
         private void LoadWeightChart(int userID)
         {
-            // Calculate Ideal Weight Here...
-            double idealWeight = 10;
 
-            SeriesCollection = new SeriesCollection
+            WeightsSeriesCollection = new SeriesCollection
             {
+                new LineSeries
+                {
+                    Title = "Ideal Weight",
+                    Values = Enumerable.Repeat(CalculateIdealWeight(), 10).AsChartValues(),
+                    PointGeometry = null,
+                    Fill = Brushes.Transparent,
+                    Stroke = Brushes.ForestGreen,
+                    StrokeDashArray = new DoubleCollection {3},
+                },
+
                 new LineSeries
                 {
                     Title = "Weight",
@@ -73,24 +82,21 @@ namespace FitnessApp.UserMainWindowPages
                     Fill = Brushes.Transparent,
                     Stroke = Brushes.Red,
                     StrokeDashArray = new DoubleCollection {3},
-                },
-
-                new LineSeries
-                {
-                    Title = "Ideal Weight",
-                    Values = Enumerable.Repeat(idealWeight, 10).AsChartValues(),
-                    PointGeometry = null,
-                    Fill = Brushes.Transparent,
-                    Stroke = Brushes.ForestGreen,
-                    StrokeDashArray = new DoubleCollection {3},
                 }
+                
             };
 
             Labels = SQLqueriesObject.GetWeightDateValues(userID);
-            YFormatter = value => value.ToString();
+            YFormatter = value => value.ToString() + " kg";
+        }
 
-            // Setting Data context for WeightChart
-            WeightChart.DataContext = this;
+        private double CalculateIdealWeight()
+        {
+            if (UserMainWindow.signedInUser.Gender == "Male")
+                return (UserMainWindow.signedInUser.Height - 100) + ((UserMainWindow.signedInUser.Height - 100) * 0.10);
+
+            else
+                return (UserMainWindow.signedInUser.Height - 100) + ((UserMainWindow.signedInUser.Height - 100) * 0.15);
         }
 
         private void DecimalNumbersOnlyFieldValidation(object sender, TextCompositionEventArgs e)
@@ -103,7 +109,7 @@ namespace FitnessApp.UserMainWindowPages
         private void SaveWeightButton_Click(object sender, RoutedEventArgs e)
         {
             SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserMainWindow.signedInUser.ID);
-            WeightChart.Series[0].Values.Add(double.Parse(TodaysWeightTextBox.Text));
+            WeightChart.Series[1].Values.Add(double.Parse(TodaysWeightTextBox.Text));
 
             // Refresh Weight-Related Cards
             LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);

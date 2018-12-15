@@ -181,14 +181,15 @@
                                                     HorizontalAlignment="Left"
                                                     Width="440"
                                                     Height="200"  
-                                                    Series="{Binding SeriesCollection}">
+                                                    Series="{Binding WeightsSeriesCollection}"
+                                                    LegendLocation="Bottom">
 
                                     <lvc:CartesianChart.AxisY>
-                                        <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}"/>
+                                        <lvc:Axis Title="Kiolgrams" LabelFormatter="{Binding YFormatter}" MinValue="0"/>
                                     </lvc:CartesianChart.AxisY>
 
                                     <lvc:CartesianChart.AxisX>
-                                        <lvc:Axis Title="Month" Labels="{Binding Labels}"/>
+                                        <lvc:Axis Title="Month" Labels="{Binding Labels}" />
                                     </lvc:CartesianChart.AxisX>
 
                                 </lvc:CartesianChart>
