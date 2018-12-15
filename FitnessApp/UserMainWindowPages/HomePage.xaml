@@ -1061,6 +1061,8 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="15"/>
                                     <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="25"/>
                                 </Grid.RowDefinitions>
 
@@ -1167,6 +1169,13 @@
 
                                 </Grid>
 
+                                <lvc:PieChart x:Name="CaloriesChart" 
+                                              Grid.Row="5"
+                                              Grid.Column="1"
+                                              HorizontalAlignment="Center"
+                                              Height="200"
+                                              InnerRadius="100"
+                                              Series="{Binding CaloriesSeriesCollection}" />
                             </Grid>
 
                         </materialDesign:Card>

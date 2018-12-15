@@ -40,8 +40,8 @@ namespace FitnessApp.UserMainWindowPages
             WorkoutsComboBox.ItemsSource = SQLqueriesObject.GetAllWorkouts();
 
 
-            // Setting Data context for WeightChart
-            WeightChart.DataContext = this;
+            // Setting Data context for Charts
+            DataContext = this;
         }
 
 
@@ -197,7 +197,6 @@ namespace FitnessApp.UserMainWindowPages
             UncompletedJoinedChallengesListBox.DataContext = uncompletedJoinedChallengesDataContext;
             ControlNoChallengesCard(joinedChallengesDataContext);
         }
-
 
         private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -372,11 +371,41 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// Calories Card Functions/Event Handlers //////////
 
+        // Calories Chart Property
+        public SeriesCollection CaloriesSeriesCollection { get; set; }
+
+        public void LoadCaloriesChart(double caloriesGained, double caloriesLost)
+        {
+
+            CaloriesSeriesCollection = new SeriesCollection
+            {
+                new PieSeries
+                {
+                    Title = "Calories Lost",
+                    Values = new ChartValues<double> { caloriesLost },
+                    DataLabels = true
+                },
+
+                new PieSeries
+                {
+                    Title = "Calories Gained",
+                    Values = new ChartValues<double> { caloriesGained },
+                    DataLabels = true
+                }
+
+            };
+        }
+
         private void LoadCaloriesCard(int userID)
         {
-            CaloriesGainedTextBlock.Text = SQLqueriesObject.GetCaloriesGainedToday(userID).ToString();
+            double caloriesGained = SQLqueriesObject.GetCaloriesGainedToday(userID);
+            double caloriesLost   = SQLqueriesObject.GetCaloriesLostToday(userID);
+
+            CaloriesGainedTextBlock.Text = caloriesGained.ToString();
             CaloriesNeededTextBlock.Text = CalculateCaloriedNeeded().ToString();
-            CaloriesLostTextBlock  .Text = SQLqueriesObject.GetCaloriesLostToday(userID).ToString();
+            CaloriesLostTextBlock  .Text = caloriesLost.ToString();
+
+            LoadCaloriesChart(caloriesGained, caloriesLost);
         }
 
         private double CalculateCaloriedNeeded()
