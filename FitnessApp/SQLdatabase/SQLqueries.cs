@@ -1624,5 +1624,25 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
+        public List<int> GetAppRatingValues()
+        {
+            Connection.Open();
+            List<int> ratingList = new List<int>();
+
+            for (int i = 1; i <= 5; i++)
+            {
+                string query = "SELECT COUNT(FK_Feedback_UserID) FROM Feedback WHERE Rating = @ratingValue;";
+
+                SqlCommand cmd = new SqlCommand(query, Connection);
+                cmd.Parameters.AddWithValue("@ratingValue", i);
+
+                ratingList.Add((int)cmd.ExecuteScalar());
+            }
+
+            Connection.Close();
+
+            return ratingList;
+        }
+
     }
 }
