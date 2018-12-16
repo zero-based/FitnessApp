@@ -2,7 +2,14 @@
 {
     public class FeedbackModel
     {
-        public string UserName { get; set; }
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string FullName
+        {
+            get { return FirstName + " " + LastName; } set { }
+        }
 
         public string Feedback { get; set; }
     }

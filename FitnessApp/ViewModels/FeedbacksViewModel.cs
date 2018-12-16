@@ -1,19 +1,17 @@
 ﻿using FitnessApp.Models;
+using FitnessApp.SQLdatabase;
 using System.Collections.Generic;
 
 namespace FitnessApp.ViewModels
 {
     class FeedbacksViewModel
     {
+        static SQLqueries SQLqueriesObject = new SQLqueries();
+
         private List<FeedbackModel> feedbackModels;
         public FeedbacksViewModel()
         {
-            feedbackModels = new List<FeedbackModel>()
-            {
-                new FeedbackModel() { UserName = "JHON DOE", Feedback = "Lorem iposem" },
-                new FeedbackModel() { UserName = "JHON DOE", Feedback = "Lorem iposem" },
-                new FeedbackModel() { UserName = "JHON DOE", Feedback = "Lorem iposem" }
-            };
+            feedbackModels = SQLqueriesObject.LoadAllFeedbacks();
         }
         public List<FeedbackModel> FeedbackModels {  get => feedbackModels; set { } }
     }

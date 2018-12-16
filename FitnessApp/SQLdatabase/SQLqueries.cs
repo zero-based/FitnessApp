@@ -1738,6 +1738,49 @@ namespace FitnessApp.SQLdatabase
             return ratingList;
         }
 
+        public List<FeedbackModel> LoadAllFeedbacks()
+        {
+
+            List<FeedbackModel> allFeedbackModels = new List<FeedbackModel>();
+
+            Connection.Open();
+
+            string query = "SELECT [user].FirstName, [user].LastName, [Feedback].Feedback " +
+                           "FROM [User] RIGHT JOIN [Feedback] " +
+                           "ON [User].PK_UserID  = Feedback.FK_Feedback_UserID";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                FeedbackModel temp = new FeedbackModel();
+
+                temp.FirstName = reader["FirstName"].ToString();
+                temp.LastName  = reader["LastName"] .ToString();
+                temp.Feedback  = reader["Feedback"] .ToString();
+
+                allFeedbackModels.Add(temp);
+            }
+
+            Connection.Close();
+
+            return allFeedbackModels;
+        }
+
+        public void DeleteFeedback(string feedbackBody)
+        {
+            Connection.Open();
+
+            string query = "DELETE FROM [Feedback] WHERE [Feedback].Feedback like @feedbackBody";
+            
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@feedbackBody", feedbackBody);
+            cmd.ExecuteNonQuery();
+
+            Connection.Close();
+        }
+
         public int GetAppUsersNumber()
         {
             int appUsersNumber;

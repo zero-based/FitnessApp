@@ -1,4 +1,5 @@
-﻿using FitnessApp.SQLdatabase;
+﻿using FitnessApp.Models;
+using FitnessApp.SQLdatabase;
 using FitnessApp.ViewModels;
 using LiveCharts;
 using LiveCharts.Helpers;
@@ -34,6 +35,7 @@ namespace FitnessApp.AdminMainWindowPages
 
         private void LoadAppRatingChart()
         {
+            AppRatingChart.DataContext = null;
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
@@ -55,7 +57,15 @@ namespace FitnessApp.AdminMainWindowPages
 
         private void DeleteFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            Button deleteFeedbackButton = sender as Button;
+            int selectedFeedbackIndex = FeedbacksListBox.Items.IndexOf(deleteFeedbackButton.DataContext);
 
+            FeedbackModel chosenFeedback = (FeedbackModel)FeedbacksListBox.Items[selectedFeedbackIndex];
+            SQLqueriesObject.DeleteFeedback(chosenFeedback.Feedback);
+
+            FeedbacksListBox.DataContext = null;
+            FeedbacksListBox.DataContext = new FeedbacksViewModel();
+            LoadAppRatingChart();
         }
 
         private void AddNewAdminButton_Click(object sender, System.Windows.RoutedEventArgs e)
