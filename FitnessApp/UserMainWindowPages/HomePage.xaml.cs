@@ -111,6 +111,9 @@ namespace FitnessApp.UserMainWindowPages
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your weight!");
             else
             {
+                // Update User Model Weight Porperty with the latest weight
+                UserMainWindow.signedInUser.Weight = double.Parse(TodaysWeightTextBox.Text);
+
                 // Update Weight in Database
                 SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserMainWindow.signedInUser.ID);
 
@@ -131,6 +134,14 @@ namespace FitnessApp.UserMainWindowPages
 
                 // Refresh Calories Card
                 LoadCaloriesCard(UserMainWindow.signedInUser.ID);
+
+                // Refresh CaloriesCalculatorPage DataContext
+                UserMainWindow.CaloriesCalculatorPageObject.DataContext = null;
+                UserMainWindow.CaloriesCalculatorPageObject.DataContext = UserMainWindow.signedInUser;
+
+                // Refresh SettingsPage DataContext
+                UserMainWindow.SettingsPageObject.DataContext = null;
+                UserMainWindow.SettingsPageObject.DataContext = UserMainWindow.signedInUser;
             }
         }
 
@@ -215,7 +226,6 @@ namespace FitnessApp.UserMainWindowPages
             UncompletedJoinedChallengesListBox.DataContext = uncompletedJoinedChallengesDataContext;
             ControlNoChallengesCard(joinedChallengesDataContext);
         }
-
 
         private void JoinChallengeButton_Click(object sender, RoutedEventArgs e)
         {
@@ -405,11 +415,11 @@ namespace FitnessApp.UserMainWindowPages
         {
 
             if (UserMainWindow.signedInUser.Gender == "Male")
-                return  66 + (13.7 * UserMainWindow.signedInUser.LatestWeight)
+                return  66 + (13.7 * UserMainWindow.signedInUser.Weight)
                            + (1.8  * UserMainWindow.signedInUser.Height)
                            - (4.7  * UserMainWindow.signedInUser.Age);
             else
-                return 665 + (9.6 * UserMainWindow.signedInUser.LatestWeight)
+                return 665 + (9.6 * UserMainWindow.signedInUser.Weight)
                            + (1.8 * UserMainWindow.signedInUser.Height)
                            - (4.7 * UserMainWindow.signedInUser.Age);
 

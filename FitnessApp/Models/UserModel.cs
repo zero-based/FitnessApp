@@ -121,12 +121,6 @@
             set { _weight = value; }
         }
 
-        public double LatestWeight
-        {
-            get { return SQLqueriesObject.GetLastWeight(ID); }
-            set { _weight = value; }
-        }
-
         public double Height
         {
             get { return _height; }

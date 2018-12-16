@@ -306,12 +306,12 @@ namespace FitnessApp.SQLdatabase
 
             dr.Close();
 
-            Connection.Close();
-
             // Info from Weight Table
-            currentUser.Weight = GetLastWeight(userID);
+            string query2 = "select Weight from UserWeight where FK_UserWeight_UserID = @UserId order by Date DESC";
+            SqlCommand cmd2 = new SqlCommand(query2, Connection);
+            cmd2.Parameters.AddWithValue("@userID", userID);
+            currentUser.Weight = (double) cmd2.ExecuteScalar(); 
 
-            Connection.Open();
 
             // Info from Accounts Table
             string query3 = "SELECT Email, Password FROM [Account] WHERE AccountID = @userID";
@@ -324,7 +324,7 @@ namespace FitnessApp.SQLdatabase
             currentUser.Password = dr3["Password"].ToString();
             dr3.Close();
 
-
+            // Get User Age
             string query4 = "SELECT FLOOR (DATEDIFF (DAY, BirthDate, GETDATE()) / 365.25) " +
                             "FROM [User] WHERE PK_UserID = @userID";
             SqlCommand cmd4 = new SqlCommand(query4, Connection);
@@ -335,24 +335,6 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
 
             return currentUser;
-        }
-
-        public double GetLastWeight(int userID)
-        {
-            Connection.Open();
-
-            string query = "SELECT Weight " +
-                           "FROM [UserWeight] " +
-                           "WHERE FK_UserWeight_UserID = @UserId";
-
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@UserId", userID);
-
-            double userWeight = (double)cmd.ExecuteScalar();
-
-            Connection.Close();
-
-            return userWeight;
         }
 
         // Update User Profile
@@ -1178,11 +1160,11 @@ namespace FitnessApp.SQLdatabase
 
             if (currentUser.Gender == "Female")
             {
-                totalCaloriesLost = ((currentUser.Age * 0.074) - (currentUser.LatestWeight * 0.05741) + (100 * 0.4472) - 20.4022) * (duration / 4.184);
+                totalCaloriesLost = ((currentUser.Age * 0.074) - (currentUser.Weight * 0.05741) + (100 * 0.4472) - 20.4022) * (duration / 4.184);
             }
             else
             {
-                totalCaloriesLost = ((currentUser.Age * 0.2017) - (currentUser.LatestWeight * 0.09036) + (100 * 0.6309) - 55.0969) * (duration / 4.184);
+                totalCaloriesLost = ((currentUser.Age * 0.2017) - (currentUser.Weight * 0.09036) + (100 * 0.6309) - 55.0969) * (duration / 4.184);
             }
 
             Connection.Open();
