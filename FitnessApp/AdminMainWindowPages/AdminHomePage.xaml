@@ -225,7 +225,7 @@
                                         HorizontalAlignment="Center"
                                         Orientation="Horizontal">
 
-                                <TextBlock x:Name="NumberOfSystemUsersTextBlock"
+                                <TextBlock x:Name="AppUsersNumberTextBlock"
                                            FontFamily="{StaticResource ProductSans}"
                                            Foreground="{StaticResource PrimaryHueMidBrush}"
                                            FontWeight="Bold" 
