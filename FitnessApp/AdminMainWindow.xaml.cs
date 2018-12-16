@@ -3,6 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
 using FitnessApp.AdminMainWindowPages;
+using FitnessApp.SQLdatabase;
 
 namespace FitnessApp
 {
@@ -12,6 +13,7 @@ namespace FitnessApp
     public partial class AdminMainWindow : Window
     {
         public static AdminMainWindow AdminMainWindowObject;
+        SQLqueries SQLqueriesObject = new SQLqueries();
 
         // Declare AdminMainWindowPages Objects
         public static AdminHomePage       AdminHomePageObject;
@@ -23,6 +25,7 @@ namespace FitnessApp
         {
             InitializeComponent();
             AdminMainWindowObject = this;
+            ControlUpdateNewAdminPasswordGrid(-1);
 
             // Initialize AdminMainWindowPages Objects
 
@@ -85,9 +88,19 @@ namespace FitnessApp
             PageHeaderTextBlock .Text = pageTextBlock.Text;
         }
 
+        private void ControlUpdateNewAdminPasswordGrid(int accountID)
+        {
+            if (SQLqueriesObject.IsNewAdmin(accountID))
+            {
+                UpdateNewAdminPasswordGrid.Visibility = Visibility.Visible;
+            }
+            else
+                UpdateNewAdminPasswordGrid.Visibility = Visibility.Collapsed;
+        }
+
         private void UpdatePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            UpdatePasswordGrid.Visibility = Visibility.Collapsed;
+            UpdateNewAdminPasswordGrid.Visibility = Visibility.Collapsed;
         }
 
         private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
