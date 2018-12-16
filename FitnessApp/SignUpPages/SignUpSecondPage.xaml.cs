@@ -9,12 +9,10 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class SignUpSecondPage : Page
     {
-        public static SignUpSecondPage SignUpSecondPageObject = new SignUpSecondPage();
-
         public SignUpSecondPage()
         {
             InitializeComponent();
-            SignUpSecondPageObject = this;
+            SigningWindow.SignUpSecondPageObject = this;
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
@@ -31,7 +29,7 @@ namespace FitnessApp.SignUpPages
 
             else
             {
-                NavigationService.Navigate(SetUpProfilePage.SetUpProfilePageObject);
+                NavigationService.Navigate(SigningWindow.SetUpProfilePageObject);
 
                 //Change Back Card Header
                 SigningWindow.SigningWindowObject.BackArrowButton.Visibility = Visibility.Hidden;
@@ -42,10 +40,10 @@ namespace FitnessApp.SignUpPages
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            SignUpFirstPage.SignUpFirstPageObject.PasswordTextBox.Password = SignUpFirstPage.SignUpFirstPageObject.Password;
-            SignUpFirstPage.SignUpFirstPageObject.ConfirmPasswordTextBox.Password = SignUpFirstPage.SignUpFirstPageObject.ConfirmedPassword;
+            SigningWindow.SignUpFirstPageObject.PasswordTextBox.Password = SigningWindow.SignUpFirstPageObject.Password;
+            SigningWindow.SignUpFirstPageObject.ConfirmPasswordTextBox.Password = SigningWindow.SignUpFirstPageObject.ConfirmedPassword;
 
-            NavigationService.Navigate(SignUpFirstPage.SignUpFirstPageObject);
+            NavigationService.Navigate(SigningWindow.SignUpFirstPageObject);
         }
     }
 }

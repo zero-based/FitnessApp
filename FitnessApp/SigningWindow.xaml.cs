@@ -1,4 +1,5 @@
-﻿using FitnessApp.SQLdatabase;
+﻿using FitnessApp.SignUpPages;
+using FitnessApp.SQLdatabase;
 using MaterialDesignThemes.Wpf;
 using System.Windows;
 
@@ -9,7 +10,11 @@ namespace FitnessApp
     /// </summary>
     public partial class SigningWindow : Window
     {
-        public static SigningWindow SigningWindowObject;
+        public static SigningWindow    SigningWindowObject;
+        public static SignUpFirstPage  SignUpFirstPageObject;
+        public static SignUpSecondPage SignUpSecondPageObject;
+        public static SetUpProfilePage SetUpProfilePageObject;
+        
 
         // Create object from database class
         SQLqueries SQLqueriesObject = new SQLqueries();
@@ -18,6 +23,11 @@ namespace FitnessApp
         {
             InitializeComponent();
             SigningWindowObject = this;
+
+            // Initialize UserMainWindowPages Objects
+            SignUpFirstPageObject  = new SignUpFirstPage();
+            SignUpSecondPageObject = new SignUpSecondPage();
+            SetUpProfilePageObject = new SetUpProfilePage();
 
             // Intialize ErrorMessagesQueue and Assign it to ErrorsSnackbar's MessageQueue
             var ErrorMessagesQueue = new SnackbarMessageQueue(System.TimeSpan.FromMilliseconds(2000));
@@ -58,7 +68,7 @@ namespace FitnessApp
 
         private void CreateAnAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            SignUpPagesFrame.NavigationService.Navigate(SignUpPages.SignUpFirstPage.SignUpFirstPageObject);
+            SignUpPagesFrame.NavigationService.Navigate(SigningWindow.SignUpFirstPageObject);
         }
     }
 }

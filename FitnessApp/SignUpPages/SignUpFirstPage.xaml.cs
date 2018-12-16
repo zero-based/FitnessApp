@@ -66,7 +66,7 @@ namespace FitnessApp.SignUpPages
                         if (EmailTextBox.Text.Contains(".com"))
                         {
 
-                            NavigationService.Navigate(SignUpSecondPage.SignUpSecondPageObject);
+                            NavigationService.Navigate(SigningWindow.SignUpSecondPageObject);
                         }
                     }
                     else

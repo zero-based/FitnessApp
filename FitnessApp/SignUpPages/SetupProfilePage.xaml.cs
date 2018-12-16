@@ -12,7 +12,6 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class SetUpProfilePage : Page
     {
-        public static SetUpProfilePage SetUpProfilePageObject = new SetUpProfilePage();
         private ImageModel profilePhoto = new ImageModel();
 
         // Create an object from dataBase class
@@ -21,7 +20,7 @@ namespace FitnessApp.SignUpPages
         public SetUpProfilePage()
         {
             InitializeComponent();
-            SetUpProfilePageObject = this;
+            SigningWindow.SetUpProfilePageObject = this;
         }
 
         private void SetUpProfileButton_Click(object sender, RoutedEventArgs e)
@@ -43,13 +42,13 @@ namespace FitnessApp.SignUpPages
             {
                 // Signing up
                 SQLqueriesObject.SignUp(profilePhoto.ByteArray,
-                                        SignUpFirstPage.SignUpFirstPageObject.FirstNameTextBox.Text,
-                                        SignUpFirstPage.SignUpFirstPageObject.LastNameTextBox.Text,
-                                        SignUpFirstPage.SignUpFirstPageObject.UsernameTextBox.Text,
-                                        SignUpFirstPage.SignUpFirstPageObject.EmailTextBox.Text,
-                                        SignUpFirstPage.SignUpFirstPageObject.Password,
-                                        SignUpSecondPage.SignUpSecondPageObject.GenderComboBox.Text,
-                                        SignUpSecondPage.SignUpSecondPageObject.BirthDatePicker.Text,
+                                        SigningWindow.SignUpFirstPageObject.FirstNameTextBox.Text,
+                                        SigningWindow.SignUpFirstPageObject.LastNameTextBox.Text,
+                                        SigningWindow.SignUpFirstPageObject.UsernameTextBox.Text,
+                                        SigningWindow.SignUpFirstPageObject.EmailTextBox.Text,
+                                        SigningWindow.SignUpFirstPageObject.Password,
+                                        SigningWindow.SignUpSecondPageObject.GenderComboBox.Text,
+                                        SigningWindow.SignUpSecondPageObject.BirthDatePicker.Text,
                                         double.Parse(WeightTextBox.Text),
                                         double.Parse(HeightTextBox.Text),
                                         double.Parse(TargetWeightTextBox.Text),
