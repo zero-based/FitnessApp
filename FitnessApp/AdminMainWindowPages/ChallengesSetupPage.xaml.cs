@@ -13,12 +13,12 @@ namespace FitnessApp.AdminMainWindowPages
     /// </summary>
     public partial class ChallengesSetupPage : Page
     {
-        public static ChallengesSetupPage ChallengesSetupPageObject = new ChallengesSetupPage();
         SQLqueries SQLqueriesObject = new SQLqueries();
 
         public ChallengesSetupPage()
         {
             InitializeComponent();
+            AdminMainWindow.ChallengesSetupPageObject = this;
             LoadAllChallenges();
             LoadWorkoutTypeComboBox();
         }

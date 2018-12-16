@@ -8,10 +8,10 @@ namespace FitnessApp.AdminMainWindowPages
     /// </summary>
     public partial class AdminSettingsPage : Page
     {
-        public static AdminSettingsPage AdminSettingsPageObject = new AdminSettingsPage();
         public AdminSettingsPage()
         {
             InitializeComponent();
+            AdminMainWindow.AdminSettingsPageObject = this;
 
             // Initialize Profile Expander to be expanded
             AccountExpander.IsExpanded = true;

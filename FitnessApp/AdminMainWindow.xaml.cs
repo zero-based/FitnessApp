@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using FitnessApp.AdminMainWindowPages;
 
 namespace FitnessApp
 {
@@ -12,10 +13,22 @@ namespace FitnessApp
     {
         public static AdminMainWindow AdminMainWindowObject;
 
+        // Declare AdminMainWindowPages Objects
+        public static AdminHomePage       AdminHomePageObject;
+        public static ChallengesSetupPage ChallengesSetupPageObject;
+        public static AdminSettingsPage   AdminSettingsPageObject;
+
+
         public AdminMainWindow()
         {
             InitializeComponent();
             AdminMainWindowObject = this;
+
+            // Initialize AdminMainWindowPages Objects
+
+            AdminHomePageObject       = new AdminHomePage();
+            ChallengesSetupPageObject = new ChallengesSetupPage();
+            AdminSettingsPageObject   = new AdminSettingsPage();
 
             // Initialize Listbox Selected Index
             AdminMainWindowPagesListBox.SelectedIndex = 0;
@@ -34,17 +47,17 @@ namespace FitnessApp
             switch (AdminMainWindowPagesListBox.SelectedIndex)
             {
                 case 0:
-                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.AdminHomePage.AdminHomePageObject);
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminHomePageObject);
                     HighlightItem(HomeTextBlock, HomeIcon);
                     break;
 
                 case 1:
-                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.ChallengesSetupPage.ChallengesSetupPageObject);
+                    AdminWindowPagesFrame.NavigationService.Navigate(ChallengesSetupPageObject);
                     HighlightItem(SetupChallengesTextBlock, ChallengesIcon);
                     break;
 
                 case 2:
-                    AdminWindowPagesFrame.NavigationService.Navigate(AdminMainWindowPages.AdminSettingsPage.AdminSettingsPageObject);
+                    AdminWindowPagesFrame.NavigationService.Navigate(AdminSettingsPageObject);
                     HighlightItem(SettingsTextBlock, SettingsIcon);
                     break;
             }
