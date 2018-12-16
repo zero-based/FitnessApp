@@ -82,6 +82,10 @@ namespace FitnessApp.AdminMainWindowPages
                 // Check Email Validation
             else if (!NewAdminEmailTextBox.Text.Contains("@") || !NewAdminEmailTextBox.Text.Contains(".com"))
                 AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
+
+            // Check Email not used before
+            else if (SQLqueriesObject.IsEmailTaken(NewAdminEmailTextBox.Text))
+                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             else
             {
                 SQLqueriesObject.AddNewAdmin(NewAdminEmailTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text);
