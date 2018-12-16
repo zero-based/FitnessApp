@@ -26,8 +26,6 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             <RowDefinition Height="auto"/>
                             <RowDefinition Height="15"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="auto"/>
                             <RowDefinition Height="15"/>
                         </Grid.RowDefinitions>
 
@@ -54,16 +52,8 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                          materialDesign:HintAssist.Hint="Last Name" />
                         </Grid>
 
-                        <!--Username and Email Fields-->
-                        <TextBox x:Name="UsernameTextBox"
-                                     Grid.Row="3"
-                                     FontFamily="{StaticResource Roboto}"
-                                     Text="{Binding Username}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     materialDesign:HintAssist.Hint="Username" />
-
                         <TextBox x:Name="EmailTextBox"
-                                     Grid.Row="5"
+                                     Grid.Row="3"
                                      FontFamily="{StaticResource Roboto}"
                                      Text="{Binding Email}"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -71,7 +61,7 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 
                         <!--Update Account Button-->
                         <Button x:Name="UpdateAccountButton"
-                                    Grid.Row="7"
+                                    Grid.Row="5"
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
@@ -107,22 +97,22 @@ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         </Grid.RowDefinitions>
 
                         <!--Password Fields-->
-                        <TextBox x:Name="OldPasswordTextBox"
+                        <PasswordBox x:Name="OldPasswordTextBox"
                                      Grid.Row="1"
                                      FontFamily="{StaticResource Roboto}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                      materialDesign:HintAssist.Hint="Old Password" />
 
-                        <TextBox x:Name="NewPasswordTextBox"
+                        <PasswordBox x:Name="NewPasswordTextBox"
                                      Grid.Row="3"
                                      FontFamily="{StaticResource Roboto}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                      materialDesign:HintAssist.Hint="New Password" />
 
-                        <TextBox x:Name="ConfirmNewPasswordTextBox"
+                        <PasswordBox x:Name="ConfirmNewPasswordTextBox"
                                      Grid.Row="5"
                                      FontFamily="{StaticResource Roboto}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                                      materialDesign:HintAssist.Hint="Confirm New Password" />
 
                         <!--Update Password Button-->

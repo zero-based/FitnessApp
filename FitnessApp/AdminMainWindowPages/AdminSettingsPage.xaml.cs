@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using FitnessApp.SQLdatabase;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
 namespace FitnessApp.AdminMainWindowPages
@@ -8,6 +9,8 @@ namespace FitnessApp.AdminMainWindowPages
     /// </summary>
     public partial class AdminSettingsPage : Page
     {
+        SQLqueries SQLqueriesObject = new SQLqueries();
+
         public AdminSettingsPage()
         {
             InitializeComponent();
@@ -17,7 +20,7 @@ namespace FitnessApp.AdminMainWindowPages
             AccountExpander.IsExpanded = true;
 
             // Initialize DataContext with signedInAdmin Model
-            //DataContext = AdminMainWindow.signedInUser;
+            DataContext = AdminMainWindow.signedInAdmin;
         }
 
         private void Expander_Expanded(object sender, System.Windows.RoutedEventArgs e)
@@ -62,7 +65,7 @@ namespace FitnessApp.AdminMainWindowPages
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            // Update Password Code Here...
+            
         }
     }
 }
