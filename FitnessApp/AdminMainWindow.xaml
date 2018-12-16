@@ -57,15 +57,16 @@
                         <TextBlock x:Name="FullNameTextBlock"
                                    FontFamily="{StaticResource ProductSans}"
                                    FontWeight="Bold" 
-                                   FontSize="18">
-                                   Name
+                                   FontSize="18"
+                                   Text="{Binding FullName}">
                         </TextBlock>
 
                         <TextBlock x:Name="EmailTextBlock"
                                    FontFamily="{StaticResource ProductSans}"
                                    FontWeight="Light" 
-                                   FontSize="14">
-                                   admin@FitnessApp.com
+                                   FontSize="14"
+                                   Text="{Binding Email}"
+                                   TextWrapping="Wrap">
                         </TextBlock>
                     </StackPanel>
 

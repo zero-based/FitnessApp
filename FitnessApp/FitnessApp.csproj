@@ -81,6 +81,7 @@
     <Compile Include="AdminMainWindowPages\ChallengesSetupPage.xaml.cs">
       <DependentUpon>ChallengesSetupPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\AdminModel.cs" />
     <Compile Include="Models\FeedbackModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\UserModel.cs" />

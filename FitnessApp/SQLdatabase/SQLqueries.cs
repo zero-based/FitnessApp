@@ -1594,6 +1594,43 @@ namespace FitnessApp.SQLdatabase
 
 
         ///////////// Admin's Queries and Functions /////////////
+        
+
+        // Load all Admin's Data
+        public AdminModel LoadAdminData(int adminID)
+        {
+            AdminModel currentAdmin = new AdminModel();
+
+            Connection.Open();
+
+            // Info from Admin Table
+            string query = "SELECT * FROM [Admin] WHERE PK_AdminID = @adminID";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@adminID", adminID);
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            dr.Read();
+            currentAdmin.FirstName = dr["FirstName"].ToString();
+            currentAdmin.LastName = dr["LastName"].ToString();
+            dr.Close();
+
+            // Info from Accounts Table
+            query = "SELECT Email, Password FROM [Account] WHERE AccountID = @adminID";
+
+            SqlCommand cmd2 = new SqlCommand(query, Connection);
+            cmd2.Parameters.AddWithValue("@adminID", adminID);
+            SqlDataReader dr2 = cmd2.ExecuteReader();
+
+            dr2.Read();
+            currentAdmin.Email = dr2["Email"].ToString();
+            currentAdmin.Password = dr2["Password"].ToString();
+            dr2.Close();
+
+            Connection.Close();
+
+            return currentAdmin;
+        }
 
         public void AddNewAdmin(string email, string firstName, string lastName)
         {

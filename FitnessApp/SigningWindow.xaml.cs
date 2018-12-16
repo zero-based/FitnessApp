@@ -50,7 +50,7 @@ namespace FitnessApp
                 else
                 {
                     // Open Admin Main Window
-                    AdminMainWindow AdminMainWindowTemp = new AdminMainWindow();
+                    AdminMainWindow AdminMainWindowTemp = new AdminMainWindow(SQLqueriesObject.accountID);
                     AdminMainWindowTemp.Show();
                 }
 
