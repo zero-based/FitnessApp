@@ -1660,5 +1660,25 @@ namespace FitnessApp.SQLdatabase
 
         }
 
+        public bool IsNewAdmin(int accountID)
+        {
+            Connection.Open();
+
+            string query = "SELECT Type FROM Account WHERE AccountID = @accountID";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Read();
+            string type = (string)dr["Type"];
+
+            Connection.Close();
+
+            if (type == "Admin*")
+                return true;
+            else
+                return false;
+        }
     }
 }
