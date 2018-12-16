@@ -22,6 +22,7 @@ namespace FitnessApp.AdminMainWindowPages
             AdminMainWindow.AdminHomePageObject = this;
 
             LoadAppRatingChart();
+            LoadAppUsersNumber();
             FeedbacksListBox.DataContext = new FeedbacksViewModel();
             DeleteUserListBox.DataContext = new UserViewModel();
         }
@@ -45,6 +46,11 @@ namespace FitnessApp.AdminMainWindowPages
             Formatter = value => value.ToString("N");
 
             AppRatingChart.DataContext = this;
+        }
+
+        private void LoadAppUsersNumber()
+        {
+            AppUsersNumberTextBlock.Text = SQLqueriesObject.GetAppUsersNumber().ToString();
         }
 
         private void DeleteFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
