@@ -19,14 +19,14 @@ namespace FitnessApp.UserMainWindowPages
             InitializeComponent();
             UserMainWindow.ChallengesPageObject = this;
 
-            LoadAllChallengesCards(UserMainWindow.signedInUser.ID);
+            LoadAllChallengesCards();
         }
 
-        public void LoadAllChallengesCards(int userID)
+        public void LoadAllChallengesCards()
         {
             // Setting Data context for ChallengesListBox
             ChallengesViewModel challengesDataContext = new ChallengesViewModel();
-            challengesDataContext.AllChallengesViewModel(userID);
+            challengesDataContext.AllChallengesViewModel(UserMainWindow.signedInUser.ID);
             DataContext = challengesDataContext;
         }
 
@@ -41,7 +41,7 @@ namespace FitnessApp.UserMainWindowPages
             SQLqueriesObject.JoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedChallengesCards(UserMainWindow.signedInUser.ID);
+            UserMainWindow.HomePageObject.LoadJoinedChallengesCards();
         }
             
         private void JoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
@@ -55,7 +55,7 @@ namespace FitnessApp.UserMainWindowPages
             SQLqueriesObject.UnjoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedChallengesCards(UserMainWindow.signedInUser.ID);
+            UserMainWindow.HomePageObject.LoadJoinedChallengesCards();
         }
     }
 

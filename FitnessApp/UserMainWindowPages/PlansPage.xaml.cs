@@ -17,8 +17,14 @@ namespace FitnessApp.UserMainWindowPages
         {
             InitializeComponent();
             UserMainWindow.PlansPageObject = this;
+            LoadAllPlansCards();
+        }
+
+        public void LoadAllPlansCards()
+        {
             PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
         }
+
 
         private void ViewMoreButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -42,10 +48,10 @@ namespace FitnessApp.UserMainWindowPages
             else
                 SQLqueriesObject.JoinPlan(UserMainWindow.signedInUser.ID, currentPlan.ID);
 
-            PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
+            LoadAllPlansCards();
 
             // Rrefresh Joined Plan Card in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
+            UserMainWindow.HomePageObject.LoadJoinedPlanCard();
         }
 
         private void JoinPlanButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
@@ -56,10 +62,10 @@ namespace FitnessApp.UserMainWindowPages
 
             SQLqueriesObject.UnjoinPlan(UserMainWindow.signedInUser.ID);
 
-            PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
+            LoadAllPlansCards();
 
             // Rrefresh Joined Plan Card in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
+            UserMainWindow.HomePageObject.LoadJoinedPlanCard();
         }
     }
 }
