@@ -90,6 +90,33 @@ namespace FitnessApp.SQLdatabase
 
         }
 
+        // Send Email to a recently added user
+        public void SendAdminEmail(string email, string randomPass)
+        {
+
+            MailMessage message = new MailMessage();
+
+            // Reciever's Email
+            message.To.Add(email);
+
+            // Email Subject
+            message.Subject = "Welcome To Our Humble Fitness Application ";
+
+            // Sender's Email
+            message.From = new MailAddress("fitness.weightlossapp@gmail.com", "Fitness App");
+
+            // Email Body
+            message.IsBodyHtml = true;
+            string htmlBody = "<h3>Hi</h3><br><h3>Welcome&nbsp;to <strong><u>FitnessApp</u>,</strong></h3><br>" +
+                              "<ul><li>your password :'" + randomPass + "' </li><br><li>Change it as early as possible </li><br><li>Point 3</li><br></ul><br><p>Please contact us</p><br>";
+            message.Body = htmlBody;
+
+
+            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
+            smtp.EnableSsl = true;
+            smtp.Credentials = new System.Net.NetworkCredential("fitness.weightlossapp@gmail.com", "m3leshyFitness21");
+            smtp.Send(message);
+        }
 
 
 
