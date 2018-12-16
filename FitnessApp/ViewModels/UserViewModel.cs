@@ -1,22 +1,18 @@
 ﻿using FitnessApp.Models;
-using System;
+using FitnessApp.SQLdatabase;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace FitnessApp.ViewModels
 {
     class UserViewModel
     {
+        private SQLqueries SQLqueriesObject = new SQLqueries(); 
         private List<UserModel> userModels;
 
-        public UserViewModel()
+        public UserViewModel(string userNameOrEmail)
         {
-            userModels = new List<UserModel>()
-            {
-                new UserModel() { FirstName ="JHON DOE", Email="JHON DOE@LoremIposem.com" }
-            };
+            userModels = SQLqueriesObject.SearchForUser(userNameOrEmail);
         }
 
 

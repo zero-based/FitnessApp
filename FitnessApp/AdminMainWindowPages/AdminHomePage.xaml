@@ -187,7 +187,6 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="15"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="15"/>
                         <RowDefinition Height="auto"/>
@@ -249,8 +248,178 @@
                         </Grid>
                     </materialDesign:Card>
 
-                    <!--New Admin Card-->
+                    <!--User Search Card-->
                     <materialDesign:Card Grid.Row="2"
+                                         Width="500" 
+                                         Background="{StaticResource MaterialDesignBackground}">
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Card Header-->
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="1"
+                                       FontFamily="{StaticResource ProductSans}"
+                                       FontSize="18"
+                                       Text="Delete a User"/>
+
+                            <Grid Grid.Row="3" Grid.Column="1">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!--User Search Feild-->
+                                <Grid Grid.Column="0">
+
+                                    <materialDesign:PackIcon Kind="UserSearch" Margin="0,20,0,0"/>
+                                    <TextBox x:Name="UserSearchTextBox"
+                                             Margin="25,0,0,0"
+                                             FontFamily="{StaticResource Roboto}"
+                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                             materialDesign:HintAssist.Hint="User's Name or Email"/>
+                                </Grid>
+
+                                <!--Search Button-->
+                                <Button x:Name="UserSearchButton"
+                                        Grid.Column="2"
+                                        FontFamily="{StaticResource ProductSans}"
+                                        FontSize="14"
+                                        Style="{StaticResource MaterialDesignRaisedButton}"
+                                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                        Click="UserSearchButton_Click">
+                                        Search
+                                </Button>
+
+                            </Grid>
+
+                        </Grid>
+
+                    </materialDesign:Card>
+
+                    <materialDesign:Card x:Name="DeleteUsersCard"
+                                         Grid.Row="3"
+                                         Width="500" 
+                                         Margin="0,15,0,0"
+                                         Background="{StaticResource MaterialDesignBackground}"
+                                         Visibility="Collapsed">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!--Delete User ListBox-->
+                            <ListBox x:Name="DeleteUserListBox"
+                                     Grid.Row="1"
+                                     Grid.Column="1"
+                                     Padding="-8"
+                                     ItemsSource="{Binding UserModels}" 
+                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                     materialDesign:RippleAssist.IsDisabled="True" 
+                                     Foreground="Transparent">
+
+                                <!--User item Template-->
+                                <ListBox.ItemTemplate>
+
+                                    <DataTemplate DataType="UserModel">
+
+                                        <Grid Grid.Row="1" Grid.Column="1" Width="450">
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="15"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Ellipse Grid.Column="0" Width="60" Height="60">
+
+                                                <Ellipse.Fill>
+                                                    <ImageBrush x:Name="UserProfilePhoto"
+                                                                ImageSource="{Binding ProfilePhoto.Source}"
+                                                                Stretch="UniformToFill"/>
+                                                </Ellipse.Fill>
+
+                                            </Ellipse>
+
+                                            <Grid Grid.Column="2" VerticalAlignment="Center">
+
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="auto"/>
+                                                    <RowDefinition Height="5"/>
+                                                    <RowDefinition Height="auto"/>
+                                                </Grid.RowDefinitions>
+
+                                                <!--User Name-->
+                                                <TextBlock Grid.Row="0"
+                                                           HorizontalAlignment="Left"
+                                                           FontFamily="{StaticResource ProductSans}"
+                                                           FontWeight="Regular" 
+                                                           FontSize="15"
+                                                           Foreground="Black"
+                                                           Text="{Binding FullName}"
+                                                           TextWrapping="Wrap"/>
+
+                                                <!--User Email-->
+                                                <TextBlock Grid.Row="2"
+                                                           HorizontalAlignment="Left"
+                                                           FontFamily="{StaticResource Roboto}"
+                                                           FontWeight="Regular" 
+                                                           FontSize="14"
+                                                           Foreground="Black"
+                                                           Text="{Binding Email}"
+                                                           TextWrapping="Wrap"/>
+
+                                            </Grid>
+
+                                            <!--Delete Button-->
+                                            <Button x:Name="DeleteUserButton"
+                                                    Grid.Column="4"
+                                                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                                    Background="#b71c1c"
+                                                    BorderBrush="Transparent"
+                                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
+                                                    Click="DeleteUserButton_Click">
+                                                <materialDesign:PackIcon Kind="DeleteSweep" Foreground="White"/>
+                                            </Button>
+
+                                        </Grid>
+
+                                    </DataTemplate>
+
+                                </ListBox.ItemTemplate>
+
+                            </ListBox>
+
+                        </Grid>
+
+                    </materialDesign:Card>
+                    
+                    <!--New Admin Card-->
+                    <materialDesign:Card Grid.Row="6"
                                          Width="500" 
                                          Background="{StaticResource MaterialDesignBackground}">
                         <Grid>
@@ -335,173 +504,6 @@
 
                     </materialDesign:Card>
 
-                    <!--User Search Card-->
-                    <materialDesign:Card Grid.Row="4"
-                                         Width="500" 
-                                         Background="{StaticResource MaterialDesignBackground}">
-                        <Grid>
-
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="15"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="25"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="25"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--Card Header-->
-                            <TextBlock Grid.Row="1"
-                                       Grid.Column="1"
-                                       FontFamily="{StaticResource ProductSans}"
-                                       FontSize="18"
-                                       Text="Delete a User"/>
-                            
-                            <Grid Grid.Row="3" Grid.Column="1">
-                                
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="10"/>
-                                    <ColumnDefinition Width="auto"/>
-                                </Grid.ColumnDefinitions>
-
-                                <!--User Search Feild-->
-                                <Grid Grid.Column="0">
-                                    
-                                    <materialDesign:PackIcon Kind="UserSearch" Margin="0,20,0,0"/>
-                                    <TextBox x:Name="UserSearchTextBox"
-                                             Margin="25,0,0,0"
-                                             FontFamily="{StaticResource Roboto}"
-                                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                             materialDesign:HintAssist.Hint="User's Name or Email"/>
-                                </Grid>
-
-                                <!--Search Button-->
-                                <Button x:Name="UserSearchButton"
-                                        Grid.Column="2"
-                                        FontFamily="{StaticResource ProductSans}"
-                                        FontSize="14"
-                                        Style="{StaticResource MaterialDesignRaisedButton}"
-                                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                        Click="UserSearchButton_Click">
-                                        Search
-                                </Button>
-                                
-                            </Grid>
-                            
-                        </Grid>
-
-                    </materialDesign:Card>
-
-                    <materialDesign:Card Grid.Row="6"
-                                         Grid.Column="1"
-                                         Width="500" 
-                                         Background="{StaticResource MaterialDesignBackground}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="25"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="25"/>
-                            </Grid.RowDefinitions>
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="25"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="25"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!--Delete User ListBox-->
-                            <ListBox x:Name="DeleteUserListBox"
-                                     Grid.Row="1"
-                                     Grid.Column="1"
-                                     Padding="-8"
-                                     ItemsSource="{Binding UserModels}" 
-                                     ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                     materialDesign:RippleAssist.IsDisabled="True" 
-                                     Foreground="Transparent">
-
-                                <!--User item Template-->
-                                <ListBox.ItemTemplate>
-
-                                    <DataTemplate DataType="UserModel">
-
-                                        <Grid Grid.Row="1" Grid.Column="1" Width="450">
-
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="15"/>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="auto"/>
-                                            </Grid.ColumnDefinitions>
-
-                                            <Ellipse Grid.Column="0" Width="60" Height="60">
-
-                                                <Ellipse.Fill>
-                                                    <ImageBrush x:Name="UserProfilePhoto"
-                                                                ImageSource="../Images/AccountCircleDefaultIcon.png"
-                                                                Stretch="UniformToFill"/>
-                                                </Ellipse.Fill>
-
-                                            </Ellipse>
-
-                                            <Grid Grid.Column="2" VerticalAlignment="Center">
-
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="auto"/>
-                                                    <RowDefinition Height="5"/>
-                                                    <RowDefinition Height="auto"/>
-                                                </Grid.RowDefinitions>
-
-                                                <!--User Name-->
-                                                <TextBlock Grid.Row="0"
-                                                           HorizontalAlignment="Left"
-                                                           FontFamily="{StaticResource ProductSans}"
-                                                           FontWeight="Regular" 
-                                                           FontSize="15"
-                                                           Foreground="Black"
-                                                           Text="{Binding FirstName}"
-                                                           TextWrapping="Wrap"/>
-
-                                                <!--User Email-->
-                                                <TextBlock Grid.Row="2"
-                                                           HorizontalAlignment="Left"
-                                                           FontFamily="{StaticResource Roboto}"
-                                                           FontWeight="Regular" 
-                                                           FontSize="14"
-                                                           Foreground="Black"
-                                                           Text="{Binding Email}"
-                                                           TextWrapping="Wrap"/>
-
-                                            </Grid>
-
-                                            <!--Delete Button-->
-                                            <Button x:Name="DeleteUserButton"
-                                                    Grid.Column="4"
-                                                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
-                                                    Background="#b71c1c"
-                                                    BorderBrush="Transparent"
-                                                    materialDesign:ShadowAssist.ShadowDepth="Depth0"
-                                                    Click="DeleteUserButton_Click">
-                                                <materialDesign:PackIcon Kind="DeleteSweep" Foreground="White"/>
-                                            </Button>
-
-                                        </Grid>
-
-                                    </DataTemplate>
-
-                                </ListBox.ItemTemplate>
-
-                            </ListBox>
-                            
-                        </Grid>
-                        
-                    </materialDesign:Card>
 
                 </Grid>
 

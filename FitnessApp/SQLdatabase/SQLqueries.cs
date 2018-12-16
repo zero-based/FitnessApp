@@ -1869,5 +1869,113 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
 
         }
+
+
+
+        public void DeleteUser(int accountID)
+        {
+
+            string feedbackDelete = "delete from Feedback where FK_Feedback_UserID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand(feedbackDelete, Connection);
+            cmd.Parameters.AddWithValue("@accountID", accountID);
+            SqlDataReader dr = cmd.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+            string userWorkoutDelete = "delete from UserWorkout where  FK_UserWorkout_UserID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd2 = new SqlCommand(userWorkoutDelete, Connection);
+            cmd2.Parameters.AddWithValue("@accountID", accountID);
+            dr = cmd2.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+            string accountDelete = "delete from  Account where  AccountID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd3 = new SqlCommand(accountDelete, Connection);
+            cmd3.Parameters.AddWithValue("@accountID", accountID);
+            dr = cmd3.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+            string challengeDelete = "delete from  UserChallenge where FK_UserChallenge_UserID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd4 = new SqlCommand(challengeDelete, Connection);
+            cmd4.Parameters.AddWithValue("@accountID", accountID);
+            dr = cmd4.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+            string planDelete = "delete from  UserPlanDay where FK_UserPlanDay_UserID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd5 = new SqlCommand(planDelete, Connection);
+            cmd5.Parameters.AddWithValue("@accountID", accountID);
+            dr = cmd5.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+            string weightDelete = "delete from  UserWeight where  FK_UserWeight_UserID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd6 = new SqlCommand(weightDelete, Connection);
+            cmd6.Parameters.AddWithValue("@accountID", accountID);
+            dr = cmd6.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+            string foodDelete = "delete from  UserFood where FK_UserFood_UserID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd7 = new SqlCommand(foodDelete, Connection);
+            cmd7.Parameters.AddWithValue("@accountID", accountID);
+            dr = cmd7.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+            string userDelete = "delete from [User] where PK_UserID=@accountID;";
+            Connection.Open();
+            SqlCommand cmd8 = new SqlCommand(userDelete, Connection);
+            cmd8.Parameters.AddWithValue("@accountID", accountID);
+            dr = cmd8.ExecuteReader();
+            dr.Close();
+            Connection.Close();
+
+        }
+
+        public List<UserModel> SearchForUser(string search)
+        {
+            List<UserModel> AllUsers = new List<UserModel>();
+
+            Connection.Open();
+            string query = "select PK_UserID, Photo , FirstName , LastName , Username, Email " +
+                            "from [User] inner join Account on PK_UserID = AccountID " +
+                            "where FirstName like '%' + @search + '%' " +
+                            "or LastName like '%' + @search + '%' " +
+                            "or Username like '%' + @search + '%' " +
+                            "or Email like '%' + @search + '%'";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@search", search);
+            SqlDataReader dr = cmd.ExecuteReader();
+            while (dr.Read())
+            {
+                UserModel temp = new UserModel();
+
+                temp.ID = (int)dr["PK_UserID"];
+
+                if (dr["Photo"] != DBNull.Value)
+                    temp.ProfilePhoto.ByteArray = (byte[])dr["Photo"];
+
+                temp.FirstName = dr["FirstName"].ToString();
+                temp.LastName = dr["LastName"].ToString();
+                temp.Email = dr["Email"].ToString();
+
+                AllUsers.Add(temp);
+
+            }
+
+            Connection.Close();
+
+            return AllUsers;
+        }
     }
 }

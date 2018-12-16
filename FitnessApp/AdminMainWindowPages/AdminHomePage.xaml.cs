@@ -7,6 +7,7 @@ using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Windows.Controls;
+using System.Windows;
 
 namespace FitnessApp.AdminMainWindowPages
 {
@@ -25,7 +26,6 @@ namespace FitnessApp.AdminMainWindowPages
             LoadAppRatingChart();
             LoadAppUsersNumber();
             FeedbacksListBox.DataContext = new FeedbacksViewModel();
-            DeleteUserListBox.DataContext = new UserViewModel();
         }
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -55,7 +55,7 @@ namespace FitnessApp.AdminMainWindowPages
             AppUsersNumberTextBlock.Text = SQLqueriesObject.GetAppUsersNumber().ToString();
         }
 
-        private void DeleteFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void DeleteFeedbackButton_Click(object sender, RoutedEventArgs e)
         {
             Button deleteFeedbackButton = sender as Button;
             int selectedFeedbackIndex = FeedbacksListBox.Items.IndexOf(deleteFeedbackButton.DataContext);
@@ -68,7 +68,7 @@ namespace FitnessApp.AdminMainWindowPages
             LoadAppRatingChart();
         }
 
-        private void AddNewAdminButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void AddNewAdminButton_Click(object sender, RoutedEventArgs e)
         {
             if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" || NewAdminEmailTextBox.Text == "")
             {
@@ -89,13 +89,43 @@ namespace FitnessApp.AdminMainWindowPages
             }
         }
 
-        private void UserSearchButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void UserSearchButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!string.IsNullOrWhiteSpace(UserSearchTextBox.Text))
+            {
+                UserViewModel deletedUserDataContext = new UserViewModel(UserSearchTextBox.Text);
+                DeleteUserListBox.DataContext = deletedUserDataContext;
 
+                // Show card or Error message; depending on number of users
+                if (deletedUserDataContext.UserModels.Count > 0)
+                    DeleteUsersCard.Visibility = Visibility.Visible;
+                else
+                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("No users found");
+            }
         }
 
-        private void DeleteUserButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void DeleteUserButton_Click(object sender, RoutedEventArgs e)
         {
+            // Get User ID
+            Button deleteButton = sender as Button;
+            int selectedUserIndex = DeleteUserListBox.Items.IndexOf(deleteButton.DataContext);
+            UserModel chosenUser = (UserModel)DeleteUserListBox.Items[selectedUserIndex];
+
+            // Delete Challenge From Database
+            SQLqueriesObject.DeleteUser(chosenUser.ID);
+
+            // Refresh Listbox and Number of users
+            DeleteUserListBox.DataContext = null;
+            UserViewModel deletedUserDataContext = new UserViewModel(UserSearchTextBox.Text);
+            DeleteUserListBox.DataContext = deletedUserDataContext;
+            AppUsersNumberTextBlock.Text = SQLqueriesObject.GetAppUsersNumber().ToString();
+
+            // Hide DeleteUsersCard if no remaining users exist 
+            if (deletedUserDataContext.UserModels.Count == 0)
+                DeleteUsersCard.Visibility = Visibility.Collapsed;
+
+            // Confirmation Message
+            AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("User deleted successfully");
 
         }
 
