@@ -63,7 +63,7 @@
 
                             <Grid Grid.Row="3" Grid.Column="1">
 
-                                <lvc:CartesianChart x:Name="FeedbackRatingChart" 
+                                <lvc:CartesianChart x:Name="AppRatingChart" 
                                                     Grid.Row="3" 
                                                     Grid.Column="1"
                                                     HorizontalAlignment="Left"
@@ -72,11 +72,11 @@
                                                     Series="{Binding SeriesCollection}">
                                     
                                     <lvc:CartesianChart.AxisX>
-                                        <lvc:Axis Title="Number of Stars" Labels="{Binding Labels}"></lvc:Axis>
+                                        <lvc:Axis Title="Stars" Labels="{Binding Labels}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisX>
                                     
                                     <lvc:CartesianChart.AxisY>
-                                        <lvc:Axis Title="Number of Users" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                                        <lvc:Axis Title="Users" LabelFormatter="{Binding Formatter}"></lvc:Axis>
                                     </lvc:CartesianChart.AxisY>
                                     
                                 </lvc:CartesianChart>
