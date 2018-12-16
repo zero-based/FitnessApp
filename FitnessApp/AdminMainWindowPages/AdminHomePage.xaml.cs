@@ -49,7 +49,23 @@ namespace FitnessApp.AdminMainWindowPages
 
         private void AddNewAdminButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-
+            if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" || NewAdminEmailTextBox.Text == "")
+            {
+                if (FirstNameTextBox.Text == "")
+                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
+                if (LastNameTextBox.Text == "")
+                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
+                if (NewAdminEmailTextBox.Text == "")
+                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
+            }
+                // Check Email Validation
+            else if (!NewAdminEmailTextBox.Text.Contains("@") || !NewAdminEmailTextBox.Text.Contains(".com"))
+                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
+            else
+            {
+                SQLqueriesObject.AddNewAdmin(NewAdminEmailTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text);
+                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Admin Added Succesfully");
+            }
         }
 
         private void UserSearchButton_Click(object sender, System.Windows.RoutedEventArgs e)
