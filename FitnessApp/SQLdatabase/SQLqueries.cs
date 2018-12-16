@@ -1232,11 +1232,23 @@ namespace FitnessApp.SQLdatabase
             Connection.Close();
         }
 
+        public int GetWorkoutID(string workoutName)
+        {
+            int id = -1;
 
+            Connection.Open();
+            string query = "select PK_WorkoutID from Workout where Name=@name;";
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@name", workoutName);
+            id = (int)cmd.ExecuteScalar();
+            Connection.Close();
+
+            return id;
+        }
 
 
         //////// Joined Plan ////////
-        
+
         // Get Joined Plan ID and Name 
         public int GetJoinedPlanID(int accountID)
         {
@@ -1679,6 +1691,58 @@ namespace FitnessApp.SQLdatabase
                 return true;
             else
                 return false;
+        }
+
+
+        // Challenges Managing
+        public void AddNewChallenge(byte[] photo, string name, string description, int targetMinutes,
+                                    string reward, DateTime? dueDate, int workoutID)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("AddChallenge", Connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            if (photo == null)
+                cmd.Parameters.Add("@Photo", SqlDbType.Image).Value = DBNull.Value;
+            else
+                cmd.Parameters.AddWithValue("@Photo", photo);
+
+            cmd.Parameters.AddWithValue("@Name", name);
+            cmd.Parameters.AddWithValue("@Description", description);
+            cmd.Parameters.AddWithValue("@TargetMinutes", targetMinutes);
+            cmd.Parameters.AddWithValue("@Reward", reward);
+            cmd.Parameters.AddWithValue("@DueDate", dueDate);
+            cmd.Parameters.AddWithValue("@WorkoutID", workoutID);
+            cmd.ExecuteNonQuery();
+
+            Connection.Close();
+
+        }
+
+        public void DeleteChallenge(int challengeID)
+        {
+
+            Connection.Open();
+
+            string query = "DELETE [UserChallenge] " +
+                           "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
+                           "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
+                           "WHERE [Challenge].PK_ChallengeID = @challengeID";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@challengeID", challengeID);
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            
+            query = "DELETE FROM[Challenge] WHERE[Challenge].PK_ChallengeID = @challengeID";
+            cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@challengeID", challengeID);
+            reader = cmd.ExecuteReader();
+
+            Connection.Close();
+
         }
     }
 }
