@@ -1,6 +1,7 @@
 ﻿using FitnessApp.SQLdatabase;
 using FitnessApp.ViewModels;
 using LiveCharts;
+using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
@@ -20,27 +21,31 @@ namespace FitnessApp.AdminMainWindowPages
             InitializeComponent();
             AdminMainWindow.AdminHomePageObject = this;
 
+            LoadAppRatingChart();
+            FeedbacksListBox.DataContext = new FeedbacksViewModel();
+            DeleteUserListBox.DataContext = new UserViewModel();
+        }
+
+        public SeriesCollection SeriesCollection { get; set; }
+        public List<String> Labels { get; set; }
+        public Func<double, string> Formatter { get; set; }
+
+
+        private void LoadAppRatingChart()
+        {
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
                     Title = "Rating",
-                    Values = new ChartValues<double> { 10, 50, 39, 50, 40 }
+                    Values = SQLqueriesObject.GetAppRatingValues().AsChartValues()
                 }
             };
-            Labels = new[] { "1", "2", "3", "4","5" };
+            Labels = new List<string> { "1", "2", "3", "4", "5" };
             Formatter = value => value.ToString("N");
 
-            FeedbackRatingChart.DataContext = this;
-
-            FeedbacksListBox.DataContext = new FeedbacksViewModel();
-
-            DeleteUserListBox.DataContext = new UserViewModel();
+            AppRatingChart.DataContext = this;
         }
-
-        public SeriesCollection SeriesCollection { get; set; }
-        public string[] Labels { get; set; }
-        public Func<double, string> Formatter { get; set; }
 
         private void DeleteFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
