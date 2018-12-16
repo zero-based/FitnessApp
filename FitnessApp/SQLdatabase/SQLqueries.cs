@@ -648,17 +648,19 @@ namespace FitnessApp.SQLdatabase
             Connection.Open();
             string query = "SELECT [Plan].*,[User].PK_UserID " + 
                            "FROM [Plan] Left JOIN [User] " +
-                           "ON [Plan].PK_PlanID = [User].FK_User_PlanID";
+                           "ON [Plan].PK_PlanID = [User].FK_User_PlanID " +
+                           "AND PK_UserID = @userID";
 
             List<PlanModel> plansModels = new List<PlanModel>();
             SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@userID", accountID);
             SqlDataReader reader = cmd.ExecuteReader();
 
             while (reader.Read())
             {
                 PlanModel temp = new PlanModel();
 
-                temp.ID = (int)reader[0];
+                temp.ID = (int)reader["PK_PlanID"];
 
                 if (reader["Photo"] != DBNull.Value)
                     temp.Photo.ByteArray = (byte[])reader["Photo"];
@@ -668,7 +670,7 @@ namespace FitnessApp.SQLdatabase
                 temp.Duration = reader["Duration"].ToString();
                 temp.Hardness = reader["Hardness"].ToString();
 
-                if (reader[6] != DBNull.Value)
+                if (reader["PK_UserID"] != DBNull.Value)
                     temp.IsJoined = true;
                 else
                     temp.IsJoined = false;
