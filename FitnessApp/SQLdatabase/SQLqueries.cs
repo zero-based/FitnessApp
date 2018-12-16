@@ -780,86 +780,49 @@ namespace FitnessApp.SQLdatabase
         // Weight chart
         public List<double> GetWeightValues(int accountID)
         {
-            Connection.Open();
-
-            SqlCommand cmd = new SqlCommand("select count(*) from UserWeight where FK_UserWeight_UserID = @UserId", Connection);
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@UserId", accountID);
-
-            int countUserWeightInputs = (int)cmd.ExecuteScalar();
-
-            SqlCommand CommandString = new SqlCommand("select Weight from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
-            CommandString.CommandType = CommandType.Text;
-            CommandString.Parameters.AddWithValue("@UserId", accountID);
-
-            SqlDataReader ReaderString = CommandString.ExecuteReader();
-
-
             List<double> weightValues = new List<double>();
 
-            if (countUserWeightInputs < 10)
-            {
-                for (int i = 0; ReaderString.Read(); i++)
-                {
-                    if (ReaderString.HasRows == true)
-                    {
-                        weightValues.Add((double)ReaderString["Weight"]);
-                    }
-                }
-            }
-            else
-            {
-                for (int i = 0; ReaderString.Read() && i < 10; i++)
-                {
-                    if (ReaderString.HasRows == true)
-                    {
-                        weightValues.Add((double)ReaderString["Weight"]);
-                    }
+            Connection.Open();
 
-                }
+            SqlCommand CommandString = new SqlCommand("select Weight from UserWeight where FK_UserWeight_UserID = @UserId order by Date DESC", Connection);
+            CommandString.CommandType = CommandType.Text;
+            CommandString.Parameters.AddWithValue("@UserId", accountID);
+            SqlDataReader ReaderString = CommandString.ExecuteReader();
+
+            for (int i = 0; ReaderString.Read() && i < 10; i++)
+            {
+                weightValues.Add((double)ReaderString["Weight"]);
             }
 
             Connection.Close();
+
+            // Reverse List
+            weightValues.Reverse();
 
             return weightValues;
         }
 
         public List<string> GetWeightDateValues(int accountID)
         {
+            List<string> dateValues = new List<string>();
+
             Connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select count(*) from UserWeight where FK_UserWeight_UserID = @UserId", Connection);
-            cmd.CommandType = CommandType.Text;
-            cmd.Parameters.AddWithValue("@UserId", accountID);
-
-            int countUserWeightInputs = (int)cmd.ExecuteScalar();
-
-            SqlCommand CommandString = new SqlCommand("select FORMAT(Date, 'MMM yy') AS [Date] from UserWeight where FK_UserWeight_UserID = @UserId order by Date", Connection);
+            SqlCommand CommandString = new SqlCommand("select FORMAT(Date, 'MMM yy') AS [Date] from UserWeight where FK_UserWeight_UserID = @UserId order by Date DESC", Connection);
             CommandString.CommandType = CommandType.Text;
             CommandString.Parameters.AddWithValue("@UserId", accountID);
 
             SqlDataReader ReaderString = CommandString.ExecuteReader();
 
-            List<string> dateValues = new List<string>();
-
-            if (countUserWeightInputs < 10)
+            for (int i = 0; ReaderString.Read() && i < 10; i++)
             {
-                for (int i = 0; ReaderString.Read(); i++)
-                {
-                    if (ReaderString.HasRows == true)
-                        dateValues.Add((string)ReaderString["Date"]);
-                }
-            }
-            else
-            {
-                for (int i = 0; ReaderString.Read() && i < 10; i++)
-                {
-                    if (ReaderString.HasRows == true)
-                        dateValues.Add((string)ReaderString["Date"]);
-                }
+                dateValues.Add((string)ReaderString["Date"]);
             }
 
             Connection.Close();
+
+            // Reverse List
+            dateValues.Reverse();
 
             return dateValues;
         }
