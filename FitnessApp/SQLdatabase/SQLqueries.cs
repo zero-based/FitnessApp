@@ -1578,5 +1578,51 @@ namespace FitnessApp.SQLdatabase
 
             Connection.Close();
         }
+
+
+
+        ///////////// Admin's Queries and Functions /////////////
+
+        public void AddNewAdmin(string email, string firstName, string lastName)
+        {
+            Connection.Open();
+            string query = "INSERT INTO Admin(FirstName,LastName) VALUES (@firstName,@lastName)";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@firstName", firstName);
+            cmd.Parameters.AddWithValue("@lastName", lastName);
+            cmd.ExecuteReader();
+
+            Connection.Close();
+
+            string password = GenerateRandomPassword();
+            string encryptedPassword = EncryptPassword(password);
+            InsertNewAdminAccount(email, encryptedPassword);
+
+            // Sending email to gmails only
+            if (email.Contains("gmail"))
+                SendAdminEmail(email, password);
+        }
+
+        public void InsertNewAdminAccount(string email, string password)
+        {
+            Connection.Open();
+
+            string query = "SELECT MIN(PK_AdminID) FROM Admin ";
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            int adminId = (int)cmd.ExecuteScalar();
+
+            query = "INSERT INTO Account VALUES(@adminId , @email, @password , @type);";
+
+            SqlCommand cmd2 = new SqlCommand(query, Connection);
+            cmd2.Parameters.AddWithValue("@adminId", adminId);
+            cmd2.Parameters.AddWithValue("@email", email);
+            cmd2.Parameters.AddWithValue("@password", password);
+            cmd2.Parameters.AddWithValue("@type", "Admin*");
+            cmd2.ExecuteReader();
+
+            Connection.Close();
+        }
+
     }
 }
