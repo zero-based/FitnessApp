@@ -2,6 +2,11 @@
 
 This Project is still under development
 
+**[ IMPORTANT ]** You will need [ServerDetails.cs](https://github.com/MichaelSafwatHanna/fitness-and-weight-loss-app/blob/aaa4fd2459520c5c90d143d34a0f74a2f12f98df/FitnessApp/SQLdatabase/ServerDetails.cs) if you don't have it on your local repo.
+- In the top right, right click the **Raw** button.
+- Save as...
+- Save it in the following path: ```FitnessApp\SQLdatabase```
+
 ## I. Commits Guidelines
 
 ### Commit
