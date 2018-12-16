@@ -1644,5 +1644,21 @@ namespace FitnessApp.SQLdatabase
             return ratingList;
         }
 
+        public int GetAppUsersNumber()
+        {
+            int appUsersNumber;
+
+            Connection.Open();
+            SqlCommand cmd = new SqlCommand("GetNumberOfAppUsers", Connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            appUsersNumber = (int)cmd.ExecuteScalar();
+
+            Connection.Close();
+
+            return appUsersNumber;
+
+        }
+
     }
 }
