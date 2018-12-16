@@ -67,7 +67,7 @@ namespace FitnessApp.UserMainWindowPages
                 new LineSeries
                 {
                     Title = "Weight",
-                    Values = SQLqueriesObject.GetWeightValues(userID).AsChartValues()
+                    Values = SQLqueriesObject.GetWeightValues(userID).AsChartValues(),
                 },
 
                 new LineSeries
@@ -107,15 +107,31 @@ namespace FitnessApp.UserMainWindowPages
 
         private void SaveWeightButton_Click(object sender, RoutedEventArgs e)
         {
-            SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserMainWindow.signedInUser.ID);
-            WeightChart.Series[1].Values.Add(double.Parse(TodaysWeightTextBox.Text));
+            if (String.IsNullOrWhiteSpace(TodaysWeightTextBox.Text))
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your weight!");
+            else
+            {
+                // Update Weight in Database
+                SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserMainWindow.signedInUser.ID);
 
-            // Refresh Weight-Related Cards
-            LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
-            LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
+                // Update User Weight Line Series:
+                // Add one value and remove another to keep the number of values 10
+                WeightChart.Series[1].Values.Add(double.Parse(TodaysWeightTextBox.Text));
+                WeightChart.Series[1].Values.RemoveAt(0);
 
-            // Refresh Calories Card
-            LoadCaloriesCard(UserMainWindow.signedInUser.ID);
+                // Confirmation Message
+                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Weight added successfully");
+
+                // Reset TextBox
+                TodaysWeightTextBox.Text = "";
+
+                // Refresh Weight-Related Cards
+                LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
+                LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
+
+                // Refresh Calories Card
+                LoadCaloriesCard(UserMainWindow.signedInUser.ID);
+            }
         }
 
         public void LoadTotalWeightLostCard(int userID)
