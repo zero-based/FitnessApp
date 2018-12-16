@@ -75,6 +75,21 @@ namespace FitnessApp.SQLdatabase
             smtp.Send(message);
         }
 
+        // Generate a Random Password: Used When adding a new Admin 
+        private string GenerateRandomPassword()
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            int length = 7;
+            while (0 < length--)
+            {
+                res.Append(valid[rnd.Next(valid.Length)]);
+            }
+            return res.ToString();
+
+        }
+
 
 
 
