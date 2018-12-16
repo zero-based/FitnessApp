@@ -1632,6 +1632,35 @@ namespace FitnessApp.SQLdatabase
             return currentAdmin;
         }
 
+        // Update User Account
+        public void UpdateAdminAccount(AdminModel currentAdmin)
+        {
+            Connection.Open();
+
+            SqlCommand cmd = new SqlCommand("ModifyFirstName", Connection);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
+            cmd.Parameters.Add(new SqlParameter("@FirstName", currentAdmin.FirstName));
+            SqlDataReader reader = cmd.ExecuteReader();
+            reader.Close();
+
+            SqlCommand cmd2 = new SqlCommand("ModifyLastName", Connection);
+            cmd2.CommandType = CommandType.StoredProcedure;
+            cmd2.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
+            cmd2.Parameters.Add(new SqlParameter("@LastName", currentAdmin.LastName));
+            SqlDataReader reader2 = cmd2.ExecuteReader();
+            reader2.Close();
+
+            SqlCommand cmd4 = new SqlCommand("ModifyEmail", Connection);
+            cmd4.CommandType = CommandType.StoredProcedure;
+            cmd4.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
+            cmd4.Parameters.Add(new SqlParameter("@Email", currentAdmin.Email));
+            SqlDataReader reader4 = cmd4.ExecuteReader();
+            reader4.Close();
+
+            Connection.Close();
+        }
+
         public void UpdateAdminPassword(AdminModel currentAdmin)
         {
             Connection.Open();
