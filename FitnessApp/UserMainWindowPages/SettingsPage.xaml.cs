@@ -141,6 +141,13 @@ namespace FitnessApp.UserMainWindowPages
                 UserMainWindow.CaloriesCalculatorPageObject.DataContext = null;
                 UserMainWindow.CaloriesCalculatorPageObject.DataContext = UserMainWindow.signedInUser;
 
+                // Refresh Weight and Calories Cards in Home Page
+                UserMainWindow.HomePageObject.WeightChart.DataContext = null;
+                UserMainWindow.HomePageObject.LoadWeightChart(UserMainWindow.signedInUser.ID);
+                UserMainWindow.HomePageObject.LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
+                UserMainWindow.HomePageObject.LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
+                UserMainWindow.HomePageObject.LoadCaloriesCard(UserMainWindow.signedInUser.ID);
+
                 // Confirmation Message
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Profile Updated!");
 

@@ -30,18 +30,14 @@ namespace FitnessApp.UserMainWindowPages
             LoadWeightChart(UserMainWindow.signedInUser.ID);
             LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
-            LoadJoinedChallengesCards();
-
+            LoadJoinedChallengesCards(UserMainWindow.signedInUser.ID);
             LoadJoinedPlanCard(UserMainWindow.signedInUser.ID);
             LoadMotivationalQuoteCard();
             LoadCaloriesCard(UserMainWindow.signedInUser.ID);
 
-            FoodComboBox    .ItemsSource = SQLqueriesObject.GetAllFood();
+            FoodComboBox.ItemsSource = SQLqueriesObject.GetAllFood();
             WorkoutsComboBox.ItemsSource = SQLqueriesObject.GetAllWorkouts();
 
-
-            // Setting Data context for Charts
-            DataContext = this;
         }
 
 
@@ -53,7 +49,7 @@ namespace FitnessApp.UserMainWindowPages
         public List<string> Labels { get; set; }
         public Func<double, string> YFormatter { get; set; }
 
-        private void LoadWeightChart(int userID)
+        public void LoadWeightChart(int userID)
         {
 
             WeightsSeriesCollection = new SeriesCollection
@@ -88,6 +84,9 @@ namespace FitnessApp.UserMainWindowPages
 
             Labels = SQLqueriesObject.GetWeightDateValues(userID);
             YFormatter = value => value.ToString() + " kg";
+
+            // Setting Data context for Weight Chart
+            WeightChart.DataContext = this;
         }
 
         private double CalculateIdealWeight()
@@ -114,9 +113,12 @@ namespace FitnessApp.UserMainWindowPages
             // Refresh Weight-Related Cards
             LoadTotalWeightLostCard(UserMainWindow.signedInUser.ID);
             LoadAverageWeightLostCard(UserMainWindow.signedInUser.ID);
+
+            // Refresh Calories Card
+            LoadCaloriesCard(UserMainWindow.signedInUser.ID);
         }
 
-        private void LoadTotalWeightLostCard(int userID)
+        public void LoadTotalWeightLostCard(int userID)
         {
 
             double WeightLostPerWeek = SQLqueriesObject.GetTotalWeightLostPerWeek(userID);
@@ -148,7 +150,7 @@ namespace FitnessApp.UserMainWindowPages
 
         }
 
-        private void LoadAverageWeightLostCard(int userID)
+        public void LoadAverageWeightLostCard(int userID)
         {
 
             double AverageWeightLostPerWeek = SQLqueriesObject.GetAverageWeightLostPerWeek(userID);
@@ -186,14 +188,14 @@ namespace FitnessApp.UserMainWindowPages
 
 
         // Setting Data context for JoinedChallengesListBox
-        private void LoadJoinedChallengesCards()
+        public void LoadJoinedChallengesCards(int userID)
         {
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
-            joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
+            joinedChallengesDataContext.JoinedChallengesViewModel(userID);
             CompletedJoinedChallengesListBox.DataContext = joinedChallengesDataContext;
 
             ChallengesViewModel uncompletedJoinedChallengesDataContext = new ChallengesViewModel();
-            uncompletedJoinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
+            uncompletedJoinedChallengesDataContext.JoinedChallengesViewModel(userID);
             UncompletedJoinedChallengesListBox.DataContext = uncompletedJoinedChallengesDataContext;
             ControlNoChallengesCard(joinedChallengesDataContext);
         }
@@ -216,6 +218,9 @@ namespace FitnessApp.UserMainWindowPages
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
             joinedChallengesDataContext.JoinedChallengesViewModel(UserMainWindow.signedInUser.ID);
             UncompletedJoinedChallengesListBox.DataContext = joinedChallengesDataContext;
+
+            // Refresh Challenges Page
+            UserMainWindow.ChallengesPageObject.LoadAllChallengesCards(UserMainWindow.signedInUser.ID);
         }
 
         private void ControlNoChallengesCard(ChallengesViewModel challengesViewModel)
@@ -235,7 +240,7 @@ namespace FitnessApp.UserMainWindowPages
 
             SQLqueriesObject.UnjoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
 
-            LoadJoinedChallengesCards();
+            LoadJoinedChallengesCards(UserMainWindow.signedInUser.ID);
         }
 
 
@@ -243,7 +248,7 @@ namespace FitnessApp.UserMainWindowPages
         ////////// Joined Plan Card Functions/Event Handlers //////////
 
 
-        private void LoadJoinedPlanCard(int userID)
+        public void LoadJoinedPlanCard(int userID)
         {
             bool checkJoinedInPlan = SQLqueriesObject.IsInPlan(userID);
 
@@ -339,7 +344,7 @@ namespace FitnessApp.UserMainWindowPages
             }
         }
 
-        private void JoinPlanButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void JoinPlanButton_Click(object sender, RoutedEventArgs e)
         {
             UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 2;
         }
@@ -396,7 +401,7 @@ namespace FitnessApp.UserMainWindowPages
             };
         }
 
-        private void LoadCaloriesCard(int userID)
+        public void LoadCaloriesCard(int userID)
         {
             double caloriesGained = SQLqueriesObject.GetCaloriesGainedToday(userID);
             double caloriesLost   = SQLqueriesObject.GetCaloriesLostToday(userID);
@@ -462,8 +467,12 @@ namespace FitnessApp.UserMainWindowPages
                 SQLqueriesObject.AddFood(FoodComboBox.Text, double.Parse(FoodQuantityTextBox.Text), UserMainWindow.signedInUser.ID);
                 AddFoodDialogBox.Visibility = Visibility.Collapsed;
                 DialogBox.IsOpen = false;
+
+                // Refresh Calories Card
+                LoadCaloriesCard(UserMainWindow.signedInUser.ID);
             }
 
+            // Reset Dialog Box Fields
             FoodComboBox.SelectedIndex = -1;
             FoodQuantityTextBox.Text = "";
         }
@@ -482,15 +491,18 @@ namespace FitnessApp.UserMainWindowPages
                 SQLqueriesObject.AddWorkout(WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text), UserMainWindow.signedInUser);
                 AddWorkoutDialogBox.Visibility = Visibility.Collapsed;
                 DialogBox.IsOpen = false;
+
+                // Update Progress of the Challenges having the same type as the entered workout
+                SQLqueriesObject.UpdateChallengesProgress(UserMainWindow.signedInUser.ID, WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text));
+
+                // Refresh Challenges card
+                LoadJoinedChallengesCards(UserMainWindow.signedInUser.ID);
+
+                // Refresh Calories Card
+                LoadCaloriesCard(UserMainWindow.signedInUser.ID);
             }
 
-            
-            // Update Progress of the Challenges having the same type as the entered workout
-            SQLqueriesObject.UpdateChallengesProgress(UserMainWindow.signedInUser.ID, WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text));
-
-            // Refresh Challenges card
-            LoadJoinedChallengesCards();
-
+            // Reset Dialog Box Fields
             WorkoutsComboBox.SelectedIndex = -1;
             WorkoutsDurationTextBox.Text = "";
         }
