@@ -311,7 +311,7 @@
                             <Grid Grid.Row="5" Grid.Column="1">
                                 
                                 <materialDesign:PackIcon Kind="AccountPlus" Margin="0,20,0,0"/>
-                                <TextBox x:Name="NewAdminEmail"
+                                <TextBox x:Name="NewAdminEmailTextBox"
                                          Margin="25,0,0,0"
                                          FontFamily="{StaticResource Roboto}"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
