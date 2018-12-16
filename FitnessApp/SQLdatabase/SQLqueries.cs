@@ -1632,6 +1632,22 @@ namespace FitnessApp.SQLdatabase
             return currentAdmin;
         }
 
+        public void UpdateAdminPassword(AdminModel currentAdmin)
+        {
+            Connection.Open();
+
+            string query = "UPDATE Account SET Password = @newPassword, Type = @type WHERE AccountID = @accountID";
+
+            SqlCommand cmd = new SqlCommand(query, Connection);
+            cmd.Parameters.AddWithValue("@newPassword", currentAdmin.Password);
+            cmd.Parameters.AddWithValue("@type", "Admin");
+            cmd.Parameters.AddWithValue("@accountID", currentAdmin.ID);
+            cmd.ExecuteNonQuery();
+
+            Connection.Close();
+
+        }
+
         public void AddNewAdmin(string email, string firstName, string lastName)
         {
             Connection.Open();

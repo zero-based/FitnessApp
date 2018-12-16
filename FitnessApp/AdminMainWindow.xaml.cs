@@ -110,7 +110,37 @@ namespace FitnessApp
 
         private void UpdatePasswordButton_Click(object sender, RoutedEventArgs e)
         {
+            if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != signedInAdmin.Password)
+            {
+                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
+                OldPasswordTextBox.Password = "";
+            }
+            else if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
+            {
+                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
+                NewPasswordTextBox.Password = "";
+                ConfirmNewPasswordTextBox.Password = "";
+            }
+            else if (NewPasswordTextBox.Password.Length < 7)
+            {
+                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be more than 7 Charachters!");
+                NewPasswordTextBox.Password = "";
+                ConfirmNewPasswordTextBox.Password = "";
+            }
+            else
+            {
+                // Update signedInAdmin User Model
+                signedInAdmin.Password = SQLqueriesObject.EncryptPassword(NewPasswordTextBox.Password);
 
+                // Update Admin's Password in database
+                SQLqueriesObject.UpdateAdminPassword(signedInAdmin);
+
+                // Confirmation Message
+                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");
+
+                // Hide UpdateNewAdminPasswordGrid
+                UpdateNewAdminPasswordGrid.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
