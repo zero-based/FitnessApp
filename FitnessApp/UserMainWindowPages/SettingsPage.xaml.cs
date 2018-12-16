@@ -157,7 +157,7 @@ namespace FitnessApp.UserMainWindowPages
         private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" ||
-                UsernameTextBox.Text == ""  || EmailTextBox.Text == ""     )
+                UsernameTextBox.Text == "" || EmailTextBox.Text == "")
             {
                 if (FirstNameTextBox.Text == "")
                     UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
@@ -174,20 +174,26 @@ namespace FitnessApp.UserMainWindowPages
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
 
             // Check Email/Username Availability
-            else if (SQLqueriesObject.IsEmailTaken(EmailTextBox.Text) || EmailTextBox.Text != UserMainWindow.signedInUser.Email)
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
+            else if (EmailTextBox.Text != UserMainWindow.signedInUser.Email)
+            {
+                if (SQLqueriesObject.IsEmailTaken(EmailTextBox.Text))
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
+            }
 
-            else if (SQLqueriesObject.IsUsernameTaken(UsernameTextBox.Text) || UsernameTextBox.Text != UserMainWindow.signedInUser.Username)
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
+            else if (UsernameTextBox.Text != UserMainWindow.signedInUser.Username)
+            {
+                if (SQLqueriesObject.IsUsernameTaken(UsernameTextBox.Text))
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
+            }
 
             else
             {
 
                 // Update signedInUser User Model
                 UserMainWindow.signedInUser.FirstName = FirstNameTextBox.Text;
-                UserMainWindow.signedInUser.LastName  = LastNameTextBox.Text;
-                UserMainWindow.signedInUser.Username  = UsernameTextBox.Text;
-                UserMainWindow.signedInUser.Email     = EmailTextBox.Text;
+                UserMainWindow.signedInUser.LastName = LastNameTextBox.Text;
+                UserMainWindow.signedInUser.Username = UsernameTextBox.Text;
+                UserMainWindow.signedInUser.Email = EmailTextBox.Text;
 
                 // Update User's Account in database
                 SQLqueriesObject.UpdateUserAccount(UserMainWindow.signedInUser);
