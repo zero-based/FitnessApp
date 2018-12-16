@@ -498,7 +498,7 @@
                                             </Grid.ColumnDefinitions>
 
                                             <!--Join Button-->
-                                            <ToggleButton x:Name="JoinChallengeButton"
+                                            <ToggleButton x:Name="UnjoinChallengeButton"
                                                           Grid.Row="1"
                                                           Grid.Column="1"
                                                           HorizontalAlignment="Right"
@@ -508,7 +508,7 @@
                                                           IsChecked="{Binding IsJoined}"
                                                           Style="{StaticResource MaterialDesignActionToggleButton}"
                                                           materialDesign:ShadowAssist.ShadowDepth="Depth2"
-                                                          Unchecked="JoinChallengeButton_Unchecked">
+                                                          Unchecked="UnjoinChallengeButton_Unchecked">
                                                 <materialDesign:PackIcon Kind="Add" />
                                             </ToggleButton>
 

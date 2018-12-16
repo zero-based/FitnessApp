@@ -222,7 +222,7 @@ namespace FitnessApp.UserMainWindowPages
             UserMainWindow.UserMainWindowObject.UserMainWindowPagesListBox.SelectedIndex = 1;
         }
 
-        private void JoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
+        private void UnjoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
         {
             ToggleButton toggleButton = sender as ToggleButton;
             int selectedChallengeIndex = UncompletedJoinedChallengesListBox.Items.IndexOf(toggleButton.DataContext);
