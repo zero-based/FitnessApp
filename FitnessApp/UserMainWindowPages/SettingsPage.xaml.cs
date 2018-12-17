@@ -160,13 +160,13 @@ namespace FitnessApp.UserMainWindowPages
                 UsernameTextBox.Text == "" || EmailTextBox.Text == "")
             {
                 if (FirstNameTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name is Empty!");
                 if (LastNameTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name is Empty!");
                 if (UsernameTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username Is Empty!");
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is Empty!");
                 if (EmailTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
+                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email is Empty!");
             }
 
             // Check Email Validation
