@@ -42,7 +42,7 @@ namespace FitnessApp.SignUpPages
             else
             {
                 // Signing up
-                SQLqueriesObject.SignUp(profilePhoto.ByteArray,
+                SQLqueriesObject.AddUser(profilePhoto.ByteArray,
                                         SigningWindow.SignUpFirstPageObject.FirstNameTextBox.Text,
                                         SigningWindow.SignUpFirstPageObject.LastNameTextBox.Text,
                                         SigningWindow.SignUpFirstPageObject.UsernameTextBox.Text,

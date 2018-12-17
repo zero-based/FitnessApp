@@ -11,7 +11,7 @@ namespace FitnessApp.ViewModels
 
         public PlansViewModel(int accountID)
         {
-            planModels = SQLqueriesObject.LoadPlans(accountID);
+            planModels = SQLqueriesObject.GetPlans(accountID);
         }
 
         public List<PlanModel> PlanModels

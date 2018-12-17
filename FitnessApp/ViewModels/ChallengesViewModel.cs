@@ -16,13 +16,13 @@ namespace FitnessApp.ViewModels
 
         public void AllChallengesViewModel(int accountID)
         {
-            allChallengeModels = SQLqueriesObject.LoadAllChallenges(accountID);
+            allChallengeModels = SQLqueriesObject.GetAllChallenges(accountID);
         }
 
         public void JoinedChallengesViewModel(int accountID)
         {
 
-            List<ChallengeModel> joinedChallengeModels = SQLqueriesObject.LoadJoinedChallenges(accountID);
+            List<ChallengeModel> joinedChallengeModels = SQLqueriesObject.GetJoinedChallenges(accountID);
 
             foreach (var item in joinedChallengeModels)
             {

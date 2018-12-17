@@ -11,7 +11,7 @@ namespace FitnessApp.ViewModels
         private List<FeedbackModel> feedbackModels;
         public FeedbacksViewModel()
         {
-            feedbackModels = SQLqueriesObject.LoadAllFeedbacks();
+            feedbackModels = SQLqueriesObject.GetFeedbacks();
         }
         public List<FeedbackModel> FeedbackModels {  get => feedbackModels; set { } }
     }

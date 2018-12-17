@@ -14,7 +14,7 @@
 
         public AdminModel(int adminID)
         {
-            AdminModel temp = SQLqueriesObject.LoadAdminData(adminID);
+            AdminModel temp = SQLqueriesObject.GetAdminData(adminID);
 
             _id = adminID;
             _firstName = temp.FirstName;

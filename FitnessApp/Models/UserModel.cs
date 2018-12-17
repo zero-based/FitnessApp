@@ -25,7 +25,7 @@
 
         public UserModel(int userID)
         {
-            UserModel temp = SQLqueriesObject.LoadUserData(userID);
+            UserModel temp = SQLqueriesObject.GetUserData(userID);
 
             _id                     = userID;
             _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;

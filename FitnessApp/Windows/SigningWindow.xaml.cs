@@ -37,7 +37,7 @@ namespace FitnessApp.Windows
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
 
-            bool isAccountFound = SQLqueriesObject.SignIn(EmailSignInTextBox.Text, PasswordSignInTextBox.Password);
+            bool isAccountFound = SQLqueriesObject.IsUserFound(EmailSignInTextBox.Text, PasswordSignInTextBox.Password);
 
             if (isAccountFound == true)
             {

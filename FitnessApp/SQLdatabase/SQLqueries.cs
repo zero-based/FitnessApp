@@ -12,9 +12,12 @@ namespace FitnessApp.SQLdatabase
     public class SQLqueries
     {
 
-        ////////// SQL Connection string //////////
+        ////////// SQL connection string //////////
         // [IMPORTANT] Add your server name to ServerDetails Class.
-        SqlConnection Connection = new SqlConnection(ServerDetails.ConnectionString);
+        SqlConnection connection = new SqlConnection(ServerDetails.ConnectionString);
+        string query;
+        SqlCommand command;
+        SqlDataReader dataReader;
 
 
 
@@ -48,8 +51,25 @@ namespace FitnessApp.SQLdatabase
             }
         }
 
+
+        // Generate a Random Password: Used When adding a new Admin 
+        private string GenerateRandomPassword()
+        {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            int length = 7;
+            while (0 < length--)
+            {
+                res.Append(valid[rnd.Next(valid.Length)]);
+            }
+            return res.ToString();
+
+        }
+
+
         // Send email to user function (gmail only)
-        private void SendEmail(string email, string name)
+        private void SendUserEmail(string email, string name)
         {
             MailMessage message = new MailMessage();
 
@@ -95,20 +115,6 @@ namespace FitnessApp.SQLdatabase
             smtp.Send(message);
         }
 
-        // Generate a Random Password: Used When adding a new Admin 
-        private string GenerateRandomPassword()
-        {
-            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            StringBuilder res = new StringBuilder();
-            Random rnd = new Random();
-            int length = 7;
-            while (0 < length--)
-            {
-                res.Append(valid[rnd.Next(valid.Length)]);
-            }
-            return res.ToString();
-
-        }
 
         // Send Email to a recently added user
         public void SendAdminEmail(string email, string randomPass)
@@ -156,58 +162,60 @@ namespace FitnessApp.SQLdatabase
 
 
 
-        ////////// Queries and Main Functions //////////
 
-        // Sign in query and function.
-        public bool SignIn(string email, string password)
+
+        ////////// Queries AND Main Functions //////////
+
+        // Sign in query AND function.
+        public bool IsUserFound(string email, string password)
         {
             // Encrypt Password
             string encryptedPassword = EncryptPassword(password);
 
             // Create Command
-            SqlCommand cmd = new SqlCommand("SELECT * FROM [Account] WHERE Email = @email AND Password = @password", Connection);
-            cmd.Parameters.AddWithValue("@email", email);
-            cmd.Parameters.AddWithValue("@password", encryptedPassword);
+            command = new SqlCommand("SELECT * FROM [Account] WHERE Email = @email AND Password = @password", connection);
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@password", encryptedPassword);
 
-            // Open Connection and Start Reading
-            Connection.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            // Open connection AND Start Reading
+            connection.Open();
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    // Assigns the account ID and account type to the global variables.
-                    accountID = (int)dr["AccountID"];
-                    accountType = (string)dr["Type"];
-                    Connection.Close();
+                    // Assigns the account ID AND account type to the global variables.
+                    accountID = (int)dataReader["AccountID"];
+                    accountType = (string)dataReader["Type"];
+                    connection.Close();
 
                     // If user exists, return true.
                     return true;
                 }
             }
 
-            Connection.Close();
+            connection.Close();
 
             // If user doesn't exist or any other case, return false.
-            return false; 
+            return false;
         }
 
         // Check if the Username is taken or not; because Usernames must be unique
         public bool IsUsernameTaken(string username)
         {
             // Create Command
-            SqlCommand cmd = new SqlCommand("SELECT Username FROM [User] WHERE Username = @username ;", Connection);
-            cmd.Parameters.AddWithValue("@username", username);
+            command = new SqlCommand("SELECT Username FROM [User] WHERE Username = @username ;", connection);
+            command.Parameters.AddWithValue("@username", username);
 
-            // Open Connection and Start Reading
-            Connection.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
+            // Open connection AND Start Reading
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
-            while (dr.Read())
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    Connection.Close();
+                    connection.Close();
 
                     // If the Username is taken exists, return true.
                     return true;
@@ -215,7 +223,7 @@ namespace FitnessApp.SQLdatabase
 
             }
 
-            Connection.Close();
+            connection.Close();
 
             // If the Username is not taken, return false.
             return false;
@@ -225,18 +233,18 @@ namespace FitnessApp.SQLdatabase
         public bool IsEmailTaken(string email)
         {
             // Create Command
-            SqlCommand cmd = new SqlCommand("SELECT Email FROM [Account] WHERE Email = @email ;", Connection);
-            cmd.Parameters.AddWithValue("@email", email);
+            command = new SqlCommand("SELECT Email FROM [Account] WHERE Email = @email ;", connection);
+            command.Parameters.AddWithValue("@email", email);
 
-            // Open Connection and Start Reading
-            Connection.Open();
-            SqlDataReader dr = cmd.ExecuteReader();
+            // Open connection AND Start Reading
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
-            while (dr.Read())
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    Connection.Close();
+                    connection.Close();
 
                     // If the email is taken exists, return true.
                     return true;
@@ -244,108 +252,104 @@ namespace FitnessApp.SQLdatabase
 
             }
 
-            Connection.Close();
+            connection.Close();
 
             // If the email is not taken, return false.
             return false;
         }
 
         // Sign up function
-        public void SignUp(byte[] profilePhoto, string firstName,          string lastName,
-                           string username,     string email,              string password,
-                           string gender,       string birthDate,          double weight,          double height,
-                           double targetWeight, double kilosToLosePerWeek, double workoutsPerWeek, double workoutHoursPerDay)
+        public void AddUser(byte[] profilePhoto, string firstName, string lastName,
+                            string username, string email, string password,
+                            string gender, string birthDate, double weight, double height,
+                            double targetWeight, double kilosToLosePerWeek, double workoutsPerWeek, double workoutHoursPerDay)
         {
             // Password Encryption
             string encryptedPassword = EncryptPassword(password);
 
             // Create Query amd Command
-            string query1 = "INSERT INTO [User] (Photo, FirstName, LastName, Username, BirthDate, Gender, " +
+            query = "INSERT INTO [User] (Photo, FirstName, LastName, Username, BirthDate, Gender, " +
                             "TargetWeight, Height, KilosToLosePerWeek, WorkoutsPerWeek, WorkoutHoursPerDay)" +
-                            "VALUES(@Photo ,'" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" + 
+                            "VALUES(@photo ,'" + firstName + "','" + lastName + "', '" + username + "','" + birthDate + "','" + gender + "','" +
                             targetWeight + "','" + height + "','" + kilosToLosePerWeek + "','" + workoutsPerWeek + "', '" + workoutHoursPerDay + "') ;";
-            SqlCommand cmd1 = new SqlCommand(query1, Connection);
+            command = new SqlCommand(query, connection);
 
             if (profilePhoto == null)
-                cmd1.Parameters.Add("@Photo", SqlDbType.Image).Value = DBNull.Value;
+                command.Parameters.Add("@photo", SqlDbType.Image).Value = DBNull.Value;
             else
-                cmd1.Parameters.AddWithValue("@Photo", profilePhoto);
+                command.Parameters.AddWithValue("@photo", profilePhoto);
 
-            // Open Connection and Start Reading
-            Connection.Open();
-            SqlDataReader dr;
-            dr = cmd1.ExecuteReader();
+            // Open connection AND Start Reading
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
-            while (dr.Read())
+            while (dataReader.Read())
             {
             }
 
-            Connection.Close();
+            connection.Close();
 
 
             // Get User's ID
             // Create Query amd Command
-            string query2 = "Select PK_UserID FROM [User] WHERE Username = @username";
-            SqlCommand cmd2 = new SqlCommand(query2, Connection);
-            cmd2.Parameters.AddWithValue("@username", username);
+            query = "SELECT PK_UserID FROM [User] WHERE Username = @username";
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@username", username);
 
-            // Open Connection and Start Reading
-            Connection.Open();
-            SqlDataReader dr2;
-            dr2 = cmd2.ExecuteReader();
+            // Open connection AND Start Reading
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
-            while (dr2.Read())
+            while (dataReader.Read())
             {
-                if (dr2.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    accountID = (int)dr2["PK_UserID"];
+                    accountID = (int)dataReader["PK_UserID"];
                 }
 
             }
 
-            Connection.Close();
+            connection.Close();
 
 
-            // Insert User's email and password
+            // INSERT User's email AND password
             // Create Query amd Command
-            string query3 = "INSERT INTO [Account](AccountID, Email, Password, Type) " +
+            query = "INSERT INTO [Account](AccountID, Email, Password, Type) " +
                             "VALUES('" + accountID + "','" + email + "','" + encryptedPassword + "','User');";
-            SqlCommand cmd3 = new SqlCommand(query3, Connection);
+            command = new SqlCommand(query, connection);
 
-            // Open Connection and Start Reading
-            Connection.Open();
-            SqlDataReader dr3;
-            dr3 = cmd3.ExecuteReader();
+            // Open connection AND Start Reading
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
-            while (dr3.Read())
+            while (dataReader.Read())
             {
             }
 
-            Connection.Close();
+            connection.Close();
 
 
-            // Insert User's weight into multiValued weight table
+            // INSERT User's weight into multiValued weight table
             // Create Query amd Command
-            string query4 = "INSERT INTO UserWeight(FK_UserWeight_UserID, Weight, Date) " +
+            query = "INSERT INTO UserWeight(FK_UserWeight_UserID, Weight, Date) " +
                             "VALUES('" + accountID + "','" + weight + "', GETDATE());";
-            SqlCommand cmd4 = new SqlCommand(query4, Connection);
+            command = new SqlCommand(query, connection);
 
-            // Open Connection and Start Reading
-            Connection.Open();
-            SqlDataReader dr4;
-            dr4 = cmd4.ExecuteReader();
+            // Open connection AND Start Reading
+            connection.Open();
+            dataReader = command.ExecuteReader();
 
-            while (dr4.Read())
+            while (dataReader.Read())
             {
             }
 
-            Connection.Close();
+            connection.Close();
 
 
             // Sending email to gmails only
             if (email.Contains("gmail"))
             {
-                SendEmail(email, firstName);
+                SendUserEmail(email, firstName);
             }
         }
 
@@ -353,197 +357,197 @@ namespace FitnessApp.SQLdatabase
 
 
         // Load all User's Data
-        public UserModel LoadUserData(int userID)
+        public UserModel GetUserData(int userID)
         {
             UserModel currentUser = new UserModel();
 
-            Connection.Open();
+            connection.Open();
 
-            // Info from User Table
-            string query = "SELECT * FROM [User] WHERE PK_UserID = @userID";
+            // Info FROM User Table
+            query = "SELECT * FROM [User] WHERE PK_UserID = @userID";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@userID", userID);
-            SqlDataReader dr = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", userID);
+            dataReader = command.ExecuteReader();
 
-            dr.Read();
+            dataReader.Read();
 
-            if (dr["Photo"] != DBNull.Value)
-                currentUser.ProfilePhoto.ByteArray = (byte[])dr["Photo"];
+            if (dataReader["Photo"] != DBNull.Value)
+                currentUser.ProfilePhoto.ByteArray = (byte[])dataReader["Photo"];
 
-            currentUser.FirstName              = dr["FirstName"].ToString();
-            currentUser.LastName               = dr["LastName"] .ToString();
-            currentUser.Username               = dr["Username"] .ToString();
-            currentUser.Gender                 = dr["Gender"]   .ToString();
-            currentUser.BirthDate              = dr["BirthDate"].ToString();
-            currentUser.Height                 = (double) dr["Height"];
-            currentUser.TargetWeight           = (double) dr["TargetWeight"];
-            currentUser.KilosToLosePerWeek     = (double) dr["KilosToLosePerWeek"];
-            currentUser.WorkoutsPerWeek        = (double) dr["WorkoutsPerWeek"];
-            currentUser.WorkoutHoursPerDay     = (double) dr["WorkoutHoursPerDay"];
+            currentUser.FirstName          = dataReader["FirstName"].ToString();
+            currentUser.LastName           = dataReader["LastName"].ToString();
+            currentUser.Username           = dataReader["Username"].ToString();
+            currentUser.Gender             = dataReader["Gender"].ToString();
+            currentUser.BirthDate          = dataReader["BirthDate"].ToString();
+            currentUser.Height             = (double)dataReader["Height"];
+            currentUser.TargetWeight       = (double)dataReader["TargetWeight"];
+            currentUser.KilosToLosePerWeek = (double)dataReader["KilosToLosePerWeek"];
+            currentUser.WorkoutsPerWeek    = (double)dataReader["WorkoutsPerWeek"];
+            currentUser.WorkoutHoursPerDay = (double)dataReader["WorkoutHoursPerDay"];
 
-            dr.Close();
+            dataReader.Close();
 
-            // Info from Weight Table
-            string query2 = "select Weight from UserWeight where FK_UserWeight_UserID = @UserId order by Date DESC";
-            SqlCommand cmd2 = new SqlCommand(query2, Connection);
-            cmd2.Parameters.AddWithValue("@userID", userID);
-            currentUser.Weight = (double) cmd2.ExecuteScalar(); 
+            // Info FROM Weight Table
+            query = "SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID = @userID ORDER BY Date DESC";
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", userID);
+            currentUser.Weight = (double)command.ExecuteScalar();
 
 
-            // Info from Accounts Table
-            string query3 = "SELECT Email, Password FROM [Account] WHERE AccountID = @userID";
-            SqlCommand cmd3 = new SqlCommand(query3, Connection);
-            cmd3.Parameters.AddWithValue("@userID", userID);
-            SqlDataReader dr3 = cmd3.ExecuteReader();
+            // Info FROM Accounts Table
+            query = "SELECT Email, Password FROM [Account] WHERE AccountID = @userID";
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", userID);
+            dataReader = command.ExecuteReader();
 
-            dr3.Read();
-            currentUser.Email    = dr3["Email"]   .ToString();
-            currentUser.Password = dr3["Password"].ToString();
-            dr3.Close();
+            dataReader.Read();
+            currentUser.Email = dataReader["Email"].ToString();
+            currentUser.Password = dataReader["Password"].ToString();
+            dataReader.Close();
 
             // Get User Age
-            string query4 = "SELECT FLOOR (DATEDIFF (DAY, BirthDate, GETDATE()) / 365.25) " +
+            query = "SELECT FLOOR (DATEDIFF (DAY, BirthDate, GETDATE()) / 365.25) " +
                             "FROM [User] WHERE PK_UserID = @userID";
-            SqlCommand cmd4 = new SqlCommand(query4, Connection);
-            cmd4.Parameters.AddWithValue("@userID", userID);
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", userID);
 
-            currentUser.Age = Convert.ToInt16(cmd4.ExecuteScalar());
+            currentUser.Age = Convert.ToInt16(command.ExecuteScalar());
 
-            Connection.Close();
+            connection.Close();
 
             return currentUser;
         }
 
-        // Update User Profile
+        // UPDATE User Profile
         public void UpdateUserProfile(UserModel currentUser)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "UPDATE [User] " +
-                           "SET Photo = @Photo " +
-                           "WHERE PK_UserID = @UserId";
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@UserId", currentUser.ID);
-            cmd.Parameters.AddWithValue("@Photo", currentUser.ProfilePhoto.ByteArray);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            query = "UPDATE [User] " +
+                    "SET Photo = @photo " +
+                    "WHERE PK_UserID = @userID";
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@UserId", currentUser.ID);
+            command.Parameters.AddWithValue("@Photo", currentUser.ProfilePhoto.ByteArray);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd1 = new SqlCommand("AddNewWeight", Connection);
-            cmd1.CommandType = CommandType.StoredProcedure;
-            cmd1.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd1.Parameters.Add(new SqlParameter("@AddedWeight", currentUser.Weight));
-            SqlDataReader reader1 = cmd1.ExecuteReader();
-            reader1.Close();
+            command = new SqlCommand("AddNewWeight", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@AddedWeight", currentUser.Weight));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd2 = new SqlCommand("ChangeHeight", Connection);
-            cmd2.CommandType = CommandType.StoredProcedure;
-            cmd2.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd2.Parameters.Add(new SqlParameter("@Height", currentUser.Height));
-            SqlDataReader reader2 = cmd2.ExecuteReader();
-            reader2.Close();
+            command = new SqlCommand("ChangeHeight", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@userID", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@Height", currentUser.Height));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd3 = new SqlCommand("ChangeTargetWeight", Connection);
-            cmd3.CommandType = CommandType.StoredProcedure;
-            cmd3.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd3.Parameters.Add(new SqlParameter("@TargetWeight", currentUser.TargetWeight));
-            SqlDataReader reader3 = cmd3.ExecuteReader();
-            reader3.Close();
+            command = new SqlCommand("ChangeTargetWeight", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@TargetWeight", currentUser.TargetWeight));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd4 = new SqlCommand("ChangeKilosToLosePerWeek", Connection);
-            cmd4.CommandType = CommandType.StoredProcedure;
-            cmd4.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd4.Parameters.Add(new SqlParameter("@KilosToLosePerWeek", currentUser.KilosToLosePerWeek));
-            SqlDataReader reader4 = cmd4.ExecuteReader();
-            reader4.Close();
+            command = new SqlCommand("ChangeKilosToLosePerWeek", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@KilosToLosePerWeek", currentUser.KilosToLosePerWeek));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd5 = new SqlCommand("ChangeWorkoutsDaysPerWeek", Connection);
-            cmd5.CommandType = CommandType.StoredProcedure;
-            cmd5.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd5.Parameters.Add(new SqlParameter("@Days", currentUser.WorkoutsPerWeek));
-            SqlDataReader reader5 = cmd5.ExecuteReader();
-            reader5.Close();
+            command = new SqlCommand("ChangeWorkoutsDaysPerWeek", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@Days", currentUser.WorkoutsPerWeek));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd6 = new SqlCommand("ChangeWorkoutsHoursPerDay", Connection);
-            cmd6.CommandType = CommandType.StoredProcedure;
-            cmd6.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd6.Parameters.Add(new SqlParameter("@Hours", currentUser.WorkoutHoursPerDay));
-            SqlDataReader reader6 = cmd6.ExecuteReader();
-            reader6.Close();
+            command = new SqlCommand("ChangeWorkoutsHoursPerDay", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@Hours", currentUser.WorkoutHoursPerDay));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            Connection.Close();
+            connection.Close();
         }
 
-        // Update User Account
+        // UPDATE User Account
         public void UpdateUserAccount(UserModel currentUser)
         {
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd = new SqlCommand("ChangeFirstName", Connection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd.Parameters.Add(new SqlParameter("@FirstName", currentUser.FirstName));
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            command = new SqlCommand("ChangeFirstName", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@FirstName", currentUser.FirstName));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd2 = new SqlCommand("ChangeLastName", Connection);
-            cmd2.CommandType = CommandType.StoredProcedure;
-            cmd2.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd2.Parameters.Add(new SqlParameter("@LastNmae", currentUser.LastName));
-            SqlDataReader reader2 = cmd2.ExecuteReader();
-            reader2.Close();
+            command = new SqlCommand("ChangeLastName", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@LastNmae", currentUser.LastName));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd3 = new SqlCommand("ChangeUserName", Connection);
-            cmd3.CommandType = CommandType.StoredProcedure;
-            cmd3.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd3.Parameters.Add(new SqlParameter("@UserName", currentUser.Username));
-            SqlDataReader reader3 = cmd3.ExecuteReader();
-            reader3.Close();
+            command = new SqlCommand("ChangeUserName", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@UserName", currentUser.Username));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd4 = new SqlCommand("ChangeEmail", Connection);
-            cmd4.CommandType = CommandType.StoredProcedure;
-            cmd4.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd4.Parameters.Add(new SqlParameter("@Email", currentUser.Email));
-            SqlDataReader reader4 = cmd4.ExecuteReader();
-            reader4.Close();
+            command = new SqlCommand("ChangeEmail", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@Email", currentUser.Email));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            Connection.Close();
+            connection.Close();
         }
 
-        // Update User Password
+        // UPDATE User Password
         public void UpdateUserPassword(UserModel currentUser)
         {
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd = new SqlCommand("ChangePassword", Connection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd.Parameters.Add(new SqlParameter("@Password", currentUser.Password));
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            command = new SqlCommand("ChangePassword", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@Password", currentUser.Password));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            Connection.Close();
+            connection.Close();
         }
 
         // Save Feedback
         public void SaveFeedback(int userID, int rating, string feedback)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "INSERT INTO [Feedback] (FK_Feedback_UserID, Rating, Feedback) " +
+            query = "INSERT INTO [Feedback] (FK_Feedback_UserID, Rating, Feedback) " +
                            "VALUES('" + userID + "','" + rating + "','" + feedback + "')";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
 
 
 
-        // Challenges queries and functions.
-        public List<ChallengeModel> LoadAllChallenges(int accountID)
+        // Challenges queries AND functions.
+        public List<ChallengeModel> GetAllChallenges(int accountID)
         {
 
             // Remove All Overdue Challenges before reading data
@@ -551,242 +555,242 @@ namespace FitnessApp.SQLdatabase
 
             List<ChallengeModel> allChallengeModels = new List<ChallengeModel>();
 
-            Connection.Open();
+            connection.Open();
 
-            string query = "SELECT [Challenge].*,[UserChallenge].* " +
+            query = "SELECT [Challenge].*,[UserChallenge].* " +
                            "FROM [Challenge] Left JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "AND FK_UserChallenge_UserID = " + accountID;
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
                 ChallengeModel temp = new ChallengeModel();
-                temp.ID             = (int)reader["PK_ChallengeID"];
+                temp.ID = (int)dataReader["PK_ChallengeID"];
 
-                if (reader["Photo"] != DBNull.Value)
-                    temp.Photo.ByteArray = (byte[])reader["Photo"];
+                if (dataReader["Photo"] != DBNull.Value)
+                    temp.Photo.ByteArray = (byte[])dataReader["Photo"];
 
-                temp.Name           = reader["Name"].ToString();
-                temp.Description    = reader["Description"].ToString();
-                temp.TargetMinutes  = (int)reader["TargetMinutes"];
-                temp.Reward         = reader["Reward"].ToString();
-                temp.DueDate        = reader["DueDate"].ToString().ToString().Split(' ')[0];
-                temp.WorkoutType    = (int)reader["FK_Challenge_WorkoutID"];
+                temp.Name = dataReader["Name"].ToString();
+                temp.Description = dataReader["Description"].ToString();
+                temp.TargetMinutes = (int)dataReader["TargetMinutes"];
+                temp.Reward = dataReader["Reward"].ToString();
+                temp.DueDate = dataReader["DueDate"].ToString().ToString().Split(' ')[0];
+                temp.WorkoutType = (int)dataReader["FK_Challenge_WorkoutID"];
 
-                if (reader["FK_UserChallenge_UserID"] != DBNull.Value)
+                if (dataReader["FK_UserChallenge_UserID"] != DBNull.Value)
                     temp.IsJoined = true;
                 else
                     temp.IsJoined = false;
-               
+
                 allChallengeModels.Add(temp);
             }
-            Connection.Close();
+            connection.Close();
 
             return allChallengeModels;
         }
 
-        public List<ChallengeModel> LoadJoinedChallenges(int accountID)
+        public List<ChallengeModel> GetJoinedChallenges(int accountID)
         {
             // Remove All Overdue Challenges before reading data
             RemoveOverdueChallenges();
 
             List<ChallengeModel> joinedChallengeModels = new List<ChallengeModel>();
 
-            Connection.Open();
+            connection.Open();
 
-            string query = "SELECT [Challenge].*,[UserChallenge].* " +
+            query = "SELECT [Challenge].*,[UserChallenge].* " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "WHERE FK_UserChallenge_UserID = " + accountID;
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
                 ChallengeModel temp = new ChallengeModel();
 
-                temp.ID             = (int)reader["PK_ChallengeID"];
-                temp.Name           = reader["Name"].ToString();
-                temp.Description    = reader["Description"].ToString();
-                temp.TargetMinutes  = (int)reader["TargetMinutes"];
-                temp.Reward         = reader["Reward"].ToString();
-                temp.DueDate        = reader["DueDate"].ToString().Split(' ')[0];
-                temp.WorkoutType    = (int)reader["FK_Challenge_WorkoutID"];
-                temp.Progress       = (int)reader["Progress"];
-                temp.IsJoined       = true;
+                temp.ID = (int)dataReader["PK_ChallengeID"];
+                temp.Name = dataReader["Name"].ToString();
+                temp.Description = dataReader["Description"].ToString();
+                temp.TargetMinutes = (int)dataReader["TargetMinutes"];
+                temp.Reward = dataReader["Reward"].ToString();
+                temp.DueDate = dataReader["DueDate"].ToString().Split(' ')[0];
+                temp.WorkoutType = (int)dataReader["FK_Challenge_WorkoutID"];
+                temp.Progress = (int)dataReader["Progress"];
+                temp.IsJoined = true;
 
                 joinedChallengeModels.Add(temp);
             }
 
-            Connection.Close();
+            connection.Close();
 
             return joinedChallengeModels;
         }
 
         public void JoinChallenge(int accountID, int ChallengeID)
         {
-            Connection.Open();
-            string query = "INSERT INTO [UserChallenge] " +
+            connection.Open();
+            query = "INSERT INTO [UserChallenge] " +
                            "(FK_UserChallenge_UserID, FK_UserChallenge_ChallengeID, JoiningDate, Progress) " +
-                            "Values (" + accountID + ", " + ChallengeID + ", getdate(), 0)";
+                            "VALUES (" + accountID + ", " + ChallengeID + ", GETDATE(), 0)";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void UnjoinChallenge(int accountID, int ChallengeID)
         {
-            Connection.Open();
-            string query = "DELETE [UserChallenge] " +
+            connection.Open();
+            query = "DELETE [UserChallenge] " +
                            "WHERE [UserChallenge].FK_UserChallenge_UserID = " + accountID + " " +
                            "AND [UserChallenge].FK_UserChallenge_ChallengeID = " + ChallengeID;
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void RemoveOverdueChallenges()
         {
 
-            Connection.Open();
+            connection.Open();
 
-            string query = "DELETE [UserChallenge] " +
+            query = "DELETE [UserChallenge] " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
-                           "WHERE [Challenge].DueDate <= getdate()";
+                           "WHERE [Challenge].DueDate <= GETDATE()";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            query = "DELETE FROM[Challenge] WHERE[Challenge].DueDate <= getdate()";
+            query = "DELETE FROM[Challenge] WHERE[Challenge].DueDate <= GETDATE()";
 
-            cmd = new SqlCommand(query, Connection);
-            reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
 
         }
 
         public void UpdateChallengesProgress(int accountID, string workout, double duration)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "UPDATE [UserChallenge] " +
+            query = "UPDATE [UserChallenge] " +
                            "SET progress += @workoutDuration " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "RIGHT JOIN [Workout] " +
                            "ON [Challenge].Fk_Challenge_WorkoutID = [Workout].PK_WorkoutID " +
                            "WHERE FK_UserChallenge_UserID = @userID " +
-                           "AND getdate() Between JoiningDate and DueDate " +
+                           "AND GETDATE() Between JoiningDate AND DueDate " +
                            "AND [Workout].[Name] = @workoutName";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@workoutDuration", duration);
-            cmd.Parameters.AddWithValue("@userID", accountID);
-            cmd.Parameters.AddWithValue("@workoutName", workout);
-            cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@workoutDuration", duration);
+            command.Parameters.AddWithValue("@userID", accountID);
+            command.Parameters.AddWithValue("@workoutName", workout);
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
 
 
-        // Plans queries and functions.
-        public List<PlanModel> LoadPlans(int accountID)
+        // Plans queries AND functions.
+        public List<PlanModel> GetPlans(int accountID)
         {
-            Connection.Open();
-            string query = "SELECT [Plan].*,[User].PK_UserID " + 
+            connection.Open();
+            query = "SELECT [Plan].*,[User].PK_UserID " +
                            "FROM [Plan] Left JOIN [User] " +
                            "ON [Plan].PK_PlanID = [User].FK_User_PlanID " +
                            "AND PK_UserID = @userID";
 
             List<PlanModel> plansModels = new List<PlanModel>();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@userID", accountID);
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", accountID);
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
                 PlanModel temp = new PlanModel();
 
-                temp.ID = (int)reader["PK_PlanID"];
+                temp.ID = (int)dataReader["PK_PlanID"];
 
-                if (reader["Photo"] != DBNull.Value)
-                    temp.Photo.ByteArray = (byte[])reader["Photo"];
+                if (dataReader["Photo"] != DBNull.Value)
+                    temp.Photo.ByteArray = (byte[])dataReader["Photo"];
 
-                temp.Name = reader["Name"].ToString();
-                temp.Description = reader["Description"].ToString();
-                temp.Duration = reader["Duration"].ToString();
-                temp.Hardness = reader["Hardness"].ToString();
+                temp.Name = dataReader["Name"].ToString();
+                temp.Description = dataReader["Description"].ToString();
+                temp.Duration = dataReader["Duration"].ToString();
+                temp.Hardness = dataReader["Hardness"].ToString();
 
-                if (reader["PK_UserID"] != DBNull.Value)
+                if (dataReader["PK_UserID"] != DBNull.Value)
                     temp.IsJoined = true;
                 else
                     temp.IsJoined = false;
 
                 plansModels.Add(temp);
             }
-            Connection.Close();
+            connection.Close();
 
             return plansModels;
         }
 
-        public List<DayModel> LoadPlanDays(int planID)
+        public List<DayModel> GetPlanDays(int planID)
         {
-            Connection.Open();
-            string query = "SELECT * FROM[PlanDayDescription] " +
+            connection.Open();
+            query = "SELECT * FROM[PlanDayDescription] " +
                            "WHERE[PlanDayDescription].FK_PlanDayDescription_PlanID = " + planID + " " +
                            "ORDER BY[PlanDayDescription].DayNumber";
 
             List<DayModel> dayModels = new List<DayModel>();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
                 DayModel temp = new DayModel();
 
-                temp.DayNumber = (int)reader["DayNumber"];
+                temp.DayNumber = (int)dataReader["DayNumber"];
                 //temp.image
-                temp.BreakfastDescription = reader["BreakfastDescription"].ToString();
-                temp.LunchDescription = reader["LunchDescription"].ToString();
-                temp.DinnerDescription = reader["DinnerDescription"].ToString();
-                temp.WorkoutDescription = reader["WorkoutDescription"].ToString();
+                temp.BreakfastDescription = dataReader["BreakfastDescription"].ToString();
+                temp.LunchDescription = dataReader["LunchDescription"].ToString();
+                temp.DinnerDescription = dataReader["DinnerDescription"].ToString();
+                temp.WorkoutDescription = dataReader["WorkoutDescription"].ToString();
 
                 dayModels.Add(temp);
             }
-            Connection.Close();
+            connection.Close();
 
             return dayModels;
         }
 
         public bool IsInPlan(int accountID)
         {
-            Connection.Open();
-            string query = "SELECT FK_User_PlanID " +
+            connection.Open();
+            query = "SELECT FK_User_PlanID " +
                            "FROM [USER] " +
                            "WHERE PK_UserID = " + accountID;
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
+            command = new SqlCommand(query, connection);
 
-            if (cmd.ExecuteScalar() != DBNull.Value)
+            if (command.ExecuteScalar() != DBNull.Value)
             {
-                Connection.Close();
+                connection.Close();
                 return true;
             }
             else
             {
-                Connection.Close();
+                connection.Close();
                 return false;
             }
 
@@ -794,42 +798,42 @@ namespace FitnessApp.SQLdatabase
 
         public void JoinPlan(int accountID, int planID)
         {
-            Connection.Open();
-            string query = "UPDATE [User] " +
+            connection.Open();
+            query = "UPDATE [User] " +
                            "SET FK_User_PlanID = " + planID + ", " +
-                           "PlanJoiningDate = Convert(date, getdate()) " +
+                           "PlanJoiningDate = CONVERT(date, GETDATE()) " +
                            "WHERE [User].PK_UserID = " + accountID;
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
             query = "INSERT INTO UserPlanDay (FK_UserPlanDay_UserID, DayNumber) VALUES (@userID, 1)";
-            cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@userID", accountID);
-            reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", accountID);
+            dataReader = command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void UnjoinPlan(int accountID)
         {
-            Connection.Open();
-            string query = "UPDATE [User] " +
+            connection.Open();
+            query = "UPDATE [User] " +
                            "SET FK_User_PlanID = NULL, " +
                            "PlanJoiningDate = NULL " +
                            "WHERE [User].PK_UserID = " + accountID;
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
             query = "DELETE FROM UserPlanDay WHERE FK_UserPlanDay_UserID = @userID";
-            cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@userID", accountID);
-            reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", accountID);
+            dataReader = command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
 
@@ -841,19 +845,19 @@ namespace FitnessApp.SQLdatabase
         {
             List<double> weightValues = new List<double>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand CommandString = new SqlCommand("select Weight from UserWeight where FK_UserWeight_UserID = @UserId order by Date DESC", Connection);
+            SqlCommand CommandString = new SqlCommand("SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID = @userID ORDER BY Date DESC", connection);
             CommandString.CommandType = CommandType.Text;
-            CommandString.Parameters.AddWithValue("@UserId", accountID);
-            SqlDataReader ReaderString = CommandString.ExecuteReader();
+            CommandString.Parameters.AddWithValue("@userID", accountID);
+            dataReader = CommandString.ExecuteReader();
 
-            for (int i = 0; ReaderString.Read() && i < 10; i++)
+            for (int i = 0; dataReader.Read() && i < 10; i++)
             {
-                weightValues.Add((double)ReaderString["Weight"]);
+                weightValues.Add((double)dataReader["Weight"]);
             }
 
-            Connection.Close();
+            connection.Close();
 
             // Reverse List
             weightValues.Reverse();
@@ -865,20 +869,20 @@ namespace FitnessApp.SQLdatabase
         {
             List<string> dateValues = new List<string>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand CommandString = new SqlCommand("select FORMAT(Date, 'MMM yy') AS [Date] from UserWeight where FK_UserWeight_UserID = @UserId order by Date DESC", Connection);
+            SqlCommand CommandString = new SqlCommand("SELECT FORMAT(Date, 'MMM yy') AS [Date] FROM UserWeight WHERE FK_UserWeight_UserID = @userID ORDER BY Date DESC", connection);
             CommandString.CommandType = CommandType.Text;
-            CommandString.Parameters.AddWithValue("@UserId", accountID);
+            CommandString.Parameters.AddWithValue("@userID", accountID);
 
-            SqlDataReader ReaderString = CommandString.ExecuteReader();
+            dataReader = CommandString.ExecuteReader();
 
-            for (int i = 0; ReaderString.Read() && i < 10; i++)
+            for (int i = 0; dataReader.Read() && i < 10; i++)
             {
-                dateValues.Add((string)ReaderString["Date"]);
+                dateValues.Add((string)dataReader["Date"]);
             }
 
-            Connection.Close();
+            connection.Close();
 
             // Reverse List
             dateValues.Reverse();
@@ -888,15 +892,15 @@ namespace FitnessApp.SQLdatabase
 
         public void AddNewWeight(double NewWeight, int accountID)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "INSERT INTO [UserWeight] VALUES (@UserId, @AddedWeight, getdate())";
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.Add(new SqlParameter("@UserId", accountID));
-            cmd.Parameters.Add(new SqlParameter("@AddedWeight", NewWeight));
-            cmd.ExecuteReader();
+            query = "INSERT INTO [UserWeight] VALUES (@userID, @AddedWeight, GETDATE())";
+            command = new SqlCommand(query, connection);
+            command.Parameters.Add(new SqlParameter("@userID", accountID));
+            command.Parameters.Add(new SqlParameter("@AddedWeight", NewWeight));
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
         // Total Weight Lost
@@ -906,18 +910,18 @@ namespace FitnessApp.SQLdatabase
             double WeekWeightLost = 0;
             List<double> WeekWeight = new List<double>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE()) Order by Date", Connection);
-            cmd.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader rd = cmd.ExecuteReader();
+            command = new SqlCommand("SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID=@id AND DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE()) ORDER BY Date", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
 
-            while (rd.Read())
+            while (dataReader.Read())
             {
-                WeekWeight.Add((double)(rd["Weight"]));
+                WeekWeight.Add((double)(dataReader["Weight"]));
             }
 
-            Connection.Close();
+            connection.Close();
 
             for (int i = 0; i < (WeekWeight.Count - 1); i++)
             {
@@ -934,17 +938,17 @@ namespace FitnessApp.SQLdatabase
             double MonthWeightLost = 0;
             List<double> MonthWeight = new List<double>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd1 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(MONTH,Date) = DATEPART(MONTH,GETDATE()) Order by Date", Connection);
-            cmd1.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader rd1 = cmd1.ExecuteReader();
-            while (rd1.Read())
+            command = new SqlCommand("SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID=@id AND DATEPART(MONTH,Date) = DATEPART(MONTH,GETDATE()) ORDER BY Date", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                MonthWeight.Add((double)(rd1["Weight"]));
+                MonthWeight.Add((double)(dataReader["Weight"]));
             }
 
-            Connection.Close();
+            connection.Close();
 
             for (int i = 0; i < (MonthWeight.Count - 1); i++)
             {
@@ -961,18 +965,18 @@ namespace FitnessApp.SQLdatabase
             double YearWeightLost = 0;
             List<double> YearWeight = new List<double>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd2 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(YEAR,Date) = DATEPART(YEAR,GETDATE()) Order by Date", Connection);
-            cmd2.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader rd2 = cmd2.ExecuteReader();
+            command = new SqlCommand("SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID=@id AND DATEPART(YEAR,Date) = DATEPART(YEAR,GETDATE()) ORDER BY Date", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
 
-            while (rd2.Read())
+            while (dataReader.Read())
             {
-                YearWeight.Add((double)(rd2["Weight"]));
+                YearWeight.Add((double)(dataReader["Weight"]));
             }
 
-            Connection.Close();
+            connection.Close();
 
             for (int i = 0; i < (YearWeight.Count - 1); i++)
             {
@@ -989,18 +993,18 @@ namespace FitnessApp.SQLdatabase
             double WeekWeightLost = 0;
             List<double> WeekWeight = new List<double>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE()) Order by Date", Connection);
-            cmd.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader rd = cmd.ExecuteReader();
+            command = new SqlCommand("SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID=@id AND DATEPART(WEEK,Date) = DATEPART(WEEK,GETDATE()) ORDER BY Date", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
 
-            while (rd.Read())
+            while (dataReader.Read())
             {
-                WeekWeight.Add((double)(rd["Weight"]));
+                WeekWeight.Add((double)(dataReader["Weight"]));
             }
 
-            Connection.Close();
+            connection.Close();
 
             for (int i = 0; i < (WeekWeight.Count - 1); i++)
             {
@@ -1016,17 +1020,17 @@ namespace FitnessApp.SQLdatabase
             double MonthWeightLost = 0;
             List<double> MonthWeight = new List<double>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd1 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(MONTH,Date) = DATEPART(MONTH,GETDATE()) Order by Date", Connection);
-            cmd1.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader rd1 = cmd1.ExecuteReader();
-            while (rd1.Read())
+            command = new SqlCommand("SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID=@id AND DATEPART(MONTH,Date) = DATEPART(MONTH,GETDATE()) ORDER BY Date", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                MonthWeight.Add((double)(rd1["Weight"]));
+                MonthWeight.Add((double)(dataReader["Weight"]));
             }
 
-            Connection.Close();
+            connection.Close();
 
             for (int i = 0; i < (MonthWeight.Count - 1); i++)
             {
@@ -1043,18 +1047,18 @@ namespace FitnessApp.SQLdatabase
             double YearWeightLost = 0;
             List<double> YearWeight = new List<double>();
 
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd2 = new SqlCommand("select Weight From UserWeight Where FK_UserWeight_UserID=@id AND DATEPART(YEAR,Date) = DATEPART(YEAR,GETDATE()) Order by Date", Connection);
-            cmd2.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader rd2 = cmd2.ExecuteReader();
+            command = new SqlCommand("SELECT Weight FROM UserWeight WHERE FK_UserWeight_UserID=@id AND DATEPART(YEAR,Date) = DATEPART(YEAR,GETDATE()) ORDER BY Date", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
 
-            while (rd2.Read())
+            while (dataReader.Read())
             {
-                YearWeight.Add((double)(rd2["Weight"]));
+                YearWeight.Add((double)(dataReader["Weight"]));
             }
 
-            Connection.Close();
+            connection.Close();
 
             for (int i = 0; i < (YearWeight.Count - 1); i++)
             {
@@ -1071,15 +1075,15 @@ namespace FitnessApp.SQLdatabase
 
         public string GetMotivationalQuote()
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "SELECT Quote FROM MotivationalQuote " +
+            query = "SELECT Quote FROM MotivationalQuote " +
                            "WHERE PK_MotivationalQuoteID = DATEPART(DAY,GETDATE())";
-            SqlCommand CMD = new SqlCommand(query, Connection);
+            command = new SqlCommand(query, connection);
 
-            string Quote = CMD.ExecuteScalar().ToString();
+            string Quote = command.ExecuteScalar().ToString();
 
-            Connection.Close();
+            connection.Close();
 
             return Quote;
         }
@@ -1090,60 +1094,60 @@ namespace FitnessApp.SQLdatabase
 
         public List<String> GetAllFood()
         {
-            Connection.Open();
+            connection.Open();
 
             List<String> food = new List<string>();
 
-            SqlCommand cmd = new SqlCommand("select Name from Food", Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand("SELECT Name FROM Food", connection);
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
-                string FoodName = reader["Name"].ToString();
+                string FoodName = dataReader["Name"].ToString();
                 food.Add(FoodName);
             }
-            reader.Close();
+            dataReader.Close();
 
-            Connection.Close();
+            connection.Close();
 
             return food;
         }
 
         public List<String> GetAllWorkouts()
         {
-            Connection.Open();
+            connection.Open();
 
             List<String> workouts = new List<string>();
 
-            SqlCommand cmd = new SqlCommand("select Name from Workout", Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand("SELECT Name FROM Workout", connection);
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
-                string WorkoutName = reader["Name"].ToString();
+                string WorkoutName = dataReader["Name"].ToString();
                 workouts.Add(WorkoutName);
             }
-            reader.Close();
+            dataReader.Close();
 
-            Connection.Close();
+            connection.Close();
 
             return workouts;
         }
 
         public void AddFood(string food, double quantity, int accountID)
         {
-            Connection.Open();
+            connection.Open();
 
             int foodID = 0;
             double totalCaloriesGained = 0;
 
             // Calculate Total Calories gained
-            SqlCommand cmd = new SqlCommand("select Type from Food where Name=@food", Connection);
-            cmd.Parameters.AddWithValue("@food", food);
-            string foodType = cmd.ExecuteScalar().ToString();
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand("SELECT Type FROM Food WHERE Name=@food", connection);
+            command.Parameters.AddWithValue("@food", food);
+            string foodType = command.ExecuteScalar().ToString();
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
                 if (foodType == "Protein")
                 {
@@ -1158,26 +1162,26 @@ namespace FitnessApp.SQLdatabase
                     totalCaloriesGained += 4 * quantity;
                 }
             }
-            reader.Close();
+            dataReader.Close();
 
             // Get Food ID
-            SqlCommand cmd2 = new SqlCommand("select PK_FoodID from Food where Name=@food", Connection);
-            cmd2.Parameters.AddWithValue("@food", food);
-            SqlDataReader reader2 = cmd2.ExecuteReader();
-            while (reader2.Read())
+            command = new SqlCommand("SELECT PK_FoodID FROM Food WHERE Name=@food", connection);
+            command.Parameters.AddWithValue("@food", food);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                foodID = (int)(reader2["PK_FoodID"]);
+                foodID = (int)(dataReader["PK_FoodID"]);
             }
-            reader2.Close();
+            dataReader.Close();
 
-            // Insert Food in UserFood Table
-            SqlCommand cmd3 = new SqlCommand("insert into [UserFood] (FK_UserFood_UserID, FK_UserFood_FoodID, CaloriesGained,DateOfToday) Values (@UserId, @FoodId, @Calories, getdate())", Connection);
-            cmd3.Parameters.AddWithValue("@UserId", accountID);
-            cmd3.Parameters.AddWithValue("@FoodId", foodID);
-            cmd3.Parameters.AddWithValue("@Calories", totalCaloriesGained);
-            cmd3.ExecuteReader();
+            // INSERT Food in UserFood Table
+            command = new SqlCommand("INSERT into [UserFood] (FK_UserFood_UserID, FK_UserFood_FoodID, CaloriesGained,DateOfToday) VALUES (@userID, @foodID, @calories, GETDATE())", connection);
+            command.Parameters.AddWithValue("@userID", accountID);
+            command.Parameters.AddWithValue("@foodID", foodID);
+            command.Parameters.AddWithValue("@calories", totalCaloriesGained);
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
 
         }
 
@@ -1195,39 +1199,39 @@ namespace FitnessApp.SQLdatabase
                 totalCaloriesLost = ((currentUser.Age * 0.2017) - (currentUser.Weight * 0.09036) + (100 * 0.6309) - 55.0969) * (duration / 4.184);
             }
 
-            Connection.Open();
+            connection.Open();
 
             // Get Workout ID
-            SqlCommand cmd4 = new SqlCommand("select PK_WorkoutID from Workout where Name=@name", Connection);
-            cmd4.Parameters.AddWithValue("@name", workout);
-            SqlDataReader dr = cmd4.ExecuteReader();
-            while (dr.Read())
+            command = new SqlCommand("SELECT PK_WorkoutID FROM Workout WHERE Name=@name", connection);
+            command.Parameters.AddWithValue("@name", workout);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                workoutID = (int)(dr["PK_WorkoutID"]);
+                workoutID = (int)(dataReader["PK_WorkoutID"]);
             }
-            dr.Close();
+            dataReader.Close();
 
-            // Insert Workout in UserWorkout Table
-            SqlCommand Cmd3 = new SqlCommand("Insert into UserWorkout (FK_UserWorkout_UserID,FK_UserWorkout_WorkoutID,MinutesOfWork,CaloriesLost,DateOfToday) Values(@userid, @workoutid, @duration, @calories, getdate())", Connection);
-            Cmd3.Parameters.AddWithValue("@userid", currentUser.ID);
-            Cmd3.Parameters.AddWithValue("@workoutid", workoutID);
-            Cmd3.Parameters.AddWithValue("@duration", duration);
-            Cmd3.Parameters.AddWithValue("@calories", Math.Round(totalCaloriesLost, 2));
-            Cmd3.ExecuteNonQuery();
+            // INSERT Workout in UserWorkout Table
+            command = new SqlCommand("INSERT into UserWorkout (FK_UserWorkout_UserID,FK_UserWorkout_WorkoutID,MinutesOfWork,CaloriesLost,DateOfToday) VALUES(@userID, @workoutID, @duration, @calories, GETDATE())", connection);
+            command.Parameters.AddWithValue("@userID", currentUser.ID);
+            command.Parameters.AddWithValue("@workoutID", workoutID);
+            command.Parameters.AddWithValue("@duration", duration);
+            command.Parameters.AddWithValue("@calories", Math.Round(totalCaloriesLost, 2));
+            command.ExecuteNonQuery();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public int GetWorkoutID(string workoutName)
         {
             int id = -1;
 
-            Connection.Open();
-            string query = "select PK_WorkoutID from Workout where Name=@name;";
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@name", workoutName);
-            id = (int)cmd.ExecuteScalar();
-            Connection.Close();
+            connection.Open();
+            query = "SELECT PK_WorkoutID FROM Workout WHERE Name=@name;";
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@name", workoutName);
+            id = (int)command.ExecuteScalar();
+            connection.Close();
 
             return id;
         }
@@ -1235,26 +1239,26 @@ namespace FitnessApp.SQLdatabase
 
         //////// Joined Plan ////////
 
-        // Get Joined Plan ID and Name 
+        // Get Joined Plan ID AND Name 
         public int GetJoinedPlanID(int accountID)
         {
             int SQLplanID = 0;
-            string query = "select FK_User_PlanID from [User] where PK_UserID= @accountID;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = "SELECT FK_User_PlanID FROM [User] WHERE PK_UserID= @accountID;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
 
-                    SQLplanID = (int)dr["FK_User_PlanID"];
+                    SQLplanID = (int)dataReader["FK_User_PlanID"];
 
                 }
             }
-            dr.Close();
-            Connection.Close();
+            dataReader.Close();
+            connection.Close();
 
             return SQLplanID;
 
@@ -1264,31 +1268,31 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanID = GetJoinedPlanID(accountID);
             string SQLplanName = "";
-            string query = "select Name from [Plan] where PK_PlanID=@SQLplanID;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
-            SqlDataReader dr = cmd.ExecuteReader();
-            dr.Read();
-            SQLplanName = (string)dr["Name"];
-            Connection.Close();
+            query = "SELECT Name FROM [Plan] WHERE PK_PlanID=@SQLplanID;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            dataReader = command.ExecuteReader();
+            dataReader.Read();
+            SQLplanName = (string)dataReader["Name"];
+            connection.Close();
             return SQLplanName;
         }
 
         // Get Joined Plan Day Number
         public int GetJoinedPlanDayNumber(int accountID)
         {
-            Connection.Open();
+            connection.Open();
 
-            string dateDiff = "select DATEDIFF(day, PlanJoiningDate , getdate()) from [user] where PK_UserID = @userID";
-            SqlCommand cmd = new SqlCommand(dateDiff, Connection);
-            cmd.Parameters.AddWithValue("@userID", accountID);
+            string dateDiff = "SELECT DATEDIFF(day, PlanJoiningDate , GETDATE()) FROM [user] WHERE PK_UserID = @userID";
+            command = new SqlCommand(dateDiff, connection);
+            command.Parameters.AddWithValue("@userID", accountID);
 
             int dayNumber = 0;
-            
-            dayNumber = (int)cmd.ExecuteScalar();
 
-            Connection.Close();
+            dayNumber = (int)command.ExecuteScalar();
+
+            connection.Close();
 
             // to make it begin with 1 instead of zero
             int SQLplanDay = dayNumber + 1;
@@ -1302,22 +1306,22 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
             string breakfastDiscription = "";
-            string query = "select BreakfastDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = "SELECT BreakfastDescription FROM PlanDayDescription WHERE FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    breakfastDiscription = (string)dr["BreakfastDescription"];
+                    breakfastDiscription = (string)dataReader["BreakfastDescription"];
 
                 }
             }
 
-            Connection.Close();
+            connection.Close();
             return breakfastDiscription;
         }
 
@@ -1326,22 +1330,22 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
             string lucnchDiscription = "";
-            string query = "select LunchDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = "SELECT LunchDescription FROM PlanDayDescription WHERE FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    lucnchDiscription = (string)dr["LunchDescription"];
+                    lucnchDiscription = (string)dataReader["LunchDescription"];
 
                 }
             }
 
-            Connection.Close();
+            connection.Close();
             return lucnchDiscription;
         }
 
@@ -1350,22 +1354,22 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
             string dinnerDiscription = "";
-            string query = "select DinnerDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = "SELECT DinnerDescription FROM PlanDayDescription WHERE FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    dinnerDiscription = (string)dr["DinnerDescription"];
+                    dinnerDiscription = (string)dataReader["DinnerDescription"];
 
                 }
             }
 
-            Connection.Close();
+            connection.Close();
             return dinnerDiscription;
         }
 
@@ -1374,22 +1378,22 @@ namespace FitnessApp.SQLdatabase
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
             string workoutDiscription = "";
-            string query = "select WorkoutDescription from PlanDayDescription where FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanID", SQLplanID);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = "SELECT WorkoutDescription FROM PlanDayDescription WHERE FK_PlanDayDescription_PlanID=@SQLplanID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanID", SQLplanID);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    workoutDiscription = (string)dr["WorkoutDescription"];
+                    workoutDiscription = (string)dataReader["WorkoutDescription"];
 
                 }
             }
 
-            Connection.Close();
+            connection.Close();
             return workoutDiscription;
         }
 
@@ -1399,21 +1403,21 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlBreakfast = false;
-            string query = " select BreakfastIsDone from UserPlanDay where FK_UserPlanDay_UserID = @accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = " SELECT BreakfastIsDone FROM UserPlanDay WHERE FK_UserPlanDay_UserID = @accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    SqlBreakfast = (bool)dr["BreakfastIsDone"];
+                    SqlBreakfast = (bool)dataReader["BreakfastIsDone"];
 
                 }
             }
-            Connection.Close();
+            connection.Close();
 
             return SqlBreakfast;
         }
@@ -1422,21 +1426,21 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlLunch = false;
-            string query = " select LunchIsDone from UserPlanDay where FK_UserPlanDay_UserID = @accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = " SELECT LunchIsDone FROM UserPlanDay WHERE FK_UserPlanDay_UserID = @accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    SqlLunch = (bool)dr["LunchIsDone"];
+                    SqlLunch = (bool)dataReader["LunchIsDone"];
 
                 }
             }
-            Connection.Close();
+            connection.Close();
 
             return SqlLunch;
         }
@@ -1445,21 +1449,21 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlDinner = false;
-            string query = " select DinnerIsDone from UserPlanDay where FK_UserPlanDay_UserID=@accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = " SELECT DinnerIsDone FROM UserPlanDay WHERE FK_UserPlanDay_UserID=@accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    SqlDinner = (bool)dr["DinnerIsDone"];
+                    SqlDinner = (bool)dataReader["DinnerIsDone"];
 
                 }
             }
-            Connection.Close();
+            connection.Close();
 
             return SqlDinner;
         }
@@ -1468,21 +1472,21 @@ namespace FitnessApp.SQLdatabase
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlWorkout = false;
-            string query = " select WorkoutsIsDone from UserPlanDay where FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            query = " SELECT WorkoutsIsDone FROM UserPlanDay WHERE FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                if (dr.HasRows == true)
+                if (dataReader.HasRows == true)
                 {
-                    SqlWorkout = (bool)dr["WorkoutsIsDone"];
+                    SqlWorkout = (bool)dataReader["WorkoutsIsDone"];
 
                 }
             }
-            Connection.Close();
+            connection.Close();
 
             return SqlWorkout;
         }
@@ -1492,188 +1496,188 @@ namespace FitnessApp.SQLdatabase
 
         public void UpdatePlanDayNumber(int accountID, int dayNumber)
         {
-            Connection.Open();
-            string query = "SELECT DayNumber " +
+            connection.Open();
+            query = "SELECT DayNumber " +
                            "FROM UserPlanDay " +
-                           "Where FK_UserPlanDay_UserID = @userID";
+                           "WHERE FK_UserPlanDay_UserID = @userID";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@userID", accountID);
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@userID", accountID);
 
-            if ((int)cmd.ExecuteScalar() != dayNumber)
+            if ((int)command.ExecuteScalar() != dayNumber)
             {
-                query = "UPDATE [UserPlanDay] "          +
+                query = "UPDATE [UserPlanDay] " +
                         "SET DayNumber   = @dayNumber, " +
-                        "BreakfastIsDone = 0, "          +
-                        "LunchIsDone     = 0, "          +
-                        "DinnerIsDone    = 0, "          +
-                        "WorkoutsIsDone  = 0 "           +
+                        "BreakfastIsDone = 0, " +
+                        "LunchIsDone     = 0, " +
+                        "DinnerIsDone    = 0, " +
+                        "WorkoutsIsDone  = 0 " +
                         "WHERE FK_UserPlanDay_UserID = @userID";
 
-                cmd = new SqlCommand(query, Connection);
-                cmd.Parameters.AddWithValue("@dayNumber", dayNumber);
-                cmd.Parameters.AddWithValue("@userID", accountID);
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@dayNumber", dayNumber);
+                command.Parameters.AddWithValue("@userID", accountID);
 
-                SqlDataReader reader = cmd.ExecuteReader();
+                dataReader = command.ExecuteReader();
             }
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void UpdateDayBreakfastStatus(bool checkedBreakfast, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
-            string query = "Update UserPlanDay SET  BreakfastIsDone=@checkedBreakfast where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            cmd.Parameters.AddWithValue("@checkedBreakfast", checkedBreakfast);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            cmd.ExecuteNonQuery();
+            query = "UPDATE UserPlanDay SET  BreakfastIsDone=@checkedBreakfast WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            command.Parameters.AddWithValue("@checkedBreakfast", checkedBreakfast);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            command.ExecuteNonQuery();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void UpdateDayLunchStatus(bool checkedLunch, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
-            string query = "Update UserPlanDay SET  LunchIsDone=@checkedLunch where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            cmd.Parameters.AddWithValue("@checkedLunch", checkedLunch);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            cmd.ExecuteNonQuery();
+            query = "UPDATE UserPlanDay SET  LunchIsDone=@checkedLunch WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            command.Parameters.AddWithValue("@checkedLunch", checkedLunch);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            command.ExecuteNonQuery();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void UpdateDayDinnerStatus(bool checkedDinner, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
-            string query = "Update UserPlanDay SET  DinnerIsDone=@checkedDinner where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            cmd.Parameters.AddWithValue("@checkedDinner", checkedDinner);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            cmd.ExecuteNonQuery();
+            query = "UPDATE UserPlanDay SET  DinnerIsDone=@checkedDinner WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            command.Parameters.AddWithValue("@checkedDinner", checkedDinner);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            command.ExecuteNonQuery();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void UpdateDayWorkoutStatus(bool checkedWorkout, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
-            string query = "Update UserPlanDay SET  WorkoutsIsDone=@checkedWorkout where  FK_UserPlanDay_UserID= @accountID and DayNumber = @SQLplanDay ;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
-            cmd.Parameters.AddWithValue("@checkedWorkout", checkedWorkout);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            cmd.ExecuteNonQuery();
+            query = "UPDATE UserPlanDay SET  WorkoutsIsDone=@checkedWorkout WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
+            connection.Open();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@SQLplanDay", SQLplanDay);
+            command.Parameters.AddWithValue("@checkedWorkout", checkedWorkout);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            command.ExecuteNonQuery();
 
 
-            Connection.Close();
+            connection.Close();
         }
 
 
 
-        ///////////// Admin's Queries and Functions /////////////
-        
+        ///////////// Admin's Queries AND Functions /////////////
+
 
         // Load all Admin's Data
-        public AdminModel LoadAdminData(int adminID)
+        public AdminModel GetAdminData(int adminID)
         {
             AdminModel currentAdmin = new AdminModel();
 
-            Connection.Open();
+            connection.Open();
 
-            // Info from Admin Table
-            string query = "SELECT * FROM [Admin] WHERE PK_AdminID = @adminID";
+            // Info FROM Admin Table
+            query = "SELECT * FROM [Admin] WHERE PK_AdminID = @adminID";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@adminID", adminID);
-            SqlDataReader dr = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@adminID", adminID);
+            dataReader = command.ExecuteReader();
 
-            dr.Read();
-            currentAdmin.FirstName = dr["FirstName"].ToString();
-            currentAdmin.LastName = dr["LastName"].ToString();
-            dr.Close();
+            dataReader.Read();
+            currentAdmin.FirstName = dataReader["FirstName"].ToString();
+            currentAdmin.LastName = dataReader["LastName"].ToString();
+            dataReader.Close();
 
-            // Info from Accounts Table
+            // Info FROM Accounts Table
             query = "SELECT Email, Password FROM [Account] WHERE AccountID = @adminID";
 
-            SqlCommand cmd2 = new SqlCommand(query, Connection);
-            cmd2.Parameters.AddWithValue("@adminID", adminID);
-            SqlDataReader dr2 = cmd2.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@adminID", adminID);
+            dataReader = command.ExecuteReader();
 
-            dr2.Read();
-            currentAdmin.Email = dr2["Email"].ToString();
-            currentAdmin.Password = dr2["Password"].ToString();
-            dr2.Close();
+            dataReader.Read();
+            currentAdmin.Email = dataReader["Email"].ToString();
+            currentAdmin.Password = dataReader["Password"].ToString();
+            dataReader.Close();
 
-            Connection.Close();
+            connection.Close();
 
             return currentAdmin;
         }
 
-        // Update User Account
+        // UPDATE User Account
         public void UpdateAdminAccount(AdminModel currentAdmin)
         {
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd = new SqlCommand("ModifyFirstName", Connection);
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
-            cmd.Parameters.Add(new SqlParameter("@FirstName", currentAdmin.FirstName));
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            command = new SqlCommand("ModifyFirstName", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
+            command.Parameters.Add(new SqlParameter("@FirstName", currentAdmin.FirstName));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd2 = new SqlCommand("ModifyLastName", Connection);
-            cmd2.CommandType = CommandType.StoredProcedure;
-            cmd2.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
-            cmd2.Parameters.Add(new SqlParameter("@LastName", currentAdmin.LastName));
-            SqlDataReader reader2 = cmd2.ExecuteReader();
-            reader2.Close();
+            command = new SqlCommand("ModifyLastName", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
+            command.Parameters.Add(new SqlParameter("@LastName", currentAdmin.LastName));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            SqlCommand cmd4 = new SqlCommand("ModifyEmail", Connection);
-            cmd4.CommandType = CommandType.StoredProcedure;
-            cmd4.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
-            cmd4.Parameters.Add(new SqlParameter("@Email", currentAdmin.Email));
-            SqlDataReader reader4 = cmd4.ExecuteReader();
-            reader4.Close();
+            command = new SqlCommand("ModifyEmail", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
+            command.Parameters.Add(new SqlParameter("@Email", currentAdmin.Email));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public void UpdateAdminPassword(AdminModel currentAdmin)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "UPDATE Account SET Password = @newPassword, Type = @type WHERE AccountID = @accountID";
+            query = "UPDATE Account SET Password = @newPassword, Type = @type WHERE AccountID = @accountID";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@newPassword", currentAdmin.Password);
-            cmd.Parameters.AddWithValue("@type", "Admin");
-            cmd.Parameters.AddWithValue("@accountID", currentAdmin.ID);
-            cmd.ExecuteNonQuery();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@newPassword", currentAdmin.Password);
+            command.Parameters.AddWithValue("@type", "Admin");
+            command.Parameters.AddWithValue("@accountID", currentAdmin.ID);
+            command.ExecuteNonQuery();
 
-            Connection.Close();
+            connection.Close();
 
         }
 
         public void AddNewAdmin(string email, string firstName, string lastName)
         {
-            Connection.Open();
-            string query = "INSERT INTO Admin(FirstName,LastName) VALUES (@firstName,@lastName)";
+            connection.Open();
+            query = "INSERT INTO Admin(FirstName,LastName) VALUES (@firstName,@lastName)";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@firstName", firstName);
-            cmd.Parameters.AddWithValue("@lastName", lastName);
-            cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@firstName", firstName);
+            command.Parameters.AddWithValue("@lastName", lastName);
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
 
             string password = GenerateRandomPassword();
             string encryptedPassword = EncryptPassword(password);
@@ -1686,98 +1690,98 @@ namespace FitnessApp.SQLdatabase
 
         public void InsertNewAdminAccount(string email, string password)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "SELECT MIN(PK_AdminID) FROM Admin ";
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            int adminId = (int)cmd.ExecuteScalar();
+            query = "SELECT MIN(PK_AdminID) FROM Admin ";
+            command = new SqlCommand(query, connection);
+            int adminId = (int)command.ExecuteScalar();
 
             query = "INSERT INTO Account VALUES(@adminId , @email, @password , @type);";
 
-            SqlCommand cmd2 = new SqlCommand(query, Connection);
-            cmd2.Parameters.AddWithValue("@adminId", adminId);
-            cmd2.Parameters.AddWithValue("@email", email);
-            cmd2.Parameters.AddWithValue("@password", password);
-            cmd2.Parameters.AddWithValue("@type", "Admin*");
-            cmd2.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@adminId", adminId);
+            command.Parameters.AddWithValue("@email", email);
+            command.Parameters.AddWithValue("@password", password);
+            command.Parameters.AddWithValue("@type", "Admin*");
+            command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
         }
 
         public List<int> GetAppRatingValues()
         {
-            Connection.Open();
+            connection.Open();
             List<int> ratingList = new List<int>();
 
             for (int i = 1; i <= 5; i++)
             {
-                string query = "SELECT COUNT(FK_Feedback_UserID) FROM Feedback WHERE Rating = @ratingValue;";
+                query = "SELECT COUNT(FK_Feedback_UserID) FROM Feedback WHERE Rating = @ratingValue;";
 
-                SqlCommand cmd = new SqlCommand(query, Connection);
-                cmd.Parameters.AddWithValue("@ratingValue", i);
+                command = new SqlCommand(query, connection);
+                command.Parameters.AddWithValue("@ratingValue", i);
 
-                ratingList.Add((int)cmd.ExecuteScalar());
+                ratingList.Add((int)command.ExecuteScalar());
             }
 
-            Connection.Close();
+            connection.Close();
 
             return ratingList;
         }
 
-        public List<FeedbackModel> LoadAllFeedbacks()
+        public List<FeedbackModel> GetFeedbacks()
         {
 
             List<FeedbackModel> allFeedbackModels = new List<FeedbackModel>();
 
-            Connection.Open();
+            connection.Open();
 
-            string query = "SELECT [user].FirstName, [user].LastName, [Feedback].Feedback " +
+            query = "SELECT [user].FirstName, [user].LastName, [Feedback].Feedback " +
                            "FROM [User] RIGHT JOIN [Feedback] " +
                            "ON [User].PK_UserID  = Feedback.FK_Feedback_UserID";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            dataReader = command.ExecuteReader();
 
-            while (reader.Read())
+            while (dataReader.Read())
             {
                 FeedbackModel temp = new FeedbackModel();
 
-                temp.FirstName = reader["FirstName"].ToString();
-                temp.LastName  = reader["LastName"] .ToString();
-                temp.Feedback  = reader["Feedback"] .ToString();
+                temp.FirstName = dataReader["FirstName"].ToString();
+                temp.LastName = dataReader["LastName"].ToString();
+                temp.Feedback = dataReader["Feedback"].ToString();
 
                 allFeedbackModels.Add(temp);
             }
 
-            Connection.Close();
+            connection.Close();
 
             return allFeedbackModels;
         }
 
         public void DeleteFeedback(string feedbackBody)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "DELETE FROM [Feedback] WHERE [Feedback].Feedback like @feedbackBody";
-            
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@feedbackBody", feedbackBody);
-            cmd.ExecuteNonQuery();
+            query = "DELETE FROM [Feedback] WHERE [Feedback].Feedback LIKE @feedbackBody";
 
-            Connection.Close();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@feedbackBody", feedbackBody);
+            command.ExecuteNonQuery();
+
+            connection.Close();
         }
 
         public int GetAppUsersNumber()
         {
             int appUsersNumber;
 
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand("GetNumberOfAppUsers", Connection);
-            cmd.CommandType = CommandType.StoredProcedure;
+            connection.Open();
+            command = new SqlCommand("GetNumberOfAppUsers", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
-            appUsersNumber = (int)cmd.ExecuteScalar();
+            appUsersNumber = (int)command.ExecuteScalar();
 
-            Connection.Close();
+            connection.Close();
 
             return appUsersNumber;
 
@@ -1785,18 +1789,18 @@ namespace FitnessApp.SQLdatabase
 
         public bool IsNewAdmin(int accountID)
         {
-            Connection.Open();
+            connection.Open();
 
-            string query = "SELECT Type FROM Account WHERE AccountID = @accountID";
+            query = "SELECT Type FROM Account WHERE AccountID = @accountID";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
 
-            SqlDataReader dr = cmd.ExecuteReader();
-            dr.Read();
-            string type = (string)dr["Type"];
+            dataReader = command.ExecuteReader();
+            dataReader.Read();
+            string type = (string)dataReader["Type"];
 
-            Connection.Close();
+            connection.Close();
 
             if (type == "Admin*")
                 return true;
@@ -1809,50 +1813,50 @@ namespace FitnessApp.SQLdatabase
         public void AddNewChallenge(byte[] photo, string name, string description, int targetMinutes,
                                     string reward, DateTime? dueDate, int workoutID)
         {
-            Connection.Open();
+            connection.Open();
 
-            SqlCommand cmd = new SqlCommand("AddChallenge", Connection);
-            cmd.CommandType = CommandType.StoredProcedure;
+            command = new SqlCommand("AddChallenge", connection);
+            command.CommandType = CommandType.StoredProcedure;
 
             if (photo == null)
-                cmd.Parameters.Add("@Photo", SqlDbType.Image).Value = DBNull.Value;
+                command.Parameters.Add("@Photo", SqlDbType.Image).Value = DBNull.Value;
             else
-                cmd.Parameters.AddWithValue("@Photo", photo);
+                command.Parameters.AddWithValue("@Photo", photo);
 
-            cmd.Parameters.AddWithValue("@Name", name);
-            cmd.Parameters.AddWithValue("@Description", description);
-            cmd.Parameters.AddWithValue("@TargetMinutes", targetMinutes);
-            cmd.Parameters.AddWithValue("@Reward", reward);
-            cmd.Parameters.AddWithValue("@DueDate", dueDate);
-            cmd.Parameters.AddWithValue("@WorkoutID", workoutID);
-            cmd.ExecuteNonQuery();
+            command.Parameters.AddWithValue("@Name", name);
+            command.Parameters.AddWithValue("@Description", description);
+            command.Parameters.AddWithValue("@TargetMinutes", targetMinutes);
+            command.Parameters.AddWithValue("@Reward", reward);
+            command.Parameters.AddWithValue("@DueDate", dueDate);
+            command.Parameters.AddWithValue("@WorkoutID", workoutID);
+            command.ExecuteNonQuery();
 
-            Connection.Close();
+            connection.Close();
 
         }
 
         public void DeleteChallenge(int challengeID)
         {
 
-            Connection.Open();
+            connection.Open();
 
-            string query = "DELETE [UserChallenge] " +
+            query = "DELETE [UserChallenge] " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "WHERE [Challenge].PK_ChallengeID = @challengeID";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@challengeID", challengeID);
-            SqlDataReader reader = cmd.ExecuteReader();
-            reader.Close();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@challengeID", challengeID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
 
-            
+
             query = "DELETE FROM[Challenge] WHERE[Challenge].PK_ChallengeID = @challengeID";
-            cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@challengeID", challengeID);
-            reader = cmd.ExecuteReader();
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@challengeID", challengeID);
+            dataReader = command.ExecuteReader();
 
-            Connection.Close();
+            connection.Close();
 
         }
 
@@ -1861,69 +1865,69 @@ namespace FitnessApp.SQLdatabase
         public void DeleteUser(int accountID)
         {
 
-            string feedbackDelete = "delete from Feedback where FK_Feedback_UserID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd = new SqlCommand(feedbackDelete, Connection);
-            cmd.Parameters.AddWithValue("@accountID", accountID);
-            SqlDataReader dr = cmd.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string feedbackDelete = "delete FROM Feedback WHERE FK_Feedback_UserID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(feedbackDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
-            string userWorkoutDelete = "delete from UserWorkout where  FK_UserWorkout_UserID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd2 = new SqlCommand(userWorkoutDelete, Connection);
-            cmd2.Parameters.AddWithValue("@accountID", accountID);
-            dr = cmd2.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string userWorkoutDelete = "delete FROM UserWorkout WHERE  FK_UserWorkout_UserID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(userWorkoutDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
-            string accountDelete = "delete from  Account where  AccountID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd3 = new SqlCommand(accountDelete, Connection);
-            cmd3.Parameters.AddWithValue("@accountID", accountID);
-            dr = cmd3.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string accountDelete = "delete FROM  Account WHERE  AccountID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(accountDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
-            string challengeDelete = "delete from  UserChallenge where FK_UserChallenge_UserID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd4 = new SqlCommand(challengeDelete, Connection);
-            cmd4.Parameters.AddWithValue("@accountID", accountID);
-            dr = cmd4.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string challengeDelete = "delete FROM  UserChallenge WHERE FK_UserChallenge_UserID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(challengeDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
-            string planDelete = "delete from  UserPlanDay where FK_UserPlanDay_UserID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd5 = new SqlCommand(planDelete, Connection);
-            cmd5.Parameters.AddWithValue("@accountID", accountID);
-            dr = cmd5.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string planDelete = "delete FROM  UserPlanDay WHERE FK_UserPlanDay_UserID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(planDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
-            string weightDelete = "delete from  UserWeight where  FK_UserWeight_UserID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd6 = new SqlCommand(weightDelete, Connection);
-            cmd6.Parameters.AddWithValue("@accountID", accountID);
-            dr = cmd6.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string weightDelete = "delete FROM  UserWeight WHERE  FK_UserWeight_UserID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(weightDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
-            string foodDelete = "delete from  UserFood where FK_UserFood_UserID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd7 = new SqlCommand(foodDelete, Connection);
-            cmd7.Parameters.AddWithValue("@accountID", accountID);
-            dr = cmd7.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string foodDelete = "delete FROM  UserFood WHERE FK_UserFood_UserID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(foodDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
-            string userDelete = "delete from [User] where PK_UserID=@accountID;";
-            Connection.Open();
-            SqlCommand cmd8 = new SqlCommand(userDelete, Connection);
-            cmd8.Parameters.AddWithValue("@accountID", accountID);
-            dr = cmd8.ExecuteReader();
-            dr.Close();
-            Connection.Close();
+            string userDelete = "delete FROM [User] WHERE PK_UserID=@accountID;";
+            connection.Open();
+            command = new SqlCommand(userDelete, connection);
+            command.Parameters.AddWithValue("@accountID", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
 
         }
 
@@ -1931,65 +1935,65 @@ namespace FitnessApp.SQLdatabase
         {
             List<UserModel> AllUsers = new List<UserModel>();
 
-            Connection.Open();
-            string query = "select PK_UserID, Photo , FirstName , LastName , Username, Email " +
-                            "from [User] inner join Account on PK_UserID = AccountID " +
-                            "where FirstName like '%' + @search + '%' " +
-                            "or LastName like '%' + @search + '%' " +
-                            "or Username like '%' + @search + '%' " +
-                            "or Email like '%' + @search + '%'";
+            connection.Open();
+            query = "SELECT PK_UserID, Photo , FirstName , LastName , Username, Email " +
+                            "FROM [User] inner JOIN Account ON PK_UserID = AccountID " +
+                            "WHERE FirstName LIKE '%' + @search + '%' " +
+                            "or LastName LIKE '%' + @search + '%' " +
+                            "or Username LIKE '%' + @search + '%' " +
+                            "or Email LIKE '%' + @search + '%'";
 
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            cmd.Parameters.AddWithValue("@search", search);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@search", search);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
                 UserModel temp = new UserModel();
 
-                temp.ID = (int)dr["PK_UserID"];
+                temp.ID = (int)dataReader["PK_UserID"];
 
-                if (dr["Photo"] != DBNull.Value)
-                    temp.ProfilePhoto.ByteArray = (byte[])dr["Photo"];
+                if (dataReader["Photo"] != DBNull.Value)
+                    temp.ProfilePhoto.ByteArray = (byte[])dataReader["Photo"];
 
-                temp.FirstName = dr["FirstName"].ToString();
-                temp.LastName = dr["LastName"].ToString();
-                temp.Email = dr["Email"].ToString();
+                temp.FirstName = dataReader["FirstName"].ToString();
+                temp.LastName = dataReader["LastName"].ToString();
+                temp.Email = dataReader["Email"].ToString();
 
                 AllUsers.Add(temp);
 
             }
 
-            Connection.Close();
+            connection.Close();
 
             return AllUsers;
         }
-       
+
 
         // Calories Card Modified
 
         public string GetTodayDate()
         {
-            Connection.Open();
+            connection.Open();
 
-            // Using convert to get the day only from the getdate function
-            SqlCommand cmd = new SqlCommand("select Convert(date, getdate())", Connection);
-            string dateOfToday = cmd.ExecuteScalar().ToString();
-            Connection.Close();
+            // Using CONVERT to get the day only FROM the GETDATE function
+            command = new SqlCommand("SELECT CONVERT(date, GETDATE())", connection);
+            string dateOfToday = command.ExecuteScalar().ToString();
+            connection.Close();
             return dateOfToday;
         }
 
 
         public string GetLastWeightDate(int accountID)
         {
-            Connection.Open();
+            connection.Open();
             string dateTime = "";
-            SqlCommand cmd10 = new SqlCommand("select convert(Date,[Date]) as date  from UserWeight where FK_UserWeight_UserID = @id Order by [Date] ", Connection);
-            cmd10.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader Reader1 = cmd10.ExecuteReader();
-            Reader1.Read();
-            dateTime = Reader1["date"].ToString();
-            Reader1.Close();
-            Connection.Close();
+            command = new SqlCommand("SELECT CONVERT(Date,[Date]) AS date  FROM UserWeight WHERE FK_UserWeight_UserID = @id ORDER BY [Date] ", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
+            dataReader.Read();
+            dateTime = dataReader["date"].ToString();
+            dataReader.Close();
+            connection.Close();
 
             return dateTime;
 
@@ -2016,45 +2020,45 @@ namespace FitnessApp.SQLdatabase
 
         public double CalroiesGainedToday(int accountID)
         {
-            Connection.Open();
+            connection.Open();
             double SumOfCaloriesGained = 0;
-            SqlCommand cmd5 = new SqlCommand("select SUM(CaloriesGained)[0] from UserFood Where FK_UserFood_UserID=@id AND convert(date,DateOfToday) = convert(date ,getdate());", Connection);
-            cmd5.Parameters.AddWithValue("@id", accountID);
-            if (cmd5.ExecuteScalar().ToString() != "")
+            command = new SqlCommand("SELECT SUM(CaloriesGained)[0] FROM UserFood WHERE FK_UserFood_UserID=@id AND CONVERT(date,DateOfToday) = CONVERT(date ,GETDATE());", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            if (command.ExecuteScalar().ToString() != "")
             {
-                double Calorie = (double)cmd5.ExecuteScalar();
+                double Calorie = (double)command.ExecuteScalar();
                 SumOfCaloriesGained = Calorie;
-                Connection.Close();
+                connection.Close();
                 return SumOfCaloriesGained;
 
             }
 
             else
             {
-                Connection.Close();
+                connection.Close();
                 return SumOfCaloriesGained;
             }
         }
 
         public double CalroiesLostToday(int accountID)
         {
-            Connection.Open();
+            connection.Open();
             double SumOfCaloriesLost = 0;
-            SqlCommand cmd6 = new SqlCommand("select SUM(CaloriesLost)[0] from UserWorkout Where FK_UserWorkout_UserID =@id AND convert(date,DateOfToday)=convert (date ,getdate())", Connection);
-            cmd6.Parameters.AddWithValue("@id", accountID);
-            if (cmd6.ExecuteScalar().ToString() != "")
+            command = new SqlCommand("SELECT SUM(CaloriesLost)[0] FROM UserWorkout WHERE FK_UserWorkout_UserID =@id AND CONVERT(date,DateOfToday)=CONVERT (date ,GETDATE())", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            if (command.ExecuteScalar().ToString() != "")
             {
 
-                double calorie = (double)cmd6.ExecuteScalar();
+                double calorie = (double)command.ExecuteScalar();
                 SumOfCaloriesLost = calorie;
-                Connection.Close();
+                connection.Close();
                 return SumOfCaloriesLost;
 
             }
 
             else
             {
-                Connection.Close();
+                connection.Close();
                 return SumOfCaloriesLost;
             }
 
@@ -2066,32 +2070,32 @@ namespace FitnessApp.SQLdatabase
         {
             // Get last meal date
             DateTime? date = null;
-            Connection.Open();
-            SqlCommand cmd21 = new SqlCommand("select DateOfToday from UserFood Where FK_UserFood_UserID = @id Order by DateOfToday Desc", Connection);
-            cmd21.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader READER = cmd21.ExecuteReader();
-            while (READER.Read())
+            connection.Open();
+            command = new SqlCommand("SELECT DateOfToday FROM UserFood WHERE FK_UserFood_UserID = @id ORDER BY DateOfToday DESC", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                date = (DateTime?)READER["DateOfToday"];
+                date = (DateTime?)dataReader["DateOfToday"];
                 break;
             }
-            READER.Close();
-            Connection.Close();
+            dataReader.Close();
+            connection.Close();
 
             // Get last meal calories
             string caloriesgain = "0";
-            Connection.Open();
-            SqlCommand cmd4 = new SqlCommand("select SUM(CaloriesGained)[0] from UserFood Where FK_UserFood_UserID =@id AND DateOfToday=@date", Connection);
-            cmd4.Parameters.AddWithValue("@id", accountID);
-            cmd4.Parameters.AddWithValue("@date", date);
-            double Calorie = (double)cmd4.ExecuteScalar();
-            SqlDataReader dr = cmd4.ExecuteReader();
-            while (dr.Read())
+            connection.Open();
+            command = new SqlCommand("SELECT SUM(CaloriesGained)[0] FROM UserFood WHERE FK_UserFood_UserID =@id AND DateOfToday=@date", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            command.Parameters.AddWithValue("@date", date);
+            double Calorie = (double)command.ExecuteScalar();
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
                 caloriesgain = Calorie.ToString();
             }
-            dr.Close();
-            Connection.Close();
+            dataReader.Close();
+            connection.Close();
             return caloriesgain;
         }
 
@@ -2100,33 +2104,33 @@ namespace FitnessApp.SQLdatabase
         {
             // Get date of the previous workout
             DateTime? workoutLastDate = null;
-            Connection.Open();
-            SqlCommand cmd22 = new SqlCommand("select DateOfToday from UserWorkout Where FK_UserWorkout_UserID=@id Order by DateOfToday Desc", Connection);
-            cmd22.Parameters.AddWithValue("@id", accountID);
-            SqlDataReader READER1 = cmd22.ExecuteReader();
-            while (READER1.Read())
+            connection.Open();
+            command = new SqlCommand("SELECT DateOfToday FROM UserWorkout WHERE FK_UserWorkout_UserID=@id ORDER BY DateOfToday DESC", connection);
+            command.Parameters.AddWithValue("@id", accountID);
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
-                workoutLastDate = (DateTime)READER1["DateOfToday"];
+                workoutLastDate = (DateTime)dataReader["DateOfToday"];
                 break;
             }
-            READER1.Close();
-            Connection.Close();
+            dataReader.Close();
+            connection.Close();
 
 
             // Get it's calories
             string calorieslost = "0";
-            Connection.Open();
-            SqlCommand cmd5 = new SqlCommand("select SUM(CaloriesLost)[0] from UserWorkout Where FK_UserWorkout_UserID=@id And DateOfToday=@date", Connection);
-            cmd5.Parameters.AddWithValue("@date", workoutLastDate);
-            cmd5.Parameters.AddWithValue("@id", accountID);
-            double Calorie1 = (double)cmd5.ExecuteScalar();
-            SqlDataReader dr2 = cmd5.ExecuteReader();
-            while (dr2.Read())
+            connection.Open();
+            command = new SqlCommand("SELECT SUM(CaloriesLost)[0] FROM UserWorkout WHERE FK_UserWorkout_UserID=@id AND DateOfToday=@date", connection);
+            command.Parameters.AddWithValue("@date", workoutLastDate);
+            command.Parameters.AddWithValue("@id", accountID);
+            double Calorie1 = (double)command.ExecuteScalar();
+            dataReader = command.ExecuteReader();
+            while (dataReader.Read())
             {
                 calorieslost = Calorie1.ToString();
             }
-            dr2.Close();
-            Connection.Close();
+            dataReader.Close();
+            connection.Close();
 
             return calorieslost;
         }
@@ -2148,14 +2152,14 @@ namespace FitnessApp.SQLdatabase
                 currentUser.Weight -= Math.Round(weightCalCulated, 2);
             }
 
-            Connection.Open();
-            SqlCommand cmd11 = new SqlCommand("AddNewWeight", Connection);
-            cmd11.CommandType = CommandType.StoredProcedure;
-            cmd11.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            cmd11.Parameters.Add(new SqlParameter("@AddedWeight", currentUser.Weight));
-            SqlDataReader DR1 = cmd11.ExecuteReader();
-            DR1.Close();
-            Connection.Close();
+            connection.Open();
+            command = new SqlCommand("AddNewWeight", connection);
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            command.Parameters.Add(new SqlParameter("@AddedWeight", currentUser.Weight));
+            dataReader = command.ExecuteReader();
+            dataReader.Close();
+            connection.Close();
         }
 
 
