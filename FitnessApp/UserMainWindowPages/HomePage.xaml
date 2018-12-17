@@ -34,7 +34,8 @@
                              Margin="0,10,0,0"
                              FontFamily="{StaticResource Roboto}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Quantity (grams)"/>
+                             materialDesign:HintAssist.Hint="Quantity (grams)"
+                             PreviewTextInput="DecimalNumbersOnlyFieldValidation"/>
 
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
@@ -83,7 +84,8 @@
                              Margin="0,10,0,0"
                              FontFamily="{StaticResource Roboto}"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             materialDesign:HintAssist.Hint="Duration (minuites)"/>
+                             materialDesign:HintAssist.Hint="Duration (minuites)"
+                             PreviewTextInput="DecimalNumbersOnlyFieldValidation"/>
 
                     <StackPanel Orientation="Horizontal"
                                 HorizontalAlignment="Center">
