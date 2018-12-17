@@ -145,7 +145,7 @@ namespace FitnessApp.AdminMainWindowPages
             WorkoutTypeComboBox.SelectedIndex = -1;
             ChallengeTargetMinutesTextBox.Text = "";
             ChallengeRewardTextBox.Text = "";
-            challengePhoto = null;
+            challengePhoto = new ImageModel();
         }
     }
 }

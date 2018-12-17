@@ -68,7 +68,7 @@
                         <TextBox x:Name="ChallengeDescriptionTextBox"
                                  Margin="25,0,0,0"
                                  TextWrapping="Wrap"
-                                 MaxLength="215"
+                                 MaxLength="114"
                                  AcceptsReturn="True"
                                  SpellCheck.IsEnabled="True"
                                  VerticalScrollBarVisibility="Auto"
