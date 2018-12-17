@@ -72,16 +72,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AdminMainWindow.xaml.cs">
-      <DependentUpon>AdminMainWindow.xaml</DependentUpon>
+    <Compile Include="Windows\AdminWindow.xaml.cs">
+      <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminMainWindowPages\AdminHomePage.xaml.cs">
+    <Compile Include="AdminWindowPages\AdminHomePage.xaml.cs">
       <DependentUpon>AdminHomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminMainWindowPages\AdminSettingsPage.xaml.cs">
+    <Compile Include="AdminWindowPages\AdminSettingsPage.xaml.cs">
       <DependentUpon>AdminSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AdminMainWindowPages\ChallengesSetupPage.xaml.cs">
+    <Compile Include="AdminWindowPages\ChallengesSetupPage.xaml.cs">
       <DependentUpon>ChallengesSetupPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
@@ -99,22 +99,22 @@
     </Compile>
     <Compile Include="SQLdatabase\ServerDetails.cs" />
     <Compile Include="SQLdatabase\SQLqueries.cs" />
-    <Compile Include="UserMainWindow.xaml.cs">
-      <DependentUpon>UserMainWindow.xaml</DependentUpon>
+    <Compile Include="Windows\UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserMainWindowPages\HomePage.xaml.cs">
+    <Compile Include="UserWindowPages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserMainWindowPages\CaloriesCalculatorPage.xaml.cs">
+    <Compile Include="UserWindowPages\CaloriesCalculatorPage.xaml.cs">
       <DependentUpon>CaloriesCalculatorPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserMainWindowPages\ChallengesPage.xaml.cs">
+    <Compile Include="UserWindowPages\ChallengesPage.xaml.cs">
       <DependentUpon>ChallengesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserMainWindowPages\PlansPage.xaml.cs">
+    <Compile Include="UserWindowPages\PlansPage.xaml.cs">
       <DependentUpon>PlansPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserMainWindowPages\SettingsPage.xaml.cs">
+    <Compile Include="UserWindowPages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\DaysViewModel.cs" />
@@ -125,23 +125,23 @@
     <Compile Include="ViewModels\FeedbacksViewModel.cs" />
     <Compile Include="ViewModels\PlansViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Page Include="AdminMainWindow.xaml">
+    <Page Include="Windows\AdminWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminMainWindowPages\AdminHomePage.xaml">
+    <Page Include="AdminWindowPages\AdminHomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminMainWindowPages\AdminSettingsPage.xaml">
+    <Page Include="AdminWindowPages\AdminSettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AdminMainWindowPages\ChallengesSetupPage.xaml">
+    <Page Include="AdminWindowPages\ChallengesSetupPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SigningWindow.xaml">
+    <Page Include="Windows\SigningWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -149,7 +149,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SigningWindow.xaml.cs">
+    <Compile Include="Windows\SigningWindow.xaml.cs">
       <DependentUpon>SigningWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
@@ -164,27 +164,27 @@
     <Page Include="SignUpPages\SetUpProfilePage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserMainWindow.xaml">
+    <Page Include="Windows\UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserMainWindowPages\HomePage.xaml">
+    <Page Include="UserWindowPages\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserMainWindowPages\CaloriesCalculatorPage.xaml">
+    <Page Include="UserWindowPages\CaloriesCalculatorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserMainWindowPages\ChallengesPage.xaml">
+    <Page Include="UserWindowPages\ChallengesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="UserMainWindowPages\PlansPage.xaml">
+    <Page Include="UserWindowPages\PlansPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="UserMainWindowPages\SettingsPage.xaml">
+    <Page Include="UserWindowPages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

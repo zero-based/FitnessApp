@@ -1,11 +1,11 @@
-﻿using System.Data.SqlClient;
+﻿using FitnessApp.Models;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
-using System;
-using FitnessApp.Models;
-using System.Collections.Generic;
-using System.Data;
 
 namespace FitnessApp.SQLdatabase
 {

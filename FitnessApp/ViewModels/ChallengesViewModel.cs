@@ -1,8 +1,6 @@
 ﻿using FitnessApp.Models;
-using System;
 using FitnessApp.SQLdatabase;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 
 namespace FitnessApp.ViewModels
 {

@@ -1,10 +1,11 @@
-﻿using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using FitnessApp.Models;
-using FitnessApp.ViewModels;
+﻿using FitnessApp.Models;
 using FitnessApp.SQLdatabase;
+using FitnessApp.ViewModels;
+using FitnessApp.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
-namespace FitnessApp.UserMainWindowPages
+namespace FitnessApp.UserWindowPages
 {
     /// <summary>
     /// Interaction logic for PlansPage.xaml
@@ -16,13 +17,13 @@ namespace FitnessApp.UserMainWindowPages
         public PlansPage()
         {
             InitializeComponent();
-            UserMainWindow.PlansPageObject = this;
+            UserWindow.PlansPageObject = this;
             LoadAllPlansCards();
         }
 
         public void LoadAllPlansCards()
         {
-            PlansListBox.DataContext = new PlansViewModel(UserMainWindow.signedInUser.ID);
+            PlansListBox.DataContext = new PlansViewModel(UserWindow.signedInUser.ID);
         }
 
 
@@ -43,15 +44,15 @@ namespace FitnessApp.UserMainWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            if (SQLqueriesObject.IsInPlan(UserMainWindow.signedInUser.ID))
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("You are currently in a plan. Please unjoin it first.");
+            if (SQLqueriesObject.IsInPlan(UserWindow.signedInUser.ID))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("You are currently in a plan. Please unjoin it first.");
             else
-                SQLqueriesObject.JoinPlan(UserMainWindow.signedInUser.ID, currentPlan.ID);
+                SQLqueriesObject.JoinPlan(UserWindow.signedInUser.ID, currentPlan.ID);
 
             LoadAllPlansCards();
 
             // Rrefresh Joined Plan Card in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedPlanCard();
+            UserWindow.HomePageObject.LoadJoinedPlanCard();
         }
 
         private void JoinPlanButton_Unchecked(object sender, System.Windows.RoutedEventArgs e)
@@ -60,12 +61,12 @@ namespace FitnessApp.UserMainWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            SQLqueriesObject.UnjoinPlan(UserMainWindow.signedInUser.ID);
+            SQLqueriesObject.UnjoinPlan(UserWindow.signedInUser.ID);
 
             LoadAllPlansCards();
 
             // Rrefresh Joined Plan Card in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedPlanCard();
+            UserWindow.HomePageObject.LoadJoinedPlanCard();
         }
     }
 }

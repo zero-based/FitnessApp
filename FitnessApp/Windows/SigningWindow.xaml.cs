@@ -3,7 +3,7 @@ using FitnessApp.SQLdatabase;
 using MaterialDesignThemes.Wpf;
 using System.Windows;
 
-namespace FitnessApp
+namespace FitnessApp.Windows
 {
     /// <summary>
     /// Interaction logic for SigningWindow.xaml
@@ -24,7 +24,7 @@ namespace FitnessApp
             InitializeComponent();
             SigningWindowObject = this;
 
-            // Initialize UserMainWindowPages Objects
+            // Initialize UserWindowPages Objects
             SignUpFirstPageObject  = new SignUpFirstPage();
             SignUpSecondPageObject = new SignUpSecondPage();
             SetUpProfilePageObject = new SetUpProfilePage();
@@ -44,14 +44,14 @@ namespace FitnessApp
                 if (SQLqueriesObject.accountType == "User")
                 {
                     // Open User Main Window
-                    UserMainWindow UserMainWindowTemp = new UserMainWindow(SQLqueriesObject.accountID);
-                    UserMainWindowTemp.Show();
+                    UserWindow UserWindowTemp = new UserWindow(SQLqueriesObject.accountID);
+                    UserWindowTemp.Show();
                 }
                 else
                 {
                     // Open Admin Main Window
-                    AdminMainWindow AdminMainWindowTemp = new AdminMainWindow(SQLqueriesObject.accountID);
-                    AdminMainWindowTemp.Show();
+                    AdminWindow AdminWindowTemp = new AdminWindow(SQLqueriesObject.accountID);
+                    AdminWindowTemp.Show();
                 }
 
                 // Close Signing Window

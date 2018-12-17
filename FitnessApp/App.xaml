@@ -1,7 +1,7 @@
 ﻿<Application x:Class="FitnessApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             StartupUri="SigningWindow.xaml">
+             StartupUri="Windows/SigningWindow.xaml">
     
     <Application.Resources>
         <ResourceDictionary>

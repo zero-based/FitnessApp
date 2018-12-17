@@ -1,15 +1,16 @@
 ﻿using FitnessApp.Models;
 using FitnessApp.SQLdatabase;
 using FitnessApp.ViewModels;
+using FitnessApp.Windows;
 using LiveCharts;
 using LiveCharts.Helpers;
 using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Controls;
 
-namespace FitnessApp.AdminMainWindowPages
+namespace FitnessApp.AdminWindowPages
 {
     /// <summary>
     /// Interaction logic for AdminHomePage.xaml
@@ -21,7 +22,7 @@ namespace FitnessApp.AdminMainWindowPages
         public AdminHomePage()
         {
             InitializeComponent();
-            AdminMainWindow.AdminHomePageObject = this;
+            AdminWindow.AdminHomePageObject = this;
 
             LoadAppRatingChart();
             LoadAppUsersNumber();
@@ -73,23 +74,23 @@ namespace FitnessApp.AdminMainWindowPages
             if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" || NewAdminEmailTextBox.Text == "")
             {
                 if (FirstNameTextBox.Text == "")
-                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
+                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
                 if (LastNameTextBox.Text == "")
-                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
+                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
                 if (NewAdminEmailTextBox.Text == "")
-                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
+                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
             }
                 // Check Email Validation
             else if (!NewAdminEmailTextBox.Text.Contains("@") || !NewAdminEmailTextBox.Text.Contains(".com"))
-                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
 
             // Check Email not used before
             else if (SQLqueriesObject.IsEmailTaken(NewAdminEmailTextBox.Text))
-                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             else
             {
                 SQLqueriesObject.AddNewAdmin(NewAdminEmailTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text);
-                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Admin Added Succesfully");
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Admin Added Succesfully");
             }
         }
 
@@ -104,7 +105,7 @@ namespace FitnessApp.AdminMainWindowPages
                 if (deletedUserDataContext.UserModels.Count > 0)
                     DeleteUsersCard.Visibility = Visibility.Visible;
                 else
-                    AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("No users found");
+                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("No users found");
             }
         }
 
@@ -129,7 +130,7 @@ namespace FitnessApp.AdminMainWindowPages
                 DeleteUsersCard.Visibility = Visibility.Collapsed;
 
             // Confirmation Message
-            AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("User deleted successfully");
+            AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("User deleted successfully");
 
         }
 

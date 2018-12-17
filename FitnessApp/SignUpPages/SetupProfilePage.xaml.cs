@@ -1,8 +1,9 @@
-﻿using FitnessApp.SQLdatabase;
+﻿using FitnessApp.Models;
+using FitnessApp.SQLdatabase;
+using FitnessApp.Windows;
 using Microsoft.Win32;
-using System.Windows.Controls;
 using System.Windows;
-using FitnessApp.Models;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace FitnessApp.SignUpPages
@@ -56,9 +57,9 @@ namespace FitnessApp.SignUpPages
                                         double.Parse(WorkoutsPerWeekTextBox.Text),
                                         double.Parse(WorkoutHoursPerDayTextBox.Text));
 
-                UserMainWindow UserMainWindowTemp = new UserMainWindow(SQLqueriesObject.accountID);
+                UserWindow UserWindowTemp = new UserWindow(SQLqueriesObject.accountID);
                 SigningWindow.SigningWindowObject.Close();
-                UserMainWindowTemp.Show();
+                UserWindowTemp.Show();
             }
         }
 

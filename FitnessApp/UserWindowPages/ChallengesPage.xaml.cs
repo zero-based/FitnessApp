@@ -1,11 +1,12 @@
-﻿using System.Windows.Controls.Primitives;
-using System.Windows.Controls;
+﻿using FitnessApp.Models;
 using FitnessApp.SQLdatabase;
-using System.Windows;
-using FitnessApp.Models;
 using FitnessApp.ViewModels;
+using FitnessApp.Windows;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
-namespace FitnessApp.UserMainWindowPages
+namespace FitnessApp.UserWindowPages
 {
     /// <summary>
     /// Interaction logic for ChallengesPage.xaml
@@ -17,7 +18,7 @@ namespace FitnessApp.UserMainWindowPages
         public ChallengesPage()
         {
             InitializeComponent();
-            UserMainWindow.ChallengesPageObject = this;
+            UserWindow.ChallengesPageObject = this;
 
             LoadAllChallengesCards();
         }
@@ -26,7 +27,7 @@ namespace FitnessApp.UserMainWindowPages
         {
             // Setting Data context for ChallengesListBox
             ChallengesViewModel challengesDataContext = new ChallengesViewModel();
-            challengesDataContext.AllChallengesViewModel(UserMainWindow.signedInUser.ID);
+            challengesDataContext.AllChallengesViewModel(UserWindow.signedInUser.ID);
             DataContext = challengesDataContext;
         }
 
@@ -38,10 +39,10 @@ namespace FitnessApp.UserMainWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.JoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
+            SQLqueriesObject.JoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedChallengesCards();
+            UserWindow.HomePageObject.LoadJoinedChallengesCards();
         }
             
         private void JoinChallengeButton_Unchecked(object sender, RoutedEventArgs e)
@@ -52,10 +53,10 @@ namespace FitnessApp.UserMainWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.UnjoinChallenge(UserMainWindow.signedInUser.ID, currentChallenge.ID);
+            SQLqueriesObject.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
-            UserMainWindow.HomePageObject.LoadJoinedChallengesCards();
+            UserWindow.HomePageObject.LoadJoinedChallengesCards();
         }
     }
 

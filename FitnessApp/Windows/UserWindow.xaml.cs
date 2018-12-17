@@ -1,31 +1,31 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using FitnessApp.Models;
+using FitnessApp.UserWindowPages;
+using MaterialDesignThemes.Wpf;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows;
-using FitnessApp.Models;
-using FitnessApp.UserMainWindowPages;
 
-namespace FitnessApp
+namespace FitnessApp.Windows
 {
     /// <summary>
-    /// Interaction logic for UserMainWindow.xaml
+    /// Interaction logic for UserWindow.xaml
     /// </summary>
-    public partial class UserMainWindow : Window
+    public partial class UserWindow : Window
     {
-        public static UserMainWindow UserMainWindowObject;
+        public static UserWindow UserWindowObject;
         public static UserModel signedInUser;
 
-        // Declare UserMainWindowPages Objects
+        // Declare UserWindowPages Objects
         public static HomePage HomePageObject;
         public static ChallengesPage ChallengesPageObject;
         public static PlansPage PlansPageObject;
         public static CaloriesCalculatorPage CaloriesCalculatorPageObject;
         public static SettingsPage SettingsPageObject;
 
-        public UserMainWindow(int signedInUserID)
+        public UserWindow(int signedInUserID)
         {
             InitializeComponent();
-            UserMainWindowObject = this;
+            UserWindowObject = this;
 
             // Initialize User Model
             signedInUser = new UserModel(signedInUserID);
@@ -33,7 +33,7 @@ namespace FitnessApp
             // Initialize DataContext with signedInUser Model
             DataContext = signedInUser;
 
-            // Initialize UserMainWindowPages Objects
+            // Initialize UserWindowPages Objects
             HomePageObject               = new HomePage();
             ChallengesPageObject         = new ChallengesPage();
             PlansPageObject              = new PlansPage();
@@ -41,20 +41,20 @@ namespace FitnessApp
             SettingsPageObject           = new SettingsPage();
 
             // Initialize Listbox Selected Index
-            UserMainWindowPagesListBox.SelectedIndex = 0;
+            UserWindowPagesListBox.SelectedIndex = 0;
 
             // Intialize MessagesQueue and Assign it to MessagesSnackbar's MessageQueue
             var MessagesQueue = new SnackbarMessageQueue(System.TimeSpan.FromMilliseconds(2000));
             MessagesSnackbar.MessageQueue = MessagesQueue;
         }
 
-        private void UserMainWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void UserWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Close Side Menu Drawer
             SideMenuDrawer.IsLeftDrawerOpen = false;
 
             // Navigate to the selected Page and Highlight the chosen Item
-            switch (UserMainWindowPagesListBox.SelectedIndex)
+            switch (UserWindowPagesListBox.SelectedIndex)
             {
                 case 0:
                     UserWindowPagesFrame.NavigationService.Navigate(HomePageObject);
@@ -117,7 +117,7 @@ namespace FitnessApp
 
         private void UserProfilePhotoButton_Click(object sender, RoutedEventArgs e)
         {
-            UserMainWindowPagesListBox.SelectedIndex = 4;
+            UserWindowPagesListBox.SelectedIndex = 4;
         }
 
         private void LogoutListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

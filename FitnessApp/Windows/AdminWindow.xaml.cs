@@ -1,33 +1,33 @@
-﻿using MaterialDesignThemes.Wpf;
+﻿using FitnessApp.AdminWindowPages;
+using FitnessApp.Models;
+using FitnessApp.SQLdatabase;
+using MaterialDesignThemes.Wpf;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows;
-using FitnessApp.AdminMainWindowPages;
-using FitnessApp.SQLdatabase;
-using FitnessApp.Models;
 
-namespace FitnessApp
+namespace FitnessApp.Windows
 {
     /// <summary>
-    /// Interaction logic for AdminMainWindow.xaml
+    /// Interaction logic for AdminWindow.xaml
     /// </summary>
-    public partial class AdminMainWindow : Window
+    public partial class AdminWindow : Window
     {
-        public static AdminMainWindow AdminMainWindowObject;
+        public static AdminWindow AdminWindowObject;
         public static AdminModel signedInAdmin;
 
         SQLqueries SQLqueriesObject = new SQLqueries();
 
-        // Declare AdminMainWindowPages Objects
+        // Declare AdminWindowPages Objects
         public static AdminHomePage       AdminHomePageObject;
         public static ChallengesSetupPage ChallengesSetupPageObject;
         public static AdminSettingsPage   AdminSettingsPageObject;
 
 
-        public AdminMainWindow(int signedInAdminID)
+        public AdminWindow(int signedInAdminID)
         {
             InitializeComponent();
-            AdminMainWindowObject = this;
+            AdminWindowObject = this;
 
             signedInAdmin = new AdminModel(signedInAdminID);
 
@@ -36,27 +36,27 @@ namespace FitnessApp
 
             ControlUpdateNewAdminPasswordGrid(signedInAdmin.ID);
 
-            // Initialize AdminMainWindowPages Objects
+            // Initialize AdminWindowPages Objects
 
             AdminHomePageObject       = new AdminHomePage();
             ChallengesSetupPageObject = new ChallengesSetupPage();
             AdminSettingsPageObject   = new AdminSettingsPage();
 
             // Initialize Listbox Selected Index
-            AdminMainWindowPagesListBox.SelectedIndex = 0;
+            AdminWindowPagesListBox.SelectedIndex = 0;
 
             // Intialize MessagesQueue and Assign it to MessagesSnackbar's MessageQueue
             var MessagesQueue = new SnackbarMessageQueue(System.TimeSpan.FromMilliseconds(2000));
             MessagesSnackbar.MessageQueue = MessagesQueue;
         }
 
-        private void AdminMainWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AdminWindowPagesListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Close Side Menu Drawer
             SideMenuDrawer.IsLeftDrawerOpen = false;
 
             // Navigate to the selected Page and Highlight the chosen Item
-            switch (AdminMainWindowPagesListBox.SelectedIndex)
+            switch (AdminWindowPagesListBox.SelectedIndex)
             {
                 case 0:
                     AdminWindowPagesFrame.NavigationService.Navigate(AdminHomePageObject);
@@ -112,18 +112,18 @@ namespace FitnessApp
         {
             if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != signedInAdmin.Password)
             {
-                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
                 OldPasswordTextBox.Password = "";
             }
             else if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
             {
-                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
                 NewPasswordTextBox.Password = "";
                 ConfirmNewPasswordTextBox.Password = "";
             }
             else if (NewPasswordTextBox.Password.Length < 7)
             {
-                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be more than 7 Charachters!");
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be more than 7 Charachters!");
                 NewPasswordTextBox.Password = "";
                 ConfirmNewPasswordTextBox.Password = "";
             }
@@ -136,7 +136,7 @@ namespace FitnessApp
                 SQLqueriesObject.UpdateAdminPassword(signedInAdmin);
 
                 // Confirmation Message
-                AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");
 
                 // Hide UpdateNewAdminPasswordGrid
                 UpdateNewAdminPasswordGrid.Visibility = Visibility.Collapsed;

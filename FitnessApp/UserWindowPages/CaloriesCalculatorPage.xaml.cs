@@ -1,6 +1,7 @@
-﻿using System.Windows.Controls;
+﻿using FitnessApp.Windows;
+using System.Windows.Controls;
 
-namespace FitnessApp.UserMainWindowPages
+namespace FitnessApp.UserWindowPages
 {
     /// <summary>
     /// Interaction logic for CaloriesCalculatorPage.xaml
@@ -11,10 +12,10 @@ namespace FitnessApp.UserMainWindowPages
         public CaloriesCalculatorPage()
         {
             InitializeComponent();
-            UserMainWindow.CaloriesCalculatorPageObject = this;
+            UserWindow.CaloriesCalculatorPageObject = this;
 
             // Initialize DataContext with signedInUser Model
-            DataContext = UserMainWindow.signedInUser;
+            DataContext = UserWindow.signedInUser;
         }
 
         private void CalculateButton_Click(object sender, System.Windows.RoutedEventArgs e)

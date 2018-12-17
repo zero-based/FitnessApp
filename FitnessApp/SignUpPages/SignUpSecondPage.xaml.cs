@@ -1,6 +1,7 @@
-﻿using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using FitnessApp.Windows;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 
 namespace FitnessApp.SignUpPages
 {

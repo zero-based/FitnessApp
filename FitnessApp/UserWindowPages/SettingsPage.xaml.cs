@@ -1,10 +1,11 @@
-﻿using Microsoft.Win32;
-using System.Windows.Input;
-using System.Windows.Controls;
-using FitnessApp.Models;
+﻿using FitnessApp.Models;
 using FitnessApp.SQLdatabase;
+using FitnessApp.Windows;
+using Microsoft.Win32;
+using System.Windows.Controls;
+using System.Windows.Input;
 
-namespace FitnessApp.UserMainWindowPages
+namespace FitnessApp.UserWindowPages
 {
     /// <summary>
     /// Interaction logic for SettingsPage.xaml
@@ -17,13 +18,13 @@ namespace FitnessApp.UserMainWindowPages
         public SettingsPage()
         {
             InitializeComponent();
-            UserMainWindow.SettingsPageObject = this;
+            UserWindow.SettingsPageObject = this;
 
             // Initialize Profile Expander to be expanded
             ProfileExpander.IsExpanded = true;
 
             // Initialize DataContext with signedInUser Model
-            DataContext = UserMainWindow.signedInUser;
+            DataContext = UserWindow.signedInUser;
         }
 
 
@@ -102,17 +103,17 @@ namespace FitnessApp.UserMainWindowPages
                 KilosToLosePerWeekTextBox.Text == "" || WorkoutsPerWeekTextBox.Text == "" || WorkoutHoursPerDayTextBox.Text == "")
             {
                 if (WeightTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Weight Is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Weight Is Empty!");
                 if (HeightTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Height Is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Height Is Empty!");
                 if (TargetWeightTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Target Weight Is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Target Weight Is Empty!");
                 if (KilosToLosePerWeekTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Kilos To Lose Per Week Is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Kilos To Lose Per Week Is Empty!");
                 if (WorkoutsPerWeekTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workouts Per Week Is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workouts Per Week Is Empty!");
                 if (WorkoutHoursPerDayTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workout Hours Per Day Is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workout Hours Per Day Is Empty!");
             }
 
             else
@@ -121,35 +122,35 @@ namespace FitnessApp.UserMainWindowPages
                 // Update signedInUser User Model
 
                 if (currentProfilePhoto != null) // Check if profile photo is updated
-                    UserMainWindow.signedInUser.ProfilePhoto   = currentProfilePhoto;
+                    UserWindow.signedInUser.ProfilePhoto   = currentProfilePhoto;
 
-                UserMainWindow.signedInUser.Weight             = double.Parse(WeightTextBox            .Text);
-                UserMainWindow.signedInUser.Height             = double.Parse(HeightTextBox            .Text);
-                UserMainWindow.signedInUser.TargetWeight       = double.Parse(TargetWeightTextBox      .Text);
-                UserMainWindow.signedInUser.KilosToLosePerWeek = double.Parse(KilosToLosePerWeekTextBox.Text);
-                UserMainWindow.signedInUser.WorkoutsPerWeek    = double.Parse(WorkoutsPerWeekTextBox   .Text);
-                UserMainWindow.signedInUser.WorkoutHoursPerDay = double.Parse(WorkoutHoursPerDayTextBox.Text);
+                UserWindow.signedInUser.Weight             = double.Parse(WeightTextBox            .Text);
+                UserWindow.signedInUser.Height             = double.Parse(HeightTextBox            .Text);
+                UserWindow.signedInUser.TargetWeight       = double.Parse(TargetWeightTextBox      .Text);
+                UserWindow.signedInUser.KilosToLosePerWeek = double.Parse(KilosToLosePerWeekTextBox.Text);
+                UserWindow.signedInUser.WorkoutsPerWeek    = double.Parse(WorkoutsPerWeekTextBox   .Text);
+                UserWindow.signedInUser.WorkoutHoursPerDay = double.Parse(WorkoutHoursPerDayTextBox.Text);
 
                 // Update User's Profile in database
-                SQLqueriesObject.UpdateUserProfile(UserMainWindow.signedInUser);
+                SQLqueriesObject.UpdateUserProfile(UserWindow.signedInUser);
 
-                // Refresh UserMainWindow DataContext
-                UserMainWindow.UserMainWindowObject.DataContext = null;
-                UserMainWindow.UserMainWindowObject.DataContext = UserMainWindow.signedInUser;
+                // Refresh UserWindow DataContext
+                UserWindow.UserWindowObject.DataContext = null;
+                UserWindow.UserWindowObject.DataContext = UserWindow.signedInUser;
 
                 // Refresh CaloriesCalculatorPage DataContext
-                UserMainWindow.CaloriesCalculatorPageObject.DataContext = null;
-                UserMainWindow.CaloriesCalculatorPageObject.DataContext = UserMainWindow.signedInUser;
+                UserWindow.CaloriesCalculatorPageObject.DataContext = null;
+                UserWindow.CaloriesCalculatorPageObject.DataContext = UserWindow.signedInUser;
 
                 // Refresh Weight and Calories Cards in Home Page
-                UserMainWindow.HomePageObject.WeightChart.DataContext = null;
-                UserMainWindow.HomePageObject.LoadWeightChart();
-                UserMainWindow.HomePageObject.LoadTotalWeightLostCard();
-                UserMainWindow.HomePageObject.LoadAverageWeightLostCard();
-                UserMainWindow.HomePageObject.LoadCaloriesCard();
+                UserWindow.HomePageObject.WeightChart.DataContext = null;
+                UserWindow.HomePageObject.LoadWeightChart();
+                UserWindow.HomePageObject.LoadTotalWeightLostCard();
+                UserWindow.HomePageObject.LoadAverageWeightLostCard();
+                UserWindow.HomePageObject.LoadCaloriesCard();
 
                 // Confirmation Message
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Profile Updated!");
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Profile Updated!");
 
             }
         }
@@ -160,65 +161,65 @@ namespace FitnessApp.UserMainWindowPages
                 UsernameTextBox.Text == "" || EmailTextBox.Text == "")
             {
                 if (FirstNameTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name is Empty!");
                 if (LastNameTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name is Empty!");
                 if (UsernameTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is Empty!");
                 if (EmailTextBox.Text == "")
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email is Empty!");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email is Empty!");
             }
 
             // Check Email Validation
             else if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
 
             // Check Email/Username Availability
-            else if (EmailTextBox.Text != UserMainWindow.signedInUser.Email)
+            else if (EmailTextBox.Text != UserWindow.signedInUser.Email)
             {
                 if (SQLqueriesObject.IsEmailTaken(EmailTextBox.Text))
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             }
 
-            else if (UsernameTextBox.Text != UserMainWindow.signedInUser.Username)
+            else if (UsernameTextBox.Text != UserWindow.signedInUser.Username)
             {
                 if (SQLqueriesObject.IsUsernameTaken(UsernameTextBox.Text))
-                    UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
+                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
             }
 
             else
             {
 
                 // Update signedInUser User Model
-                UserMainWindow.signedInUser.FirstName = FirstNameTextBox.Text;
-                UserMainWindow.signedInUser.LastName = LastNameTextBox.Text;
-                UserMainWindow.signedInUser.Username = UsernameTextBox.Text;
-                UserMainWindow.signedInUser.Email = EmailTextBox.Text;
+                UserWindow.signedInUser.FirstName = FirstNameTextBox.Text;
+                UserWindow.signedInUser.LastName = LastNameTextBox.Text;
+                UserWindow.signedInUser.Username = UsernameTextBox.Text;
+                UserWindow.signedInUser.Email = EmailTextBox.Text;
 
                 // Update User's Account in database
-                SQLqueriesObject.UpdateUserAccount(UserMainWindow.signedInUser);
+                SQLqueriesObject.UpdateUserAccount(UserWindow.signedInUser);
 
-                // Refresh UserMainWindow DataContext
-                UserMainWindow.UserMainWindowObject.DataContext = null;
-                UserMainWindow.UserMainWindowObject.DataContext = UserMainWindow.signedInUser;
+                // Refresh UserWindow DataContext
+                UserWindow.UserWindowObject.DataContext = null;
+                UserWindow.UserWindowObject.DataContext = UserWindow.signedInUser;
 
                 // Confirmation Message
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Account Updated!");
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Account Updated!");
 
             }
         }
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != UserMainWindow.signedInUser.Password)
+            if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != UserWindow.signedInUser.Password)
             {
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
                 OldPasswordTextBox.Password = "";
             }
 
             else if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
             {
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
                 NewPasswordTextBox.Password = "";
                 ConfirmNewPasswordTextBox.Password = "";
             }
@@ -227,22 +228,22 @@ namespace FitnessApp.UserMainWindowPages
             {
 
                 // Update signedInUser User Model
-                UserMainWindow.signedInUser.Password = SQLqueriesObject.EncryptPassword(NewPasswordTextBox.Password);
+                UserWindow.signedInUser.Password = SQLqueriesObject.EncryptPassword(NewPasswordTextBox.Password);
 
                 // Update User's Password in database
-                SQLqueriesObject.UpdateUserPassword(UserMainWindow.signedInUser);
+                SQLqueriesObject.UpdateUserPassword(UserWindow.signedInUser);
 
                 // Confirmation Message
-                UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");
             }
         }
 
         private void SubmitFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            SQLqueriesObject.SaveFeedback(UserMainWindow.signedInUser.ID, RatingBar.Value , FeedbackTextBox.Text);
+            SQLqueriesObject.SaveFeedback(UserWindow.signedInUser.ID, RatingBar.Value , FeedbackTextBox.Text);
 
             // Confirmation Message
-            UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Thank you for your feedback!");
+            UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Thank you for your feedback!");
 
         }
 

@@ -1,14 +1,13 @@
 ﻿using FitnessApp.Models;
 using FitnessApp.SQLdatabase;
 using FitnessApp.ViewModels;
+using FitnessApp.Windows;
 using Microsoft.Win32;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace FitnessApp.AdminMainWindowPages
+namespace FitnessApp.AdminWindowPages
 {
     /// <summary>
     /// Interaction logic for ChallengesSetupPage.xaml
@@ -21,7 +20,7 @@ namespace FitnessApp.AdminMainWindowPages
         public ChallengesSetupPage()
         {
             InitializeComponent();
-            AdminMainWindow.ChallengesSetupPageObject = this;
+            AdminWindow.ChallengesSetupPageObject = this;
             LoadAllChallenges();
             LoadWorkoutTypeComboBox();
         }
@@ -51,7 +50,7 @@ namespace FitnessApp.AdminMainWindowPages
             LoadAllChallenges();
 
             // Confirmation Message
-            AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Challenge deleted successfully");
+            AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Challenge deleted successfully");
         }
 
 
@@ -85,7 +84,7 @@ namespace FitnessApp.AdminMainWindowPages
                string.IsNullOrWhiteSpace(ChallengeTargetMinutesTextBox.Text) ||
                string.IsNullOrWhiteSpace(ChallengeRewardTextBox.Text))
             {
-                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("All Fields are Required");
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("All Fields are Required");
             }
 
             else
@@ -107,7 +106,7 @@ namespace FitnessApp.AdminMainWindowPages
                 LoadAllChallenges();
 
                 // Confirmation Message
-                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Challenge added successfully");
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Challenge added successfully");
             }
                 
         }
@@ -133,7 +132,7 @@ namespace FitnessApp.AdminMainWindowPages
                 challengePhoto = new ImageModel(browsePhotoDialog.FileName);
 
                 // Confirmation Message
-                AdminMainWindow.AdminMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Photo added successfully");
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Photo added successfully");
             }
         }
 
