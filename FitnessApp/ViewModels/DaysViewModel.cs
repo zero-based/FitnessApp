@@ -6,14 +6,14 @@ namespace FitnessApp.ViewModels
 {
     class DaysViewModel
     {
-        static SQLqueries SQLqueriesObject = new SQLqueries();
+       
         private List<DayModel> dayModels;
 
         public DaysViewModel(int planID)
         {
             //Initialize 30 Days of Plan of ID: planNumber + 1 in DayModels Array
 
-            dayModels = SQLqueriesObject.GetPlanDays(planID);
+            dayModels = SQLqueries.GetPlanDays(planID);
         }
 
         public List<DayModel> DayModels

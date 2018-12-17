@@ -17,7 +17,7 @@ namespace FitnessApp.AdminWindowPages
     /// </summary>
     public partial class AdminHomePage : Page
     {
-        SQLqueries SQLqueriesObject = new SQLqueries();
+
 
         public AdminHomePage()
         {
@@ -42,7 +42,7 @@ namespace FitnessApp.AdminWindowPages
                 new ColumnSeries
                 {
                     Title = "Rating",
-                    Values = SQLqueriesObject.GetAppRatingValues().AsChartValues()
+                    Values = SQLqueries.GetAppRatingValues().AsChartValues()
                 }
             };
             Labels = new List<string> { "1", "2", "3", "4", "5" };
@@ -53,7 +53,7 @@ namespace FitnessApp.AdminWindowPages
 
         private void LoadAppUsersNumber()
         {
-            AppUsersNumberTextBlock.Text = SQLqueriesObject.GetAppUsersNumber().ToString();
+            AppUsersNumberTextBlock.Text = SQLqueries.GetAppUsersNumber().ToString();
         }
 
         private void DeleteFeedbackButton_Click(object sender, RoutedEventArgs e)
@@ -62,7 +62,7 @@ namespace FitnessApp.AdminWindowPages
             int selectedFeedbackIndex = FeedbacksListBox.Items.IndexOf(deleteFeedbackButton.DataContext);
 
             FeedbackModel chosenFeedback = (FeedbackModel)FeedbacksListBox.Items[selectedFeedbackIndex];
-            SQLqueriesObject.DeleteFeedback(chosenFeedback.Feedback);
+            SQLqueries.DeleteFeedback(chosenFeedback.Feedback);
 
             FeedbacksListBox.DataContext = null;
             FeedbacksListBox.DataContext = new FeedbacksViewModel();
@@ -85,11 +85,11 @@ namespace FitnessApp.AdminWindowPages
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
 
             // Check Email not used before
-            else if (SQLqueriesObject.IsEmailTaken(NewAdminEmailTextBox.Text))
+            else if (SQLqueries.IsEmailTaken(NewAdminEmailTextBox.Text))
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             else
             {
-                SQLqueriesObject.AddNewAdmin(NewAdminEmailTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text);
+                SQLqueries.AddNewAdmin(NewAdminEmailTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text);
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Admin Added Succesfully");
             }
         }
@@ -117,13 +117,13 @@ namespace FitnessApp.AdminWindowPages
             UserModel chosenUser = (UserModel)DeleteUserListBox.Items[selectedUserIndex];
 
             // Delete Challenge From Database
-            SQLqueriesObject.DeleteUser(chosenUser.ID);
+            SQLqueries.DeleteUser(chosenUser.ID);
 
             // Refresh Listbox and Number of users
             DeleteUserListBox.DataContext = null;
             UserViewModel deletedUserDataContext = new UserViewModel(UserSearchTextBox.Text);
             DeleteUserListBox.DataContext = deletedUserDataContext;
-            AppUsersNumberTextBlock.Text = SQLqueriesObject.GetAppUsersNumber().ToString();
+            AppUsersNumberTextBlock.Text = SQLqueries.GetAppUsersNumber().ToString();
 
             // Hide DeleteUsersCard if no remaining users exist 
             if (deletedUserDataContext.UserModels.Count == 0)

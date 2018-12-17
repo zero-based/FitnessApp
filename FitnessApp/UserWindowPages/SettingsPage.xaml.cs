@@ -13,7 +13,7 @@ namespace FitnessApp.UserWindowPages
     public partial class SettingsPage : Page
     {
         // Create an object from dataBase class
-        SQLqueries SQLqueriesObject = new SQLqueries();
+
 
         public SettingsPage()
         {
@@ -132,7 +132,7 @@ namespace FitnessApp.UserWindowPages
                 UserWindow.signedInUser.WorkoutHoursPerDay = double.Parse(WorkoutHoursPerDayTextBox.Text);
 
                 // Update User's Profile in database
-                SQLqueriesObject.UpdateUserProfile(UserWindow.signedInUser);
+                SQLqueries.UpdateUserProfile(UserWindow.signedInUser);
 
                 // Refresh UserWindow DataContext
                 UserWindow.UserWindowObject.DataContext = null;
@@ -177,13 +177,13 @@ namespace FitnessApp.UserWindowPages
             // Check Email/Username Availability
             else if (EmailTextBox.Text != UserWindow.signedInUser.Email)
             {
-                if (SQLqueriesObject.IsEmailTaken(EmailTextBox.Text))
+                if (SQLqueries.IsEmailTaken(EmailTextBox.Text))
                     UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             }
 
             else if (UsernameTextBox.Text != UserWindow.signedInUser.Username)
             {
-                if (SQLqueriesObject.IsUsernameTaken(UsernameTextBox.Text))
+                if (SQLqueries.IsUsernameTaken(UsernameTextBox.Text))
                     UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
             }
 
@@ -197,7 +197,7 @@ namespace FitnessApp.UserWindowPages
                 UserWindow.signedInUser.Email = EmailTextBox.Text;
 
                 // Update User's Account in database
-                SQLqueriesObject.UpdateUserAccount(UserWindow.signedInUser);
+                SQLqueries.UpdateUserAccount(UserWindow.signedInUser);
 
                 // Refresh UserWindow DataContext
                 UserWindow.UserWindowObject.DataContext = null;
@@ -216,7 +216,7 @@ namespace FitnessApp.UserWindowPages
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("All fields are required!");
             }
 
-            else if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != UserWindow.signedInUser.Password)
+            else if (SQLqueries.EncryptPassword(OldPasswordTextBox.Password) != UserWindow.signedInUser.Password)
             {
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
                 OldPasswordTextBox.Password = "";
@@ -233,10 +233,10 @@ namespace FitnessApp.UserWindowPages
             {
 
                 // Update signedInUser User Model
-                UserWindow.signedInUser.Password = SQLqueriesObject.EncryptPassword(NewPasswordTextBox.Password);
+                UserWindow.signedInUser.Password = SQLqueries.EncryptPassword(NewPasswordTextBox.Password);
 
                 // Update User's Password in database
-                SQLqueriesObject.UpdateUserPassword(UserWindow.signedInUser);
+                SQLqueries.UpdateUserPassword(UserWindow.signedInUser);
 
                 // Confirmation Message
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");
@@ -245,7 +245,7 @@ namespace FitnessApp.UserWindowPages
 
         private void SubmitFeedbackButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            SQLqueriesObject.SaveFeedback(UserWindow.signedInUser.ID, RatingBar.Value , FeedbackTextBox.Text);
+            SQLqueries.SaveFeedback(UserWindow.signedInUser.ID, RatingBar.Value , FeedbackTextBox.Text);
 
             // Confirmation Message
             UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Thank you for your feedback!");

@@ -21,7 +21,7 @@ namespace FitnessApp.UserWindowPages
     /// </summary>
     public partial class HomePage : Page
     {
-        SQLqueries SQLqueriesObject = new SQLqueries();
+
 
         public HomePage()
         {
@@ -36,8 +36,8 @@ namespace FitnessApp.UserWindowPages
             LoadMotivationalQuoteCard();
             LoadCaloriesCard();
 
-            FoodComboBox.ItemsSource = SQLqueriesObject.GetAllFood();
-            WorkoutsComboBox.ItemsSource = SQLqueriesObject.GetAllWorkouts();
+            FoodComboBox.ItemsSource = SQLqueries.GetAllFood();
+            WorkoutsComboBox.ItemsSource = SQLqueries.GetAllWorkouts();
 
         }
 
@@ -68,7 +68,7 @@ namespace FitnessApp.UserWindowPages
                 new LineSeries
                 {
                     Title = "Weight",
-                    Values = SQLqueriesObject.GetWeightValues(UserWindow.signedInUser.ID).AsChartValues(),
+                    Values = SQLqueries.GetWeightValues(UserWindow.signedInUser.ID).AsChartValues(),
                 },
 
                 new LineSeries
@@ -83,7 +83,7 @@ namespace FitnessApp.UserWindowPages
                 
             };
 
-            Labels = SQLqueriesObject.GetWeightDateValues(UserWindow.signedInUser.ID);
+            Labels = SQLqueries.GetWeightDateValues(UserWindow.signedInUser.ID);
             YFormatter = value => value.ToString() + " kg";
 
             // Setting Data context for Weight Chart
@@ -116,7 +116,7 @@ namespace FitnessApp.UserWindowPages
                 UserWindow.signedInUser.Weight = double.Parse(TodaysWeightTextBox.Text);
 
                 // Update Weight in Database
-                SQLqueriesObject.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserWindow.signedInUser.ID);
+                SQLqueries.AddNewWeight(double.Parse(TodaysWeightTextBox.Text), UserWindow.signedInUser.ID);
 
                 // Update User Weight Line Series:
                 // Add one value and remove another to keep the number of values 10
@@ -151,9 +151,9 @@ namespace FitnessApp.UserWindowPages
         public void LoadTotalWeightLostCard()
         {
 
-            double WeightLostPerWeek = SQLqueriesObject.GetTotalWeightLostPerWeek(UserWindow.signedInUser.ID);
-            double WeightLostPerMonth = SQLqueriesObject.GetTotalWeightLostPerMonth(UserWindow.signedInUser.ID);
-            double WeightLostPerYear = SQLqueriesObject.GetTotalWeightLostPerYear(UserWindow.signedInUser.ID);
+            double WeightLostPerWeek = SQLqueries.GetTotalWeightLostPerWeek(UserWindow.signedInUser.ID);
+            double WeightLostPerMonth = SQLqueries.GetTotalWeightLostPerMonth(UserWindow.signedInUser.ID);
+            double WeightLostPerYear = SQLqueries.GetTotalWeightLostPerYear(UserWindow.signedInUser.ID);
 
 
             // Set Colours
@@ -183,9 +183,9 @@ namespace FitnessApp.UserWindowPages
         public void LoadAverageWeightLostCard()
         {
 
-            double AverageWeightLostPerWeek = SQLqueriesObject.GetAverageWeightLostPerWeek(UserWindow.signedInUser.ID);
-            double AverageWeightLostPerMonth = SQLqueriesObject.GetAverageWeightLostPerMonth(UserWindow.signedInUser.ID);
-            double AverageWeightLostPerYear = SQLqueriesObject.GetAverageWeightLostPerYear(UserWindow.signedInUser.ID);
+            double AverageWeightLostPerWeek = SQLqueries.GetAverageWeightLostPerWeek(UserWindow.signedInUser.ID);
+            double AverageWeightLostPerMonth = SQLqueries.GetAverageWeightLostPerMonth(UserWindow.signedInUser.ID);
+            double AverageWeightLostPerYear = SQLqueries.GetAverageWeightLostPerYear(UserWindow.signedInUser.ID);
 
 
             // Set Colours
@@ -242,7 +242,7 @@ namespace FitnessApp.UserWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel)UncompletedJoinedChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
+            SQLqueries.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             // Reloading Data context for JoinedChallengesListBox
             ChallengesViewModel joinedChallengesDataContext = new ChallengesViewModel();
@@ -268,7 +268,7 @@ namespace FitnessApp.UserWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel)CompletedJoinedChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
+            SQLqueries.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             LoadJoinedChallengesCards();
         }
@@ -280,7 +280,7 @@ namespace FitnessApp.UserWindowPages
 
         public void LoadJoinedPlanCard()
         {
-            bool checkJoinedInPlan = SQLqueriesObject.IsInPlan(UserWindow.signedInUser.ID);
+            bool checkJoinedInPlan = SQLqueries.IsInPlan(UserWindow.signedInUser.ID);
 
             NoPlanCard.Visibility = Visibility.Visible;
             JoinedPlanCard.Visibility = Visibility.Visible;
@@ -290,7 +290,7 @@ namespace FitnessApp.UserWindowPages
             {
                 NoPlanCard.Visibility = Visibility.Collapsed;
 
-                int planDayNum = SQLqueriesObject.GetJoinedPlanDayNumber(UserWindow.signedInUser.ID);
+                int planDayNum = SQLqueries.GetJoinedPlanDayNumber(UserWindow.signedInUser.ID);
 
                 if (planDayNum > 30)
                     JoinedPlanCard.Visibility = Visibility.Collapsed;
@@ -299,21 +299,21 @@ namespace FitnessApp.UserWindowPages
                     PlanCompletedCard.Visibility = Visibility.Collapsed;
 
                     // Load Header
-                    string planName = SQLqueriesObject.GetJoinedPlanName(UserWindow.signedInUser.ID).ToString();
+                    string planName = SQLqueries.GetJoinedPlanName(UserWindow.signedInUser.ID).ToString();
                     PlanHeaderTextBlock.Text = planName + " | Day #" + planDayNum;
-                    SQLqueriesObject.UpdatePlanDayNumber(UserWindow.signedInUser.ID, planDayNum);
+                    SQLqueries.UpdatePlanDayNumber(UserWindow.signedInUser.ID, planDayNum);
 
                     // Load CheckBoxes
-                    BreakfastCheckBox.IsChecked = SQLqueriesObject.GetDayBreakfastStatus(UserWindow.signedInUser.ID);
-                    LunchCheckBox.IsChecked = SQLqueriesObject.GetDayLunchStatus(UserWindow.signedInUser.ID);
-                    DinnerCheckBox.IsChecked = SQLqueriesObject.GetDayDinnerStatus(UserWindow.signedInUser.ID);
-                    WorkoutsCheckBox.IsChecked = SQLqueriesObject.GetDayWorkoutStatus(UserWindow.signedInUser.ID);
+                    BreakfastCheckBox.IsChecked = SQLqueries.GetDayBreakfastStatus(UserWindow.signedInUser.ID);
+                    LunchCheckBox.IsChecked = SQLqueries.GetDayLunchStatus(UserWindow.signedInUser.ID);
+                    DinnerCheckBox.IsChecked = SQLqueries.GetDayDinnerStatus(UserWindow.signedInUser.ID);
+                    WorkoutsCheckBox.IsChecked = SQLqueries.GetDayWorkoutStatus(UserWindow.signedInUser.ID);
 
                     // Load Descriptions
-                    BreakfastDescriptionTextBlock.Text = SQLqueriesObject.GetDayBreakfastDescription(UserWindow.signedInUser.ID);
-                    LunchDescriptionTextBlock.Text = SQLqueriesObject.GetDayLucnchDescription(UserWindow.signedInUser.ID);
-                    DinnerDescriptionTextBlock.Text = SQLqueriesObject.GetDayDinnerDescription(UserWindow.signedInUser.ID);
-                    WorkoutsDescriptionTextBlock.Text = SQLqueriesObject.GetDayWorkoutDescription(UserWindow.signedInUser.ID);
+                    BreakfastDescriptionTextBlock.Text = SQLqueries.GetDayBreakfastDescription(UserWindow.signedInUser.ID);
+                    LunchDescriptionTextBlock.Text = SQLqueries.GetDayLucnchDescription(UserWindow.signedInUser.ID);
+                    DinnerDescriptionTextBlock.Text = SQLqueries.GetDayDinnerDescription(UserWindow.signedInUser.ID);
+                    WorkoutsDescriptionTextBlock.Text = SQLqueries.GetDayWorkoutDescription(UserWindow.signedInUser.ID);
 
                     // Load Progress Bar
                     PlanProgressBar.Value = planDayNum;
@@ -333,19 +333,19 @@ namespace FitnessApp.UserWindowPages
             switch (currentCheckBox.Name)
             {
                 case "BreakfastCheckBox":
-                    SQLqueriesObject.UpdateDayBreakfastStatus(true, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayBreakfastStatus(true, UserWindow.signedInUser.ID);
                     break;
 
                 case "LunchCheckBox":
-                    SQLqueriesObject.UpdateDayLunchStatus(true, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayLunchStatus(true, UserWindow.signedInUser.ID);
                     break;
 
                 case "DinnerCheckBox":
-                    SQLqueriesObject.UpdateDayDinnerStatus(true, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayDinnerStatus(true, UserWindow.signedInUser.ID);
                     break;
 
                 case "WorkoutsCheckBox":
-                    SQLqueriesObject.UpdateDayWorkoutStatus(true, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayWorkoutStatus(true, UserWindow.signedInUser.ID);
                     break;
             }
         }
@@ -357,19 +357,19 @@ namespace FitnessApp.UserWindowPages
             switch (currentCheckBox.Name)
             {
                 case "BreakfastCheckBox":
-                    SQLqueriesObject.UpdateDayBreakfastStatus(false, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayBreakfastStatus(false, UserWindow.signedInUser.ID);
                     break;
 
                 case "LunchCheckBox":
-                    SQLqueriesObject.UpdateDayLunchStatus(false, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayLunchStatus(false, UserWindow.signedInUser.ID);
                     break;
 
                 case "DinnerCheckBox":
-                    SQLqueriesObject.UpdateDayDinnerStatus(false, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayDinnerStatus(false, UserWindow.signedInUser.ID);
                     break;
 
                 case "WorkoutsCheckBox":
-                    SQLqueriesObject.UpdateDayWorkoutStatus(false, UserWindow.signedInUser.ID);
+                    SQLqueries.UpdateDayWorkoutStatus(false, UserWindow.signedInUser.ID);
                     break;
             }
         }
@@ -381,7 +381,7 @@ namespace FitnessApp.UserWindowPages
 
         private void DismissPlanButton_Click(object sender, RoutedEventArgs e)
         {
-            SQLqueriesObject.UnjoinPlan(UserWindow.signedInUser.ID);
+            SQLqueries.UnjoinPlan(UserWindow.signedInUser.ID);
             LoadJoinedPlanCard();
 
             UserWindow.PlansPageObject.LoadAllPlansCards();
@@ -397,7 +397,7 @@ namespace FitnessApp.UserWindowPages
 
         private void LoadMotivationalQuoteCard()
         {
-            MotiationalQuoteTextBlock.Text = SQLqueriesObject.GetMotivationalQuote();
+            MotiationalQuoteTextBlock.Text = SQLqueries.GetMotivationalQuote();
         }
 
         //////////////////////////////////////////////////////////////////////
@@ -414,12 +414,12 @@ namespace FitnessApp.UserWindowPages
         public void LoadCaloriesCard()
         {
 
-            if (SQLqueriesObject.GetTodayDate() != SQLqueriesObject.GetLastWeightDate(UserWindow.signedInUser.ID))
-                SQLqueriesObject.WeightCalc(UserWindow.signedInUser);
+            if (SQLqueries.GetTodayDate() != SQLqueries.GetLastWeightDate(UserWindow.signedInUser.ID))
+                SQLqueries.WeightCalc(UserWindow.signedInUser);
 
-            double caloiresGained = SQLqueriesObject.CalroiesGainedToday(UserWindow.signedInUser.ID);
-            double caloriesNeeded = SQLqueriesObject.CalroiesNeeded(UserWindow.signedInUser);
-            double caloriesLost   = SQLqueriesObject.CalroiesLostToday(UserWindow.signedInUser.ID);
+            double caloiresGained = SQLqueries.CalroiesGainedToday(UserWindow.signedInUser.ID);
+            double caloriesNeeded = SQLqueries.CalroiesNeeded(UserWindow.signedInUser);
+            double caloriesLost   = SQLqueries.CalroiesLostToday(UserWindow.signedInUser.ID);
 
             CaloriesGainedTextBlock.Text = caloiresGained.ToString();
             CaloriesNeededTextBlock.Text = caloriesNeeded.ToString();
@@ -495,7 +495,7 @@ namespace FitnessApp.UserWindowPages
 
             else
             {
-                SQLqueriesObject.AddFood(FoodComboBox.Text, double.Parse(FoodQuantityTextBox.Text), UserWindow.signedInUser.ID);
+                SQLqueries.AddFood(FoodComboBox.Text, double.Parse(FoodQuantityTextBox.Text), UserWindow.signedInUser.ID);
                 AddFoodDialogBox.Visibility = Visibility.Collapsed;
                 DialogBox.IsOpen = false;
 
@@ -520,12 +520,12 @@ namespace FitnessApp.UserWindowPages
 
             else
             {
-                SQLqueriesObject.AddWorkout(WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text), UserWindow.signedInUser);
+                SQLqueries.AddWorkout(WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text), UserWindow.signedInUser);
                 AddWorkoutDialogBox.Visibility = Visibility.Collapsed;
                 DialogBox.IsOpen = false;
 
                 // Update Progress of the Challenges having the same type as the entered workout
-                SQLqueriesObject.UpdateChallengesProgress(UserWindow.signedInUser.ID, WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text));
+                SQLqueries.UpdateChallengesProgress(UserWindow.signedInUser.ID, WorkoutsComboBox.Text, double.Parse(WorkoutsDurationTextBox.Text));
 
                 // Refresh Challenges card
                 LoadJoinedChallengesCards();

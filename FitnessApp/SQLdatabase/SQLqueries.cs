@@ -9,21 +9,21 @@ using System.Text;
 
 namespace FitnessApp.SQLdatabase
 {
-    public class SQLqueries
+    public static class SQLqueries
     {
 
         ////////// SQL connection string //////////
         // [IMPORTANT] Add your server name to ServerDetails Class.
-        SqlConnection connection = new SqlConnection(ServerDetails.ConnectionString);
-        string query;
-        SqlCommand command;
-        SqlDataReader dataReader;
+        private static SqlConnection connection = new SqlConnection(ServerDetails.ConnectionString);
+        private static string query;
+        private static SqlCommand command;
+        private static SqlDataReader dataReader;
 
 
 
         ////////// Local Fields //////////
-        public int accountID;
-        public string accountType;
+        public static int accountID;
+        public static string accountType;
 
 
 
@@ -31,7 +31,7 @@ namespace FitnessApp.SQLdatabase
         ////////// Helper Functions //////////
 
         // Encrypt given password
-        public string EncryptPassword(string password)
+        public static string EncryptPassword(string password)
         {
             string hash = "f0le@rn";
             string encryptedPassword;
@@ -53,7 +53,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Generate a Random Password: Used When adding a new Admin 
-        private string GenerateRandomPassword()
+        private static string GenerateRandomPassword()
         {
             const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             StringBuilder res = new StringBuilder();
@@ -69,7 +69,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Send email to user function (gmail only)
-        private void SendUserEmail(string email, string name)
+        private static void SendUserEmail(string email, string name)
         {
             MailMessage message = new MailMessage();
 
@@ -117,7 +117,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Send Email to a recently added user
-        public void SendAdminEmail(string email, string randomPass)
+        public static void SendAdminEmail(string email, string randomPass)
         {
 
             MailMessage message = new MailMessage();
@@ -167,7 +167,7 @@ namespace FitnessApp.SQLdatabase
         ////////// Queries AND Main Functions //////////
 
         // Sign in query AND function.
-        public bool IsUserFound(string email, string password)
+        public static bool IsUserFound(string email, string password)
         {
             // Encrypt Password
             string encryptedPassword = EncryptPassword(password);
@@ -201,7 +201,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Check if the Username is taken or not; because Usernames must be unique
-        public bool IsUsernameTaken(string username)
+        public static bool IsUsernameTaken(string username)
         {
             // Create Command
             command = new SqlCommand("SELECT Username FROM [User] WHERE Username = @username ;", connection);
@@ -230,7 +230,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Check if the Entered Email while signing up is taken or not
-        public bool IsEmailTaken(string email)
+        public static bool IsEmailTaken(string email)
         {
             // Create Command
             command = new SqlCommand("SELECT Email FROM [Account] WHERE Email = @email ;", connection);
@@ -259,7 +259,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Sign up function
-        public void AddUser(byte[] profilePhoto, string firstName, string lastName,
+        public static void AddUser(byte[] profilePhoto, string firstName, string lastName,
                             string username, string email, string password,
                             string gender, string birthDate, double weight, double height,
                             double targetWeight, double kilosToLosePerWeek, double workoutsPerWeek, double workoutHoursPerDay)
@@ -357,7 +357,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Load all User's Data
-        public UserModel GetUserData(int userID)
+        public static UserModel GetUserData(int userID)
         {
             UserModel currentUser = new UserModel();
 
@@ -420,7 +420,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // UPDATE User Profile
-        public void UpdateUserProfile(UserModel currentUser)
+        public static void UpdateUserProfile(UserModel currentUser)
         {
             connection.Open();
 
@@ -479,7 +479,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // UPDATE User Account
-        public void UpdateUserAccount(UserModel currentUser)
+        public static void UpdateUserAccount(UserModel currentUser)
         {
             connection.Open();
 
@@ -515,7 +515,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // UPDATE User Password
-        public void UpdateUserPassword(UserModel currentUser)
+        public static void UpdateUserPassword(UserModel currentUser)
         {
             connection.Open();
 
@@ -530,7 +530,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Save Feedback
-        public void SaveFeedback(int userID, int rating, string feedback)
+        public static void SaveFeedback(int userID, int rating, string feedback)
         {
             connection.Open();
 
@@ -547,7 +547,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Challenges queries AND functions.
-        public List<ChallengeModel> GetAllChallenges(int accountID)
+        public static List<ChallengeModel> GetAllChallenges(int accountID)
         {
 
             // Remove All Overdue Challenges before reading data
@@ -592,7 +592,7 @@ namespace FitnessApp.SQLdatabase
             return allChallengeModels;
         }
 
-        public List<ChallengeModel> GetJoinedChallenges(int accountID)
+        public static List<ChallengeModel> GetJoinedChallenges(int accountID)
         {
             // Remove All Overdue Challenges before reading data
             RemoveOverdueChallenges();
@@ -631,7 +631,7 @@ namespace FitnessApp.SQLdatabase
             return joinedChallengeModels;
         }
 
-        public void JoinChallenge(int accountID, int ChallengeID)
+        public static void JoinChallenge(int accountID, int ChallengeID)
         {
             connection.Open();
             query = "INSERT INTO [UserChallenge] " +
@@ -644,7 +644,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void UnjoinChallenge(int accountID, int ChallengeID)
+        public static void UnjoinChallenge(int accountID, int ChallengeID)
         {
             connection.Open();
             query = "DELETE [UserChallenge] " +
@@ -657,7 +657,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void RemoveOverdueChallenges()
+        public static void RemoveOverdueChallenges()
         {
 
             connection.Open();
@@ -680,7 +680,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public void UpdateChallengesProgress(int accountID, string workout, double duration)
+        public static void UpdateChallengesProgress(int accountID, string workout, double duration)
         {
             connection.Open();
 
@@ -706,7 +706,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Plans queries AND functions.
-        public List<PlanModel> GetPlans(int accountID)
+        public static List<PlanModel> GetPlans(int accountID)
         {
             connection.Open();
             query = "SELECT [Plan].*,[User].PK_UserID " +
@@ -745,7 +745,7 @@ namespace FitnessApp.SQLdatabase
             return plansModels;
         }
 
-        public List<DayModel> GetPlanDays(int planID)
+        public static List<DayModel> GetPlanDays(int planID)
         {
             connection.Open();
             query = "SELECT * FROM[PlanDayDescription] " +
@@ -774,7 +774,7 @@ namespace FitnessApp.SQLdatabase
             return dayModels;
         }
 
-        public bool IsInPlan(int accountID)
+        public static bool IsInPlan(int accountID)
         {
             connection.Open();
             query = "SELECT FK_User_PlanID " +
@@ -796,7 +796,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public void JoinPlan(int accountID, int planID)
+        public static void JoinPlan(int accountID, int planID)
         {
             connection.Open();
             query = "UPDATE [User] " +
@@ -816,7 +816,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void UnjoinPlan(int accountID)
+        public static void UnjoinPlan(int accountID)
         {
             connection.Open();
             query = "UPDATE [User] " +
@@ -841,7 +841,7 @@ namespace FitnessApp.SQLdatabase
         //////// Weight ////////
 
         // Weight chart
-        public List<double> GetWeightValues(int accountID)
+        public static List<double> GetWeightValues(int accountID)
         {
             List<double> weightValues = new List<double>();
 
@@ -865,7 +865,7 @@ namespace FitnessApp.SQLdatabase
             return weightValues;
         }
 
-        public List<string> GetWeightDateValues(int accountID)
+        public static List<string> GetWeightDateValues(int accountID)
         {
             List<string> dateValues = new List<string>();
 
@@ -890,7 +890,7 @@ namespace FitnessApp.SQLdatabase
             return dateValues;
         }
 
-        public void AddNewWeight(double NewWeight, int accountID)
+        public static void AddNewWeight(double NewWeight, int accountID)
         {
             connection.Open();
 
@@ -904,7 +904,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Total Weight Lost
-        public double GetTotalWeightLostPerWeek(int accountID)
+        public static double GetTotalWeightLostPerWeek(int accountID)
         {
 
             double WeekWeightLost = 0;
@@ -932,7 +932,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public double GetTotalWeightLostPerMonth(int accountID)
+        public static double GetTotalWeightLostPerMonth(int accountID)
         {
 
             double MonthWeightLost = 0;
@@ -959,7 +959,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public double GetTotalWeightLostPerYear(int accountID)
+        public static double GetTotalWeightLostPerYear(int accountID)
         {
 
             double YearWeightLost = 0;
@@ -988,7 +988,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Average Weight Lost
-        public double GetAverageWeightLostPerWeek(int accountID)
+        public static double GetAverageWeightLostPerWeek(int accountID)
         {
             double WeekWeightLost = 0;
             List<double> WeekWeight = new List<double>();
@@ -1015,7 +1015,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public double GetAverageWeightLostPerMonth(int accountID)
+        public static double GetAverageWeightLostPerMonth(int accountID)
         {
             double MonthWeightLost = 0;
             List<double> MonthWeight = new List<double>();
@@ -1041,7 +1041,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public double GetAverageWeightLostPerYear(int accountID)
+        public static double GetAverageWeightLostPerYear(int accountID)
         {
 
             double YearWeightLost = 0;
@@ -1073,7 +1073,7 @@ namespace FitnessApp.SQLdatabase
 
         //////// Motivational Quote ////////
 
-        public string GetMotivationalQuote()
+        public static string GetMotivationalQuote()
         {
             connection.Open();
 
@@ -1092,7 +1092,7 @@ namespace FitnessApp.SQLdatabase
 
         //////// Food/Workout ////////
 
-        public List<String> GetAllFood()
+        public static List<String> GetAllFood()
         {
             connection.Open();
 
@@ -1113,7 +1113,7 @@ namespace FitnessApp.SQLdatabase
             return food;
         }
 
-        public List<String> GetAllWorkouts()
+        public static List<String> GetAllWorkouts()
         {
             connection.Open();
 
@@ -1134,7 +1134,7 @@ namespace FitnessApp.SQLdatabase
             return workouts;
         }
 
-        public void AddFood(string food, double quantity, int accountID)
+        public static void AddFood(string food, double quantity, int accountID)
         {
             connection.Open();
 
@@ -1185,7 +1185,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public void AddWorkout(string workout, double duration, UserModel currentUser)
+        public static void AddWorkout(string workout, double duration, UserModel currentUser)
         {
             int workoutID = 0;
             double totalCaloriesLost = 0;
@@ -1222,7 +1222,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public int GetWorkoutID(string workoutName)
+        public static int GetWorkoutID(string workoutName)
         {
             int id = -1;
 
@@ -1240,7 +1240,7 @@ namespace FitnessApp.SQLdatabase
         //////// Joined Plan ////////
 
         // Get Joined Plan ID AND Name 
-        public int GetJoinedPlanID(int accountID)
+        public static int GetJoinedPlanID(int accountID)
         {
             int SQLplanID = 0;
             query = "SELECT FK_User_PlanID FROM [User] WHERE PK_UserID= @accountID;";
@@ -1264,7 +1264,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public string GetJoinedPlanName(int accountID)
+        public static string GetJoinedPlanName(int accountID)
         {
             int SQLplanID = GetJoinedPlanID(accountID);
             string SQLplanName = "";
@@ -1280,7 +1280,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Get Joined Plan Day Number
-        public int GetJoinedPlanDayNumber(int accountID)
+        public static int GetJoinedPlanDayNumber(int accountID)
         {
             connection.Open();
 
@@ -1301,7 +1301,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // Get Joined Plan items' Descriptions
-        public string GetDayBreakfastDescription(int accountID)
+        public static string GetDayBreakfastDescription(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
@@ -1325,7 +1325,7 @@ namespace FitnessApp.SQLdatabase
             return breakfastDiscription;
         }
 
-        public string GetDayLucnchDescription(int accountID)
+        public static string GetDayLucnchDescription(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
@@ -1349,7 +1349,7 @@ namespace FitnessApp.SQLdatabase
             return lucnchDiscription;
         }
 
-        public string GetDayDinnerDescription(int accountID)
+        public static string GetDayDinnerDescription(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
@@ -1373,7 +1373,7 @@ namespace FitnessApp.SQLdatabase
             return dinnerDiscription;
         }
 
-        public string GetDayWorkoutDescription(int accountID)
+        public static string GetDayWorkoutDescription(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             int SQLplanID = GetJoinedPlanID(accountID);
@@ -1399,7 +1399,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Get Joined Plan Checkboxes' Status
-        public bool GetDayBreakfastStatus(int accountID)
+        public static bool GetDayBreakfastStatus(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlBreakfast = false;
@@ -1422,7 +1422,7 @@ namespace FitnessApp.SQLdatabase
             return SqlBreakfast;
         }
 
-        public bool GetDayLunchStatus(int accountID)
+        public static bool GetDayLunchStatus(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlLunch = false;
@@ -1445,7 +1445,7 @@ namespace FitnessApp.SQLdatabase
             return SqlLunch;
         }
 
-        public bool GetDayDinnerStatus(int accountID)
+        public static bool GetDayDinnerStatus(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlDinner = false;
@@ -1468,7 +1468,7 @@ namespace FitnessApp.SQLdatabase
             return SqlDinner;
         }
 
-        public bool GetDayWorkoutStatus(int accountID)
+        public static bool GetDayWorkoutStatus(int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             bool SqlWorkout = false;
@@ -1494,7 +1494,7 @@ namespace FitnessApp.SQLdatabase
 
         //Modify Joined Plan Checkboxes
 
-        public void UpdatePlanDayNumber(int accountID, int dayNumber)
+        public static void UpdatePlanDayNumber(int accountID, int dayNumber)
         {
             connection.Open();
             query = "SELECT DayNumber " +
@@ -1524,7 +1524,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void UpdateDayBreakfastStatus(bool checkedBreakfast, int accountID)
+        public static void UpdateDayBreakfastStatus(bool checkedBreakfast, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             query = "UPDATE UserPlanDay SET  BreakfastIsDone=@checkedBreakfast WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
@@ -1538,7 +1538,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void UpdateDayLunchStatus(bool checkedLunch, int accountID)
+        public static void UpdateDayLunchStatus(bool checkedLunch, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             query = "UPDATE UserPlanDay SET  LunchIsDone=@checkedLunch WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
@@ -1552,7 +1552,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void UpdateDayDinnerStatus(bool checkedDinner, int accountID)
+        public static void UpdateDayDinnerStatus(bool checkedDinner, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             query = "UPDATE UserPlanDay SET  DinnerIsDone=@checkedDinner WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
@@ -1566,7 +1566,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void UpdateDayWorkoutStatus(bool checkedWorkout, int accountID)
+        public static void UpdateDayWorkoutStatus(bool checkedWorkout, int accountID)
         {
             int SQLplanDay = GetJoinedPlanDayNumber(accountID);
             query = "UPDATE UserPlanDay SET  WorkoutsIsDone=@checkedWorkout WHERE  FK_UserPlanDay_UserID= @accountID AND DayNumber = @SQLplanDay ;";
@@ -1587,7 +1587,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Load all Admin's Data
-        public AdminModel GetAdminData(int adminID)
+        public static AdminModel GetAdminData(int adminID)
         {
             AdminModel currentAdmin = new AdminModel();
 
@@ -1623,7 +1623,7 @@ namespace FitnessApp.SQLdatabase
         }
 
         // UPDATE User Account
-        public void UpdateAdminAccount(AdminModel currentAdmin)
+        public static void UpdateAdminAccount(AdminModel currentAdmin)
         {
             connection.Open();
 
@@ -1651,7 +1651,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public void UpdateAdminPassword(AdminModel currentAdmin)
+        public static void UpdateAdminPassword(AdminModel currentAdmin)
         {
             connection.Open();
 
@@ -1667,7 +1667,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public void AddNewAdmin(string email, string firstName, string lastName)
+        public static void AddNewAdmin(string email, string firstName, string lastName)
         {
             connection.Open();
             query = "INSERT INTO Admin(FirstName,LastName) VALUES (@firstName,@lastName)";
@@ -1688,7 +1688,7 @@ namespace FitnessApp.SQLdatabase
                 SendAdminEmail(email, password);
         }
 
-        public void InsertNewAdminAccount(string email, string password)
+        public static void InsertNewAdminAccount(string email, string password)
         {
             connection.Open();
 
@@ -1708,7 +1708,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public List<int> GetAppRatingValues()
+        public static List<int> GetAppRatingValues()
         {
             connection.Open();
             List<int> ratingList = new List<int>();
@@ -1728,7 +1728,7 @@ namespace FitnessApp.SQLdatabase
             return ratingList;
         }
 
-        public List<FeedbackModel> GetFeedbacks()
+        public static List<FeedbackModel> GetFeedbacks()
         {
 
             List<FeedbackModel> allFeedbackModels = new List<FeedbackModel>();
@@ -1758,7 +1758,7 @@ namespace FitnessApp.SQLdatabase
             return allFeedbackModels;
         }
 
-        public void DeleteFeedback(string feedbackBody)
+        public static void DeleteFeedback(string feedbackBody)
         {
             connection.Open();
 
@@ -1771,7 +1771,7 @@ namespace FitnessApp.SQLdatabase
             connection.Close();
         }
 
-        public int GetAppUsersNumber()
+        public static int GetAppUsersNumber()
         {
             int appUsersNumber;
 
@@ -1787,7 +1787,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public bool IsNewAdmin(int accountID)
+        public static bool IsNewAdmin(int accountID)
         {
             connection.Open();
 
@@ -1810,7 +1810,7 @@ namespace FitnessApp.SQLdatabase
 
 
         // Challenges Managing
-        public void AddNewChallenge(byte[] photo, string name, string description, int targetMinutes,
+        public static void AddNewChallenge(byte[] photo, string name, string description, int targetMinutes,
                                     string reward, DateTime? dueDate, int workoutID)
         {
             connection.Open();
@@ -1835,7 +1835,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public void DeleteChallenge(int challengeID)
+        public static void DeleteChallenge(int challengeID)
         {
 
             connection.Open();
@@ -1862,7 +1862,7 @@ namespace FitnessApp.SQLdatabase
 
 
 
-        public void DeleteUser(int accountID)
+        public static void DeleteUser(int accountID)
         {
 
             string feedbackDelete = "delete FROM Feedback WHERE FK_Feedback_UserID=@accountID;";
@@ -1931,7 +1931,7 @@ namespace FitnessApp.SQLdatabase
 
         }
 
-        public List<UserModel> SearchForUser(string search)
+        public static List<UserModel> SearchForUser(string search)
         {
             List<UserModel> AllUsers = new List<UserModel>();
 
@@ -1971,7 +1971,7 @@ namespace FitnessApp.SQLdatabase
 
         // Calories Card Modified
 
-        public string GetTodayDate()
+        public static string GetTodayDate()
         {
             connection.Open();
 
@@ -1983,7 +1983,7 @@ namespace FitnessApp.SQLdatabase
         }
 
 
-        public string GetLastWeightDate(int accountID)
+        public static string GetLastWeightDate(int accountID)
         {
             connection.Open();
             string dateTime = "";
@@ -2000,7 +2000,7 @@ namespace FitnessApp.SQLdatabase
         }
 
 
-        public double CalroiesNeeded(UserModel currentUser)
+        public static double CalroiesNeeded(UserModel currentUser)
         {
             double SWeight = currentUser.Weight;
             double SHeight = currentUser.Height;
@@ -2018,7 +2018,7 @@ namespace FitnessApp.SQLdatabase
             }
         }
 
-        public double CalroiesGainedToday(int accountID)
+        public static double CalroiesGainedToday(int accountID)
         {
             connection.Open();
             double SumOfCaloriesGained = 0;
@@ -2040,7 +2040,7 @@ namespace FitnessApp.SQLdatabase
             }
         }
 
-        public double CalroiesLostToday(int accountID)
+        public static double CalroiesLostToday(int accountID)
         {
             connection.Open();
             double SumOfCaloriesLost = 0;
@@ -2066,7 +2066,7 @@ namespace FitnessApp.SQLdatabase
 
 
 
-        private string CalroiesGainedDuetoLastMeal(int accountID)
+        private static string CalroiesGainedDuetoLastMeal(int accountID)
         {
             // Get last meal date
             DateTime? date = null;
@@ -2100,7 +2100,7 @@ namespace FitnessApp.SQLdatabase
         }
 
 
-        private string CaloriesLostInpreviousWorkout(int accountID)
+        private static string CaloriesLostInpreviousWorkout(int accountID)
         {
             // Get date of the previous workout
             DateTime? workoutLastDate = null;
@@ -2136,7 +2136,7 @@ namespace FitnessApp.SQLdatabase
         }
 
 
-        public void WeightCalc(UserModel currentUser)
+        public static void WeightCalc(UserModel currentUser)
         {
             double caloriesGained = double.Parse(CalroiesGainedDuetoLastMeal(currentUser.ID));
             double caloriesLost = double.Parse(CaloriesLostInpreviousWorkout(currentUser.ID));

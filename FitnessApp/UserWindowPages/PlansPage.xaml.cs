@@ -12,7 +12,6 @@ namespace FitnessApp.UserWindowPages
     /// </summary>
     public partial class PlansPage : Page
     {
-        SQLqueries SQLqueriesObject = new SQLqueries();
 
         public PlansPage()
         {
@@ -44,10 +43,10 @@ namespace FitnessApp.UserWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            if (SQLqueriesObject.IsInPlan(UserWindow.signedInUser.ID))
+            if (SQLqueries.IsInPlan(UserWindow.signedInUser.ID))
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("You are currently in a plan. Please unjoin it first.");
             else
-                SQLqueriesObject.JoinPlan(UserWindow.signedInUser.ID, currentPlan.ID);
+                SQLqueries.JoinPlan(UserWindow.signedInUser.ID, currentPlan.ID);
 
             LoadAllPlansCards();
 
@@ -61,7 +60,7 @@ namespace FitnessApp.UserWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            SQLqueriesObject.UnjoinPlan(UserWindow.signedInUser.ID);
+            SQLqueries.UnjoinPlan(UserWindow.signedInUser.ID);
 
             LoadAllPlansCards();
 

@@ -16,9 +16,6 @@ namespace FitnessApp.Windows
         public static SetUpProfilePage SetUpProfilePageObject;
         
 
-        // Create object from database class
-        SQLqueries SQLqueriesObject = new SQLqueries();
-
         public SigningWindow()
         {
             InitializeComponent();
@@ -37,20 +34,20 @@ namespace FitnessApp.Windows
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
 
-            bool isAccountFound = SQLqueriesObject.IsUserFound(EmailSignInTextBox.Text, PasswordSignInTextBox.Password);
+            bool isAccountFound = SQLqueries.IsUserFound(EmailSignInTextBox.Text, PasswordSignInTextBox.Password);
 
             if (isAccountFound == true)
             {
-                if (SQLqueriesObject.accountType == "User")
+                if (SQLqueries.accountType == "User")
                 {
                     // Open User Main Window
-                    UserWindow UserWindowTemp = new UserWindow(SQLqueriesObject.accountID);
+                    UserWindow UserWindowTemp = new UserWindow(SQLqueries.accountID);
                     UserWindowTemp.Show();
                 }
                 else
                 {
                     // Open Admin Main Window
-                    AdminWindow AdminWindowTemp = new AdminWindow(SQLqueriesObject.accountID);
+                    AdminWindow AdminWindowTemp = new AdminWindow(SQLqueries.accountID);
                     AdminWindowTemp.Show();
                 }
 

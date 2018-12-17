@@ -1,8 +1,10 @@
-﻿namespace FitnessApp.Models
+﻿using FitnessApp.SQLdatabase;
+
+namespace FitnessApp.Models
 {
     public class AdminModel
     {
-        SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
+        
 
         private int _id;
         private string _firstName;
@@ -14,7 +16,7 @@
 
         public AdminModel(int adminID)
         {
-            AdminModel temp = SQLqueriesObject.GetAdminData(adminID);
+            AdminModel temp = SQLqueries.GetAdminData(adminID);
 
             _id = adminID;
             _firstName = temp.FirstName;

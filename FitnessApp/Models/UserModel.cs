@@ -1,8 +1,9 @@
-﻿namespace FitnessApp.Models
+﻿using FitnessApp.SQLdatabase;
+
+namespace FitnessApp.Models
 {
     public class UserModel
     {
-        SQLdatabase.SQLqueries SQLqueriesObject = new SQLdatabase.SQLqueries();
 
         private int _id;
         private ImageModel _profilePhoto = new ImageModel() { Default = @"..\..\Images\AccountCircleDefaultIcon.png" };
@@ -25,7 +26,7 @@
 
         public UserModel(int userID)
         {
-            UserModel temp = SQLqueriesObject.GetUserData(userID);
+            UserModel temp = SQLqueries.GetUserData(userID);
 
             _id                     = userID;
             _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;

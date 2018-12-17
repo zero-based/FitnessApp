@@ -11,8 +11,6 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class SignUpFirstPage : Page
     {
-        // creating an object from the sql class
-        SQLqueries objectSqlQueries = new SQLqueries();
 
         public static SignUpFirstPage SignUpFirstPageObject = new SignUpFirstPage();
 
@@ -50,8 +48,8 @@ namespace FitnessApp.SignUpPages
             int firstNameLength = FirstNameTextBox.Text.Length;
             int lastNameLength = LastNameTextBox.Text.Length;
             int userNameLength = UsernameTextBox.Text.Length;
-            bool CheckUniqueUsername = objectSqlQueries.IsUsernameTaken(UsernameTextBox.Text);
-            bool CheckUniqueEmail = objectSqlQueries.IsEmailTaken(EmailTextBox.Text);
+            bool CheckUniqueUsername = SQLqueries.IsUsernameTaken(UsernameTextBox.Text);
+            bool CheckUniqueEmail = SQLqueries.IsEmailTaken(EmailTextBox.Text);
 
             // Constraints , to make sure that texts boxes are not empty
             if (firstNameLength < 1 || lastNameLength < 1 || userNameLength < 1 || passwordLength < 1)

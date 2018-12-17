@@ -14,7 +14,6 @@ namespace FitnessApp.AdminWindowPages
     /// </summary>
     public partial class ChallengesSetupPage : Page
     {
-        SQLqueries SQLqueriesObject = new SQLqueries();
         private ImageModel challengePhoto = new ImageModel();
 
         public ChallengesSetupPage()
@@ -44,7 +43,7 @@ namespace FitnessApp.AdminWindowPages
             ChallengeModel chosenChallenge = (ChallengeModel)AllChallengesListBox.Items[selectedChallengeIndex];
 
             // Delete Challenge From Database
-            SQLqueriesObject.DeleteChallenge(chosenChallenge.ID);
+            SQLqueries.DeleteChallenge(chosenChallenge.ID);
 
             // Refresh Challenges
             LoadAllChallenges();
@@ -66,7 +65,7 @@ namespace FitnessApp.AdminWindowPages
         private void LoadWorkoutTypeComboBox()
         {
             // Get All Workouts From Database
-            WorkoutTypeComboBox.ItemsSource = SQLqueriesObject.GetAllWorkouts();
+            WorkoutTypeComboBox.ItemsSource = SQLqueries.GetAllWorkouts();
         }
 
         private void ChallengeDialogBoxAddButton_Click(object sender, RoutedEventArgs e)
@@ -90,13 +89,13 @@ namespace FitnessApp.AdminWindowPages
             else
             {
                 // Add Challenge to databse
-                SQLqueriesObject.AddNewChallenge(challengePhoto.ByteArray,
+                SQLqueries.AddNewChallenge(challengePhoto.ByteArray,
                                                  ChallengeNameTextBox.Text,
                                                  ChallengeDescriptionTextBox.Text,
                                                  int.Parse(ChallengeTargetMinutesTextBox.Text),
                                                  ChallengeRewardTextBox.Text,
                                                  ChallengeDueDatePicker.SelectedDate,
-                                                 SQLqueriesObject.GetWorkoutID(WorkoutTypeComboBox.Text));
+                                                 SQLqueries.GetWorkoutID(WorkoutTypeComboBox.Text));
 
                 AddChallengeDialogBox.Visibility = Visibility.Collapsed;
                 DialogBox.IsOpen = false;

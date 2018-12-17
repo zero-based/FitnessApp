@@ -6,7 +6,7 @@ namespace FitnessApp.ViewModels
 {
     class ChallengesViewModel
     {
-        static SQLqueries SQLqueriesObject = new SQLqueries();
+       
         private List<ChallengeModel> allChallengeModels;
         private List<ChallengeModel> uncompletedJoinedChallengeModels = new List<ChallengeModel>();
         private List<ChallengeModel> completedJoinedChallengeModels = new List<ChallengeModel>();
@@ -16,13 +16,13 @@ namespace FitnessApp.ViewModels
 
         public void AllChallengesViewModel(int accountID)
         {
-            allChallengeModels = SQLqueriesObject.GetAllChallenges(accountID);
+            allChallengeModels = SQLqueries.GetAllChallenges(accountID);
         }
 
         public void JoinedChallengesViewModel(int accountID)
         {
 
-            List<ChallengeModel> joinedChallengeModels = SQLqueriesObject.GetJoinedChallenges(accountID);
+            List<ChallengeModel> joinedChallengeModels = SQLqueries.GetJoinedChallenges(accountID);
 
             foreach (var item in joinedChallengeModels)
             {

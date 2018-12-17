@@ -13,7 +13,6 @@ namespace FitnessApp.UserWindowPages
     /// </summary>
     public partial class ChallengesPage : Page
     {
-        SQLqueries SQLqueriesObject = new SQLqueries();
 
         public ChallengesPage()
         {
@@ -39,7 +38,7 @@ namespace FitnessApp.UserWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.JoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
+            SQLqueries.JoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
             UserWindow.HomePageObject.LoadJoinedChallengesCards();
@@ -53,7 +52,7 @@ namespace FitnessApp.UserWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueriesObject.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
+            SQLqueries.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
             UserWindow.HomePageObject.LoadJoinedChallengesCards();
