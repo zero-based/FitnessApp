@@ -135,7 +135,7 @@
                                            FontFamily="{StaticResource ProductSans}"
                                            FontSize="15"
                                            Foreground="Black"
-                                           Text="{Binding TargetMinutes}">
+                                           Text="{Binding StyledTargetMinutes}">
                                 </TextBlock>
                                 
                             </Grid>

@@ -54,7 +54,7 @@
 
         public string Duration
         {
-            get { return _duration; }
+            get { return _duration + " days"; }
             set { _duration = value; }
         }
 

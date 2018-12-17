@@ -82,6 +82,12 @@
             set { _targetMinutes = value; }
         }
 
+        public string StyledTargetMinutes
+        {
+            get { return TargetMinutes.ToString() + " minutes"; }
+            set {  }
+        }
+
         public string Reward
         {
             get { return _reward; }
