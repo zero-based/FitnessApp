@@ -216,7 +216,8 @@
                                     <Image Grid.Row="0"
                                            Grid.ColumnSpan="3"
                                            Source="{Binding Photo.Source}"
-                                           Stretch="UniformToFill"/>
+                                           Stretch="UniformToFill"
+                                           VerticalAlignment="Center"/>
 
                                     <!--Join Button-->
                                     <Button x:Name="DeleteChallengeButton"
