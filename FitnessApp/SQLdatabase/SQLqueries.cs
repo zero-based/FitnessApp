@@ -57,15 +57,35 @@ namespace FitnessApp.SQLdatabase
             message.To.Add(email);
 
             // Email Subject
-            message.Subject = "Welcome To Our Humble Fitness Application ";
+            message.Subject = "Welcome To FitnessApp";
 
             // Sender's Email
             message.From = new MailAddress("fitness.weightlossapp@gmail.com", "Fitness App");
 
             // Email Body
             message.IsBodyHtml = true;
-            string htmlBody = "<h3>Hi '" + name + "'</h3><br><h3>Welcome&nbsp;to <strong><u>FitnessApp</u>,</strong></h3><br>" +
-                              "<ul><li>Point 1</li><br><li>Point 2</li><br><li>Point 3</li><br></ul><br><p>Please contact us</p><br>";
+            string htmlBody = "<body>" +
+                              "<img src=https://bit.ly/2PI1mx4>" +
+                              "<p style=\"float: left; \">" +
+                              "<img src=https://bit.ly/2STDZ62 height=\"100px\" width=\"100px\" hspace=\"5\" style=\"border - right: 1px solid black;\">" +
+                              "</p> " +
+                              "<p style=\"padding: 20px; \"> " +
+                              " <font size=\"5px\" color=\"#0F88A8\">" +
+                              "<b> Welcome " + name + " , </b>" +
+                              "</font>" +
+                              "<br>" +
+                              "Thank you for choosing FitnessApp!" +
+                              "<br> <br> " +
+                              "Ready for <b>RESHAPING</b> &#9889;" +
+                              "<br><br>" +
+                              " <font size=\"2 px\">" +
+                              "feel free to contact us  &#9786; " +
+                              ",<br> " +
+                              "<a href=\"fitness.weightlossapp @gmail.com\">" +
+                              "fitness.weightlossapp@gmail.com</font>" +
+                              "</p>" +
+                              "</div>" +
+                              "</body>";
             message.Body = htmlBody;
 
 
@@ -95,20 +115,36 @@ namespace FitnessApp.SQLdatabase
         {
 
             MailMessage message = new MailMessage();
-
             // Reciever's Email
             message.To.Add(email);
 
             // Email Subject
-            message.Subject = "Welcome To Our Humble Fitness Application ";
+            message.Subject = "Welcome To FitnessApp";
 
             // Sender's Email
             message.From = new MailAddress("fitness.weightlossapp@gmail.com", "Fitness App");
 
             // Email Body
             message.IsBodyHtml = true;
-            string htmlBody = "<h3>Hi</h3><br><h3>Welcome&nbsp;to <strong><u>FitnessApp</u>,</strong></h3><br>" +
-                              "<ul><li>your password :'" + randomPass + "' </li><br><li>Change it as early as possible </li><br><li>Point 3</li><br></ul><br><p>Please contact us</p><br>";
+            string htmlBody = "<body>" +
+                                "<img src=https://bit.ly/2PI1mx4> " +
+                                "<p style=\"float: left; \">" +
+                                "<img src=https://bit.ly/2STDZ62 height=\"100px\" width=\"100px\" hspace=\"5\" style=\"border - right: 1px solid black;\">" +
+                                "</p> " +
+                                "<p style=\"padding: 20px; \">  " +
+                                "<font size=\"5px\" color=\"#0F88A8\">" +
+                                "<b> Welcome  </b>" +
+                                "</font>" +
+                                "<br>" +
+                                "<b> We are so grateful for having you ! &#9786; </b>" +
+                                "<br> <br>" +
+                                "<font size =\"3px\"> Please change your password as soon as possible : </font> " + randomPass + 
+                                "<br> <br> <br>" +
+                                "<em>Best regards,</em>" +
+                                "<br>FitnessApp Team </p>" +
+                                "</div> " +
+                              "</body>";
+
             message.Body = htmlBody;
 
 
