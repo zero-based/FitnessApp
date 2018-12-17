@@ -46,7 +46,7 @@
                   Grid.Row="4"
                   FontFamily="{StaticResource Roboto}"
                   Style="{StaticResource MaterialDesignCheckBox}">
-            I'm not a Robot!
+                  I'm not a Robot!
         </CheckBox>
 
         <!--Back and Sign Up Buttons-->
@@ -56,7 +56,7 @@
                     HorizontalAlignment="Left"
                     FontFamily="{StaticResource ProductSans}" 
                     FontSize="14" 
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
                     Click="BackButton_Click">
                     Back
             </Button>
@@ -65,7 +65,7 @@
                     HorizontalAlignment="Right"
                     FontFamily="{StaticResource ProductSans}" 
                     FontSize="14" 
-                    Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
                     Click="SignUpButton_Click">
                     Sign Up
             </Button>

@@ -205,7 +205,7 @@
                 <!--User Main Window Header-->
                 <materialDesign:ColorZone Grid.Row="0"
                                           Padding="15" 
-                                          Mode="PrimaryDark"
+                                          Mode="PrimaryMid"
                                           materialDesign:ShadowAssist.ShadowDepth="Depth2">
 
                     <Grid Width="1035">

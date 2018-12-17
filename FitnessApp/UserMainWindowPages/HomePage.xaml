@@ -43,7 +43,7 @@
                                 Margin="0,15,15,0"
                                 FontFamily="{StaticResource ProductSans}" 
                                 FontSize="14"
-                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="DialogBoxAddFoodButton_Click">
                                 Add
@@ -53,7 +53,7 @@
                                 Margin="0,15,0,0"
                                 FontFamily="{StaticResource ProductSans}" 
                                 FontSize="14"
-                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="DialogBoxCancelButton_Click">
                                 Cancel
@@ -92,7 +92,7 @@
                                 Margin="0,15,15,0"
                                 FontFamily="{StaticResource ProductSans}" 
                                 FontSize="14"
-                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="DialogBoxAddWorkoutButton_Click">
                                 Add
@@ -102,7 +102,7 @@
                                 Margin="0,15,0,0"
                                 FontFamily="{StaticResource ProductSans}" 
                                 FontSize="14"
-                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                 Style="{StaticResource MaterialDesignFlatButton}"
                                 Click="DialogBoxCancelButton_Click">
                                 Cancel
@@ -215,7 +215,7 @@
                                             Grid.Column="2"
                                             FontFamily="{StaticResource ProductSans}"
                                             FontSize="12"
-                                            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                            Style="{StaticResource MaterialDesignRaisedButton}"
                                             Click="SaveWeightButton_Click">
                                             Save
                                     </Button>
@@ -434,7 +434,6 @@
                                                    FontWeight="Bold" 
                                                    FontSize="28"
                                                    TextAlignment="Center">
-                                                   1000
                                         </TextBlock>
 
                                         <TextBlock Margin="0,5"
@@ -442,8 +441,9 @@
                                                    FontFamily="{StaticResource Roboto}"
                                                    FontSize="14"
                                                    TextAlignment="Center"
-                                                   TextWrapping="Wrap"/>
-
+                                                   TextWrapping="Wrap">
+                                                   kg/Year
+                                        </TextBlock>
                                     </StackPanel>
 
                                 </Grid>
@@ -640,7 +640,7 @@
                                             Margin="0,5,0,0"
                                             FontFamily="{StaticResource ProductSans}" 
                                             FontSize="14"
-                                            Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                            Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                             Style="{StaticResource MaterialDesignFlatButton}"
                                             Click="JoinChallengeButton_Click">
                                             Join a Challenge
@@ -701,7 +701,7 @@
                                                         Margin="0,5,0,0"
                                                         FontFamily="{StaticResource ProductSans}" 
                                                         FontSize="18"
-                                                        Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                                        Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                                         Style="{StaticResource MaterialDesignFlatButton}"
                                                         Click="CompletedChallengeButton_Click">
                                                         Completed
@@ -928,7 +928,7 @@
                                             Margin="0,5,0,0"
                                             FontFamily="{StaticResource ProductSans}" 
                                             FontSize="14"
-                                            Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                            Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                             Style="{StaticResource MaterialDesignFlatButton}"
                                             Click="DismissPlanButton_Click">
                                             Dismiss
@@ -982,7 +982,7 @@
                                             Margin="0,5,0,0"
                                             FontFamily="{StaticResource ProductSans}" 
                                             FontSize="14"
-                                            Foreground="{DynamicResource PrimaryHueDarkBrush}" 
+                                            Foreground="{DynamicResource PrimaryHueMidBrush}" 
                                             Style="{StaticResource MaterialDesignFlatButton}"
                                             Click="JoinPlanButton_Click">
                                             Join a plan

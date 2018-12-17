@@ -103,29 +103,29 @@
                     
                     <!--Create an account & Sign In Buttons-->
                         
-                        <Button x:Name="CreateAnAccountButton"
-                                Grid.Row="10" 
-                                Grid.Column="1"
-                                HorizontalAlignment="Left"
-                                FontFamily="{StaticResource ProductSans}"
-                                FontSize="12"
-                                Foreground="{DynamicResource PrimaryHueDarkBrush}" 
-                                Style="{StaticResource MaterialDesignFlatButton}"
-                                Command="{x:Static materialDesign:Flipper.FlipCommand}"
-                                Click="CreateAnAccountButton_Click">
-                                Create an account
-                        </Button>
+                    <Button x:Name="CreateAnAccountButton"
+                            Grid.Row="10" 
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            FontFamily="{StaticResource ProductSans}"
+                            FontSize="12"
+                            Foreground="{DynamicResource PrimaryHueMidBrush}" 
+                            Style="{StaticResource MaterialDesignFlatButton}"
+                            Command="{x:Static materialDesign:Flipper.FlipCommand}"
+                            Click="CreateAnAccountButton_Click">
+                            Create an account
+                    </Button>
 
-                        <Button x:Name="SignInButton"
-                                Grid.Row="10" 
-                                Grid.Column="1"
-                                HorizontalAlignment="Right"
-                                FontFamily="{StaticResource ProductSans}"
-                                FontSize="14"
-                                Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-                                Click="SignInButton_Click">
-                                Sign in
-                        </Button>
+                    <Button x:Name="SignInButton"
+                            Grid.Row="10" 
+                            Grid.Column="1"
+                            HorizontalAlignment="Right"
+                            FontFamily="{StaticResource ProductSans}"
+                            FontSize="14"
+                            Style="{StaticResource MaterialDesignRaisedButton}" 
+                            Click="SignInButton_Click">
+                            Sign in
+                    </Button>
                         
                         
                 </Grid>
@@ -145,7 +145,7 @@
                         
                     
                     <!--Create an account Header-->
-                    <materialDesign:ColorZone Mode="PrimaryDark" Padding="10">
+                    <materialDesign:ColorZone Mode="PrimaryMid" Padding="10">
                         <StackPanel Orientation="Horizontal">
 
                             <Button x:Name="BackArrowButton"

@@ -300,7 +300,6 @@
                                         FontFamily="{StaticResource ProductSans}"
                                         FontSize="14"
                                         Style="{StaticResource MaterialDesignRaisedButton}"
-                                        materialDesign:ShadowAssist.ShadowDepth="Depth0"
                                         Click="UserSearchButton_Click">
                                         Search
                                 </Button>
@@ -398,7 +397,7 @@
                                             <!--Delete Button-->
                                             <Button x:Name="DeleteUserButton"
                                                     Grid.Column="4"
-                                                    Style="{StaticResource MaterialDesignFloatingActionMiniDarkButton}"
+                                                    Style="{StaticResource MaterialDesignFloatingActionMiniButton}"
                                                     Background="#b71c1c"
                                                     BorderBrush="Transparent"
                                                     materialDesign:ShadowAssist.ShadowDepth="Depth0"

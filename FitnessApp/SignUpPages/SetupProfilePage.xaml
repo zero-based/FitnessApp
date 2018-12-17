@@ -38,7 +38,6 @@
                     Width="120" 
                     Height="120" 
                     Opacity="0"
-                    Style="{StaticResource MaterialDesignFloatingActionButton}"
                     Click="ChooseUserProfilePhotoButton_Click">
             </Button>
 
@@ -122,7 +121,7 @@
                 HorizontalAlignment="Right"
                 FontFamily="{StaticResource ProductSans}" 
                 FontSize="14"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                Style="{StaticResource MaterialDesignRaisedButton}"
                 Click="SetUpProfileButton_Click">
                 Set up Profile
         </Button>

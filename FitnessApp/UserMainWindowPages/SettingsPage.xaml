@@ -139,7 +139,7 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
                                     Click="UpdateProfileButton_Click">
                                     Update Profile
                             </Button>
@@ -214,7 +214,7 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
                                     Click="UpdateAccountButton_Click">
                                     Update Account
                             </Button>
@@ -270,7 +270,7 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
                                     Click="UpdatePasswordButton_Click">
                                     Update Password
                             </Button>
@@ -320,7 +320,7 @@
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
-                                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
                                     Click="SubmitFeedbackButton_Click">
                                     Submit
                             </Button>

@@ -92,8 +92,8 @@ namespace FitnessApp
             SettingsIcon     .Foreground = new SolidColorBrush(Colors.Black);
 
             // Highlight the required Item only and Change Page Header
-            pageTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
-            pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueDarkBrush"];
+            pageTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
+            pageIcon     .Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
             PageHeaderTextBlock .Text = pageTextBlock.Text;
         }
 

@@ -118,7 +118,7 @@
                         HorizontalAlignment="Right"
                         FontFamily="{StaticResource ProductSans}"
                         FontSize="14"
-                        Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+                        Style="{StaticResource MaterialDesignRaisedButton}" 
                         Click="CalculateButton_Click">
                         Calculate
                 </Button>
