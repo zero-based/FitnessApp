@@ -51,50 +51,35 @@ namespace FitnessApp.SignUpPages
             int userNameLength = UsernameTextBox.Text.Length;
             bool CheckUniqueUsername = objectSqlQueries.IsUsernameTaken(UsernameTextBox.Text);
             bool CheckUniqueEmail = objectSqlQueries.IsEmailTaken(EmailTextBox.Text);
+
             // Constraints , to make sure that texts boxes are not empty
             if (firstNameLength < 1 || lastNameLength < 1 || userNameLength < 1 || passwordLength < 1)
             {
-
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("All fields are required!");
             }
-            else
+            else if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
             {
-                if (PasswordTextBox.Password == ConfirmPasswordTextBox.Password && passwordLength > 6 && CheckUniqueUsername == false && CheckUniqueEmail == false)
-                {
-                    if (EmailTextBox.Text.Contains("@"))
-                    {
-                        if (EmailTextBox.Text.Contains(".com"))
-                        {
-
-                            NavigationService.Navigate(SigningWindow.SignUpSecondPageObject);
-                        }
-                    }
-                    else
-                    {
-                        SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Invalid E-mail");
-                    }
-                }
-                else
-                {
-                    SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("password != confirmation password OR password < 7 ");
-                }
-
-
-                if (CheckUniqueUsername == true && CheckUniqueEmail == false)
-                {
-                    SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("User Name Is Already Taken ");
-
-                }
-
-                if (CheckUniqueEmail == true && CheckUniqueUsername == false)
-                {
-                    SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue(" Email Is Already Taken");
-                }
-                if (CheckUniqueEmail == true && CheckUniqueUsername == true)
-                {
-                    SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue(" Email and user name are already taken");
-                }
-
+                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Invalid E-mail");
+            }
+            else if (CheckUniqueEmail)
+            {
+                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Email is already taken!");
+            }
+            else if (CheckUniqueUsername)
+            {
+                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Username is already taken!");
+            }
+            else if (passwordLength < 6)
+            {
+                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("password < 7!");
+            }
+            else if (PasswordTextBox.Password != ConfirmPasswordTextBox.Password)
+            {
+                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Password doesn't match confirmation!");
+            }
+            else
+            { 
+              NavigationService.Navigate(SigningWindow.SignUpSecondPageObject);
             }
         }
     }
