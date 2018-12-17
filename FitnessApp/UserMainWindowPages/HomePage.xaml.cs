@@ -407,24 +407,14 @@ namespace FitnessApp.UserMainWindowPages
 
         public void LoadCaloriesCard()
         {
-            CaloriesGainedTextBlock.Text = SQLqueriesObject.GetCaloriesGainedToday(UserMainWindow.signedInUser.ID).ToString();
-            CaloriesNeededTextBlock.Text = CalculateCaloriedNeeded().ToString();
-            CaloriesLostTextBlock  .Text = SQLqueriesObject.GetCaloriesLostToday(UserMainWindow.signedInUser.ID).ToString();
+            if (SQLqueriesObject.GetTodayDate() != SQLqueriesObject.GetLastWeightDate(UserMainWindow.signedInUser.ID))
+                SQLqueriesObject.WeightCalc(UserMainWindow.signedInUser);
+
+            CaloriesNeededTextBlock.Text = SQLqueriesObject.CalroiesNeeded(UserMainWindow.signedInUser);
+            CaloriesGainedTextBlock.Text = SQLqueriesObject.CalroiesGainedToday(UserMainWindow.signedInUser.ID);
+            CaloriesLostTextBlock.Text   = SQLqueriesObject.CalroiesLostToday(UserMainWindow.signedInUser.ID);
         }
 
-        private double CalculateCaloriedNeeded()
-        {
-
-            if (UserMainWindow.signedInUser.Gender == "Male")
-                return  66 + (13.7 * UserMainWindow.signedInUser.Weight)
-                           + (1.8  * UserMainWindow.signedInUser.Height)
-                           - (4.7  * UserMainWindow.signedInUser.Age);
-            else
-                return 665 + (9.6 * UserMainWindow.signedInUser.Weight)
-                           + (1.8 * UserMainWindow.signedInUser.Height)
-                           - (4.7 * UserMainWindow.signedInUser.Age);
-
-        }
 
         ///////////////////////////////////////////////////////////
 
