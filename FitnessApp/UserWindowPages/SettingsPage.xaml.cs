@@ -211,7 +211,12 @@ namespace FitnessApp.UserWindowPages
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != UserWindow.signedInUser.Password)
+            if (OldPasswordTextBox.Password == "" || NewPasswordTextBox.Password == "" || ConfirmNewPasswordTextBox.Password == "")
+            {
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("All fields are required!");
+            }
+
+            else if (SQLqueriesObject.EncryptPassword(OldPasswordTextBox.Password) != UserWindow.signedInUser.Password)
             {
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
                 OldPasswordTextBox.Password = "";
