@@ -162,12 +162,12 @@ namespace FitnessApp.UserWindowPages
             else
                 WeightLostPerWeekTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
-            if (WeightLostPerWeek < 0)
+            if (WeightLostPerMonth < 0)
                 WeightLostPerMonthTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 WeightLostPerMonthTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
-            if (WeightLostPerWeek < 0)
+            if (WeightLostPerYear < 0)
                 WeightLostPerYearTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 WeightLostPerYearTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
