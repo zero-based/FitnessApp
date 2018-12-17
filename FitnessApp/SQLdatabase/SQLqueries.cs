@@ -1961,7 +1961,7 @@ namespace FitnessApp.SQLdatabase
         }
 
 
-        public string CalroiesNeeded(UserModel currentUser)
+        public double CalroiesNeeded(UserModel currentUser)
         {
             double SWeight = currentUser.Weight;
             double SHeight = currentUser.Height;
@@ -1970,16 +1970,16 @@ namespace FitnessApp.SQLdatabase
             if (currentUser.Gender == "Female")
             {
                 double Femalecalculate = 665 + (9.6 * (SWeight)) + (1.8 * (SHeight)) - (4.7 * (SAge));
-                return Femalecalculate.ToString();
+                return Femalecalculate;
             }
             else
             {
                 double Malecalculate = 66 + (13.7 * (SWeight)) + (1.8 * (SHeight)) - (4.7 * (SAge));
-                return Malecalculate.ToString();
+                return Malecalculate;
             }
         }
 
-        public string CalroiesGainedToday(int accountID)
+        public double CalroiesGainedToday(int accountID)
         {
             Connection.Open();
             double SumOfCaloriesGained = 0;
@@ -1990,18 +1990,18 @@ namespace FitnessApp.SQLdatabase
                 double Calorie = (double)cmd5.ExecuteScalar();
                 SumOfCaloriesGained = Calorie;
                 Connection.Close();
-                return SumOfCaloriesGained.ToString();
+                return SumOfCaloriesGained;
 
             }
 
             else
             {
                 Connection.Close();
-                return SumOfCaloriesGained.ToString();
+                return SumOfCaloriesGained;
             }
         }
 
-        public string CalroiesLostToday(int accountID)
+        public double CalroiesLostToday(int accountID)
         {
             Connection.Open();
             double SumOfCaloriesLost = 0;
@@ -2013,14 +2013,14 @@ namespace FitnessApp.SQLdatabase
                 double calorie = (double)cmd6.ExecuteScalar();
                 SumOfCaloriesLost = calorie;
                 Connection.Close();
-                return SumOfCaloriesLost.ToString();
+                return SumOfCaloriesLost;
 
             }
 
             else
             {
                 Connection.Close();
-                return SumOfCaloriesLost.ToString();
+                return SumOfCaloriesLost;
             }
 
         }
@@ -2103,7 +2103,7 @@ namespace FitnessApp.SQLdatabase
             double caloriesLost = double.Parse(CaloriesLostInpreviousWorkout(currentUser.ID));
             double actualCallories = caloriesGained - caloriesLost;
             double weightCalCulated = actualCallories / (7716.179176470716);
-            double neededCalories = double.Parse(CalroiesNeeded(currentUser));
+            double neededCalories = CalroiesNeeded(currentUser);
             if (actualCallories > neededCalories)
             {
                 currentUser.Weight += Math.Round(weightCalCulated, 2);

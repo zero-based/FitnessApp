@@ -404,15 +404,54 @@ namespace FitnessApp.UserMainWindowPages
 
         ////////// Calories Card Functions/Event Handlers //////////
 
+        public SeriesCollection CaloriesSeriesCollection { get; set; }
+        public string[] CaloriesLabels { get; set; }
+        public Func<double, string> Formatter { get; set; }
 
         public void LoadCaloriesCard()
         {
+
             if (SQLqueriesObject.GetTodayDate() != SQLqueriesObject.GetLastWeightDate(UserMainWindow.signedInUser.ID))
                 SQLqueriesObject.WeightCalc(UserMainWindow.signedInUser);
 
-            CaloriesNeededTextBlock.Text = SQLqueriesObject.CalroiesNeeded(UserMainWindow.signedInUser);
-            CaloriesGainedTextBlock.Text = SQLqueriesObject.CalroiesGainedToday(UserMainWindow.signedInUser.ID);
-            CaloriesLostTextBlock.Text   = SQLqueriesObject.CalroiesLostToday(UserMainWindow.signedInUser.ID);
+            double caloiresGained = SQLqueriesObject.CalroiesGainedToday(UserMainWindow.signedInUser.ID);
+            double caloriesNeeded = SQLqueriesObject.CalroiesNeeded(UserMainWindow.signedInUser);
+            double caloriesLost   = SQLqueriesObject.CalroiesLostToday(UserMainWindow.signedInUser.ID);
+
+            CaloriesGainedTextBlock.Text = caloiresGained.ToString();
+            CaloriesNeededTextBlock.Text = caloriesNeeded.ToString();
+            CaloriesLostTextBlock  .Text = caloriesLost.ToString();
+
+
+            CaloriesSeriesCollection = new SeriesCollection
+            {
+                new ColumnSeries
+                {
+                    Title  = "Gaind",
+                    Values = new ChartValues<double>() { caloiresGained },
+                    Fill   = Brushes.Red,
+                },
+
+                new ColumnSeries
+                {
+                    Title  = "Needed",
+                    Values = new ChartValues<double>() { caloriesNeeded },
+                    Fill   = (Brush)Application.Current.Resources["PrimaryHueMidBrush"],
+                },
+
+                new ColumnSeries
+                {
+                     Title  = "Lost",
+                     Values = new ChartValues<double>() { caloriesLost },
+                     Fill   = Brushes.ForestGreen,
+                }
+            };
+
+
+            CaloriesLabels = new[] { "Calories" };
+            Formatter = value => value.ToString() + "  kCal.";
+            CaloriesChart.DataContext = this;
+
         }
 
 
@@ -458,6 +497,7 @@ namespace FitnessApp.UserMainWindowPages
                 DialogBox.IsOpen = false;
 
                 // Refresh Calories Card
+                CaloriesChart.DataContext = null;
                 LoadCaloriesCard();
             }
 
@@ -488,6 +528,7 @@ namespace FitnessApp.UserMainWindowPages
                 LoadJoinedChallengesCards();
 
                 // Refresh Calories Card
+                CaloriesChart.DataContext = null;
                 LoadCaloriesCard();
             }
 

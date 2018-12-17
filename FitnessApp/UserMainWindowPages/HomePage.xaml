@@ -268,9 +268,7 @@
                                                    Foreground="{StaticResource PrimaryHueMidBrush}"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="80"
@@ -296,9 +294,7 @@
                                                    Foreground="{StaticResource PrimaryHueMidBrush}"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="80"
@@ -324,9 +320,7 @@
                                                    Foreground="{StaticResource PrimaryHueMidBrush}"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="80"
@@ -387,9 +381,7 @@
                                                    Foreground="{StaticResource PrimaryHueMidBrush}"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="80"
@@ -415,9 +407,7 @@
                                                    Foreground="{StaticResource PrimaryHueMidBrush}"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="80"
@@ -452,9 +442,7 @@
                                                    FontFamily="{StaticResource Roboto}"
                                                    FontSize="14"
                                                    TextAlignment="Center"
-                                                   TextWrapping="Wrap">
-                                                   kg/Year
-                                        </TextBlock>
+                                                   TextWrapping="Wrap"/>
 
                                     </StackPanel>
 
@@ -1061,6 +1049,8 @@
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="15"/>
                                     <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="15"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="25"/>
                                 </Grid.RowDefinitions>
 
@@ -1091,12 +1081,10 @@
 
                                         <TextBlock x:Name="CaloriesGainedTextBlock"
                                                    FontFamily="{StaticResource ProductSans}"
-                                                   Foreground="{StaticResource PrimaryHueMidBrush}"
+                                                   Foreground="Red"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="70"
@@ -1122,9 +1110,7 @@
                                                    Foreground="{StaticResource PrimaryHueMidBrush}"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="70"
@@ -1147,12 +1133,10 @@
 
                                         <TextBlock x:Name="CaloriesLostTextBlock"
                                                    FontFamily="{StaticResource ProductSans}"
-                                                   Foreground="{StaticResource PrimaryHueMidBrush}"
+                                                   Foreground="ForestGreen"
                                                    FontWeight="Bold" 
                                                    FontSize="28"
-                                                   TextAlignment="Center">
-                                                   1000
-                                        </TextBlock>
+                                                   TextAlignment="Center"/>
 
                                         <TextBlock Margin="0,5"
                                                    Width="70"
@@ -1167,6 +1151,23 @@
 
                                 </Grid>
 
+
+                                <lvc:CartesianChart x:Name="CaloriesChart"
+                                                    Grid.Row="5"
+                                                    Grid.Column="1"
+                                                    Height="200"
+                                                    Series="{Binding CaloriesSeriesCollection}">
+                                    
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis Labels="{Binding CaloriesLabels}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                    
+                                    <lvc:CartesianChart.AxisY>
+                                        <lvc:Axis LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                                    </lvc:CartesianChart.AxisY>
+
+                                </lvc:CartesianChart>
+                                
                             </Grid>
 
                         </materialDesign:Card>
