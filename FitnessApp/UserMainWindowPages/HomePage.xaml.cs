@@ -120,7 +120,8 @@ namespace FitnessApp.UserMainWindowPages
                 // Update User Weight Line Series:
                 // Add one value and remove another to keep the number of values 10
                 WeightChart.Series[1].Values.Add(double.Parse(TodaysWeightTextBox.Text));
-                WeightChart.Series[1].Values.RemoveAt(0);
+                if (WeightChart.Series[1].Values.Count > 10)
+                    WeightChart.Series[1].Values.RemoveAt(0);
 
                 // Confirmation Message
                 UserMainWindow.UserMainWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Weight added successfully");
@@ -132,7 +133,8 @@ namespace FitnessApp.UserMainWindowPages
                 LoadTotalWeightLostCard();
                 LoadAverageWeightLostCard();
 
-                // Refresh Calories Card
+                // Refresh Calories Card and Chart
+                CaloriesChart.DataContext = null;
                 LoadCaloriesCard();
 
                 // Refresh CaloriesCalculatorPage DataContext
