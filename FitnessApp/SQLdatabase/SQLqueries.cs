@@ -646,7 +646,6 @@ namespace FitnessApp.SQLdatabase
 
             string query = "UPDATE [UserChallenge] " +
                            "SET progress += @workoutDuration " +
-                           "SELECT [Challenge].*, [UserChallenge].* , [Workout].[Name] " +
                            "FROM [Challenge] RIGHT JOIN [UserChallenge] " +
                            "ON [Challenge].PK_ChallengeID = [UserChallenge].FK_UserChallenge_ChallengeID " +
                            "RIGHT JOIN [Workout] " +
