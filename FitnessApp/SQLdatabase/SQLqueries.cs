@@ -889,7 +889,7 @@ namespace FitnessApp.SQLdatabase
                 WeekWeightLost += (WeekWeight[i] - WeekWeight[i + 1]);
             }
 
-            return WeekWeightLost;
+            return Math.Round(WeekWeightLost, 2);
 
         }
 
@@ -916,7 +916,7 @@ namespace FitnessApp.SQLdatabase
                 MonthWeightLost += (MonthWeight[i] - MonthWeight[i + 1]);
             }
 
-            return MonthWeightLost;
+            return Math.Round(MonthWeightLost, 2);
 
         }
 
@@ -944,7 +944,7 @@ namespace FitnessApp.SQLdatabase
                 YearWeightLost += (YearWeight[i] - YearWeight[i + 1]);
             }
 
-            return YearWeightLost;
+            return Math.Round(YearWeightLost, 2);
 
         }
 
