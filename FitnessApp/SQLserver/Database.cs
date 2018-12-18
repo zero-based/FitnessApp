@@ -1791,13 +1791,16 @@ namespace FitnessApp.SQLserver
 
             while (dataReader.Read())
             {
-                FeedbackModel temp = new FeedbackModel();
+                if (!string.IsNullOrWhiteSpace(dataReader["Feedback"].ToString()))
+                {
+                    FeedbackModel temp = new FeedbackModel();
 
-                temp.FirstName = dataReader["FirstName"].ToString();
-                temp.LastName = dataReader["LastName"].ToString();
-                temp.Feedback = dataReader["Feedback"].ToString();
+                    temp.FirstName = dataReader["FirstName"].ToString();
+                    temp.LastName = dataReader["LastName"].ToString();
+                    temp.Feedback = dataReader["Feedback"].ToString();
 
-                allFeedbackModels.Add(temp);
+                    allFeedbackModels.Add(temp);
+                }
             }
 
             connection.Close();
