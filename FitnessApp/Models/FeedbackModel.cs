@@ -8,7 +8,8 @@
 
         public string FullName
         {
-            get { return FirstName + " " + LastName; } set { }
+            get { return FirstName + " " + LastName; }
+            set { }
         }
 
         public string Feedback { get; set; }

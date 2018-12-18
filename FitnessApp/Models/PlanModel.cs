@@ -12,16 +12,6 @@
 
         public PlanModel() { }
 
-        public PlanModel(int id, bool isJoined, string name, string description, string duration, string hardness)
-        {
-            _id = id;
-            _isJoined = isJoined;
-            _name = name;
-            _description = description;
-            _duration = duration;
-            _hardness = hardness;
-        }
-
         public int ID
         {
             get { return _id; }

@@ -10,15 +10,6 @@
 
         public DayModel() { }
 
-        public DayModel(int dayNumber, string breakfastDescription, string lunchDescription, string dinnerDescription, string workoutDescription)
-        {
-            _dayNumber = dayNumber;
-            _breakfastDescription = breakfastDescription;
-            _lunchDescription = lunchDescription;
-            _dinnerDescription = dinnerDescription;
-            _workoutDescription = workoutDescription;
-        }
-
         public int DayNumber
         {
             get { return _dayNumber; }

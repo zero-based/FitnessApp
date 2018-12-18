@@ -15,19 +15,6 @@
 
         public ChallengeModel() { }
 
-        public ChallengeModel(int id, bool isJoined, int progress, int workoutType, string name, string description, string dueDate, int targetMinutes, string reward)
-        {
-            _id = id;
-            _isJoined = isJoined;
-            _progress = progress;
-            _workoutType = workoutType;
-            _name = name;
-            _description = description;
-            _dueDate = dueDate;
-            _targetMinutes = targetMinutes;
-            _reward = reward;
-        }
-
         public int ID
         {
             get { return _id; }
