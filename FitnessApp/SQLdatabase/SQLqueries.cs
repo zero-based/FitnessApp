@@ -424,54 +424,52 @@ namespace FitnessApp.SQLdatabase
         {
             connection.Open();
 
-            query = "UPDATE [User] " +
-                    "SET Photo = @photo " +
-                    "WHERE PK_UserID = @userID";
+            query = "UPDATE [User] SET Photo = @Photo WHERE PK_UserID = @UserId";
             command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@UserId", currentUser.ID);
             command.Parameters.AddWithValue("@Photo", currentUser.ProfilePhoto.ByteArray);
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("AddNewWeight", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
+            query = "INSERT INTO [UserWeight] VALUES (@UserId, @AddedWeight, GETDATE())";
+            command = new SqlCommand(query, connection);
+            command.Parameters.Add(new SqlParameter("@userID", accountID));
             command.Parameters.Add(new SqlParameter("@AddedWeight", currentUser.Weight));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeHeight", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add(new SqlParameter("@userID", currentUser.ID));
+            query = "UPDATE [User] SET Height = @Height WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
+            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
             command.Parameters.Add(new SqlParameter("@Height", currentUser.Height));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeTargetWeight", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [User] SET TargetWeight = @TargetWeight WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
             command.Parameters.Add(new SqlParameter("@TargetWeight", currentUser.TargetWeight));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeKilosToLosePerWeek", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [User] SET KilosToLosePerWeek = @KilosToLosePerWeek WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
             command.Parameters.Add(new SqlParameter("@KilosToLosePerWeek", currentUser.KilosToLosePerWeek));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeWorkoutsDaysPerWeek", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [User] SET WorkoutsPerWeek = @WorkoutsPerWeek WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            command.Parameters.Add(new SqlParameter("@Days", currentUser.WorkoutsPerWeek));
+            command.Parameters.Add(new SqlParameter("@WorkoutsPerWeek", currentUser.WorkoutsPerWeek));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeWorkoutsHoursPerDay", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [User] SET WorkoutHoursPerDay = @WorkoutHoursPerDay WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            command.Parameters.Add(new SqlParameter("@Hours", currentUser.WorkoutHoursPerDay));
+            command.Parameters.Add(new SqlParameter("@WorkoutHoursPerDay", currentUser.WorkoutHoursPerDay));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
@@ -483,29 +481,29 @@ namespace FitnessApp.SQLdatabase
         {
             connection.Open();
 
-            command = new SqlCommand("ChangeFirstName", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [User] SET FirstName = @FirstName WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
             command.Parameters.Add(new SqlParameter("@FirstName", currentUser.FirstName));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeLastName", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [User] SET LastName = @LastName WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            command.Parameters.Add(new SqlParameter("@LastNmae", currentUser.LastName));
+            command.Parameters.Add(new SqlParameter("@LastName", currentUser.LastName));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeUserName", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [User] SET Username = @Username WHERE PK_UserID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            command.Parameters.Add(new SqlParameter("@UserName", currentUser.Username));
+            command.Parameters.Add(new SqlParameter("@Username", currentUser.Username));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ChangeEmail", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [Account] SET Email = @Email WHERE AccountID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
             command.Parameters.Add(new SqlParameter("@Email", currentUser.Email));
             dataReader = command.ExecuteReader();
@@ -519,8 +517,8 @@ namespace FitnessApp.SQLdatabase
         {
             connection.Open();
 
-            command = new SqlCommand("ChangePassword", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [Account] SET[Password] = @Password WHERE AccountID = @UserId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
             command.Parameters.Add(new SqlParameter("@Password", currentUser.Password));
             dataReader = command.ExecuteReader();
@@ -1676,22 +1674,22 @@ namespace FitnessApp.SQLdatabase
         {
             connection.Open();
 
-            command = new SqlCommand("ModifyFirstName", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [Admin] Set FirstName = @FirstName WHERE PK_AdminID = @AdminId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
             command.Parameters.Add(new SqlParameter("@FirstName", currentAdmin.FirstName));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ModifyLastName", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [Admin] Set LastName = @LastName WHERE PK_AdminID = @AdminId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
             command.Parameters.Add(new SqlParameter("@LastName", currentAdmin.LastName));
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            command = new SqlCommand("ModifyEmail", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "UPDATE [Account] Set Email = @Email WHERE AccountID = @AdminId";
+            command = new SqlCommand(query, connection);
             command.Parameters.Add(new SqlParameter("@AdminId", currentAdmin.ID));
             command.Parameters.Add(new SqlParameter("@Email", currentAdmin.Email));
             dataReader = command.ExecuteReader();
@@ -1825,9 +1823,8 @@ namespace FitnessApp.SQLdatabase
             int appUsersNumber;
 
             connection.Open();
-            command = new SqlCommand("GetNumberOfAppUsers", connection);
-            command.CommandType = CommandType.StoredProcedure;
-
+            query = "SELECT COUNT(*) FROM [User]";
+            command = new SqlCommand(query, connection);
             appUsersNumber = (int)command.ExecuteScalar();
 
             connection.Close();
@@ -1864,8 +1861,10 @@ namespace FitnessApp.SQLdatabase
         {
             connection.Open();
 
-            command = new SqlCommand("AddChallenge", connection);
-            command.CommandType = CommandType.StoredProcedure;
+            query = "INSERT INTO [Challenge] (Photo, Name, Description, TargetMinutes, Reward, DueDate, Fk_Challenge_WorkoutID) " +
+                     "VALUES (@Photo, @Name, @Description, @TargetMinutes, @Reward, @DueDate, @WorkoutID)";
+
+            command = new SqlCommand(query, connection);
 
             if (photo == null)
                 command.Parameters.Add("@Photo", SqlDbType.Image).Value = DBNull.Value;
@@ -1878,7 +1877,7 @@ namespace FitnessApp.SQLdatabase
             command.Parameters.AddWithValue("@Reward", reward);
             command.Parameters.AddWithValue("@DueDate", dueDate);
             command.Parameters.AddWithValue("@WorkoutID", workoutID);
-            command.ExecuteNonQuery();
+            command.ExecuteReader();
 
             connection.Close();
 
