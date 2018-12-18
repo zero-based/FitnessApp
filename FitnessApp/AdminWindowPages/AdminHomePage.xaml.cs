@@ -37,6 +37,7 @@ namespace FitnessApp.AdminWindowPages
         private void LoadAppRatingChart()
         {
             AppRatingChart.DataContext = null;
+
             SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
@@ -124,6 +125,11 @@ namespace FitnessApp.AdminWindowPages
             UserViewModel deletedUserDataContext = new UserViewModel(UserSearchTextBox.Text);
             DeleteUserListBox.DataContext = deletedUserDataContext;
             AppUsersNumberTextBlock.Text = Database.GetAppUsersNumber().ToString();
+
+            // Refresh Feedbacks and Rating Chart
+            FeedbacksListBox.DataContext = null;
+            FeedbacksListBox.DataContext = new FeedbacksViewModel();
+            LoadAppRatingChart();
 
             // Hide DeleteUsersCard if no remaining users exist 
             if (deletedUserDataContext.UserModels.Count == 0)
