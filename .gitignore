@@ -248,6 +248,9 @@ ServiceFabricBackup/
 *.ldf
 *.ndf
 
+# Server Details Class
+ServerDetails.cs
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout
@@ -332,6 +335,3 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
-
-# Server Details Class
-FitnessApp/SQLdatabase/ServerDetails.cs
