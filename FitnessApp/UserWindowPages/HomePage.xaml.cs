@@ -414,12 +414,9 @@ namespace FitnessApp.UserWindowPages
         public void LoadCaloriesCard()
         {
 
-            if (SQLqueries.GetTodayDate() != SQLqueries.GetLastWeightDate(UserWindow.signedInUser.ID))
-                SQLqueries.WeightCalc(UserWindow.signedInUser);
-
-            double caloiresGained = SQLqueries.CalroiesGainedToday(UserWindow.signedInUser.ID);
-            double caloriesNeeded = SQLqueries.CalroiesNeeded(UserWindow.signedInUser);
-            double caloriesLost   = SQLqueries.CalroiesLostToday(UserWindow.signedInUser.ID);
+            double caloiresGained = SQLqueries.GetCaloriesGainedToday(UserWindow.signedInUser.ID);
+            double caloriesNeeded = CalculateCaloriedNeeded();
+            double caloriesLost   = SQLqueries.GetCaloriesLostToday(UserWindow.signedInUser.ID);
 
             CaloriesGainedTextBlock.Text = caloiresGained.ToString();
             CaloriesNeededTextBlock.Text = caloriesNeeded.ToString();
@@ -454,9 +451,21 @@ namespace FitnessApp.UserWindowPages
             CaloriesLabels = new[] { "Calories" };
             Formatter = value => value.ToString() + "  kCal.";
             CaloriesChart.DataContext = this;
-
         }
 
+        private double CalculateCaloriedNeeded()
+        {
+
+            if (UserWindow.signedInUser.Gender == "Male")
+                return  66 + (13.7 * UserWindow.signedInUser.Weight)
+                           + (1.8  * UserWindow.signedInUser.Height)
+                           - (4.7  * UserWindow.signedInUser.Age);
+            else
+                return 665 + (9.6  * UserWindow.signedInUser.Weight)
+                           + (1.8  * UserWindow.signedInUser.Height)
+                           - (4.7  * UserWindow.signedInUser.Age);
+
+        }
 
         ///////////////////////////////////////////////////////////
 

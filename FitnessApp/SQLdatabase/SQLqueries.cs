@@ -144,7 +144,7 @@ namespace FitnessApp.SQLdatabase
                                 "<br>" +
                                 "<b> We are so grateful for having you ! &#9786; </b>" +
                                 "<br> <br>" +
-                                "<font size =\"3px\"> Please change your password as soon as possible : </font> " + randomPass + 
+                                "<font size =\"3px\"> Please change your password as soon as possible : </font> " + randomPass +
                                 "<br> <br> <br>" +
                                 "<em>Best regards,</em>" +
                                 "<br>FitnessApp Team </p>" +
@@ -375,15 +375,15 @@ namespace FitnessApp.SQLdatabase
             if (dataReader["Photo"] != DBNull.Value)
                 currentUser.ProfilePhoto.ByteArray = (byte[])dataReader["Photo"];
 
-            currentUser.FirstName          = dataReader["FirstName"].ToString();
-            currentUser.LastName           = dataReader["LastName"].ToString();
-            currentUser.Username           = dataReader["Username"].ToString();
-            currentUser.Gender             = dataReader["Gender"].ToString();
-            currentUser.BirthDate          = dataReader["BirthDate"].ToString();
-            currentUser.Height             = (double)dataReader["Height"];
-            currentUser.TargetWeight       = (double)dataReader["TargetWeight"];
+            currentUser.FirstName = dataReader["FirstName"].ToString();
+            currentUser.LastName = dataReader["LastName"].ToString();
+            currentUser.Username = dataReader["Username"].ToString();
+            currentUser.Gender = dataReader["Gender"].ToString();
+            currentUser.BirthDate = dataReader["BirthDate"].ToString();
+            currentUser.Height = (double)dataReader["Height"];
+            currentUser.TargetWeight = (double)dataReader["TargetWeight"];
             currentUser.KilosToLosePerWeek = (double)dataReader["KilosToLosePerWeek"];
-            currentUser.WorkoutsPerWeek    = (double)dataReader["WorkoutsPerWeek"];
+            currentUser.WorkoutsPerWeek = (double)dataReader["WorkoutsPerWeek"];
             currentUser.WorkoutHoursPerDay = (double)dataReader["WorkoutHoursPerDay"];
 
             dataReader.Close();
@@ -1087,6 +1087,55 @@ namespace FitnessApp.SQLdatabase
 
             return Quote;
         }
+
+
+
+        //////// Calories ////////
+
+        public static double GetCaloriesGainedToday(int accountID)
+        {
+            double caloriesGained = 0;
+
+            connection.Open();
+
+            query = "SELECT SUM(CaloriesGained) " +
+                    "FROM UserFood " +
+                    "WHERE FK_UserFood_UserID = @id " +
+                    "AND convert (date, DateOfToday) = convert (date, getdate())";
+
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@id", accountID);
+
+            if (command.ExecuteScalar() != DBNull.Value)
+                caloriesGained = (double)command.ExecuteScalar();
+
+            connection.Close();
+
+            return caloriesGained;
+        }
+
+        public static double GetCaloriesLostToday(int accountID)
+        {
+            double caloriesLost = 0;
+
+            connection.Open();
+
+            query = "SELECT SUM(CaloriesLost) " +
+                    "FROM UserWorkout " +
+                    "WHERE FK_UserWorkout_UserID = @id " +
+                    "AND convert (date, DateOfToday) = convert (date, getdate())";
+
+            command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@id", accountID);
+
+            if (command.ExecuteScalar() != DBNull.Value)
+                caloriesLost = (double)command.ExecuteScalar();
+
+            connection.Close();
+
+            return caloriesLost;
+        }
+
 
 
 
@@ -1967,201 +2016,6 @@ namespace FitnessApp.SQLdatabase
 
             return AllUsers;
         }
-
-
-        // Calories Card Modified
-
-        public static string GetTodayDate()
-        {
-            connection.Open();
-
-            // Using CONVERT to get the day only FROM the GETDATE function
-            command = new SqlCommand("SELECT CONVERT(date, GETDATE())", connection);
-            string dateOfToday = command.ExecuteScalar().ToString();
-            connection.Close();
-            return dateOfToday;
-        }
-
-
-        public static string GetLastWeightDate(int accountID)
-        {
-            connection.Open();
-            string dateTime = "";
-            command = new SqlCommand("SELECT CONVERT(Date,[Date]) AS date  FROM UserWeight WHERE FK_UserWeight_UserID = @id ORDER BY [Date] ", connection);
-            command.Parameters.AddWithValue("@id", accountID);
-            dataReader = command.ExecuteReader();
-            dataReader.Read();
-            dateTime = dataReader["date"].ToString();
-            dataReader.Close();
-            connection.Close();
-
-            return dateTime;
-
-        }
-
-
-        public static double CalroiesNeeded(UserModel currentUser)
-        {
-            double SWeight = currentUser.Weight;
-            double SHeight = currentUser.Height;
-            double SAge = currentUser.Age;
-
-            if (currentUser.Gender == "Female")
-            {
-                double Femalecalculate = 665 + (9.6 * (SWeight)) + (1.8 * (SHeight)) - (4.7 * (SAge));
-                return Femalecalculate;
-            }
-            else
-            {
-                double Malecalculate = 66 + (13.7 * (SWeight)) + (1.8 * (SHeight)) - (4.7 * (SAge));
-                return Malecalculate;
-            }
-        }
-
-        public static double CalroiesGainedToday(int accountID)
-        {
-            connection.Open();
-            double SumOfCaloriesGained = 0;
-            command = new SqlCommand("SELECT SUM(CaloriesGained)[0] FROM UserFood WHERE FK_UserFood_UserID=@id AND CONVERT(date,DateOfToday) = CONVERT(date ,GETDATE());", connection);
-            command.Parameters.AddWithValue("@id", accountID);
-            if (command.ExecuteScalar().ToString() != "")
-            {
-                double Calorie = (double)command.ExecuteScalar();
-                SumOfCaloriesGained = Calorie;
-                connection.Close();
-                return SumOfCaloriesGained;
-
-            }
-
-            else
-            {
-                connection.Close();
-                return SumOfCaloriesGained;
-            }
-        }
-
-        public static double CalroiesLostToday(int accountID)
-        {
-            connection.Open();
-            double SumOfCaloriesLost = 0;
-            command = new SqlCommand("SELECT SUM(CaloriesLost)[0] FROM UserWorkout WHERE FK_UserWorkout_UserID =@id AND CONVERT(date,DateOfToday)=CONVERT (date ,GETDATE())", connection);
-            command.Parameters.AddWithValue("@id", accountID);
-            if (command.ExecuteScalar().ToString() != "")
-            {
-
-                double calorie = (double)command.ExecuteScalar();
-                SumOfCaloriesLost = calorie;
-                connection.Close();
-                return SumOfCaloriesLost;
-
-            }
-
-            else
-            {
-                connection.Close();
-                return SumOfCaloriesLost;
-            }
-
-        }
-
-
-
-        private static string CalroiesGainedDuetoLastMeal(int accountID)
-        {
-            // Get last meal date
-            DateTime? date = null;
-            connection.Open();
-            command = new SqlCommand("SELECT DateOfToday FROM UserFood WHERE FK_UserFood_UserID = @id ORDER BY DateOfToday DESC", connection);
-            command.Parameters.AddWithValue("@id", accountID);
-            dataReader = command.ExecuteReader();
-            while (dataReader.Read())
-            {
-                date = (DateTime?)dataReader["DateOfToday"];
-                break;
-            }
-            dataReader.Close();
-            connection.Close();
-
-            // Get last meal calories
-            string caloriesgain = "0";
-            connection.Open();
-            command = new SqlCommand("SELECT SUM(CaloriesGained)[0] FROM UserFood WHERE FK_UserFood_UserID =@id AND DateOfToday=@date", connection);
-            command.Parameters.AddWithValue("@id", accountID);
-            command.Parameters.AddWithValue("@date", date);
-            double Calorie = (double)command.ExecuteScalar();
-            dataReader = command.ExecuteReader();
-            while (dataReader.Read())
-            {
-                caloriesgain = Calorie.ToString();
-            }
-            dataReader.Close();
-            connection.Close();
-            return caloriesgain;
-        }
-
-
-        private static string CaloriesLostInpreviousWorkout(int accountID)
-        {
-            // Get date of the previous workout
-            DateTime? workoutLastDate = null;
-            connection.Open();
-            command = new SqlCommand("SELECT DateOfToday FROM UserWorkout WHERE FK_UserWorkout_UserID=@id ORDER BY DateOfToday DESC", connection);
-            command.Parameters.AddWithValue("@id", accountID);
-            dataReader = command.ExecuteReader();
-            while (dataReader.Read())
-            {
-                workoutLastDate = (DateTime)dataReader["DateOfToday"];
-                break;
-            }
-            dataReader.Close();
-            connection.Close();
-
-
-            // Get it's calories
-            string calorieslost = "0";
-            connection.Open();
-            command = new SqlCommand("SELECT SUM(CaloriesLost)[0] FROM UserWorkout WHERE FK_UserWorkout_UserID=@id AND DateOfToday=@date", connection);
-            command.Parameters.AddWithValue("@date", workoutLastDate);
-            command.Parameters.AddWithValue("@id", accountID);
-            double Calorie1 = (double)command.ExecuteScalar();
-            dataReader = command.ExecuteReader();
-            while (dataReader.Read())
-            {
-                calorieslost = Calorie1.ToString();
-            }
-            dataReader.Close();
-            connection.Close();
-
-            return calorieslost;
-        }
-
-
-        public static void WeightCalc(UserModel currentUser)
-        {
-            double caloriesGained = double.Parse(CalroiesGainedDuetoLastMeal(currentUser.ID));
-            double caloriesLost = double.Parse(CaloriesLostInpreviousWorkout(currentUser.ID));
-            double actualCallories = caloriesGained - caloriesLost;
-            double weightCalCulated = actualCallories / (7716.179176470716);
-            double neededCalories = CalroiesNeeded(currentUser);
-            if (actualCallories > neededCalories)
-            {
-                currentUser.Weight += Math.Round(weightCalCulated, 2);
-            }
-            else if (actualCallories < neededCalories)
-            {
-                currentUser.Weight -= Math.Round(weightCalCulated, 2);
-            }
-
-            connection.Open();
-            command = new SqlCommand("AddNewWeight", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            command.Parameters.Add(new SqlParameter("@UserId", currentUser.ID));
-            command.Parameters.Add(new SqlParameter("@AddedWeight", currentUser.Weight));
-            dataReader = command.ExecuteReader();
-            dataReader.Close();
-            connection.Close();
-        }
-
 
     }
 }
