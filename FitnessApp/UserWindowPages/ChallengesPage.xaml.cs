@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using FitnessApp.ViewModels;
 using FitnessApp.Windows;
 using System.Windows;
@@ -38,7 +38,7 @@ namespace FitnessApp.UserWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueries.JoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
+            Database.JoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
             UserWindow.HomePageObject.LoadJoinedChallengesCards();
@@ -52,7 +52,7 @@ namespace FitnessApp.UserWindowPages
 
             ChallengeModel currentChallenge = (ChallengeModel) ChallengesListBox.Items[selectedChallengeIndex];
 
-            SQLqueries.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
+            Database.UnjoinChallenge(UserWindow.signedInUser.ID, currentChallenge.ID);
 
             // Rrefresh Joined Challenges Cards in Home Page 
             UserWindow.HomePageObject.LoadJoinedChallengesCards();

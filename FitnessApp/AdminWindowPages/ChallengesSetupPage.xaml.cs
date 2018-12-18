@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using FitnessApp.ViewModels;
 using FitnessApp.Windows;
 using Microsoft.Win32;
@@ -43,7 +43,7 @@ namespace FitnessApp.AdminWindowPages
             ChallengeModel chosenChallenge = (ChallengeModel)AllChallengesListBox.Items[selectedChallengeIndex];
 
             // Delete Challenge From Database
-            SQLqueries.DeleteChallenge(chosenChallenge.ID);
+            Database.DeleteChallenge(chosenChallenge.ID);
 
             // Refresh Challenges
             LoadAllChallenges();
@@ -65,7 +65,7 @@ namespace FitnessApp.AdminWindowPages
         private void LoadWorkoutTypeComboBox()
         {
             // Get All Workouts From Database
-            WorkoutTypeComboBox.ItemsSource = SQLqueries.GetAllWorkouts();
+            WorkoutTypeComboBox.ItemsSource = Database.GetAllWorkouts();
         }
 
         private void ChallengeDialogBoxAddButton_Click(object sender, RoutedEventArgs e)
@@ -89,13 +89,13 @@ namespace FitnessApp.AdminWindowPages
             else
             {
                 // Add Challenge to databse
-                SQLqueries.AddNewChallenge(challengePhoto.ByteArray,
+                Database.AddNewChallenge(challengePhoto.ByteArray,
                                                  ChallengeNameTextBox.Text,
                                                  ChallengeDescriptionTextBox.Text,
                                                  int.Parse(ChallengeTargetMinutesTextBox.Text),
                                                  ChallengeRewardTextBox.Text,
                                                  ChallengeDueDatePicker.SelectedDate,
-                                                 SQLqueries.GetWorkoutID(WorkoutTypeComboBox.Text));
+                                                 Database.GetWorkoutID(WorkoutTypeComboBox.Text));
 
                 AddChallengeDialogBox.Visibility = Visibility.Collapsed;
                 DialogBox.IsOpen = false;

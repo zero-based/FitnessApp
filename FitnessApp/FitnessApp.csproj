@@ -97,8 +97,8 @@
     <Compile Include="SignUpPages\SetUpProfilePage.xaml.cs">
       <DependentUpon>SetUpProfilePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SQLdatabase\ServerDetails.cs" />
-    <Compile Include="SQLdatabase\SQLqueries.cs" />
+    <Compile Include="SQLserver\ServerDetails.cs" />
+    <Compile Include="SQLserver\Database.cs" />
     <Compile Include="Windows\UserWindow.xaml.cs">
       <DependentUpon>UserWindow.xaml</DependentUpon>
     </Compile>

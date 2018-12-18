@@ -7,9 +7,9 @@ using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace FitnessApp.SQLdatabase
+namespace FitnessApp.SQLserver
 {
-    public static class SQLqueries
+    public static class Database
     {
 
         ////////// SQL connection string //////////

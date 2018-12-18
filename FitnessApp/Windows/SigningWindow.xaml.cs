@@ -1,5 +1,5 @@
 ﻿using FitnessApp.SignUpPages;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using MaterialDesignThemes.Wpf;
 using System.Windows;
 
@@ -34,20 +34,20 @@ namespace FitnessApp.Windows
         private void SignInButton_Click(object sender, RoutedEventArgs e)
         {
 
-            bool isAccountFound = SQLqueries.IsUserFound(EmailSignInTextBox.Text, PasswordSignInTextBox.Password);
+            bool isAccountFound = Database.IsUserFound(EmailSignInTextBox.Text, PasswordSignInTextBox.Password);
 
             if (isAccountFound == true)
             {
-                if (SQLqueries.accountType == "User")
+                if (Database.accountType == "User")
                 {
                     // Open User Main Window
-                    UserWindow UserWindowTemp = new UserWindow(SQLqueries.accountID);
+                    UserWindow UserWindowTemp = new UserWindow(Database.accountID);
                     UserWindowTemp.Show();
                 }
                 else
                 {
                     // Open Admin Main Window
-                    AdminWindow AdminWindowTemp = new AdminWindow(SQLqueries.accountID);
+                    AdminWindow AdminWindowTemp = new AdminWindow(Database.accountID);
                     AdminWindowTemp.Show();
                 }
 

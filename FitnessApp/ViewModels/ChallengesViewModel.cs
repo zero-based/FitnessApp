@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using System.Collections.Generic;
 
 namespace FitnessApp.ViewModels
@@ -16,13 +16,13 @@ namespace FitnessApp.ViewModels
 
         public void AllChallengesViewModel(int accountID)
         {
-            allChallengeModels = SQLqueries.GetAllChallenges(accountID);
+            allChallengeModels = Database.GetAllChallenges(accountID);
         }
 
         public void JoinedChallengesViewModel(int accountID)
         {
 
-            List<ChallengeModel> joinedChallengeModels = SQLqueries.GetJoinedChallenges(accountID);
+            List<ChallengeModel> joinedChallengeModels = Database.GetJoinedChallenges(accountID);
 
             foreach (var item in joinedChallengeModels)
             {

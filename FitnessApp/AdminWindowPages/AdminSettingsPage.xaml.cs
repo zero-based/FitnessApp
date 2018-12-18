@@ -1,4 +1,4 @@
-﻿using FitnessApp.SQLdatabase;
+﻿using FitnessApp.SQLserver;
 using FitnessApp.Windows;
 using System.Windows.Controls;
 
@@ -76,7 +76,7 @@ namespace FitnessApp.AdminWindowPages
             // Check Email/Username Availability
             else if (EmailTextBox.Text != AdminWindow.signedInAdmin.Email)
             {
-                if (SQLqueries.IsEmailTaken(EmailTextBox.Text))
+                if (Database.IsEmailTaken(EmailTextBox.Text))
                     AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             }
             else
@@ -88,7 +88,7 @@ namespace FitnessApp.AdminWindowPages
                 AdminWindow.signedInAdmin.Email     = EmailTextBox.Text;
 
                 // Update User's Account in database
-                SQLqueries.UpdateAdminAccount(AdminWindow.signedInAdmin);
+                Database.UpdateAdminAccount(AdminWindow.signedInAdmin);
 
                 // Refresh UserWindow DataContext
                 AdminWindow.AdminWindowObject.DataContext = null;
@@ -102,7 +102,7 @@ namespace FitnessApp.AdminWindowPages
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (SQLqueries.EncryptPassword(OldPasswordTextBox.Password) != AdminWindow.signedInAdmin.Password)
+            if (Database.EncryptPassword(OldPasswordTextBox.Password) != AdminWindow.signedInAdmin.Password)
             {
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
                 OldPasswordTextBox.Password = "";
@@ -122,10 +122,10 @@ namespace FitnessApp.AdminWindowPages
             else
             {
                 // Update signedInAdmin User Model
-                AdminWindow.signedInAdmin.Password = SQLqueries.EncryptPassword(NewPasswordTextBox.Password);
+                AdminWindow.signedInAdmin.Password = Database.EncryptPassword(NewPasswordTextBox.Password);
 
                 // Update Admin's Password in database
-                SQLqueries.UpdateAdminPassword(AdminWindow.signedInAdmin);
+                Database.UpdateAdminPassword(AdminWindow.signedInAdmin);
 
                 // Confirmation Message
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");

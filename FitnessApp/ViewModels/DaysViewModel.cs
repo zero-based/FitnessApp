@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using System.Collections.Generic;
 
 namespace FitnessApp.ViewModels
@@ -13,7 +13,7 @@ namespace FitnessApp.ViewModels
         {
             //Initialize 30 Days of Plan of ID: planNumber + 1 in DayModels Array
 
-            dayModels = SQLqueries.GetPlanDays(planID);
+            dayModels = Database.GetPlanDays(planID);
         }
 
         public List<DayModel> DayModels

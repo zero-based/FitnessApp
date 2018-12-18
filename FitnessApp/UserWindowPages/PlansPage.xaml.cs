@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using FitnessApp.ViewModels;
 using FitnessApp.Windows;
 using System.Windows.Controls;
@@ -43,10 +43,10 @@ namespace FitnessApp.UserWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            if (SQLqueries.IsInPlan(UserWindow.signedInUser.ID))
+            if (Database.IsInPlan(UserWindow.signedInUser.ID))
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("You are currently in a plan. Please unjoin it first.");
             else
-                SQLqueries.JoinPlan(UserWindow.signedInUser.ID, currentPlan.ID);
+                Database.JoinPlan(UserWindow.signedInUser.ID, currentPlan.ID);
 
             LoadAllPlansCards();
 
@@ -60,7 +60,7 @@ namespace FitnessApp.UserWindowPages
             int selectedPlanIndex = PlansListBox.Items.IndexOf(toggleButton.DataContext);
             PlanModel currentPlan = (PlanModel)PlansListBox.Items[selectedPlanIndex];
 
-            SQLqueries.UnjoinPlan(UserWindow.signedInUser.ID);
+            Database.UnjoinPlan(UserWindow.signedInUser.ID);
 
             LoadAllPlansCards();
 

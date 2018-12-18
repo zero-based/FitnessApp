@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using FitnessApp.Windows;
 using Microsoft.Win32;
 using System.Windows;
@@ -42,7 +42,7 @@ namespace FitnessApp.SignUpPages
             else
             {
                 // Signing up
-                SQLqueries.AddUser(profilePhoto.ByteArray,
+                Database.AddUser(profilePhoto.ByteArray,
                                         SigningWindow.SignUpFirstPageObject.FirstNameTextBox.Text,
                                         SigningWindow.SignUpFirstPageObject.LastNameTextBox.Text,
                                         SigningWindow.SignUpFirstPageObject.UsernameTextBox.Text,
@@ -57,7 +57,7 @@ namespace FitnessApp.SignUpPages
                                         double.Parse(WorkoutsPerWeekTextBox.Text),
                                         double.Parse(WorkoutHoursPerDayTextBox.Text));
 
-                UserWindow UserWindowTemp = new UserWindow(SQLqueries.accountID);
+                UserWindow UserWindowTemp = new UserWindow(Database.accountID);
                 SigningWindow.SigningWindowObject.Close();
                 UserWindowTemp.Show();
             }

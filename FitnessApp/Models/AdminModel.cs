@@ -1,4 +1,4 @@
-﻿using FitnessApp.SQLdatabase;
+﻿using FitnessApp.SQLserver;
 
 namespace FitnessApp.Models
 {
@@ -16,7 +16,7 @@ namespace FitnessApp.Models
 
         public AdminModel(int adminID)
         {
-            AdminModel temp = SQLqueries.GetAdminData(adminID);
+            AdminModel temp = Database.GetAdminData(adminID);
 
             _id = adminID;
             _firstName = temp.FirstName;

@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using System.Collections.Generic;
 
 namespace FitnessApp.ViewModels
@@ -11,7 +11,7 @@ namespace FitnessApp.ViewModels
 
         public PlansViewModel(int accountID)
         {
-            planModels = SQLqueries.GetPlans(accountID);
+            planModels = Database.GetPlans(accountID);
         }
 
         public List<PlanModel> PlanModels

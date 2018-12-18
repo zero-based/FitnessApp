@@ -1,4 +1,4 @@
-﻿using FitnessApp.SQLdatabase;
+﻿using FitnessApp.SQLserver;
 
 namespace FitnessApp.Models
 {
@@ -26,7 +26,7 @@ namespace FitnessApp.Models
 
         public UserModel(int userID)
         {
-            UserModel temp = SQLqueries.GetUserData(userID);
+            UserModel temp = Database.GetUserData(userID);
 
             _id                     = userID;
             _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;

@@ -1,6 +1,6 @@
 ﻿using FitnessApp.AdminWindowPages;
 using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using MaterialDesignThemes.Wpf;
 using System.Windows;
 using System.Windows.Controls;
@@ -98,7 +98,7 @@ namespace FitnessApp.Windows
 
         private void ControlUpdateNewAdminPasswordGrid(int accountID)
         {
-            if (SQLqueries.IsNewAdmin(accountID))
+            if (Database.IsNewAdmin(accountID))
             {
                 UpdateNewAdminPasswordGrid.Visibility = Visibility.Visible;
 
@@ -109,7 +109,7 @@ namespace FitnessApp.Windows
 
         private void UpdatePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SQLqueries.EncryptPassword(OldPasswordTextBox.Password) != signedInAdmin.Password)
+            if (Database.EncryptPassword(OldPasswordTextBox.Password) != signedInAdmin.Password)
             {
                 AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
                 OldPasswordTextBox.Password = "";
@@ -129,10 +129,10 @@ namespace FitnessApp.Windows
             else
             {
                 // Update signedInAdmin User Model
-                signedInAdmin.Password = SQLqueries.EncryptPassword(NewPasswordTextBox.Password);
+                signedInAdmin.Password = Database.EncryptPassword(NewPasswordTextBox.Password);
 
                 // Update Admin's Password in database
-                SQLqueries.UpdateAdminPassword(signedInAdmin);
+                Database.UpdateAdminPassword(signedInAdmin);
 
                 // Confirmation Message
                 AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password Updated!");

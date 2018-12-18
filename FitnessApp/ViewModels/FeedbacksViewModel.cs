@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using System.Collections.Generic;
 
 namespace FitnessApp.ViewModels
@@ -11,7 +11,7 @@ namespace FitnessApp.ViewModels
         private List<FeedbackModel> feedbackModels;
         public FeedbacksViewModel()
         {
-            feedbackModels = SQLqueries.GetFeedbacks();
+            feedbackModels = Database.GetFeedbacks();
         }
         public List<FeedbackModel> FeedbackModels {  get => feedbackModels; set { } }
     }

@@ -1,5 +1,5 @@
 ﻿using FitnessApp.Models;
-using FitnessApp.SQLdatabase;
+using FitnessApp.SQLserver;
 using System.Collections.Generic;
 
 
@@ -12,7 +12,7 @@ namespace FitnessApp.ViewModels
 
         public UserViewModel(string userNameOrEmail)
         {
-            userModels = SQLqueries.SearchForUser(userNameOrEmail);
+            userModels = Database.SearchForUser(userNameOrEmail);
         }
 
 
