@@ -162,7 +162,7 @@
         </materialDesign:DialogHost.DialogContent>
         
         <Grid>
-            <Grid HorizontalAlignment="Center" Margin="5">
+            <Grid HorizontalAlignment="Center">
 
                 <!--All Challenges ListBox-->
                 <ListBox x:Name="AllChallengesListBox" 
