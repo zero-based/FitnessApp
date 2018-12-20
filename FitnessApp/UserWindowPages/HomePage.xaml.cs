@@ -151,64 +151,64 @@ namespace FitnessApp.UserWindowPages
         public void LoadTotalWeightLostCard()
         {
 
-            double WeightLostPerWeek = Database.GetTotalWeightLostPerWeek(UserWindow.signedInUser.ID);
-            double WeightLostPerMonth = Database.GetTotalWeightLostPerMonth(UserWindow.signedInUser.ID);
-            double WeightLostPerYear = Database.GetTotalWeightLostPerYear(UserWindow.signedInUser.ID);
+            double totalWeightLostPerWeek  = Database.GetTotalWeightLostPerDuration(UserWindow.signedInUser.ID, "WEEK");
+            double totalWeightLostPerMonth = Database.GetTotalWeightLostPerDuration(UserWindow.signedInUser.ID, "MONTH");
+            double totalWeightLostPerYear  = Database.GetTotalWeightLostPerDuration(UserWindow.signedInUser.ID, "YEAR");
 
 
             // Set Colours
-            if (WeightLostPerWeek < 0)
+            if (totalWeightLostPerWeek < 0)
                 WeightLostPerWeekTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 WeightLostPerWeekTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
-            if (WeightLostPerMonth < 0)
+            if (totalWeightLostPerMonth < 0)
                 WeightLostPerMonthTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 WeightLostPerMonthTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
-            if (WeightLostPerYear < 0)
+            if (totalWeightLostPerYear < 0)
                 WeightLostPerYearTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 WeightLostPerYearTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
 
             // Assign Values to TextBoxes
-            WeightLostPerWeekTextBlock.Text = WeightLostPerWeek.ToString();
-            WeightLostPerMonthTextBlock.Text = WeightLostPerMonth.ToString();
-            WeightLostPerYearTextBlock.Text = WeightLostPerYear.ToString();
+            WeightLostPerWeekTextBlock .Text = totalWeightLostPerWeek.ToString();
+            WeightLostPerMonthTextBlock.Text = totalWeightLostPerMonth.ToString();
+            WeightLostPerYearTextBlock .Text = totalWeightLostPerYear.ToString();
 
         }
 
         public void LoadAverageWeightLostCard()
         {
 
-            double AverageWeightLostPerWeek = Database.GetAverageWeightLostPerWeek(UserWindow.signedInUser.ID);
-            double AverageWeightLostPerMonth = Database.GetAverageWeightLostPerMonth(UserWindow.signedInUser.ID);
-            double AverageWeightLostPerYear = Database.GetAverageWeightLostPerYear(UserWindow.signedInUser.ID);
+            double averageWeightLostPerWeek  = Database.GetAverageWeightLostPerDuration(UserWindow.signedInUser.ID, "WEEK");
+            double averageWeightLostPerMonth = Database.GetAverageWeightLostPerDuration(UserWindow.signedInUser.ID, "MONTH");
+            double averageWeightLostPerYear  = Database.GetAverageWeightLostPerDuration(UserWindow.signedInUser.ID, "YEAR");
 
 
             // Set Colours
-            if (AverageWeightLostPerWeek < 0)
+            if (averageWeightLostPerWeek < 0)
                 AverageWeightLostPerWeekTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 AverageWeightLostPerWeekTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
-            if (AverageWeightLostPerMonth < 0)
+            if (averageWeightLostPerMonth < 0)
                 AverageWeightLostPerMonthTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 AverageWeightLostPerMonthTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
-            if (AverageWeightLostPerYear < 0)
+            if (averageWeightLostPerYear < 0)
                 AverageWeightLostPerYearTextBlock.Foreground = new SolidColorBrush(Colors.Red);
             else
                 AverageWeightLostPerYearTextBlock.Foreground = (Brush)Application.Current.Resources["PrimaryHueMidBrush"];
 
 
             // Assign Values to TextBoxes
-            AverageWeightLostPerWeekTextBlock.Text = AverageWeightLostPerWeek.ToString();
-            AverageWeightLostPerMonthTextBlock.Text = AverageWeightLostPerMonth.ToString();
-            AverageWeightLostPerYearTextBlock.Text = AverageWeightLostPerYear.ToString();
+            AverageWeightLostPerWeekTextBlock .Text = averageWeightLostPerWeek.ToString();
+            AverageWeightLostPerMonthTextBlock.Text = averageWeightLostPerMonth.ToString();
+            AverageWeightLostPerYearTextBlock .Text = averageWeightLostPerYear.ToString();
         }
 
 
@@ -305,15 +305,15 @@ namespace FitnessApp.UserWindowPages
 
                     // Load CheckBoxes
                     BreakfastCheckBox.IsChecked = Database.GetDayBreakfastStatus(UserWindow.signedInUser.ID);
-                    LunchCheckBox.IsChecked = Database.GetDayLunchStatus(UserWindow.signedInUser.ID);
-                    DinnerCheckBox.IsChecked = Database.GetDayDinnerStatus(UserWindow.signedInUser.ID);
-                    WorkoutsCheckBox.IsChecked = Database.GetDayWorkoutStatus(UserWindow.signedInUser.ID);
+                    LunchCheckBox    .IsChecked = Database.GetDayLunchStatus(UserWindow.signedInUser.ID);
+                    DinnerCheckBox   .IsChecked = Database.GetDayDinnerStatus(UserWindow.signedInUser.ID);
+                    WorkoutsCheckBox .IsChecked = Database.GetDayWorkoutStatus(UserWindow.signedInUser.ID);
 
                     // Load Descriptions
                     BreakfastDescriptionTextBlock.Text = Database.GetDayBreakfastDescription(UserWindow.signedInUser.ID);
-                    LunchDescriptionTextBlock.Text = Database.GetDayLucnchDescription(UserWindow.signedInUser.ID);
-                    DinnerDescriptionTextBlock.Text = Database.GetDayDinnerDescription(UserWindow.signedInUser.ID);
-                    WorkoutsDescriptionTextBlock.Text = Database.GetDayWorkoutDescription(UserWindow.signedInUser.ID);
+                    LunchDescriptionTextBlock    .Text = Database.GetDayLunchDescription(UserWindow.signedInUser.ID);
+                    DinnerDescriptionTextBlock   .Text = Database.GetDayDinnerDescription(UserWindow.signedInUser.ID);
+                    WorkoutsDescriptionTextBlock .Text = Database.GetDayWorkoutDescription(UserWindow.signedInUser.ID);
 
                     // Load Progress Bar
                     PlanProgressBar.Value = planDayNum;
@@ -321,7 +321,7 @@ namespace FitnessApp.UserWindowPages
             }
             else
             {
-                JoinedPlanCard.Visibility = Visibility.Collapsed;
+                JoinedPlanCard   .Visibility = Visibility.Collapsed;
                 PlanCompletedCard.Visibility = Visibility.Collapsed;
             }
         }

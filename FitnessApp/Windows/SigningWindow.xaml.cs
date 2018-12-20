@@ -38,16 +38,16 @@ namespace FitnessApp.Windows
 
             if (isAccountFound == true)
             {
-                if (Database.accountType == "User")
+                if (Database.AccountType == "User")
                 {
                     // Open User Main Window
-                    UserWindow UserWindowTemp = new UserWindow(Database.accountID);
+                    UserWindow UserWindowTemp = new UserWindow(Database.AccountID);
                     UserWindowTemp.Show();
                 }
                 else
                 {
                     // Open Admin Main Window
-                    AdminWindow AdminWindowTemp = new AdminWindow(Database.accountID);
+                    AdminWindow AdminWindowTemp = new AdminWindow(Database.AccountID);
                     AdminWindowTemp.Show();
                 }
 

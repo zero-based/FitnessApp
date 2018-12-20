@@ -57,7 +57,7 @@ namespace FitnessApp.SignUpPages
                                         double.Parse(WorkoutsPerWeekTextBox.Text),
                                         double.Parse(WorkoutHoursPerDayTextBox.Text));
 
-                UserWindow UserWindowTemp = new UserWindow(Database.accountID);
+                UserWindow UserWindowTemp = new UserWindow(Database.AccountID);
                 SigningWindow.SigningWindowObject.Close();
                 UserWindowTemp.Show();
             }
