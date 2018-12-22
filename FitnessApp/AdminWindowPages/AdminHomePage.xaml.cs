@@ -90,7 +90,7 @@ namespace FitnessApp.AdminWindowPages
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             else
             {
-                Database.AddNewAdmin(NewAdminEmailTextBox.Text, FirstNameTextBox.Text, LastNameTextBox.Text);
+                Database.AddNewAdmin(FirstNameTextBox.Text, LastNameTextBox.Text, NewAdminEmailTextBox.Text);
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Admin Added Succesfully");
             }
         }

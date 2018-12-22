@@ -45,7 +45,6 @@ namespace FitnessApp.SignUpPages
                 Database.AddUser(profilePhoto.ByteArray,
                                         SigningWindow.SignUpFirstPageObject.FirstNameTextBox.Text,
                                         SigningWindow.SignUpFirstPageObject.LastNameTextBox.Text,
-                                        SigningWindow.SignUpFirstPageObject.UsernameTextBox.Text,
                                         SigningWindow.SignUpFirstPageObject.EmailTextBox.Text,
                                         SigningWindow.SignUpFirstPageObject.Password,
                                         SigningWindow.SignUpSecondPageObject.GenderComboBox.Text,

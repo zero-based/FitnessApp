@@ -181,19 +181,12 @@ namespace FitnessApp.UserWindowPages
                     UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             }
 
-            else if (UsernameTextBox.Text != UserWindow.signedInUser.Username)
-            {
-                if (Database.IsUsernameTaken(UsernameTextBox.Text))
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is in use");
-            }
-
             else
             {
 
                 // Update signedInUser User Model
                 UserWindow.signedInUser.FirstName = FirstNameTextBox.Text;
                 UserWindow.signedInUser.LastName = LastNameTextBox.Text;
-                UserWindow.signedInUser.Username = UsernameTextBox.Text;
                 UserWindow.signedInUser.Email = EmailTextBox.Text;
 
                 // Update User's Account in database

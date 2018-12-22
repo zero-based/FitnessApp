@@ -48,7 +48,6 @@ namespace FitnessApp.SignUpPages
             int firstNameLength = FirstNameTextBox.Text.Length;
             int lastNameLength = LastNameTextBox.Text.Length;
             int userNameLength = UsernameTextBox.Text.Length;
-            bool CheckUniqueUsername = Database.IsUsernameTaken(UsernameTextBox.Text);
             bool CheckUniqueEmail = Database.IsEmailTaken(EmailTextBox.Text);
 
             // Constraints , to make sure that texts boxes are not empty
@@ -63,10 +62,6 @@ namespace FitnessApp.SignUpPages
             else if (CheckUniqueEmail)
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Email is already taken!");
-            }
-            else if (CheckUniqueUsername)
-            {
-                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Username is already taken!");
             }
             else if (passwordLength < 6)
             {
