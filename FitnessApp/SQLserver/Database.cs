@@ -240,7 +240,7 @@ namespace FitnessApp.SQLserver
             // Get User's ID
             query = "SELECT PK_AccountID FROM [Account] " +
                     "WHERE FirstName = @firstName " +
-                    "AND LastName = @lastName" +
+                    "AND LastName = @lastName " +
                     "And Email = @email";
 
             command = new SqlCommand(query, connection);
