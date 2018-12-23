@@ -90,12 +90,12 @@
                                    TextWrapping="Wrap"
                                    Text="{Binding FullName}"/>
 
-                        <TextBlock x:Name="UsernameTextBlock"
+                        <TextBlock x:Name="EmailTextBlock"
                                    FontFamily="{StaticResource ProductSans}"
                                    FontWeight="Light" 
                                    FontSize="14"
                                    TextWrapping="Wrap"
-                                   Text="{Binding StyledUsername}"/>
+                                   Text="{Binding Email}"/>
                     </StackPanel>
 
                     <Separator Grid.Row="5" Grid.ColumnSpan="3"/>

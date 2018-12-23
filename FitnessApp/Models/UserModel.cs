@@ -9,7 +9,6 @@ namespace FitnessApp.Models
         private ImageModel _profilePhoto = new ImageModel() { Default = @"..\..\Images\AccountCircleDefaultIcon.png" };
         private string _firstName;
         private string _lastName;
-        private string _username;
         private string _email;
         private string _password;
         private string _gender;
@@ -32,7 +31,6 @@ namespace FitnessApp.Models
             _profilePhoto.ByteArray = temp.ProfilePhoto.ByteArray;
             _firstName              = temp.FirstName;
             _lastName               = temp.LastName;
-            _username               = temp.Username;
             _email                  = temp.Email;
             _password               = temp.Password;
             _gender                 = temp.Gender;
@@ -73,17 +71,6 @@ namespace FitnessApp.Models
         public string FullName
         {
             get { return _firstName + " " + _lastName; }
-        }
-
-        public string Username
-        {
-            get { return _username; }
-            set { _username = value; }
-        }
-
-        public string StyledUsername
-        {
-            get { return "@" + _username; }
         }
 
         public string Email
