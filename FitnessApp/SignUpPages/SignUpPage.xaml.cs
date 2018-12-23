@@ -43,17 +43,9 @@ namespace FitnessApp.SignUpPages
             password = PasswordTextBox.Password;
             confirmedPassword = ConfirmPasswordTextBox.Password;
 
-            // Get the length of each input
-            int passwordLength     = PasswordTextBox.Password.Length;
-            int firstNameLength    = FirstNameTextBox.Text.Length;
-            int lastNameLength     = LastNameTextBox.Text.Length;
-            int genderIsSelected   = GenderComboBox.Text.Length;
-            int calenderIsSelected = BirthDatePicker.Text.Length;
-            bool CheckUniqueEmail  = Database.IsEmailTaken(EmailTextBox.Text);
-
             // Constraints , to make sure that texts boxes are not empty
-            if (firstNameLength < 1 || lastNameLength < 1 || passwordLength < 1 || 
-               genderIsSelected < 4 || calenderIsSelected < 5 || (NotRobotCheckBox.IsChecked == false))
+            if (FirstNameTextBox.Text.Length < 1 || LastNameTextBox.Text.Length < 1 || PasswordTextBox.Password.Length < 1 ||
+               GenderComboBox.Text.Length < 4 || BirthDatePicker.Text.Length < 5 || (NotRobotCheckBox.IsChecked == false))
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("All fields are required!");
             }
@@ -61,11 +53,11 @@ namespace FitnessApp.SignUpPages
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Invalid E-mail");
             }
-            else if (CheckUniqueEmail)
+            else if (Database.IsEmailTaken(EmailTextBox.Text))
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Email is already taken!");
             }
-            else if (passwordLength < 6)
+            else if (PasswordTextBox.Password.Length < 6)
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("password < 7!");
             }
