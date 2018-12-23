@@ -157,15 +157,12 @@ namespace FitnessApp.UserWindowPages
 
         private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" ||
-                UsernameTextBox.Text == "" || EmailTextBox.Text == "")
+            if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" || EmailTextBox.Text == "")
             {
                 if (FirstNameTextBox.Text == "")
                     UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name is Empty!");
                 if (LastNameTextBox.Text == "")
                     UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name is Empty!");
-                if (UsernameTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Username is Empty!");
                 if (EmailTextBox.Text == "")
                     UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email is Empty!");
             }

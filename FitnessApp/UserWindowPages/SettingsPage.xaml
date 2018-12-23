@@ -165,8 +165,6 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
                                 <RowDefinition Height="auto"/>
-                                <RowDefinition Height="30"/>
-                                <RowDefinition Height="auto"/>
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
 
@@ -193,16 +191,8 @@
                                          materialDesign:HintAssist.Hint="Last Name" />
                             </Grid>
 
-                            <!--Username and Email Fields-->
-                            <TextBox x:Name="UsernameTextBox"
-                                     Grid.Row="3"
-                                     FontFamily="{StaticResource Roboto}"
-                                     Text="{Binding Username}"
-                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                     materialDesign:HintAssist.Hint="Username" />
-
                             <TextBox x:Name="EmailTextBox"
-                                     Grid.Row="5"
+                                     Grid.Row="3"
                                      FontFamily="{StaticResource Roboto}"
                                      Text="{Binding Email}"
                                      Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -210,7 +200,7 @@
 
                             <!--Update Account Button-->
                             <Button x:Name="UpdateAccountButton"
-                                    Grid.Row="7"
+                                    Grid.Row="5"
                                     HorizontalAlignment="Right"
                                     FontFamily="{StaticResource ProductSans}" 
                                     FontSize="14"
