@@ -88,11 +88,8 @@
     <Compile Include="Models\FeedbackModel.cs" />
     <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\UserModel.cs" />
-    <Compile Include="SignUpPages\SignUpFirstPage.xaml.cs">
-      <DependentUpon>SignUpFirstPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SignUpPages\SignUpSecondPage.xaml.cs">
-      <DependentUpon>SignUpSecondPage.xaml</DependentUpon>
+    <Compile Include="SignUpPages\SignUpPage.xaml.cs">
+      <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="SignUpPages\SetUpProfilePage.xaml.cs">
       <DependentUpon>SetUpProfilePage.xaml</DependentUpon>
@@ -153,11 +150,7 @@
       <DependentUpon>SigningWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SignUpPages\SignUpFirstPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="SignUpPages\SignUpSecondPage.xaml">
+    <Page Include="SignUpPages\SignUpPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

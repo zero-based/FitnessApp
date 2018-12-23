@@ -11,8 +11,7 @@ namespace FitnessApp.Windows
     public partial class SigningWindow : Window
     {
         public static SigningWindow    SigningWindowObject;
-        public static SignUpFirstPage  SignUpFirstPageObject;
-        public static SignUpSecondPage SignUpSecondPageObject;
+        public static SignUpPage       SignUpPageObject;
         public static SetUpProfilePage SetUpProfilePageObject;
         
 
@@ -22,8 +21,7 @@ namespace FitnessApp.Windows
             SigningWindowObject = this;
 
             // Initialize UserWindowPages Objects
-            SignUpFirstPageObject  = new SignUpFirstPage();
-            SignUpSecondPageObject = new SignUpSecondPage();
+            SignUpPageObject  = new SignUpPage();
             SetUpProfilePageObject = new SetUpProfilePage();
 
             // Intialize ErrorMessagesQueue and Assign it to ErrorsSnackbar's MessageQueue
@@ -65,7 +63,7 @@ namespace FitnessApp.Windows
 
         private void CreateAnAccountButton_Click(object sender, RoutedEventArgs e)
         {
-            SignUpPagesFrame.NavigationService.Navigate(SigningWindow.SignUpFirstPageObject);
+            SignUpPagesFrame.NavigationService.Navigate(SigningWindow.SignUpPageObject);
         }
     }
 }

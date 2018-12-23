@@ -7,17 +7,17 @@ using System.Windows.Navigation;
 namespace FitnessApp.SignUpPages
 {
     /// <summary>
-    /// Interaction logic for SignUpFirstPage.xaml
+    /// Interaction logic for SignUpPage.xaml
     /// </summary>
-    public partial class SignUpFirstPage : Page
+    public partial class SignUpPage : Page
     {
 
-        public static SignUpFirstPage SignUpFirstPageObject = new SignUpFirstPage();
+        public static SignUpPage SignUpPageObject = new SignUpPage();
 
-        public SignUpFirstPage()
+        public SignUpPage()
         {
             InitializeComponent();
-            SignUpFirstPageObject = this;
+            SignUpPageObject = this;
         }
 
 
@@ -37,21 +37,23 @@ namespace FitnessApp.SignUpPages
             set { confirmedPassword = value; }
         }
 
-        private void NextButton_Click(object sender, RoutedEventArgs e)
+        private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             // Save entered password and its confirmation
             password = PasswordTextBox.Password;
             confirmedPassword = ConfirmPasswordTextBox.Password;
 
             // Get the length of each input
-            int passwordLength = PasswordTextBox.Password.Length;
-            int firstNameLength = FirstNameTextBox.Text.Length;
-            int lastNameLength = LastNameTextBox.Text.Length;
-            int userNameLength = UsernameTextBox.Text.Length;
-            bool CheckUniqueEmail = Database.IsEmailTaken(EmailTextBox.Text);
+            int passwordLength     = PasswordTextBox.Password.Length;
+            int firstNameLength    = FirstNameTextBox.Text.Length;
+            int lastNameLength     = LastNameTextBox.Text.Length;
+            int genderIsSelected   = GenderComboBox.Text.Length;
+            int calenderIsSelected = BirthDatePicker.Text.Length;
+            bool CheckUniqueEmail  = Database.IsEmailTaken(EmailTextBox.Text);
 
             // Constraints , to make sure that texts boxes are not empty
-            if (firstNameLength < 1 || lastNameLength < 1 || userNameLength < 1 || passwordLength < 1)
+            if (firstNameLength < 1 || lastNameLength < 1 || passwordLength < 1 || 
+               genderIsSelected < 4 || calenderIsSelected < 5 || (NotRobotCheckBox.IsChecked == false))
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("All fields are required!");
             }
@@ -72,8 +74,13 @@ namespace FitnessApp.SignUpPages
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Password doesn't match confirmation!");
             }
             else
-            { 
-              NavigationService.Navigate(SigningWindow.SignUpSecondPageObject);
+            {
+                NavigationService.Navigate(SigningWindow.SetUpProfilePageObject);
+
+                //Change Back Card Header
+                SigningWindow.SigningWindowObject.BackArrowButton.Visibility = Visibility.Hidden;
+                SigningWindow.SigningWindowObject.BackCardHeaderTextBlock.Text = "Set up your Profile";
+                SigningWindow.SigningWindowObject.BackCardHeaderTextBlock.Margin = new Thickness(-15);
             }
         }
     }

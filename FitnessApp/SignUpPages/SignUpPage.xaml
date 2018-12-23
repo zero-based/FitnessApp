@@ -1,4 +1,4 @@
-﻿<Page x:Class="FitnessApp.SignUpPages.SignUpFirstPage"
+﻿<Page x:Class="FitnessApp.SignUpPages.SignUpPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -11,6 +11,10 @@
              because the total width of the frame is 500px-->
         
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="auto"/>
@@ -45,22 +49,16 @@
         </Grid>
 
 
-        <!--Username and Email Feilds-->
-        <TextBox x:Name="UsernameTextBox"
-                 Grid.Row="2"
-                 FontFamily="{StaticResource Roboto}"
-                 Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                 materialDesign:HintAssist.Hint="Username"/>
-
+        <!--Email Feild-->
         <TextBox x:Name="EmailTextBox"
-                 Grid.Row="4"
+                 Grid.Row="2"
                  FontFamily="{StaticResource Roboto}"
                  Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                  materialDesign:HintAssist.Hint="Email"/>
         
         
         <!--Passsword and Confirm Password Feilds-->
-        <Grid Grid.Row="6">
+        <Grid Grid.Row="4">
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -81,19 +79,46 @@
                          materialDesign:HintAssist.Hint="Confirm Password"/>
             
         </Grid>
-
         
-        <!--Next Button-->
-        <Button x:Name="NextButton"
-                Grid.Row="8"
+        <!--Gender and Birthdate Feilds-->
+        <ComboBox x:Name="GenderComboBox"
+                  Grid.Row="6"
+                  FontFamily="{StaticResource Roboto}"
+                  materialDesign:HintAssist.Hint="Gender">
+            <ComboBoxItem>
+                Male
+            </ComboBoxItem>
+            <ComboBoxItem>
+                Female
+            </ComboBoxItem>
+        </ComboBox>
+
+        <DatePicker x:Name="BirthDatePicker"
+                    Grid.Row="8"
+                    FontFamily="{StaticResource Roboto}"
+                    Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                    materialDesign:HintAssist.Hint="Birth Date"/>
+
+        <!--Not A Robot CheckBoxes-->
+        <CheckBox x:Name="NotRobotCheckBox"
+                  Grid.Row="10"
+                  FontFamily="{StaticResource Roboto}"
+                  Style="{StaticResource MaterialDesignCheckBox}">
+                  I'm not a Robot!
+        </CheckBox>
+
+
+        <!--SignUp Button-->
+        <Button x:Name="SignUpButton" 
+                Grid.Row="12"
                 HorizontalAlignment="Right"
                 FontFamily="{StaticResource ProductSans}" 
-                FontSize="14"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                Click="NextButton_Click">
-                Next
+                FontSize="14" 
+                Style="{StaticResource MaterialDesignRaisedButton}" 
+                Click="SignUpButton_Click">
+                Sign Up
         </Button>
-        
+
     </Grid>
     
 </Page>

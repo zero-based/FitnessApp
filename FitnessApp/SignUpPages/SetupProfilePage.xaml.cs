@@ -43,12 +43,12 @@ namespace FitnessApp.SignUpPages
             {
                 // Signing up
                 Database.AddUser(profilePhoto.ByteArray,
-                                        SigningWindow.SignUpFirstPageObject.FirstNameTextBox.Text,
-                                        SigningWindow.SignUpFirstPageObject.LastNameTextBox.Text,
-                                        SigningWindow.SignUpFirstPageObject.EmailTextBox.Text,
-                                        SigningWindow.SignUpFirstPageObject.Password,
-                                        SigningWindow.SignUpSecondPageObject.GenderComboBox.Text,
-                                        SigningWindow.SignUpSecondPageObject.BirthDatePicker.Text,
+                                        SigningWindow.SignUpPageObject.FirstNameTextBox.Text,
+                                        SigningWindow.SignUpPageObject.LastNameTextBox.Text,
+                                        SigningWindow.SignUpPageObject.EmailTextBox.Text,
+                                        SigningWindow.SignUpPageObject.Password,
+                                        SigningWindow.SignUpPageObject.GenderComboBox.Text,
+                                        SigningWindow.SignUpPageObject.BirthDatePicker.Text,
                                         double.Parse(WeightTextBox.Text),
                                         double.Parse(HeightTextBox.Text),
                                         double.Parse(TargetWeightTextBox.Text),
