@@ -109,23 +109,23 @@ namespace FitnessApp.Windows
 
         private void UpdatePasswordButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Database.EncryptPassword(OldPasswordTextBox.Password) != signedInAdmin.Password)
-            {
-                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
-                OldPasswordTextBox.Password = "";
-            }
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(OldPasswordTextBox.Password))
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your old password!");
+
+            else if (string.IsNullOrWhiteSpace(NewPasswordTextBox.Password))
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your new password!");
+
             else if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
-            {
-                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
-                NewPasswordTextBox.Password = "";
-                ConfirmNewPasswordTextBox.Password = "";
-            }
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation doesn't match!");
+
+            // Password Validation
             else if (NewPasswordTextBox.Password.Length < 7)
-            {
-                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be more than 7 Charachters!");
-                NewPasswordTextBox.Password = "";
-                ConfirmNewPasswordTextBox.Password = "";
-            }
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be 7 characters or more");
+
+            else if (Database.EncryptPassword(OldPasswordTextBox.Password) != signedInAdmin.Password)
+                AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
+
             else
             {
                 // Update signedInAdmin User Model

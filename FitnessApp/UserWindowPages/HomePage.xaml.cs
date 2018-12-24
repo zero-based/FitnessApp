@@ -108,7 +108,7 @@ namespace FitnessApp.UserWindowPages
 
         private void SaveWeightButton_Click(object sender, RoutedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(TodaysWeightTextBox.Text))
+            if (string.IsNullOrWhiteSpace(TodaysWeightTextBox.Text))
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your weight!");
             else
             {
@@ -499,7 +499,7 @@ namespace FitnessApp.UserWindowPages
             if (FoodComboBox.SelectedIndex == -1)
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please choose Food!");
 
-            else if (FoodQuantityTextBox.Text == "")
+            else if (string.IsNullOrWhiteSpace(FoodQuantityTextBox.Text))
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter Food Quantity!");
 
             else
@@ -524,7 +524,7 @@ namespace FitnessApp.UserWindowPages
             if (WorkoutsComboBox.SelectedIndex == -1)
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please choose Workout!");
 
-            else if (WorkoutsDurationTextBox.Text == "")
+            else if (string.IsNullOrWhiteSpace(WorkoutsDurationTextBox.Text))
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter Workout Duration!");
 
             else

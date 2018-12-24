@@ -98,32 +98,30 @@ namespace FitnessApp.UserWindowPages
 
         private void UpdateProfileButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(WeightTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Weight Is Empty!");
 
-            if (WeightTextBox.Text == ""             || HeightTextBox.Text == ""          || TargetWeightTextBox.Text == ""     ||
-                KilosToLosePerWeekTextBox.Text == "" || WorkoutsPerWeekTextBox.Text == "" || WorkoutHoursPerDayTextBox.Text == "")
-            {
-                if (WeightTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Weight Is Empty!");
-                if (HeightTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Height Is Empty!");
-                if (TargetWeightTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Target Weight Is Empty!");
-                if (KilosToLosePerWeekTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Kilos To Lose Per Week Is Empty!");
-                if (WorkoutsPerWeekTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workouts Per Week Is Empty!");
-                if (WorkoutHoursPerDayTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workout Hours Per Day Is Empty!");
-            }
+            else if (string.IsNullOrWhiteSpace(HeightTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Height Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(TargetWeightTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Target Weight Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(KilosToLosePerWeekTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Kilos To Lose Per Week Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(WorkoutsPerWeekTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workouts Per Week Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(WorkoutHoursPerDayTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Workout Hours Per Day Is Empty!");
 
             else
             {
-
                 // Update signedInUser User Model
-
                 if (currentProfilePhoto != null) // Check if profile photo is updated
                     UserWindow.signedInUser.ProfilePhoto   = currentProfilePhoto;
-
                 UserWindow.signedInUser.Weight             = double.Parse(WeightTextBox            .Text);
                 UserWindow.signedInUser.Height             = double.Parse(HeightTextBox            .Text);
                 UserWindow.signedInUser.TargetWeight       = double.Parse(TargetWeightTextBox      .Text);
@@ -151,27 +149,26 @@ namespace FitnessApp.UserWindowPages
 
                 // Confirmation Message
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Profile Updated!");
-
             }
         }
 
         private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" || EmailTextBox.Text == "")
-            {
-                if (FirstNameTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name is Empty!");
-                if (LastNameTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name is Empty!");
-                if (EmailTextBox.Text == "")
-                    UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email is Empty!");
-            }
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(LastNameTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email is Empty!");
 
             // Check Email Validation
             else if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
 
-            // Check Email/Username Availability
+            // Check Email Availability
             else if (EmailTextBox.Text != UserWindow.signedInUser.Email)
             {
                 if (Database.IsEmailTaken(EmailTextBox.Text))
@@ -180,7 +177,6 @@ namespace FitnessApp.UserWindowPages
 
             else
             {
-
                 // Update signedInUser User Model
                 UserWindow.signedInUser.FirstName = FirstNameTextBox.Text;
                 UserWindow.signedInUser.LastName = LastNameTextBox.Text;
@@ -195,33 +191,31 @@ namespace FitnessApp.UserWindowPages
 
                 // Confirmation Message
                 UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Account Updated!");
-
             }
         }
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (OldPasswordTextBox.Password == "" || NewPasswordTextBox.Password == "" || ConfirmNewPasswordTextBox.Password == "")
-            {
-                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("All fields are required!");
-            }
 
-            else if (Database.EncryptPassword(OldPasswordTextBox.Password) != UserWindow.signedInUser.Password)
-            {
-                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
-                OldPasswordTextBox.Password = "";
-            }
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(OldPasswordTextBox.Password))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your old password!");
+
+            else if (string.IsNullOrWhiteSpace(NewPasswordTextBox.Password))
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your new password!");
 
             else if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
-            {
-                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
-                NewPasswordTextBox.Password = "";
-                ConfirmNewPasswordTextBox.Password = "";
-            }
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation doesn't match!");
+
+            // Password Validation
+            else if (NewPasswordTextBox.Password.Length < 7)
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be 7 characters or more");
+
+            else if (Database.EncryptPassword(OldPasswordTextBox.Password) != UserWindow.signedInUser.Password)
+                UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
 
             else
             {
-
                 // Update signedInUser User Model
                 UserWindow.signedInUser.Password = Database.EncryptPassword(NewPasswordTextBox.Password);
 
@@ -239,7 +233,6 @@ namespace FitnessApp.UserWindowPages
 
             // Confirmation Message
             UserWindow.UserWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Thank you for your feedback!");
-
         }
 
     }

@@ -30,7 +30,7 @@ namespace FitnessApp.AdminWindowPages
         }
 
         public SeriesCollection SeriesCollection { get; set; }
-        public List<String> Labels { get; set; }
+        public List<string> Labels { get; set; }
         public Func<double, string> Formatter { get; set; }
 
 
@@ -72,16 +72,17 @@ namespace FitnessApp.AdminWindowPages
 
         private void AddNewAdminButton_Click(object sender, RoutedEventArgs e)
         {
-            if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" || NewAdminEmailTextBox.Text == "")
-            {
-                if (FirstNameTextBox.Text == "")
-                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
-                if (LastNameTextBox.Text == "")
-                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
-                if (NewAdminEmailTextBox.Text == "")
-                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
-            }
-                // Check Email Validation
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(LastNameTextBox.Text))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(NewAdminEmailTextBox.Text))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
+
+            // Check Email Validation
             else if (!NewAdminEmailTextBox.Text.Contains("@") || !NewAdminEmailTextBox.Text.Contains(".com"))
                 AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Invalid E-mail");
 

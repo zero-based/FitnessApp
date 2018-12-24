@@ -59,15 +59,15 @@ namespace FitnessApp.AdminWindowPages
 
         private void UpdateAccountButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (FirstNameTextBox.Text == "" || LastNameTextBox.Text == "" || EmailTextBox.Text == "")
-            {
-                if (FirstNameTextBox.Text == "")
-                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
-                if (LastNameTextBox.Text == "")
-                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
-                if (EmailTextBox.Text == "")
-                    AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
-            }
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("First Name Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(LastNameTextBox.Text))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Last Name Is Empty!");
+
+            else if (string.IsNullOrWhiteSpace(EmailTextBox.Text))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Email Is Empty!");
 
             // Check Email Validation
             else if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
@@ -79,6 +79,7 @@ namespace FitnessApp.AdminWindowPages
                 if (Database.IsEmailTaken(EmailTextBox.Text))
                     AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("E-mail is in use");
             }
+
             else
             {
 
@@ -102,23 +103,24 @@ namespace FitnessApp.AdminWindowPages
 
         private void UpdatePasswordButton_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (Database.EncryptPassword(OldPasswordTextBox.Password) != AdminWindow.signedInAdmin.Password)
-            {
-                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
-                OldPasswordTextBox.Password = "";
-            }
+
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(OldPasswordTextBox.Password))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your old password!");
+
+            else if (string.IsNullOrWhiteSpace(NewPasswordTextBox.Password))
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Please enter your new password!");
+
             else if (NewPasswordTextBox.Password != ConfirmNewPasswordTextBox.Password)
-            {
-                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation Mismatch!");
-                NewPasswordTextBox.Password = "";
-                ConfirmNewPasswordTextBox.Password = "";
-            }
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("New Password and Confirmation doesn't match!");
+
+            // Password Validation
             else if (NewPasswordTextBox.Password.Length < 7)
-            {
-                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be more than 7 Charachters!");
-                NewPasswordTextBox.Password = "";
-                ConfirmNewPasswordTextBox.Password = "";
-            }
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Password must be 7 characters or more");
+
+            else if (Database.EncryptPassword(OldPasswordTextBox.Password) != AdminWindow.signedInAdmin.Password)
+                AdminWindow.AdminWindowObject.MessagesSnackbar.MessageQueue.Enqueue("Old Password is Incorrect!");
+
             else
             {
                 // Update signedInAdmin User Model

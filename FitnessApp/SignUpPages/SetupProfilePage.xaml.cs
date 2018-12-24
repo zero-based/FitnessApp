@@ -15,9 +15,6 @@ namespace FitnessApp.SignUpPages
     {
         private ImageModel profilePhoto = new ImageModel();
 
-        // Create an object from dataBase class
-
-
         public SetUpProfilePage()
         {
             InitializeComponent();
@@ -26,15 +23,13 @@ namespace FitnessApp.SignUpPages
 
         private void SetUpProfileButton_Click(object sender, RoutedEventArgs e)
         {
-            int heightLength = HeightTextBox.Text.Length;
-            int weightLength = WeightTextBox.Text.Length;
-            int targetWeightLength = TargetWeightTextBox.Text.Length;
-            int kilosToLosePerWeekLength = KilosToLosePerWeekTextBox.Text.Length;
-            int workoutsPerWeekLength = WorkoutsPerWeekTextBox.Text.Length;
-            int workoutHoursPerDayLength = WorkoutHoursPerDayTextBox.Text.Length;
-
-            // Constarins to make sure that all fields are filled with numbers
-            if (heightLength < 1 || weightLength < 1 || targetWeightLength < 1 || kilosToLosePerWeekLength < 1 || workoutsPerWeekLength < 1 || workoutHoursPerDayLength < 1)
+            // Constarins to make sure that all fields are filled
+            if (string.IsNullOrWhiteSpace(HeightTextBox            .Text) ||
+                string.IsNullOrWhiteSpace(WeightTextBox            .Text) ||
+                string.IsNullOrWhiteSpace(TargetWeightTextBox      .Text) ||
+                string.IsNullOrWhiteSpace(KilosToLosePerWeekTextBox.Text) ||
+                string.IsNullOrWhiteSpace(WorkoutsPerWeekTextBox   .Text) ||
+                string.IsNullOrWhiteSpace(WorkoutHoursPerDayTextBox.Text))
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("All fields are required!");
             }
@@ -43,18 +38,18 @@ namespace FitnessApp.SignUpPages
             {
                 // Signing up
                 Database.AddUser(profilePhoto.ByteArray,
-                                        SigningWindow.SignUpPageObject.FirstNameTextBox.Text,
-                                        SigningWindow.SignUpPageObject.LastNameTextBox.Text,
-                                        SigningWindow.SignUpPageObject.EmailTextBox.Text,
-                                        SigningWindow.SignUpPageObject.Password,
-                                        SigningWindow.SignUpPageObject.GenderComboBox.Text,
-                                        SigningWindow.SignUpPageObject.BirthDatePicker.Text,
-                                        double.Parse(WeightTextBox.Text),
-                                        double.Parse(HeightTextBox.Text),
-                                        double.Parse(TargetWeightTextBox.Text),
-                                        double.Parse(KilosToLosePerWeekTextBox.Text),
-                                        double.Parse(WorkoutsPerWeekTextBox.Text),
-                                        double.Parse(WorkoutHoursPerDayTextBox.Text));
+                                 SigningWindow.SignUpPageObject.FirstNameTextBox.Text,
+                                 SigningWindow.SignUpPageObject.LastNameTextBox.Text,
+                                 SigningWindow.SignUpPageObject.EmailTextBox.Text,
+                                 SigningWindow.SignUpPageObject.Password,
+                                 SigningWindow.SignUpPageObject.GenderComboBox.Text,
+                                 SigningWindow.SignUpPageObject.BirthDatePicker.Text,
+                                 double.Parse(WeightTextBox.Text),
+                                 double.Parse(HeightTextBox.Text),
+                                 double.Parse(TargetWeightTextBox.Text),
+                                 double.Parse(KilosToLosePerWeekTextBox.Text),
+                                 double.Parse(WorkoutsPerWeekTextBox.Text),
+                                 double.Parse(WorkoutHoursPerDayTextBox.Text));
 
                 UserWindow UserWindowTemp = new UserWindow(Database.AccountID);
                 SigningWindow.SigningWindowObject.Close();

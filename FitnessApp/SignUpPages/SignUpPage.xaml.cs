@@ -11,15 +11,13 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class SignUpPage : Page
     {
-
         public static SignUpPage SignUpPageObject = new SignUpPage();
 
         public SignUpPage()
         {
             InitializeComponent();
-            SignUpPageObject = this;
+            SigningWindow.SignUpPageObject = this;
         }
-
 
 
         private string password;
@@ -40,31 +38,32 @@ namespace FitnessApp.SignUpPages
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             // Save entered password and its confirmation
-            password = PasswordTextBox.Password;
-            confirmedPassword = ConfirmPasswordTextBox.Password;
+            Password = PasswordTextBox.Password;
+            ConfirmedPassword = ConfirmPasswordTextBox.Password;
 
-            // Constraints , to make sure that texts boxes are not empty
-            if (FirstNameTextBox.Text.Length < 1 || LastNameTextBox.Text.Length < 1 || PasswordTextBox.Password.Length < 1 ||
-               GenderComboBox.Text.Length < 4 || BirthDatePicker.Text.Length < 5 || (NotRobotCheckBox.IsChecked == false))
+            // Empty Fields Validation
+            if (string.IsNullOrWhiteSpace(FirstNameTextBox.Text)    ||
+                string.IsNullOrWhiteSpace(LastNameTextBox .Text)    ||
+                string.IsNullOrWhiteSpace(PasswordTextBox.Password) ||
+                GenderComboBox.SelectedIndex == -1                  ||
+                BirthDatePicker.SelectedDate == null                ||
+                NotRobotCheckBox.IsChecked   == false)
             {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("All fields are required!");
             }
+
             else if (!EmailTextBox.Text.Contains("@") || !EmailTextBox.Text.Contains(".com"))
-            {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Invalid E-mail");
-            }
+
             else if (Database.IsEmailTaken(EmailTextBox.Text))
-            {
                 SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Email is already taken!");
-            }
-            else if (PasswordTextBox.Password.Length < 6)
-            {
-                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("password < 7!");
-            }
+
             else if (PasswordTextBox.Password != ConfirmPasswordTextBox.Password)
-            {
-                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Password doesn't match confirmation!");
-            }
+                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Password and Confirmation doesn't match!");
+
+            else if (PasswordTextBox.Password.Length < 7)
+                SigningWindow.SigningWindowObject.ErrorsSnackbar.MessageQueue.Enqueue("Password must be 7 characters or more");
+
             else
             {
                 NavigationService.Navigate(SigningWindow.SetUpProfilePageObject);
