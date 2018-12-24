@@ -11,7 +11,6 @@ namespace FitnessApp.SignUpPages
     /// </summary>
     public partial class SignUpPage : Page
     {
-        public static SignUpPage SignUpPageObject = new SignUpPage();
 
         public SignUpPage()
         {
