@@ -216,7 +216,7 @@ namespace FitnessApp.SQLserver
         public static void AddUser(byte[] profilePhoto,
                                    string firstName,       string lastName,
                                    string email,           string password,
-                                   string gender,          string birthDate,
+                                   string gender,          DateTime? birthDate,
                                    double weight,          double height,
                                    double targetWeight,    double kilosToLosePerWeek,
                                    double workoutsPerWeek, double workoutHoursPerDay)

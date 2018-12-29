@@ -43,7 +43,7 @@ namespace FitnessApp.SignUpPages
                                  SigningWindow.SignUpPageObject.EmailTextBox.Text,
                                  SigningWindow.SignUpPageObject.Password,
                                  SigningWindow.SignUpPageObject.GenderComboBox.Text,
-                                 SigningWindow.SignUpPageObject.BirthDatePicker.Text,
+                                 SigningWindow.SignUpPageObject.BirthDatePicker.SelectedDate,
                                  double.Parse(WeightTextBox.Text),
                                  double.Parse(HeightTextBox.Text),
                                  double.Parse(TargetWeightTextBox.Text),
