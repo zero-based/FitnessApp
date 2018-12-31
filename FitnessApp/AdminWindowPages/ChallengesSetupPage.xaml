@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
       mc:Ignorable="d">
 
 
@@ -80,6 +81,7 @@
                         <materialDesign:PackIcon Kind="Calendar" Margin="0,20,0,0"/>
                         <DatePicker x:Name="ChallengeDueDatePicker"
                                     Margin="25,0,0,0"
+                                    DisplayDateStart="{x:Static sys:DateTime.Today}"
                                     materialDesign:HintAssist.Hint="Due Date"
                                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
                     </Grid>
@@ -98,8 +100,6 @@
                     <!--Challenge Target-->
                     <Grid Grid.Row="11" Grid.Column="1">
                         <materialDesign:PackIcon Kind="TargetArrow" Margin="0,20,0,0"/>
-
-
                         <TextBox x:Name="ChallengeTargetMinutesTextBox"
                                  Margin="25,0,0,0"
                                  FontFamily="{StaticResource Roboto}"

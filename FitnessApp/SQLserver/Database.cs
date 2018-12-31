@@ -575,13 +575,13 @@ namespace FitnessApp.SQLserver
             query = "DELETE [JoinedChallenge] " +
                     "FROM [Challenge] RIGHT JOIN [JoinedChallenge] " +
                     "ON [Challenge].PK_ChallengeID = [JoinedChallenge].FK_JoinedChallenge_ChallengeID " +
-                    "WHERE [Challenge].DueDate <= GETDATE()";
+                    "WHERE [Challenge].DueDate < GETDATE()";
 
             command = new SqlCommand(query, connection);
             dataReader = command.ExecuteReader();
             dataReader.Close();
 
-            query = "DELETE FROM[Challenge] WHERE[Challenge].DueDate <= GETDATE()";
+            query = "DELETE FROM[Challenge] WHERE[Challenge].DueDate < GETDATE()";
 
             command = new SqlCommand(query, connection);
             dataReader = command.ExecuteReader();
