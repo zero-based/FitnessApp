@@ -21,6 +21,11 @@ In alphabetical order:
 ## Building the project
 
 1. Building the project requires **VS2017+**
-1. Download [**FITNESSAPP database**](https://github.com/YoussefRaafatNasry/fitnessapp-database) latest version and attach it to your server.
-1. Add your Server Name to [**ServerDetails.cs**](./FitnessApp/SQLserver/ServerDetails.cs)
-1. Check [**Contributing Guidelines**](./CONTRIBUTING.md) for more info.
+2. Download [**FITNESSAPP database**](https://github.com/YoussefRaafatNasry/fitnessapp-database) latest version and attach it to your server.
+3. Add your Server Name to [**ServerDetails.cs**](./FitnessApp/SQLserver/ServerDetails.cs)
+4. Check [**Contributing Guidelines**](./CONTRIBUTING.md) for more info.
+
+<br><br>
+<div align="center">
+    <img src="./FitnessApp/Logo.ico" width="72" height="72">
+</div>
