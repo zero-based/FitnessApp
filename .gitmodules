@@ -1,0 +1,3 @@
+[submodule "FitnessApp/Database"]
+	path = FitnessApp/Database
+	url = https://github.com/YoussefRaafatNasry/fitnessapp-database
